@@ -1,0 +1,436 @@
+[
+  {
+    "objectID": "evaluacion.html",
+    "href": "evaluacion.html",
+    "title": "Evaluaciones",
+    "section": "",
+    "text": "La evaluación del curso se basa en la aplicación práctica de las técnicas estadísticas aprendidas. Se privilegia la comprensión conceptual y la correcta interpretación de resultados por sobre la memorización de fórmulas."
+  },
+  {
+    "objectID": "evaluacion.html#sistema-de-evaluación",
+    "href": "evaluacion.html#sistema-de-evaluación",
+    "title": "Evaluaciones",
+    "section": "",
+    "text": "La evaluación del curso se basa en la aplicación práctica de las técnicas estadísticas aprendidas. Se privilegia la comprensión conceptual y la correcta interpretación de resultados por sobre la memorización de fórmulas."
+  },
+  {
+    "objectID": "evaluacion.html#componentes-de-evaluación",
+    "href": "evaluacion.html#componentes-de-evaluación",
+    "title": "Evaluaciones",
+    "section": "Componentes de Evaluación",
+    "text": "Componentes de Evaluación\n\n\n\n\n\n\n\n\nComponente\nPorcentaje\nFecha de entrega\n\n\n\n\nTrabajo práctico\n40%\nPauta 17 de octubre. Entrega 3 de noviembre\n\n\nTrabajo final\n60%\nPauta 10 de noviembre. Entrega 8 de diciembre\n\n\nTOTAL\n100%\n\n\n\n\n\n1. Ejercicios Prácticos (40%)\nCada sesión incluye ejercicios prácticos que deben ser resueltos y entregados. Cada ejercicio vale 8%.\nFormato de entrega: - Archivo .qmd o .Rmd con código y respuestas - Debe incluir código comentado y narrativa explicativa - Se evaluará: código funcional, interpretación correcta, claridad de presentación\nCriterios de evaluación: - Código ejecutable y reproducible (30%) - Correcta aplicación de técnicas estadísticas (40%) - Interpretación adecuada de resultados (30%)\n\n\n\n\n\n\nConsejo\n\n\n\nComenta tu código y explica tu razonamiento. No basta con obtener el resultado correcto, sino que debes demostrar comprensión de lo que estás haciendo.\n\n\n\n\n\n2. Trabajo Práctico Parcial (25%)\nFecha de entrega: [Fecha]\nModalidad: Individual\nAnálisis estadístico aplicado que integra contenidos de las sesiones 1-3:\n\nAnálisis descriptivo de un conjunto de datos\nVisualizaciones apropiadas\nPruebas de hipótesis pertinentes\nInforme con interpretación de resultados\n\nExtensión: 4-6 páginas (sin contar código ni anexos)\nFormato de entrega: - Documento .qmd o .Rmd - Output HTML renderizado - Datos utilizados (si son propios)\nRúbrica:\n\n\n\n\n\n\n\n\n\n\nCriterio\nExcelente (100%)\nBueno (75%)\nSuficiente (50%)\nInsuficiente (25%)\n\n\n\n\nManipulación de datos\nPrepara datos correctamente, maneja valores perdidos, crea variables necesarias\nPrepara datos adecuadamente con mínimos errores\nPreparación básica con algunos problemas\nProblemas significativos en preparación\n\n\nAnálisis descriptivo\nEstadísticos apropiados, tablas claras, visualizaciones efectivas\nAnálisis adecuado con pequeñas omisiones\nAnálisis básico pero incompleto\nAnálisis inadecuado o incorrecto\n\n\nInferencia estadística\nPruebas apropiadas, supuestos verificados, interpretación correcta\nPruebas adecuadas con interpretación mayormente correcta\nPruebas básicas con interpretación parcial\nPruebas inapropiadas o interpretación incorrecta\n\n\nPresentación\nNarrativa clara, código bien comentado, formato profesional\nPresentación clara con mínimos problemas\nPresentación básica pero comprensible\nPresentación confusa o desorganizada\n\n\n\n\n\n\n3. Trabajo Práctico Final (35%)\nFecha de entrega: [Fecha]\nModalidad: Individual o parejas (a definir)\nProyecto de análisis estadístico integral que aplica todos los contenidos del curso:\n\nFormulación de pregunta de investigación\nAnálisis exploratorio de datos\nAnálisis de correlaciones\nModelos de regresión (simple y múltiple)\nInterpretación sustantiva de resultados\nDiscusión de limitaciones\n\nExtensión: 8-12 páginas (sin contar código ni anexos)\nComponentes obligatorios: 1. Introducción con pregunta de investigación 2. Descripción de datos y variables 3. Análisis exploratorio (descriptivos + visualizaciones) 4. Análisis de correlaciones 5. Modelos de regresión con interpretación 6. Conclusiones y limitaciones 7. Anexo con código completo\nOpciones de datos: - Dataset proporcionado por el curso - Datos de tesis o investigación propia (con aprobación previa) - Bases de datos públicas (ej. CASEN, ELSOC, World Bank)\n\n\n\n\n\n\nFecha importante\n\n\n\nSi usarás datos propios, debes enviar una descripción breve para aprobación antes del [fecha].\n\n\nRúbrica detallada: [Se compartirá con al menos 2 semanas de anticipación]"
+  },
+  {
+    "objectID": "evaluacion.html#criterios-generales-de-evaluación",
+    "href": "evaluacion.html#criterios-generales-de-evaluación",
+    "title": "Evaluaciones",
+    "section": "Criterios Generales de Evaluación",
+    "text": "Criterios Generales de Evaluación\n\nReproducibilidad\nTodo el código debe ser completamente reproducible. Esto significa que:\n\nIncluir comandos para cargar librerías necesarias\nUsar rutas relativas (nunca C:/Mi Computador/...)\nDocumentar la sesión de R (sessionInfo())\nComentar el código adecuadamente\n\n\n\nPresentación de Resultados\nSe valorará:\n\nTablas bien formateadas (usando kable, gt, etc.)\nGráficos con títulos, etiquetas de ejes claros\nInterpretación en lenguaje claro, no solo técnico\nOrtografía y redacción cuidada\n\n\n\nUso de Recursos\nEstá permitido y es recomendado:\n\nConsultar documentación de R y paquetes\nBuscar ayuda en foros (Stack Overflow, etc.)\nDiscutir ideas con compañeros/as\n\nNo está permitido: - Copiar código de compañeros/as sin citarlo - Presentar trabajo ajeno como propio\n\n\n\n\n\n\nPlagio\n\n\n\nCualquier forma de plagio resultará en nota mínima (1.0) y será reportado según reglamento universitario."
+  },
+  {
+    "objectID": "evaluacion.html#escala-de-calificaciones",
+    "href": "evaluacion.html#escala-de-calificaciones",
+    "title": "Evaluaciones",
+    "section": "Escala de Calificaciones",
+    "text": "Escala de Calificaciones\nSe utiliza la escala de 1.0 a 7.0, con nota mínima de aprobación 4.0."
+  },
+  {
+    "objectID": "evaluacion.html#entrega-de-evaluaciones",
+    "href": "evaluacion.html#entrega-de-evaluaciones",
+    "title": "Evaluaciones",
+    "section": "Entrega de Evaluaciones",
+    "text": "Entrega de Evaluaciones\nTodas las entregas se realizan vía [plataforma que uses: Moodle/Canvas/Email]:\n\nFormato: Archivo .qmd o .Rmd + HTML renderizado\nNombre de archivo: apellido_nombre_evaluacion.qmd\nHora límite: 23:59 de la fecha ind"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Taller de Métodos y Técnicas de Investigación I",
+    "section": "",
+    "text": "Este es el sitio web del curso Taller de Métodos y Técnicas de Investigación I, enfocado en la aplicación práctica de técnicas estadísticas usando R."
+  },
+  {
+    "objectID": "index.html#bienvenidao",
+    "href": "index.html#bienvenidao",
+    "title": "Taller de Métodos y Técnicas de Investigación I",
+    "section": "",
+    "text": "Este es el sitio web del curso Taller de Métodos y Técnicas de Investigación I, enfocado en la aplicación práctica de técnicas estadísticas usando R."
+  },
+  {
+    "objectID": "index.html#descripción-del-curso",
+    "href": "index.html#descripción-del-curso",
+    "title": "Taller de Métodos y Técnicas de Investigación I",
+    "section": "Descripción del curso",
+    "text": "Descripción del curso\nEste taller está diseñado para que estudiantes del Magíster en Sociología desarrollen habilidades prácticas en análisis estadístico utilizando el lenguaje de programación R. A través de 5 sesiones, cubriremos desde lo básico de R hasta análisis de regresión lineal múltiple.\n\nObjetivos de aprendizaje\nAl finalizar este curso, serás capaz de:\n\nUtilizar R y RStudio para análisis estadísticos\nAplicar técnicas de estadística descriptiva e inferencial\nRealizar pruebas de hipótesis y ANOVA\nEjecutar análisis de correlación y regresión (simple y múltiple)\nInterpretar y comunicar resultados estadísticos"
+  },
+  {
+    "objectID": "index.html#estructura-del-curso",
+    "href": "index.html#estructura-del-curso",
+    "title": "Taller de Métodos y Técnicas de Investigación I",
+    "section": "Estructura del curso",
+    "text": "Estructura del curso\nEl curso consta de 5 sesiones prácticas:\n\nSesión 1: Introducción a R + Estadística descriptiva (I)\nSesión 2: Estadística descriptiva (II) + Prueba de hipótesis (I)\nSesión 3: Prueba de hipótesis (II) + ANOVA\nSesión 4: Correlación bivariada + Regresión lineal simple\nSesión 5: Regresión lineal múltiple"
+  },
+  {
+    "objectID": "index.html#información-del-curso",
+    "href": "index.html#información-del-curso",
+    "title": "Taller de Métodos y Técnicas de Investigación I",
+    "section": "Información del curso",
+    "text": "Información del curso\n\n\n\n\n\n\nDetalles\n\n\n\n\nProfesora: Carollina Aguilera\nAyudante: Fran Sofía Núñez\nHorario: [Días y horario]\nSala: [Sala o modalidad]"
+  },
+  {
+    "objectID": "index.html#antes-de-comenzar",
+    "href": "index.html#antes-de-comenzar",
+    "title": "Taller de Métodos y Técnicas de Investigación I",
+    "section": "Antes de comenzar",
+    "text": "Antes de comenzar\nPara seguir este curso necesitarás:\n\nInstalar R\nInstalar RStudio\nConocimientos básicos de estadística\n\nRevisa la sección Recursos para guías de instalación y materiales complementarios.\n\n\n\n\n\n\n\nContacto\n\n\n\nPara consultas del curso, puedes contactarme por fransofia.nr@gmail.com."
+  },
+  {
+    "objectID": "lectures/05-regression.html",
+    "href": "lectures/05-regression.html",
+    "title": "Sesión 5: Regresión Lineal Múltiple",
+    "section": "",
+    "text": "En construcción\n\n\n\nContenido en desarrollo. Disponible próximamente."
+  },
+  {
+    "objectID": "lectures/05-regression.html#objetivos-de-la-sesión",
+    "href": "lectures/05-regression.html#objetivos-de-la-sesión",
+    "title": "Sesión 5: Regresión Lineal Múltiple",
+    "section": "Objetivos de la sesión",
+    "text": "Objetivos de la sesión\n\nAjustar modelos de regresión múltiple\nInterpretar coeficientes con múltiples predictores\nTrabajar con variables dummy\nDiagnosticar problemas en regresión\n\n\nÚltima actualización: [Fecha]"
+  },
+  {
+    "objectID": "lectures/03-inferential-statistics.html",
+    "href": "lectures/03-inferential-statistics.html",
+    "title": "Sesión 3: Prueba de Hipótesis (II) y ANOVA",
+    "section": "",
+    "text": "En construcción\n\n\n\nContenido en desarrollo. Disponible próximamente."
+  },
+  {
+    "objectID": "lectures/03-inferential-statistics.html#objetivos-de-la-sesión",
+    "href": "lectures/03-inferential-statistics.html#objetivos-de-la-sesión",
+    "title": "Sesión 3: Prueba de Hipótesis (II) y ANOVA",
+    "section": "Objetivos de la sesión",
+    "text": "Objetivos de la sesión\n\nRealizar pruebas t pareadas\nAplicar pruebas no paramétricas\nEjecutar ANOVA de un factor\nRealizar comparaciones post-hoc\n\n\nÚltima actualización: [Fecha]"
+  },
+  {
+    "objectID": "lectures/02-statistics.html",
+    "href": "lectures/02-statistics.html",
+    "title": "Sesión 2: Estadística Descriptiva (II) y Prueba de Hipótesis (I)",
+    "section": "",
+    "text": "En construcción\n\n\n\nContenido en desarrollo. Disponible próximamente."
+  },
+  {
+    "objectID": "lectures/02-statistics.html#objetivos-de-la-sesión",
+    "href": "lectures/02-statistics.html#objetivos-de-la-sesión",
+    "title": "Sesión 2: Estadística Descriptiva (II) y Prueba de Hipótesis (I)",
+    "section": "Objetivos de la sesión",
+    "text": "Objetivos de la sesión\n\nCalcular medidas de dispersión\nCrear visualizaciones avanzadas\nIntroducción a pruebas de hipótesis\nRealizar pruebas t\n\n\nÚltima actualización: [Fecha]"
+  },
+  {
+    "objectID": "lectures/01-intro.html",
+    "href": "lectures/01-intro.html",
+    "title": "Sesión 1: Introducción a R y Estadística Descriptiva (I)",
+    "section": "",
+    "text": "Al finalizar esta sesión serás capaz de:\n\nNavegar en la interfaz de RStudio\nCrear y manipular objetos básicos en R (vectores, dataframes)\nImportar datos desde archivos CSV\nCalcular medidas de tendencia central\nCrear tablas de frecuencia simples y de contingencia"
+  },
+  {
+    "objectID": "lectures/01-intro.html#objetivos-de-la-sesión",
+    "href": "lectures/01-intro.html#objetivos-de-la-sesión",
+    "title": "Sesión 1: Introducción a R y Estadística Descriptiva (I)",
+    "section": "",
+    "text": "Al finalizar esta sesión serás capaz de:\n\nNavegar en la interfaz de RStudio\nCrear y manipular objetos básicos en R (vectores, dataframes)\nImportar datos desde archivos CSV\nCalcular medidas de tendencia central\nCrear tablas de frecuencia simples y de contingencia"
+  },
+  {
+    "objectID": "lectures/01-intro.html#introducción-a-r-y-rstudio",
+    "href": "lectures/01-intro.html#introducción-a-r-y-rstudio",
+    "title": "Sesión 1: Introducción a R y Estadística Descriptiva (I)",
+    "section": "1. Introducción a R y RStudio",
+    "text": "1. Introducción a R y RStudio\n\n¿Qué es R?\nR es un lenguaje de programación especializado en análisis estadístico y visualización de datos. Es:\n\nGratuito y de código abierto\nPotente para análisis estadísticos complejos\nVersátil con miles de paquetes disponibles\nReproducible - tu análisis queda documentado en código\n\n\n\nLa interfaz de RStudio\nRStudio tiene 4 paneles principales:\n\nEditor (arriba izquierda): Donde escribes tu código en scripts\nConsola (abajo izquierda): Donde se ejecuta el código y ves resultados\nEnvironment (arriba derecha): Muestra tus objetos/datos cargados\nFiles/Plots/Help (abajo derecha): Archivos, gráficos, ayuda\n\n\n\n\n\n\n\nConsejo\n\n\n\nSiempre trabaja con scripts (archivos .R o .qmd) en lugar de escribir directo en la consola. Así tu trabajo queda guardado y es reproducible."
+  },
+  {
+    "objectID": "lectures/01-intro.html#conceptos-básicos-de-r",
+    "href": "lectures/01-intro.html#conceptos-básicos-de-r",
+    "title": "Sesión 1: Introducción a R y Estadística Descriptiva (I)",
+    "section": "2. Conceptos básicos de R",
+    "text": "2. Conceptos básicos de R\n\nPreparación\n\n# Cargar librerías necesarias\nlibrary(tidyverse)  # Para manipulación de datos\nlibrary(psych)      # Para estadística descriptiva\n\n# Configuración\noptions(scipen = 999)  # Evitar notación científica\n\n\n\nOperaciones básicas\nR funciona como una calculadora avanzada:\n\n# Operaciones aritméticas\n5 + 3\n\n[1] 8\n\n10 - 2\n\n[1] 8\n\n4 * 6\n\n[1] 24\n\n20 / 4\n\n[1] 5\n\n2^3  # Potencia\n\n[1] 8\n\n# R respeta el orden de operaciones\n(5 + 3) * 2\n\n[1] 16\n\n\n\n\nCrear objetos\nEn R guardamos información en objetos usando &lt;-:\n\n# Crear un objeto numérico\nedad &lt;- 25\nedad\n\n[1] 25\n\n# Crear un vector (secuencia de valores)\nedades &lt;- c(23, 25, 28, 30, 22, 27)\nedades\n\n[1] 23 25 28 30 22 27\n\n# Operaciones con vectores\nmean(edades)    # Promedio\n\n[1] 25.83333\n\nlength(edades)  # Largo del vector\n\n[1] 6\n\n\n\n\n\n\n\n\nNota importante\n\n\n\nLos nombres de objetos: - Pueden contener letras, números, . y _ - NO pueden empezar con números - R distingue entre mayúsculas y minúsculas (edad ≠ Edad)\n\n\n\n\nTipos de datos\n\n# Numérico\nnumero &lt;- 42\nclass(numero)\n\n[1] \"numeric\"\n\n# Carácter (texto)\nnombre &lt;- \"María\"\nclass(nombre)\n\n[1] \"character\"\n\n# Lógico\nes_estudiante &lt;- TRUE\nclass(es_estudiante)\n\n[1] \"logical\"\n\n# Factor (categorías)\nnivel_educacion &lt;- factor(c(\"Básica\", \"Media\", \"Superior\", \"Media\"))\nnivel_educacion\n\n[1] Básica   Media    Superior Media   \nLevels: Básica Media Superior"
+  },
+  {
+    "objectID": "lectures/01-intro.html#trabajar-con-dataframes",
+    "href": "lectures/01-intro.html#trabajar-con-dataframes",
+    "title": "Sesión 1: Introducción a R y Estadística Descriptiva (I)",
+    "section": "3. Trabajar con DataFrames",
+    "text": "3. Trabajar con DataFrames\nLos dataframes son tablas de datos, similares a hojas de Excel. Cada columna es una variable, cada fila es una observación.\n\nCrear un dataframe\n\n# Crear un dataframe desde vectores\nestudiantes &lt;- data.frame(\n  nombre = c(\"Ana\", \"Bruno\", \"Carla\", \"Diego\", \"Elena\"),\n  edad = c(23, 25, 24, 26, 23),\n  carrera = c(\"Sociología\", \"Sociología\", \"Antropología\", \n              \"Sociología\", \"Antropología\"),\n  nota = c(6.5, 5.8, 6.9, 6.2, 7.0)\n)\n\n# Ver el dataframe\nestudiantes\n\n  nombre edad      carrera nota\n1    Ana   23   Sociología  6.5\n2  Bruno   25   Sociología  5.8\n3  Carla   24 Antropología  6.9\n4  Diego   26   Sociología  6.2\n5  Elena   23 Antropología  7.0\n\n\n\n\nExplorar datos\n\n# Estructura del dataframe\nstr(estudiantes)\n\n'data.frame':   5 obs. of  4 variables:\n $ nombre : chr  \"Ana\" \"Bruno\" \"Carla\" \"Diego\" ...\n $ edad   : num  23 25 24 26 23\n $ carrera: chr  \"Sociología\" \"Sociología\" \"Antropología\" \"Sociología\" ...\n $ nota   : num  6.5 5.8 6.9 6.2 7\n\n# Primeras filas\nhead(estudiantes, 3)\n\n  nombre edad      carrera nota\n1    Ana   23   Sociología  6.5\n2  Bruno   25   Sociología  5.8\n3  Carla   24 Antropología  6.9\n\n# Dimensiones (filas x columnas)\ndim(estudiantes)\n\n[1] 5 4\n\n# Resumen estadístico\nsummary(estudiantes)\n\n    nombre               edad        carrera               nota     \n Length:5           Min.   :23.0   Length:5           Min.   :5.80  \n Class :character   1st Qu.:23.0   Class :character   1st Qu.:6.20  \n Mode  :character   Median :24.0   Mode  :character   Median :6.50  \n                    Mean   :24.2                      Mean   :6.48  \n                    3rd Qu.:25.0                      3rd Qu.:6.90  \n                    Max.   :26.0                      Max.   :7.00  \n\n\n\n\nAcceder a variables\n\n# Acceder a una columna específica con $\nestudiantes$edad\n\n[1] 23 25 24 26 23\n\n# Otra forma: usando corchetes\nestudiantes[, \"edad\"]\n\n[1] 23 25 24 26 23\n\n# Calcular estadísticos de una variable\nmean(estudiantes$nota)\n\n[1] 6.48\n\nsd(estudiantes$nota)\n\n[1] 0.4969909"
+  },
+  {
+    "objectID": "lectures/01-intro.html#importar-datos",
+    "href": "lectures/01-intro.html#importar-datos",
+    "title": "Sesión 1: Introducción a R y Estadística Descriptiva (I)",
+    "section": "4. Importar datos",
+    "text": "4. Importar datos\nEn la práctica, casi siempre importaremos datos desde archivos externos.\n\nImportar CSV\n\n# Importar archivo CSV\ndatos &lt;- read.csv(\"../data/ejemplo.csv\")\n\n# Con tidyverse (recomendado)\ndatos &lt;- read_csv(\"../data/ejemplo.csv\")\n\n# Ver primeras filas\nhead(datos)\n\n\n\n\n\n\n\nTip: Rutas relativas\n\n\n\nUsa rutas relativas desde tu archivo .qmd: - ../data/archivo.csv (sube una carpeta, entra a data) - Nunca uses C:/Mi Computador/... (no funcionará en otros computadores)\n\n\n\n\nPara esta sesión: datos simulados\nCrearemos datos de ejemplo sobre una encuesta de satisfacción:\n\n# Simular datos de encuesta\nset.seed(123)  # Para reproducibilidad\n\nencuesta &lt;- data.frame(\n  id = 1:100,\n  edad = sample(18:65, 100, replace = TRUE),\n  sexo = sample(c(\"Mujer\", \"Hombre\", \"Otro\"), 100, \n                replace = TRUE, prob = c(0.5, 0.48, 0.02)),\n  educacion = sample(c(\"Básica\", \"Media\", \"Técnica\", \"Universitaria\", \"Postgrado\"), \n                     100, replace = TRUE),\n  satisfaccion = sample(1:7, 100, replace = TRUE),\n  ingreso = rnorm(100, mean = 800000, sd = 300000)\n)\n\n# Vista previa\nhead(encuesta, 10)\n\n   id edad   sexo     educacion satisfaccion   ingreso\n1   1   48 Hombre       Técnica            2  649340.4\n2   2   32 Hombre     Postgrado            2 1248818.2\n3   3   31 Hombre        Básica            5  458808.9\n4   4   20 Hombre Universitaria            7  746284.5\n5   5   59 Hombre         Media            4 1370708.5\n6   6   60 Hombre Universitaria            1  769707.5\n7   7   54 Hombre     Postgrado            5  392047.8\n8   8   31 Hombre     Postgrado            2  600569.2\n9   9   42 Hombre     Postgrado            5  945638.0\n10 10   43 Hombre     Postgrado            6  687319.1"
+  },
+  {
+    "objectID": "lectures/01-intro.html#estadística-descriptiva-i",
+    "href": "lectures/01-intro.html#estadística-descriptiva-i",
+    "title": "Sesión 1: Introducción a R y Estadística Descriptiva (I)",
+    "section": "5. Estadística Descriptiva (I)",
+    "text": "5. Estadística Descriptiva (I)\nLa estadística descriptiva resume y organiza datos. Comenzaremos con medidas de tendencia central.\n\nMedidas de tendencia central\nSon valores que representan el “centro” de los datos:\n\n\n\n\n\n\nDefiniciones\n\n\n\n\nMedia (promedio): Suma de valores / cantidad de valores\nMediana: Valor que divide los datos en dos mitades iguales\nModa: Valor más frecuente\n\n\n\n\n# Media\nmean(encuesta$edad)\n\n[1] 41.72\n\n# Mediana\nmedian(encuesta$edad)\n\n[1] 42.5\n\n# Para variables categóricas: tabla de frecuencias\ntable(encuesta$educacion)\n\n\n       Básica         Media     Postgrado       Técnica Universitaria \n           28            22            30             9            11 \n\n# Moda (el valor más frecuente)\n# R no tiene función directa, usamos table\ntabla_educacion &lt;- table(encuesta$educacion)\nnames(tabla_educacion)[which.max(tabla_educacion)]\n\n[1] \"Postgrado\"\n\n\n\n\nComparación media vs mediana\n\n# Crear histograma con media y mediana\nggplot(encuesta, aes(x = ingreso)) +\n  geom_histogram(bins = 30, fill = \"steelblue\", alpha = 0.7) +\n  geom_vline(aes(xintercept = mean(ingreso), color = \"Media\"), \n             linewidth = 1.2, linetype = \"dashed\") +\n  geom_vline(aes(xintercept = median(ingreso), color = \"Mediana\"), \n             linewidth = 1.2, linetype = \"dashed\") +\n  scale_color_manual(name = \"\", \n                     values = c(\"Media\" = \"red\", \"Mediana\" = \"blue\")) +\n  theme_minimal() +\n  labs(title = \"Distribución de Ingresos\",\n       x = \"Ingreso (CLP)\",\n       y = \"Frecuencia\") +\n  scale_x_continuous(labels = scales::comma)\n\n\n\n\n\n\n\nFigure 1: Distribución de ingresos con media y mediana\n\n\n\n\n\nInterpretación: La media es sensible a valores extremos, mientras que la mediana es más robusta."
+  },
+  {
+    "objectID": "lectures/01-intro.html#tablas-de-frecuencia",
+    "href": "lectures/01-intro.html#tablas-de-frecuencia",
+    "title": "Sesión 1: Introducción a R y Estadística Descriptiva (I)",
+    "section": "6. Tablas de frecuencia",
+    "text": "6. Tablas de frecuencia\nLas tablas de frecuencia organizan datos categóricos contando cuántas veces aparece cada valor.\n\nTabla de frecuencia simple\n\n# Frecuencias absolutas\ntable(encuesta$sexo)\n\n\nHombre  Mujer   Otro \n    49     50      1 \n\n# Frecuencias relativas (proporciones)\nprop.table(table(encuesta$sexo))\n\n\nHombre  Mujer   Otro \n  0.49   0.50   0.01 \n\n# Frecuencias relativas en porcentaje\nprop.table(table(encuesta$sexo)) * 100\n\n\nHombre  Mujer   Otro \n    49     50      1 \n\n\n\n\nTabla más elaborada\n\n# Crear tabla con frecuencias y porcentajes\ntabla_sexo &lt;- as.data.frame(table(encuesta$sexo))\ncolnames(tabla_sexo) &lt;- c(\"Sexo\", \"Frecuencia\")\ntabla_sexo$Porcentaje &lt;- round(prop.table(tabla_sexo$Frecuencia) * 100, 1)\n\n# Mostrar con kable\nlibrary(knitr)\nkable(tabla_sexo, caption = \"Distribución por sexo\")\n\n\nDistribución por sexo\n\n\nSexo\nFrecuencia\nPorcentaje\n\n\n\n\nHombre\n49\n49\n\n\nMujer\n50\n50\n\n\nOtro\n1\n1\n\n\n\n\n\n\n\nTabla de contingencia (dos variables)\nLas tablas de contingencia cruzan dos variables categóricas:\n\n# Tabla de contingencia: sexo x educación\ntabla_cruzada &lt;- table(encuesta$sexo, encuesta$educacion)\ntabla_cruzada\n\n        \n         Básica Media Postgrado Técnica Universitaria\n  Hombre     15     9        11       6             8\n  Mujer      13    13        18       3             3\n  Otro        0     0         1       0             0\n\n# Agregar totales marginales\naddmargins(tabla_cruzada)\n\n        \n         Básica Media Postgrado Técnica Universitaria Sum\n  Hombre     15     9        11       6             8  49\n  Mujer      13    13        18       3             3  50\n  Otro        0     0         1       0             0   1\n  Sum        28    22        30       9            11 100\n\n\n\n\nProporciones por fila o columna\n\n# Proporciones por fila (cada fila suma 100%)\nprop.table(tabla_cruzada, margin = 1) * 100\n\n        \n            Básica     Media Postgrado   Técnica Universitaria\n  Hombre  30.61224  18.36735  22.44898  12.24490      16.32653\n  Mujer   26.00000  26.00000  36.00000   6.00000       6.00000\n  Otro     0.00000   0.00000 100.00000   0.00000       0.00000\n\n# Proporciones por columna (cada columna suma 100%)\nprop.table(tabla_cruzada, margin = 2) * 100\n\n        \n            Básica     Media Postgrado   Técnica Universitaria\n  Hombre 53.571429 40.909091 36.666667 66.666667     72.727273\n  Mujer  46.428571 59.090909 60.000000 33.333333     27.272727\n  Otro    0.000000  0.000000  3.333333  0.000000      0.000000"
+  },
+  {
+    "objectID": "lectures/01-intro.html#visualización-de-frecuencias",
+    "href": "lectures/01-intro.html#visualización-de-frecuencias",
+    "title": "Sesión 1: Introducción a R y Estadística Descriptiva (I)",
+    "section": "7. Visualización de frecuencias",
+    "text": "7. Visualización de frecuencias\n\nGráfico de barras\n\nggplot(encuesta, aes(x = educacion)) +\n  geom_bar(fill = \"steelblue\", alpha = 0.8) +\n  theme_minimal() +\n  labs(title = \"Distribución de Nivel Educacional\",\n       x = \"Nivel Educacional\",\n       y = \"Frecuencia\") +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))\n\n\n\n\n\n\n\nFigure 2: Distribución de nivel educacional\n\n\n\n\n\n\n\nGráfico de barras agrupadas\n\nggplot(encuesta, aes(x = educacion, fill = sexo)) +\n  geom_bar(position = \"dodge\") +\n  theme_minimal() +\n  labs(title = \"Nivel Educacional por Sexo\",\n       x = \"Nivel Educacional\",\n       y = \"Frecuencia\",\n       fill = \"Sexo\") +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))\n\n\n\n\n\n\n\nFigure 3: Nivel educacional por sexo"
+  },
+  {
+    "objectID": "lectures/01-intro.html#ejercicios-prácticos",
+    "href": "lectures/01-intro.html#ejercicios-prácticos",
+    "title": "Sesión 1: Introducción a R y Estadística Descriptiva (I)",
+    "section": "8. Ejercicios prácticos",
+    "text": "8. Ejercicios prácticos\n\n\n\n\n\n\nEjercicio 1: Calcular estadísticos\n\n\n\nUsando los datos de encuesta:\n\nCalcula la edad promedio\nCalcula la edad mediana\n¿Cuál es la satisfacción promedio?\n¿Cuál es el ingreso mediano?\n\nPista: Usa las funciones mean() y median()\n\n\n\n\nCode\n# Tu código aquí\n\n\n\n\n\n\n\n\nSolución Ejercicio 1\n\n\n\n\n\n\n# a) Edad promedio\nmean(encuesta$edad)\n\n[1] 41.72\n\n# b) Edad mediana\nmedian(encuesta$edad)\n\n[1] 42.5\n\n# c) Satisfacción promedio\nmean(encuesta$satisfaccion)\n\n[1] 3.96\n\n# d) Ingreso mediano\nmedian(encuesta$ingreso)\n\n[1] 824563.8\n\n\n\n\n\n\n\n\n\n\n\n\nEjercicio 2: Tablas de frecuencia\n\n\n\nCrea una tabla de frecuencias para la variable educacion que incluya: - Frecuencia absoluta - Frecuencia relativa (porcentaje)\nPista: Usa table() y prop.table()\n\n\n\n\nCode\n# Tu código aquí\n\n\n\n\n\n\n\n\nSolución Ejercicio 2\n\n\n\n\n\n\n# Crear tabla\ntabla_educ &lt;- as.data.frame(table(encuesta$educacion))\ncolnames(tabla_educ) &lt;- c(\"Nivel\", \"Frecuencia\")\ntabla_educ$Porcentaje &lt;- round(prop.table(tabla_educ$Frecuencia) * 100, 1)\n\n# Mostrar\nkable(tabla_educ)\n\n\n\n\nNivel\nFrecuencia\nPorcentaje\n\n\n\n\nBásica\n28\n28\n\n\nMedia\n22\n22\n\n\nPostgrado\n30\n30\n\n\nTécnica\n9\n9\n\n\nUniversitaria\n11\n11\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEjercicio 3: Tabla de contingencia\n\n\n\nCrea una tabla de contingencia entre sexo y educacion. Luego calcula las proporciones por fila.\n¿Qué porcentaje de mujeres tiene educación universitaria?\n\n\n\n\nCode\n# Tu código aquí\n\n\n\n\n\n\n\n\nSolución Ejercicio 3\n\n\n\n\n\n\n# Tabla de contingencia\ntabla &lt;- table(encuesta$sexo, encuesta$educacion)\ntabla\n\n        \n         Básica Media Postgrado Técnica Universitaria\n  Hombre     15     9        11       6             8\n  Mujer      13    13        18       3             3\n  Otro        0     0         1       0             0\n\n# Proporciones por fila\nprop_fila &lt;- prop.table(tabla, margin = 1) * 100\nround(prop_fila, 1)\n\n        \n         Básica Media Postgrado Técnica Universitaria\n  Hombre   30.6  18.4      22.4    12.2          16.3\n  Mujer    26.0  26.0      36.0     6.0           6.0\n  Otro      0.0   0.0     100.0     0.0           0.0\n\n# El porcentaje de mujeres con educación universitaria es:\nprop_fila[\"Mujer\", \"Universitaria\"]\n\n[1] 6"
+  },
+  {
+    "objectID": "lectures/01-intro.html#resumen",
+    "href": "lectures/01-intro.html#resumen",
+    "title": "Sesión 1: Introducción a R y Estadística Descriptiva (I)",
+    "section": "Resumen",
+    "text": "Resumen\nEn esta sesión aprendimos:\n\n✅ Navegar en RStudio y crear scripts\n✅ Crear y manipular objetos básicos (vectores, dataframes)\n✅ Importar datos desde CSV\n✅ Calcular medidas de tendencia central (media, mediana, moda)\n✅ Crear tablas de frecuencia simples y de contingencia\n✅ Visualizar datos con gráficos de barras"
+  },
+  {
+    "objectID": "lectures/01-intro.html#recursos-adicionales",
+    "href": "lectures/01-intro.html#recursos-adicionales",
+    "title": "Sesión 1: Introducción a R y Estadística Descriptiva (I)",
+    "section": "Recursos adicionales",
+    "text": "Recursos adicionales\n\nLecturas recomendadas\n\nNavarro, D. (2015). Learning Statistics with R. Capítulos 3-5. Disponible online\nWickham, H., & Grolemund, G. (2017). R for Data Science. Capítulos 1-4. Disponible online\n\n\n\nVideos\n\nIntroducción a RStudio (10 min)\nR para principiantes\n\n\n\nPráctica adicional\n\nSwirl - Learn R, in R - Tutorial interactivo\nR for Data Science - Ejercicios"
+  },
+  {
+    "objectID": "lectures/01-intro.html#para-la-próxima-sesión",
+    "href": "lectures/01-intro.html#para-la-próxima-sesión",
+    "title": "Sesión 1: Introducción a R y Estadística Descriptiva (I)",
+    "section": "Para la próxima sesión",
+    "text": "Para la próxima sesión\n\n\n\n\n\n\nTareas\n\n\n\n\nCompletar los 3 ejercicios de esta sesión\nInstalar el paquete psych: install.packages(\"psych\")\nTraer un dataset propio (opcional) o trabajaremos con datos de ejemplo\nLeer: Navarro, Capítulo 5 (Medidas de dispersión)\n\n\n\n\n\n\n\n\n\nRecordatorio\n\n\n\nLa entrega de ejercicios es el [fecha]. Formato: archivo .qmd + HTML renderizado."
+  },
+  {
+    "objectID": "lectures/04-corr-regression.html",
+    "href": "lectures/04-corr-regression.html",
+    "title": "Sesión 4: Correlación Bivariada y Regresión Lineal Simple",
+    "section": "",
+    "text": "En construcción\n\n\n\nContenido en desarrollo. Disponible próximamente."
+  },
+  {
+    "objectID": "lectures/04-corr-regression.html#objetivos-de-la-sesión",
+    "href": "lectures/04-corr-regression.html#objetivos-de-la-sesión",
+    "title": "Sesión 4: Correlación Bivariada y Regresión Lineal Simple",
+    "section": "Objetivos de la sesión",
+    "text": "Objetivos de la sesión\n\nCalcular correlaciones de Pearson y Spearman\nCrear matrices de correlación\nAjustar modelos de regresión simple\nInterpretar coeficientes de regresión\n\n\nÚltima actualización: [Fecha]"
+  },
+  {
+    "objectID": "lectures/template-clase.html",
+    "href": "lectures/template-clase.html",
+    "title": "Sesión X: [Título de la sesión]",
+    "section": "",
+    "text": "Al finalizar esta sesión serás capaz de:\n\nObjetivo 1\nObjetivo 2\nObjetivo 3"
+  },
+  {
+    "objectID": "lectures/template-clase.html#objetivos-de-la-sesión",
+    "href": "lectures/template-clase.html#objetivos-de-la-sesión",
+    "title": "Sesión X: [Título de la sesión]",
+    "section": "",
+    "text": "Al finalizar esta sesión serás capaz de:\n\nObjetivo 1\nObjetivo 2\nObjetivo 3"
+  },
+  {
+    "objectID": "lectures/template-clase.html#preparación",
+    "href": "lectures/template-clase.html#preparación",
+    "title": "Sesión X: [Título de la sesión]",
+    "section": "Preparación",
+    "text": "Preparación\n\nPaquetes necesarios\n\n# Cargar librerías\nlibrary(tidyverse)\n\n# Configuración general\noptions(scipen = 999) # Evitar notación científica\n\n\n\nDatos\nPara esta sesión utilizaremos [descripción del dataset]:\n\n# Cargar datos\ndatos &lt;- read.csv(\"../data/ene-2025-07-jja.csv\")\n\n# Vista previa\nhead(datos)\n\n                                                                                                                                                                                                                                                                                                                                                                                                                      ano_trimestre.mes_central.ano_encuesta.mes_encuesta.region.provincia.tipo.r_p_c.estrato.conglomerado.id_identificacion.hogar.idrph.nro_linea.proveedor.parentesco.sexo.edad.est_conyugal.mig1.mig2_cod.mig3_cod.mig4.mig5_cod.mig6_cod.nacionalidad.orig1. ...\n2025;7;2025;6;8;81;1;8111;8100212;35395;188791;1;853676467929;1;1;1;1;57;3;1;;;1;;;152;2;;;3;9;2;2;3;13;2;2;1;;1;;;;;;;7;2;;;2;;2;2;2;1;2;2;2;2;2;;1;1;;7;1;2;1;;88;2011;8;8111;1;2;2;;2;;;;1;1;2;0;;;;;2;2;2;2;2;2;;;;;8;5;40;;;;8;5;40;;;;;;2;;2;;;;;;;2;;;2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;9;3;2;24;2;1;1;1;3;40;40;0;2;1;7;;0;;2;130                                                                                                                                                                                                                                                                                                                         126164801805\n2025;7;2025;6;8;81;1;8111;8100212;35395;188792;1;69857573301;2;0;4;1;23;2;1;;;1;;;152;2;;;4;4;1;2;4;8;1;2;1;;1;;;;;;;9;1;;2;;;;;;;;;;;;;2;;;19;1;1;5;;6;2024;8;8111;1;2;1;FACEBOOK;2;;;;;;;;2;;4;;2;2;2;2;2;2;;;;;8;4;32;;;;;;;;;;;;1;3;;;16;;3;5;15;1;1;2;1;0;0;0;1;0;0;0;0;0;0;0;;1;1;;;;;;;;3;;;;;;;;;;;;;;;;;2;3;2;24;2;1;1;1;2;32;35;0;2;2;19;;1;;2;120                                                                                                                                                                                                                                                                                                            770034305589\n2025;7;2025;6;8;81;1;8111;8100212;35395;188792;1;733202104071;4;1;1;2;54;2;1;;;1;;;152;2;;;5;5;1;2;5;9;1;2;1;;1;;;;;;;5;2;;;2;;1;1;1;1;1;1;88;1;2;;1;1;;7;2;9;1;;88;2010;8;8111;1;2;2;;2;;;;1;1;1;0;;;;;2;2;2;2;2;2;;;;;888;6;44;;;;888;6;44;;;;;;2;;2;;;;;;;2;;;2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8;3;2;25;2;1;1;1;3;44;44;0;1;1;7;;0;;2;117                                                                                                                                                                                                                                                                                                                     699995068579\n2025;7;2025;6;8;81;1;8111;8100212;35395;188792;1;974021027494;3;0;4;2;21;2;1;;;1;;;152;2;;;2;7;2;1;2;12;2;1;2;2;;;2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2;;;;;;;;;;;;;;;;;;;;;;;4;;;2;2;3;;1;12;2024;5;3;;;;;2;3;2;24;;3;9;15;0;;;;;;;0;;0;;120                                                                                                                                                                                                                                                                                                                                                                         145638363174\n2025;7;2025;6;8;81;1;8111;8100212;35395;188792;1;408193222712;1;0;3;1;55;2;2;7406;;1;;;152;2;;;2;4;2;2;2;8;2;2;2;2;;;2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2;;;;;;;;;;;;;;;;;;;;;;;22;NO PUDO RENOVAR LA LICENCIA DE CONDUCIR;;1;2;13;PARA RENOVAR LICENCIA DE CONDUCIR LE EXIGEN PAGAR LA PENSION DE ALIMENTOS;1;88;2024;1;1;6;;;;9;2;1;14;;3;9;28;0;;;;;;;0;;0;;130                                                                                                                                                                                                                                                   126164801805\n2025;7;2025;6;8;81;1;8111;8100212;35395;188793;1;439623161927;1;0;3;2;30;2;1;;;1;;;152;2;;;5;9;1;2;5;13;1;2;1;;1;;;;;;;2;2;;;1;;1;1;1;2;1;1;1;1;1;5;1;1;;16;5;;1;;9;2024;8;8111;1;2;2;;2;;;;1;1;1;0;;;;;1;2;2;2;2;2;;;;;888;5;36;;;;888;5;36;;;;;;2;;2;;;;2;2;4;1;1;1;2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;4;4;4;46;2;1;1;1;4;36;36;0;1;1;16;;0;;1;141                                                                                                                                                                                                                                                                                                               845401035688"
+  },
+  {
+    "objectID": "lectures/template-clase.html#concepto-teórico-principal",
+    "href": "lectures/template-clase.html#concepto-teórico-principal",
+    "title": "Sesión X: [Título de la sesión]",
+    "section": "1. Concepto teórico principal",
+    "text": "1. Concepto teórico principal\nBreve explicación del concepto estadístico.\n\n\n\n\n\n\nDefinición\n\n\n\nAquí va una definición formal o importante.\n\n\n\nSubtema 1.1\nExplicación más detallada con ejemplos conceptuales."
+  },
+  {
+    "objectID": "lectures/template-clase.html#aplicación-en-r",
+    "href": "lectures/template-clase.html#aplicación-en-r",
+    "title": "Sesión X: [Título de la sesión]",
+    "section": "2. Aplicación en R",
+    "text": "2. Aplicación en R\n\n2.1 Primer ejemplo\nDescripción de lo que vamos a hacer:\n# Código comentado paso a paso\nresultado &lt;- funcion(datos)\n\n# Mostrar resultado\nresultado\nInterpretación: Aquí explicas qué significa el resultado.\n\n\n2.2 Segundo ejemplo\n\n# Otro ejemplo más complejo"
+  },
+  {
+    "objectID": "lectures/template-clase.html#visualización",
+    "href": "lectures/template-clase.html#visualización",
+    "title": "Sesión X: [Título de la sesión]",
+    "section": "3. Visualización",
+    "text": "3. Visualización\nLas visualizaciones ayudan a entender mejor los resultados:\n#| label: fig-grafico1\n#| fig-cap: \"Descripción del gráfico\"\n#| fig-width: 8\n#| fig-height: 6\n\n# Código para generar gráfico\nggplot(datos, aes(x = variable_x, y = variable_y)) +\n  geom_point() +\n  theme_minimal() +\n  labs(title = \"Título del gráfico\",\n       x = \"Eje X\",\n       y = \"Eje Y\")"
+  },
+  {
+    "objectID": "lectures/template-clase.html#ejercicios-prácticos",
+    "href": "lectures/template-clase.html#ejercicios-prácticos",
+    "title": "Sesión X: [Título de la sesión]",
+    "section": "4. Ejercicios prácticos",
+    "text": "4. Ejercicios prácticos\n\n\n\n\n\n\nEjercicio 1\n\n\n\nTarea: Describe qué deben hacer.\nPista: Una ayuda para empezar.\n\n\n\n# Espacio para que los estudiantes completen el código\n\n\n\n\n\n\n\nSolución Ejercicio 1\n\n\n\n\n\n\n# Código de la solución\n\nExplicación: Por qué esta es la solución correcta."
+  },
+  {
+    "objectID": "lectures/template-clase.html#resumen",
+    "href": "lectures/template-clase.html#resumen",
+    "title": "Sesión X: [Título de la sesión]",
+    "section": "Resumen",
+    "text": "Resumen\nEn esta sesión aprendimos:\n\nPunto clave 1\nPunto clave 2\nPunto clave 3"
+  },
+  {
+    "objectID": "lectures/template-clase.html#recursos-adicionales",
+    "href": "lectures/template-clase.html#recursos-adicionales",
+    "title": "Sesión X: [Título de la sesión]",
+    "section": "Recursos adicionales",
+    "text": "Recursos adicionales\n\nLecturas recomendadas\n\nAutor (año). Título del libro. Páginas X-Y.\nArtículo online\n\n\n\nVideos\n\nTutorial en YouTube\n\n\n\nPráctica adicional\n\nEjercicios complementarios"
+  },
+  {
+    "objectID": "lectures/template-clase.html#para-la-próxima-sesión",
+    "href": "lectures/template-clase.html#para-la-próxima-sesión",
+    "title": "Sesión X: [Título de la sesión]",
+    "section": "Para la próxima sesión",
+    "text": "Para la próxima sesión\n\n\n\n\n\n\nTareas\n\n\n\n\nCompletar ejercicios de esta sesión\nLeer capítulo X\nTraer dudas para resolver"
+  },
+  {
+    "objectID": "recursos.html",
+    "href": "recursos.html",
+    "title": "Recursos",
+    "section": "",
+    "text": "Para este curso necesitas instalar:\n\nR (versión 4.0 o superior)\n\nDescarga desde: https://cran.r-project.org/\nSelecciona tu sistema operativo y sigue las instrucciones\n\nRStudio (IDE recomendado)\n\nDescarga desde: https://posit.co/download/rstudio-desktop/\nVersión gratuita (Desktop) es suficiente\n\n\n\n\n\n\n\n\nVideo tutoriales de instalación\n\n\n\n\nInstalar R y RStudio en Windows\nInstalar R y RStudio en Mac\nInstalar R y RStudio en Linux\n\n(Puedes agregar tus propios videos o usar los disponibles en YouTube)\n\n\n\n\n\nDurante el curso usaremos principalmente estos paquetes. Puedes instalarlos copiando este código en tu consola de R:\n# Paquetes para manipulación de datos\ninstall.packages(\"tidyverse\")  # Incluye dplyr, ggplot2, tidyr, etc.\n\n# Paquetes para estadística\ninstall.packages(\"psych\")      # Estadística descriptiva\ninstall.packages(\"car\")        # Análisis de regresión\ninstall.packages(\"lmtest\")     # Tests para modelos lineales\n\n# Paquetes para tablas y reportes\ninstall.packages(\"knitr\")      # Para reportes\ninstall.packages(\"kableExtra\") # Tablas elegantes\ninstall.packages(\"gt\")         # Tablas modernas\n\n# Paquetes para visualización\ninstall.packages(\"ggplot2\")    # Ya incluido en tidyverse\ninstall.packages(\"patchwork\")  # Combinar gráficos"
+  },
+  {
+    "objectID": "recursos.html#software-necesario",
+    "href": "recursos.html#software-necesario",
+    "title": "Recursos",
+    "section": "",
+    "text": "Para este curso necesitas instalar:\n\nR (versión 4.0 o superior)\n\nDescarga desde: https://cran.r-project.org/\nSelecciona tu sistema operativo y sigue las instrucciones\n\nRStudio (IDE recomendado)\n\nDescarga desde: https://posit.co/download/rstudio-desktop/\nVersión gratuita (Desktop) es suficiente\n\n\n\n\n\n\n\n\nVideo tutoriales de instalación\n\n\n\n\nInstalar R y RStudio en Windows\nInstalar R y RStudio en Mac\nInstalar R y RStudio en Linux\n\n(Puedes agregar tus propios videos o usar los disponibles en YouTube)\n\n\n\n\n\nDurante el curso usaremos principalmente estos paquetes. Puedes instalarlos copiando este código en tu consola de R:\n# Paquetes para manipulación de datos\ninstall.packages(\"tidyverse\")  # Incluye dplyr, ggplot2, tidyr, etc.\n\n# Paquetes para estadística\ninstall.packages(\"psych\")      # Estadística descriptiva\ninstall.packages(\"car\")        # Análisis de regresión\ninstall.packages(\"lmtest\")     # Tests para modelos lineales\n\n# Paquetes para tablas y reportes\ninstall.packages(\"knitr\")      # Para reportes\ninstall.packages(\"kableExtra\") # Tablas elegantes\ninstall.packages(\"gt\")         # Tablas modernas\n\n# Paquetes para visualización\ninstall.packages(\"ggplot2\")    # Ya incluido en tidyverse\ninstall.packages(\"patchwork\")  # Combinar gráficos"
+  },
+  {
+    "objectID": "recursos.html#guías-y-tutoriales",
+    "href": "recursos.html#guías-y-tutoriales",
+    "title": "Recursos",
+    "section": "Guías y Tutoriales",
+    "text": "Guías y Tutoriales\n\nIntroducción a R\n\nR para Ciencia de Datos (en español) - Wickham & Grolemund\nIntroducción a R - RStudio Education\nswirl: Learn R, in R - Tutoriales interactivos\n\n\n\nEstadística en R\n\nLearning Statistics with R - Danielle Navarro (libro completo gratis)\nQuick-R - Referencia rápida de métodos estadísticos\nUCLA Statistical Consulting - Excelentes tutoriales por método estadístico\n\n\n\nVisualización de Datos\n\nggplot2: Elegant Graphics for Data Analysis\nR Graphics Cookbook\nFundamentals of Data Visualization - Claus Wilke\n\n\n\nQuarto/R Markdown\n\nQuarto Documentation\nR Markdown: The Definitive Guide\nR Markdown Cookbook"
+  },
+  {
+    "objectID": "recursos.html#datos-para-práctica",
+    "href": "recursos.html#datos-para-práctica",
+    "title": "Recursos",
+    "section": "Datos para Práctica",
+    "text": "Datos para Práctica\n\nDatasets del Curso\nLos datasets utilizados en clases están disponibles en la carpeta data/ de este sitio web:\n\nejemplo.csv - Dataset ejemplo para Sesión 1\n[Otros datasets que uses]\n\n\n\nRepositorios de Datos Sociales\nChile: - CASEN - Encuesta de Caracterización Socioeconómica Nacional - ELSOC - Estudio Longitudinal Social de Chile - CEP - Encuestas Centro de Estudios Públicos\nInternacional: - World Bank Open Data - OECD Data - Gapminder - Our World in Data\nRepositorios generales: - Kaggle Datasets - UCI Machine Learning Repository - Data.gov"
+  },
+  {
+    "objectID": "recursos.html#hojas-de-referencia-cheatsheets",
+    "href": "recursos.html#hojas-de-referencia-cheatsheets",
+    "title": "Recursos",
+    "section": "Hojas de Referencia (Cheatsheets)",
+    "text": "Hojas de Referencia (Cheatsheets)\nDescarga estas guías de referencia rápida:\n\nRStudio IDE Cheatsheet\nData Transformation with dplyr\nData Visualization with ggplot2\nR Markdown\n\nTodas las cheatsheets de RStudio: https://posit.co/resources/cheatsheets/"
+  },
+  {
+    "objectID": "recursos.html#comunidades-y-ayuda",
+    "href": "recursos.html#comunidades-y-ayuda",
+    "title": "Recursos",
+    "section": "Comunidades y Ayuda",
+    "text": "Comunidades y Ayuda\n\nForos y Comunidades\n\nStack Overflow (tag: r) - Preguntas técnicas\nRStudio Community - Comunidad oficial\nr/rstats (Reddit) - Discusiones y noticias\n\n\n\nCanales de YouTube (en español)\n\nR para Ciencia de Datos\nRiffomonas Project (inglés, pero muy didáctico)\n\n\n\nBlogs y Tutoriales\n\nR-bloggers - Agregador de blogs sobre R\nTowards Data Science - Artículos técnicos"
+  },
+  {
+    "objectID": "recursos.html#consejos-para-aprender-r",
+    "href": "recursos.html#consejos-para-aprender-r",
+    "title": "Recursos",
+    "section": "Consejos para Aprender R",
+    "text": "Consejos para Aprender R\n\n\n\n\n\n\nHaz clic para expandir consejos\n\n\n\n\n\n\n1. Practica regularmente\nNo basta con ver código, hay que escribirlo. Dedica tiempo cada semana a practicar.\n\n\n2. Aprende a buscar ayuda\n\nUsa ?funcion o help(funcion) en R\nBusca en Google: “how to [tarea] in R”\nLee los mensajes de error con calma\n\n\n\n3. No memorices, entiende\nEs mejor entender la lógica que memorizar código. Usa las cheatsheets como apoyo.\n\n\n4. Comenta tu código\nTu yo del futuro te lo agradecerá. Explica qué hace cada sección.\n\n\n5. Empieza simple\nNo trates de hacer visualizaciones complejas desde el inicio. Domina lo básico primero.\n\n\n6. Aprende de ejemplos\nEstudia código de otros, modifícalo, entiéndelo.\n\n\n7. Sé paciente\nTodos los programadores cometen errores constantemente. Es parte del proceso."
+  },
+  {
+    "objectID": "recursos.html#material-complementario",
+    "href": "recursos.html#material-complementario",
+    "title": "Recursos",
+    "section": "Material Complementario",
+    "text": "Material Complementario\n\nLibros Avanzados (para profundizar)\n\nAdvanced R - Hadley Wickham\nHands-On Programming with R\nText Mining with R\n\n\n\nCursos Online\n\nCoursera: R Programming\nDataCamp: Introduction to R\nedX: Data Science: R Basics"
+  },
+  {
+    "objectID": "recursos.html#contacto",
+    "href": "recursos.html#contacto",
+    "title": "Recursos",
+    "section": "Contacto",
+    "text": "Contacto\n¿Tienes sugerencias de recursos que deberían estar aquí? Escríbeme a [email] o abre un issue en el repositorio de GitHub."
+  },
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Programa del Curso",
+    "section": "",
+    "text": "Curso: Taller de Métodos y Técnicas de Investigación I\nPrograma: Magíster en Sociología\nProfesor/a: [Tu nombre]\nSemestre: [Semestre y año]\nCréditos: [X créditos]"
+  },
+  {
+    "objectID": "syllabus.html#información-general",
+    "href": "syllabus.html#información-general",
+    "title": "Programa del Curso",
+    "section": "",
+    "text": "Curso: Taller de Métodos y Técnicas de Investigación I\nPrograma: Magíster en Sociología\nProfesor/a: [Tu nombre]\nSemestre: [Semestre y año]\nCréditos: [X créditos]"
+  },
+  {
+    "objectID": "syllabus.html#descripción",
+    "href": "syllabus.html#descripción",
+    "title": "Programa del Curso",
+    "section": "Descripción",
+    "text": "Descripción\nEste taller proporciona formación práctica en el uso de R para análisis estadístico en ciencias sociales. El curso enfatiza la aplicación de técnicas estadísticas fundamentales, desde estadística descriptiva hasta modelos de regresión múltiple, utilizando datos reales de investigación social."
+  },
+  {
+    "objectID": "syllabus.html#objetivos-de-aprendizaje",
+    "href": "syllabus.html#objetivos-de-aprendizaje",
+    "title": "Programa del Curso",
+    "section": "Objetivos de Aprendizaje",
+    "text": "Objetivos de Aprendizaje\nAl finalizar el curso, las y los estudiantes serán capaces de:\n\nManipular y preparar datos para análisis estadístico en R\nRealizar análisis estadísticos descriptivos e inferenciales\nAplicar pruebas de hipótesis apropiadas según el tipo de datos\nEjecutar y interpretar análisis de correlación y regresión\nComunicar resultados estadísticos de manera clara y profesional"
+  },
+  {
+    "objectID": "syllabus.html#metodología",
+    "href": "syllabus.html#metodología",
+    "title": "Programa del Curso",
+    "section": "Metodología",
+    "text": "Metodología\nEl curso se estructura en sesiones prácticas donde se combinan:\n\nExposiciones teóricas breves sobre los conceptos estadísticos\nDemostraciones en vivo de código en R\nEjercicios prácticos guiados\nTrabajo autónomo con datos reales\n\nSe espera que las y los estudiantes traigan su computador con R y RStudio instalados a cada sesión."
+  },
+  {
+    "objectID": "syllabus.html#contenidos-por-sesión",
+    "href": "syllabus.html#contenidos-por-sesión",
+    "title": "Programa del Curso",
+    "section": "Contenidos por Sesión",
+    "text": "Contenidos por Sesión\n\nSesión 1: Introducción a R y Estadística Descriptiva (I)\nFecha: [Fecha]\n\nInterfaz de RStudio y flujo de trabajo\nTipos de objetos en R (vectores, dataframes, listas)\nImportación de datos\nMedidas de tendencia central\nTablas de frecuencia y contingencia\n\nLecturas: - [Referencias]\n\n\n\nSesión 2: Estadística Descriptiva (II) y Prueba de Hipótesis (I)\nFecha: [Fecha]\n\nMedidas de dispersión y posición\nVisualización de datos (histogramas, boxplots, gráficos de barras)\nIntroducción a la inferencia estadística\nPrueba t para una muestra\nPrueba t para muestras independientes\n\nLecturas: - [Referencias]\n\n\n\nSesión 3: Prueba de Hipótesis (II) y ANOVA\nFecha: [Fecha]\n\nPrueba t para muestras pareadas\nPruebas no paramétricas (Wilcoxon, Mann-Whitney)\nANOVA de un factor\nComparaciones post-hoc (Tukey, Bonferroni)\nSupuestos y diagnósticos\n\nLecturas: - [Referencias]\n\n\n\nSesión 4: Correlación Bivariada y Regresión Lineal Simple\nFecha: [Fecha]\n\nCorrelación de Pearson y Spearman\nMatrices de correlación\nIntroducción a la regresión lineal simple\nEstimación e interpretación de coeficientes\nR² y bondad de ajuste\n\nLecturas: - [Referencias]\n\n\n\nSesión 5: Regresión Lineal Múltiple\nFecha: [Fecha]\n\nRegresión lineal múltiple\nInterpretación de coeficientes con múltiples predictores\nVariables dummy y categóricas\nDiagnóstico de regresión (residuos, multicolinealidad)\nPresentación de resultados\n\nLecturas: - [Referencias]"
+  },
+  {
+    "objectID": "syllabus.html#bibliografía-básica",
+    "href": "syllabus.html#bibliografía-básica",
+    "title": "Programa del Curso",
+    "section": "Bibliografía Básica",
+    "text": "Bibliografía Básica\n\nField, A., Miles, J., & Field, Z. (2012). Discovering Statistics Using R. Sage Publications.\nNavarro, D. (2015). Learning Statistics with R. Disponible online\nWickham, H., & Grolemund, G. (2017). R for Data Science. O’Reilly. Disponible online"
+  },
+  {
+    "objectID": "syllabus.html#bibliografía-complementaria",
+    "href": "syllabus.html#bibliografía-complementaria",
+    "title": "Programa del Curso",
+    "section": "Bibliografía Complementaria",
+    "text": "Bibliografía Complementaria\n\nKabacoff, R. (2015). R in Action: Data Analysis and Graphics with R. Manning Publications.\nLander, J. P. (2017). R for Everyone: Advanced Analytics and Graphics. Addison-Wesley."
+  },
+  {
+    "objectID": "syllabus.html#políticas-del-curso",
+    "href": "syllabus.html#políticas-del-curso",
+    "title": "Programa del Curso",
+    "section": "Políticas del Curso",
+    "text": "Políticas del Curso\n\nAsistencia\nSe requiere [X%] de asistencia para aprobar el curso. Las inasistencias deben ser justificadas.\n\n\nIntegridad Académica\nSe espera honestidad académica en todos los trabajos. El plagio o copia resultará en la reprobación del curso según el reglamento de la universidad.\n\n\nUso de IA y Herramientas\n[Define tu política sobre el uso de ChatGPT, Claude, u otras herramientas de IA para resolver ejercicios]"
+  }
+]
