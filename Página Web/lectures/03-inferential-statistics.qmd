@@ -1,0 +1,21 @@
+---
+title: "Sesión 3: Prueba de Hipótesis (II) y ANOVA"
+subtitle: "Taller de Métodos y Técnicas de Investigación I"
+---
+
+::: {.callout-note}
+## En construcción
+
+Contenido en desarrollo. Disponible próximamente.
+:::
+
+## Objetivos de la sesión
+
+- Realizar pruebas t pareadas
+- Aplicar pruebas no paramétricas
+- Ejecutar ANOVA de un factor
+- Realizar comparaciones post-hoc
+
+---
+
+*Última actualización: [Fecha]*

@@ -1,0 +1,584 @@
+---
+title: "Sesión 1: Introducción a R y Estadística Descriptiva (I)"
+subtitle: "Taller de Métodos y Técnicas de Investigación I"
+date: "2024-03-15"
+format:
+  html:
+    code-fold: false
+    code-tools: true
+    toc: true
+    toc-depth: 3
+---
+
+## Objetivos de la sesión
+
+Al finalizar esta sesión serás capaz de:
+
+- Navegar en la interfaz de RStudio
+- Crear y manipular objetos básicos en R (vectores, dataframes)
+- Importar datos desde archivos CSV
+- Calcular medidas de tendencia central
+- Crear tablas de frecuencia simples y de contingencia
+
+---
+
+## 1. Introducción a R y RStudio
+
+### ¿Qué es R?
+
+R es un lenguaje de programación especializado en análisis estadístico y visualización de datos. Es:
+
+- **Gratuito y de código abierto**
+- **Potente** para análisis estadísticos complejos
+- **Versátil** con miles de paquetes disponibles
+- **Reproducible** - tu análisis queda documentado en código
+
+### La interfaz de RStudio
+
+RStudio tiene 4 paneles principales:
+
+1. **Editor** (arriba izquierda): Donde escribes tu código en scripts
+2. **Consola** (abajo izquierda): Donde se ejecuta el código y ves resultados
+3. **Environment** (arriba derecha): Muestra tus objetos/datos cargados
+4. **Files/Plots/Help** (abajo derecha): Archivos, gráficos, ayuda
+
+::: {.callout-tip}
+## Consejo
+Siempre trabaja con **scripts** (archivos .R o .qmd) en lugar de escribir directo en la consola. Así tu trabajo queda guardado y es reproducible.
+:::
+
+---
+
+## 2. Conceptos básicos de R
+
+### Preparación
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+# Cargar librerías necesarias
+library(tidyverse)  # Para manipulación de datos
+library(psych)      # Para estadística descriptiva
+
+# Configuración
+options(scipen = 999)  # Evitar notación científica
+```
+
+### Operaciones básicas
+
+R funciona como una calculadora avanzada:
+
+```{r}
+#| label: operaciones-basicas
+
+# Operaciones aritméticas
+5 + 3
+10 - 2
+4 * 6
+20 / 4
+2^3  # Potencia
+
+# R respeta el orden de operaciones
+(5 + 3) * 2
+```
+
+### Crear objetos
+
+En R guardamos información en **objetos** usando `<-`:
+
+```{r}
+#| label: crear-objetos
+
+# Crear un objeto numérico
+edad <- 25
+edad
+
+# Crear un vector (secuencia de valores)
+edades <- c(23, 25, 28, 30, 22, 27)
+edades
+
+# Operaciones con vectores
+mean(edades)    # Promedio
+length(edades)  # Largo del vector
+```
+
+::: {.callout-note}
+## Nota importante
+Los nombres de objetos:
+- Pueden contener letras, números, `.` y `_`
+- NO pueden empezar con números
+- R distingue entre mayúsculas y minúsculas (`edad ≠ Edad`)
+:::
+
+### Tipos de datos
+
+```{r}
+#| label: tipos-datos
+
+# Numérico
+numero <- 42
+class(numero)
+
+# Carácter (texto)
+nombre <- "María"
+class(nombre)
+
+# Lógico
+es_estudiante <- TRUE
+class(es_estudiante)
+
+# Factor (categorías)
+nivel_educacion <- factor(c("Básica", "Media", "Superior", "Media"))
+nivel_educacion
+```
+
+---
+
+## 3. Trabajar con DataFrames
+
+Los **dataframes** son tablas de datos, similares a hojas de Excel. Cada columna es una variable, cada fila es una observación.
+
+### Crear un dataframe
+
+```{r}
+#| label: crear-dataframe
+
+# Crear un dataframe desde vectores
+estudiantes <- data.frame(
+  nombre = c("Ana", "Bruno", "Carla", "Diego", "Elena"),
+  edad = c(23, 25, 24, 26, 23),
+  carrera = c("Sociología", "Sociología", "Antropología", 
+              "Sociología", "Antropología"),
+  nota = c(6.5, 5.8, 6.9, 6.2, 7.0)
+)
+
+# Ver el dataframe
+estudiantes
+```
+
+### Explorar datos
+
+```{r}
+#| label: explorar-datos
+
+# Estructura del dataframe
+str(estudiantes)
+
+# Primeras filas
+head(estudiantes, 3)
+
+# Dimensiones (filas x columnas)
+dim(estudiantes)
+
+# Resumen estadístico
+summary(estudiantes)
+```
+
+### Acceder a variables
+
+```{r}
+#| label: acceder-variables
+
+# Acceder a una columna específica con $
+estudiantes$edad
+
+# Otra forma: usando corchetes
+estudiantes[, "edad"]
+
+# Calcular estadísticos de una variable
+mean(estudiantes$nota)
+sd(estudiantes$nota)
+```
+
+---
+
+## 4. Importar datos
+
+En la práctica, casi siempre importaremos datos desde archivos externos.
+
+### Importar CSV
+
+```{r}
+#| label: importar-csv
+#| eval: false
+
+# Importar archivo CSV
+datos <- read.csv("../data/ejemplo.csv")
+
+# Con tidyverse (recomendado)
+datos <- read_csv("../data/ejemplo.csv")
+
+# Ver primeras filas
+head(datos)
+```
+
+::: {.callout-tip}
+## Tip: Rutas relativas
+Usa rutas relativas desde tu archivo .qmd:
+- `../data/archivo.csv` (sube una carpeta, entra a data)
+- Nunca uses `C:/Mi Computador/...` (no funcionará en otros computadores)
+:::
+
+### Para esta sesión: datos simulados
+
+Crearemos datos de ejemplo sobre una encuesta de satisfacción:
+
+```{r}
+#| label: datos-ejemplo
+
+# Simular datos de encuesta
+set.seed(123)  # Para reproducibilidad
+
+encuesta <- data.frame(
+  id = 1:100,
+  edad = sample(18:65, 100, replace = TRUE),
+  sexo = sample(c("Mujer", "Hombre", "Otro"), 100, 
+                replace = TRUE, prob = c(0.5, 0.48, 0.02)),
+  educacion = sample(c("Básica", "Media", "Técnica", "Universitaria", "Postgrado"), 
+                     100, replace = TRUE),
+  satisfaccion = sample(1:7, 100, replace = TRUE),
+  ingreso = rnorm(100, mean = 800000, sd = 300000)
+)
+
+# Vista previa
+head(encuesta, 10)
+```
+
+---
+
+## 5. Estadística Descriptiva (I)
+
+La estadística descriptiva resume y organiza datos. Comenzaremos con **medidas de tendencia central**.
+
+### Medidas de tendencia central
+
+Son valores que representan el "centro" de los datos:
+
+::: {.callout-note}
+## Definiciones
+
+- **Media (promedio)**: Suma de valores / cantidad de valores
+- **Mediana**: Valor que divide los datos en dos mitades iguales
+- **Moda**: Valor más frecuente
+:::
+
+```{r}
+#| label: tendencia-central
+
+# Media
+mean(encuesta$edad)
+
+# Mediana
+median(encuesta$edad)
+
+# Para variables categóricas: tabla de frecuencias
+table(encuesta$educacion)
+
+# Moda (el valor más frecuente)
+# R no tiene función directa, usamos table
+tabla_educacion <- table(encuesta$educacion)
+names(tabla_educacion)[which.max(tabla_educacion)]
+```
+
+### Comparación media vs mediana
+
+```{r}
+#| label: fig-media-mediana
+#| fig-cap: "Distribución de ingresos con media y mediana"
+#| fig-width: 8
+#| fig-height: 5
+
+# Crear histograma con media y mediana
+ggplot(encuesta, aes(x = ingreso)) +
+  geom_histogram(bins = 30, fill = "steelblue", alpha = 0.7) +
+  geom_vline(aes(xintercept = mean(ingreso), color = "Media"), 
+             linewidth = 1.2, linetype = "dashed") +
+  geom_vline(aes(xintercept = median(ingreso), color = "Mediana"), 
+             linewidth = 1.2, linetype = "dashed") +
+  scale_color_manual(name = "", 
+                     values = c("Media" = "red", "Mediana" = "blue")) +
+  theme_minimal() +
+  labs(title = "Distribución de Ingresos",
+       x = "Ingreso (CLP)",
+       y = "Frecuencia") +
+  scale_x_continuous(labels = scales::comma)
+```
+
+**Interpretación:** La media es sensible a valores extremos, mientras que la mediana es más robusta.
+
+---
+
+## 6. Tablas de frecuencia
+
+Las tablas de frecuencia organizan datos categóricos contando cuántas veces aparece cada valor.
+
+### Tabla de frecuencia simple
+
+```{r}
+#| label: tabla-simple
+
+# Frecuencias absolutas
+table(encuesta$sexo)
+
+# Frecuencias relativas (proporciones)
+prop.table(table(encuesta$sexo))
+
+# Frecuencias relativas en porcentaje
+prop.table(table(encuesta$sexo)) * 100
+```
+
+### Tabla más elaborada
+
+```{r}
+#| label: tabla-elaborada
+
+# Crear tabla con frecuencias y porcentajes
+tabla_sexo <- as.data.frame(table(encuesta$sexo))
+colnames(tabla_sexo) <- c("Sexo", "Frecuencia")
+tabla_sexo$Porcentaje <- round(prop.table(tabla_sexo$Frecuencia) * 100, 1)
+
+# Mostrar con kable
+library(knitr)
+kable(tabla_sexo, caption = "Distribución por sexo")
+```
+
+### Tabla de contingencia (dos variables)
+
+Las tablas de contingencia cruzan dos variables categóricas:
+
+```{r}
+#| label: tabla-contingencia
+
+# Tabla de contingencia: sexo x educación
+tabla_cruzada <- table(encuesta$sexo, encuesta$educacion)
+tabla_cruzada
+
+# Agregar totales marginales
+addmargins(tabla_cruzada)
+```
+
+### Proporciones por fila o columna
+
+```{r}
+#| label: proporciones-tabla
+
+# Proporciones por fila (cada fila suma 100%)
+prop.table(tabla_cruzada, margin = 1) * 100
+
+# Proporciones por columna (cada columna suma 100%)
+prop.table(tabla_cruzada, margin = 2) * 100
+```
+
+---
+
+## 7. Visualización de frecuencias
+
+### Gráfico de barras
+
+```{r}
+#| label: fig-barras
+#| fig-cap: "Distribución de nivel educacional"
+#| fig-width: 8
+#| fig-height: 5
+
+ggplot(encuesta, aes(x = educacion)) +
+  geom_bar(fill = "steelblue", alpha = 0.8) +
+  theme_minimal() +
+  labs(title = "Distribución de Nivel Educacional",
+       x = "Nivel Educacional",
+       y = "Frecuencia") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+### Gráfico de barras agrupadas
+
+```{r}
+#| label: fig-barras-agrupadas
+#| fig-cap: "Nivel educacional por sexo"
+#| fig-width: 10
+#| fig-height: 6
+
+ggplot(encuesta, aes(x = educacion, fill = sexo)) +
+  geom_bar(position = "dodge") +
+  theme_minimal() +
+  labs(title = "Nivel Educacional por Sexo",
+       x = "Nivel Educacional",
+       y = "Frecuencia",
+       fill = "Sexo") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+---
+
+## 8. Ejercicios prácticos
+
+::: {.callout-tip}
+## Ejercicio 1: Calcular estadísticos
+
+Usando los datos de `encuesta`:
+
+a) Calcula la edad promedio
+b) Calcula la edad mediana
+c) ¿Cuál es la satisfacción promedio?
+d) ¿Cuál es el ingreso mediano?
+
+**Pista:** Usa las funciones `mean()` y `median()`
+:::
+
+```{r}
+#| label: ejercicio-1
+#| eval: false
+#| code-fold: true
+
+# Tu código aquí
+
+```
+
+::: {.callout-tip collapse="true"}
+## Solución Ejercicio 1
+
+```{r}
+#| label: solucion-1
+
+# a) Edad promedio
+mean(encuesta$edad)
+
+# b) Edad mediana
+median(encuesta$edad)
+
+# c) Satisfacción promedio
+mean(encuesta$satisfaccion)
+
+# d) Ingreso mediano
+median(encuesta$ingreso)
+```
+:::
+
+---
+
+::: {.callout-tip}
+## Ejercicio 2: Tablas de frecuencia
+
+Crea una tabla de frecuencias para la variable `educacion` que incluya:
+- Frecuencia absoluta
+- Frecuencia relativa (porcentaje)
+
+**Pista:** Usa `table()` y `prop.table()`
+:::
+
+```{r}
+#| label: ejercicio-2
+#| eval: false
+#| code-fold: true
+
+# Tu código aquí
+
+```
+
+::: {.callout-tip collapse="true"}
+## Solución Ejercicio 2
+
+```{r}
+#| label: solucion-2
+
+# Crear tabla
+tabla_educ <- as.data.frame(table(encuesta$educacion))
+colnames(tabla_educ) <- c("Nivel", "Frecuencia")
+tabla_educ$Porcentaje <- round(prop.table(tabla_educ$Frecuencia) * 100, 1)
+
+# Mostrar
+kable(tabla_educ)
+```
+:::
+
+---
+
+::: {.callout-tip}
+## Ejercicio 3: Tabla de contingencia
+
+Crea una tabla de contingencia entre `sexo` y `educacion`.
+Luego calcula las proporciones por fila.
+
+¿Qué porcentaje de mujeres tiene educación universitaria?
+:::
+
+```{r}
+#| label: ejercicio-3
+#| eval: false
+#| code-fold: true
+
+# Tu código aquí
+
+```
+
+::: {.callout-tip collapse="true"}
+## Solución Ejercicio 3
+
+```{r}
+#| label: solucion-3
+
+# Tabla de contingencia
+tabla <- table(encuesta$sexo, encuesta$educacion)
+tabla
+
+# Proporciones por fila
+prop_fila <- prop.table(tabla, margin = 1) * 100
+round(prop_fila, 1)
+
+# El porcentaje de mujeres con educación universitaria es:
+prop_fila["Mujer", "Universitaria"]
+```
+:::
+
+---
+
+## Resumen
+
+En esta sesión aprendimos:
+
+- ✅ Navegar en RStudio y crear scripts
+- ✅ Crear y manipular objetos básicos (vectores, dataframes)
+- ✅ Importar datos desde CSV
+- ✅ Calcular medidas de tendencia central (media, mediana, moda)
+- ✅ Crear tablas de frecuencia simples y de contingencia
+- ✅ Visualizar datos con gráficos de barras
+
+---
+
+## Recursos adicionales
+
+### Lecturas recomendadas
+
+- Navarro, D. (2015). *Learning Statistics with R*. Capítulos 3-5. [Disponible online](https://learningstatisticswithr.com/)
+- Wickham, H., & Grolemund, G. (2017). *R for Data Science*. Capítulos 1-4. [Disponible online](https://r4ds.had.co.nz/)
+
+### Videos
+
+- [Introducción a RStudio (10 min)](https://www.youtube.com/watch?v=lVKMsaWju8w)
+- [R para principiantes](https://www.youtube.com/watch?v=_V8eKsto3Ug)
+
+### Práctica adicional
+
+- [Swirl - Learn R, in R](https://swirlstats.com/) - Tutorial interactivo
+- [R for Data Science - Ejercicios](https://r4ds.hadley.nz/data-transform.html#exercises-9)
+
+---
+
+## Para la próxima sesión
+
+::: {.callout-important}
+## Tareas
+
+1. Completar los 3 ejercicios de esta sesión
+2. Instalar el paquete `psych`: `install.packages("psych")`
+3. Traer un dataset propio (opcional) o trabajaremos con datos de ejemplo
+4. Leer: Navarro, Capítulo 5 (Medidas de dispersión)
+:::
+
+::: {.callout-note}
+## Recordatorio
+
+La entrega de ejercicios es el [fecha]. Formato: archivo `.qmd` + HTML renderizado.
+:::

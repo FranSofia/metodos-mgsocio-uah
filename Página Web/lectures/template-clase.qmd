@@ -1,0 +1,188 @@
+---
+title: "Sesión X: [Título de la sesión]"
+subtitle: "Taller de Métodos y Técnicas de Investigación I"
+date: "[Fecha]"
+format:
+  html:
+    code-fold: false
+    code-tools: true
+    toc: true
+    toc-depth: 3
+---
+
+## Objetivos de la sesión
+
+Al finalizar esta sesión serás capaz de:
+
+- Objetivo 1
+- Objetivo 2
+- Objetivo 3
+
+---
+
+## Preparación
+
+### Paquetes necesarios
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+# Cargar librerías
+library(tidyverse)
+
+# Configuración general
+options(scipen = 999) # Evitar notación científica
+```
+
+### Datos
+
+Para esta sesión utilizaremos [descripción del dataset]:
+
+```{r}
+#| label: load-data
+
+# Cargar datos
+datos <- read.csv("../data/ene-2025-07-jja.csv")
+
+# Vista previa
+head(datos)
+```
+
+---
+
+## 1. Concepto teórico principal
+
+Breve explicación del concepto estadístico.
+
+::: {.callout-note}
+## Definición
+
+Aquí va una definición formal o importante.
+:::
+
+### Subtema 1.1
+
+Explicación más detallada con ejemplos conceptuales.
+
+---
+
+## 2. Aplicación en R
+
+### 2.1 Primer ejemplo
+
+Descripción de lo que vamos a hacer:
+
+```
+# Código comentado paso a paso
+resultado <- funcion(datos)
+
+# Mostrar resultado
+resultado
+```
+
+**Interpretación:** Aquí explicas qué significa el resultado.
+
+### 2.2 Segundo ejemplo
+
+```{r}
+#| label: ejemplo-2
+
+# Otro ejemplo más complejo
+```
+
+---
+
+## 3. Visualización
+
+Las visualizaciones ayudan a entender mejor los resultados:
+
+```r
+#| label: fig-grafico1
+#| fig-cap: "Descripción del gráfico"
+#| fig-width: 8
+#| fig-height: 6
+
+# Código para generar gráfico
+ggplot(datos, aes(x = variable_x, y = variable_y)) +
+  geom_point() +
+  theme_minimal() +
+  labs(title = "Título del gráfico",
+       x = "Eje X",
+       y = "Eje Y")
+```
+
+---
+
+## 4. Ejercicios prácticos
+
+::: {.callout-tip}
+## Ejercicio 1
+
+**Tarea:** Describe qué deben hacer.
+
+**Pista:** Una ayuda para empezar.
+:::
+
+```{r}
+#| label: ejercicio-1
+#| eval: false
+
+# Espacio para que los estudiantes completen el código
+
+```
+
+::: {.callout-tip collapse="true"}
+## Solución Ejercicio 1
+
+```{r}
+#| label: solucion-1
+
+# Código de la solución
+```
+
+**Explicación:** Por qué esta es la solución correcta.
+:::
+
+---
+
+## Resumen
+
+En esta sesión aprendimos:
+
+- Punto clave 1
+- Punto clave 2
+- Punto clave 3
+
+---
+
+## Recursos adicionales
+
+### Lecturas recomendadas
+
+- Autor (año). *Título del libro*. Páginas X-Y.
+- [Artículo online](URL)
+
+### Videos
+
+- [Tutorial en YouTube](URL)
+
+### Práctica adicional
+
+- [Ejercicios complementarios](URL)
+
+---
+
+## Para la próxima sesión
+
+::: {.callout-important}
+## Tareas
+
+1. Completar ejercicios de esta sesión
+2. Leer capítulo X
+3. Traer dudas para resolver
+:::
+
+
+

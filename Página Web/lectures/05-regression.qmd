@@ -1,0 +1,21 @@
+---
+title: "Sesión 5: Regresión Lineal Múltiple"
+subtitle: "Taller de Métodos y Técnicas de Investigación I"
+---
+
+::: {.callout-note}
+## En construcción
+
+Contenido en desarrollo. Disponible próximamente.
+:::
+
+## Objetivos de la sesión
+
+- Ajustar modelos de regresión múltiple
+- Interpretar coeficientes con múltiples predictores
+- Trabajar con variables dummy
+- Diagnosticar problemas en regresión
+
+---
+
+*Última actualización: [Fecha]*

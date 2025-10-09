@@ -1,0 +1,128 @@
+---
+title: "Programa del Curso"
+---
+
+## Información General
+
+**Curso:** Taller de Métodos y Técnicas de Investigación I  
+**Programa:** Magíster en Sociología  
+**Profesor/a:** [Tu nombre]  
+**Semestre:** [Semestre y año]  
+**Créditos:** [X créditos]
+
+## Descripción
+
+Este taller proporciona formación práctica en el uso de R para análisis estadístico en ciencias sociales. El curso enfatiza la aplicación de técnicas estadísticas fundamentales, desde estadística descriptiva hasta modelos de regresión múltiple, utilizando datos reales de investigación social.
+
+## Objetivos de Aprendizaje
+
+Al finalizar el curso, las y los estudiantes serán capaces de:
+
+1. Manipular y preparar datos para análisis estadístico en R
+2. Realizar análisis estadísticos descriptivos e inferenciales
+3. Aplicar pruebas de hipótesis apropiadas según el tipo de datos
+4. Ejecutar y interpretar análisis de correlación y regresión
+5. Comunicar resultados estadísticos de manera clara y profesional
+
+## Metodología
+
+El curso se estructura en sesiones prácticas donde se combinan:
+
+- Exposiciones teóricas breves sobre los conceptos estadísticos
+- Demostraciones en vivo de código en R
+- Ejercicios prácticos guiados
+- Trabajo autónomo con datos reales
+
+Se espera que las y los estudiantes traigan su computador con R y RStudio instalados a cada sesión.
+
+## Contenidos por Sesión
+
+### Sesión 1: Introducción a R y Estadística Descriptiva (I)
+**Fecha:** [Fecha]
+
+- Interfaz de RStudio y flujo de trabajo
+- Tipos de objetos en R (vectores, dataframes, listas)
+- Importación de datos
+- Medidas de tendencia central
+- Tablas de frecuencia y contingencia
+
+**Lecturas:**
+- [Referencias]
+
+---
+
+### Sesión 2: Estadística Descriptiva (II) y Prueba de Hipótesis (I)
+**Fecha:** [Fecha]
+
+- Medidas de dispersión y posición
+- Visualización de datos (histogramas, boxplots, gráficos de barras)
+- Introducción a la inferencia estadística
+- Prueba t para una muestra
+- Prueba t para muestras independientes
+
+**Lecturas:**
+- [Referencias]
+
+---
+
+### Sesión 3: Prueba de Hipótesis (II) y ANOVA
+**Fecha:** [Fecha]
+
+- Prueba t para muestras pareadas
+- Pruebas no paramétricas (Wilcoxon, Mann-Whitney)
+- ANOVA de un factor
+- Comparaciones post-hoc (Tukey, Bonferroni)
+- Supuestos y diagnósticos
+
+**Lecturas:**
+- [Referencias]
+
+---
+
+### Sesión 4: Correlación Bivariada y Regresión Lineal Simple
+**Fecha:** [Fecha]
+
+- Correlación de Pearson y Spearman
+- Matrices de correlación
+- Introducción a la regresión lineal simple
+- Estimación e interpretación de coeficientes
+- R² y bondad de ajuste
+
+**Lecturas:**
+- [Referencias]
+
+---
+
+### Sesión 5: Regresión Lineal Múltiple
+**Fecha:** [Fecha]
+
+- Regresión lineal múltiple
+- Interpretación de coeficientes con múltiples predictores
+- Variables dummy y categóricas
+- Diagnóstico de regresión (residuos, multicolinealidad)
+- Presentación de resultados
+
+**Lecturas:**
+- [Referencias]
+
+## Bibliografía Básica
+
+- Field, A., Miles, J., & Field, Z. (2012). *Discovering Statistics Using R*. Sage Publications.
+- Navarro, D. (2015). *Learning Statistics with R*. [Disponible online](https://learningstatisticswithr.com/)
+- Wickham, H., & Grolemund, G. (2017). *R for Data Science*. O'Reilly. [Disponible online](https://r4ds.had.co.nz/)
+
+## Bibliografía Complementaria
+
+- Kabacoff, R. (2015). *R in Action: Data Analysis and Graphics with R*. Manning Publications.
+- Lander, J. P. (2017). *R for Everyone: Advanced Analytics and Graphics*. Addison-Wesley.
+
+## Políticas del Curso
+
+### Asistencia
+Se requiere [X%] de asistencia para aprobar el curso. Las inasistencias deben ser justificadas.
+
+### Integridad Académica
+Se espera honestidad académica en todos los trabajos. El plagio o copia resultará en la reprobación del curso según el reglamento de la universidad.
+
+### Uso de IA y Herramientas
+[Define tu política sobre el uso de ChatGPT, Claude, u otras herramientas de IA para resolver ejercicios]

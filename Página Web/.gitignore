@@ -1,0 +1,23 @@
+# Archivos de Quarto
+/.quarto/
+/_site/
+/docs/
+
+# Archivos de R
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos temporales
+*~
+*.tmp
+*.bak
+
+# Archivos de RStudio
+.Rproj.user

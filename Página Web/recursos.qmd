@@ -1,0 +1,190 @@
+---
+title: "Recursos"
+---
+
+## Software Necesario
+
+### R y RStudio
+
+Para este curso necesitas instalar:
+
+1. **R** (versión 4.0 o superior)
+   - Descarga desde: [https://cran.r-project.org/](https://cran.r-project.org/)
+   - Selecciona tu sistema operativo y sigue las instrucciones
+
+2. **RStudio** (IDE recomendado)
+   - Descarga desde: [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/)
+   - Versión gratuita (Desktop) es suficiente
+
+::: {.callout-tip}
+## Video tutoriales de instalación
+
+- [Instalar R y RStudio en Windows](https://www.youtube.com/watch?v=...)
+- [Instalar R y RStudio en Mac](https://www.youtube.com/watch?v=...)
+- [Instalar R y RStudio en Linux](https://www.youtube.com/watch?v=...)
+
+(Puedes agregar tus propios videos o usar los disponibles en YouTube)
+:::
+
+### Paquetes de R
+
+Durante el curso usaremos principalmente estos paquetes. Puedes instalarlos copiando este código en tu consola de R:
+
+```r
+# Paquetes para manipulación de datos
+install.packages("tidyverse")  # Incluye dplyr, ggplot2, tidyr, etc.
+
+# Paquetes para estadística
+install.packages("psych")      # Estadística descriptiva
+install.packages("car")        # Análisis de regresión
+install.packages("lmtest")     # Tests para modelos lineales
+
+# Paquetes para tablas y reportes
+install.packages("knitr")      # Para reportes
+install.packages("kableExtra") # Tablas elegantes
+install.packages("gt")         # Tablas modernas
+
+# Paquetes para visualización
+install.packages("ggplot2")    # Ya incluido en tidyverse
+install.packages("patchwork")  # Combinar gráficos
+```
+
+## Guías y Tutoriales
+
+### Introducción a R
+
+- [R para Ciencia de Datos (en español)](https://es.r4ds.hadley.nz/) - Wickham & Grolemund
+- [Introducción a R - RStudio Education](https://education.rstudio.com/learn/beginner/)
+- [swirl: Learn R, in R](https://swirlstats.com/) - Tutoriales interactivos
+
+### Estadística en R
+
+- [Learning Statistics with R](https://learningstatisticswithr.com/) - Danielle Navarro (libro completo gratis)
+- [Quick-R](https://www.statmethods.net/) - Referencia rápida de métodos estadísticos
+- [UCLA Statistical Consulting](https://stats.oarc.ucla.edu/r/) - Excelentes tutoriales por método estadístico
+
+### Visualización de Datos
+
+- [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)
+- [R Graphics Cookbook](https://r-graphics.org/)
+- [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) - Claus Wilke
+
+### Quarto/R Markdown
+
+- [Quarto Documentation](https://quarto.org/docs/guide/)
+- [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+- [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)
+
+
+## Datos para Práctica
+
+### Datasets del Curso
+
+Los datasets utilizados en clases están disponibles en la carpeta `data/` de este sitio web:
+
+- `ejemplo.csv` - Dataset ejemplo para Sesión 1
+- [Otros datasets que uses]
+
+### Repositorios de Datos Sociales
+
+**Chile:**
+- [CASEN](http://observatorio.ministeriodesarrollosocial.gob.cl/encuesta-casen) - Encuesta de Caracterización Socioeconómica Nacional
+- [ELSOC](https://coes.cl/encuesta-panel/) - Estudio Longitudinal Social de Chile
+- [CEP](https://www.cepchile.cl/opinion-publica/encuesta-cep/) - Encuestas Centro de Estudios Públicos
+
+**Internacional:**
+- [World Bank Open Data](https://data.worldbank.org/)
+- [OECD Data](https://data.oecd.org/)
+- [Gapminder](https://www.gapminder.org/data/)
+- [Our World in Data](https://ourworldindata.org/)
+
+**Repositorios generales:**
+- [Kaggle Datasets](https://www.kaggle.com/datasets)
+- [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php)
+- [Data.gov](https://www.data.gov/)
+
+
+## Hojas de Referencia (Cheatsheets)
+
+Descarga estas guías de referencia rápida:
+
+- [RStudio IDE Cheatsheet](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf)
+- [Data Transformation with dplyr](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
+- [Data Visualization with ggplot2](https://rstudio.github.io/cheatsheets/data-visualization.pdf)
+- [R Markdown](https://rstudio.github.io/cheatsheets/rmarkdown.pdf)
+
+Todas las cheatsheets de RStudio: [https://posit.co/resources/cheatsheets/](https://posit.co/resources/cheatsheets/)
+
+
+## Comunidades y Ayuda
+
+### Foros y Comunidades
+
+- [Stack Overflow (tag: r)](https://stackoverflow.com/questions/tagged/r) - Preguntas técnicas
+- [RStudio Community](https://community.rstudio.com/) - Comunidad oficial
+- [r/rstats (Reddit)](https://www.reddit.com/r/rstats/) - Discusiones y noticias
+
+### Canales de YouTube (en español)
+
+- [R para Ciencia de Datos](https://www.youtube.com/@rparacienciadedatos)
+- [Riffomonas Project](https://www.youtube.com/@Riffomonas) (inglés, pero muy didáctico)
+
+### Blogs y Tutoriales
+
+- [R-bloggers](https://www.r-bloggers.com/) - Agregador de blogs sobre R
+- [Towards Data Science](https://towardsdatascience.com/tagged/r-programming) - Artículos técnicos
+
+
+
+## Consejos para Aprender R
+
+::: {.callout-tip collapse="true"}
+## Haz clic para expandir consejos
+
+### 1. Practica regularmente
+No basta con ver código, hay que escribirlo. Dedica tiempo cada semana a practicar.
+
+### 2. Aprende a buscar ayuda
+- Usa `?funcion` o `help(funcion)` en R
+- Busca en Google: "how to [tarea] in R"
+- Lee los mensajes de error con calma
+
+### 3. No memorices, entiende
+Es mejor entender la lógica que memorizar código. Usa las cheatsheets como apoyo.
+
+### 4. Comenta tu código
+Tu yo del futuro te lo agradecerá. Explica qué hace cada sección.
+
+### 5. Empieza simple
+No trates de hacer visualizaciones complejas desde el inicio. Domina lo básico primero.
+
+### 6. Aprende de ejemplos
+Estudia código de otros, modifícalo, entiéndelo.
+
+### 7. Sé paciente
+Todos los programadores cometen errores constantemente. Es parte del proceso.
+:::
+
+
+## Material Complementario
+
+### Libros Avanzados (para profundizar)
+
+- [Advanced R](https://adv-r.hadley.nz/) - Hadley Wickham
+- [Hands-On Programming with R](https://rstudio-education.github.io/hopr/)
+- [Text Mining with R](https://www.tidytextmining.com/)
+
+### Cursos Online
+
+- [Coursera: R Programming](https://www.coursera.org/learn/r-programming)
+- [DataCamp: Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r)
+- [edX: Data Science: R Basics](https://www.edx.org/course/data-science-r-basics)
+
+
+
+## Contacto
+
+¿Tienes sugerencias de recursos que deberían estar aquí? Escríbeme a [email] o abre un issue en el [repositorio de GitHub](https://github.com/TU-USUARIO/taller-metodos).
+
+
+

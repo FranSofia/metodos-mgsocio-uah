@@ -1,0 +1,61 @@
+---
+title: "Taller de Métodos y Técnicas de Investigación I"
+subtitle: "Magíster en Sociología"
+---
+
+## Bienvenida/o
+
+Este es el sitio web del curso **Taller de Métodos y Técnicas de Investigación I**, enfocado en la aplicación práctica de técnicas estadísticas usando R.
+
+## Descripción del curso
+
+Este taller está diseñado para que estudiantes del Magíster en Sociología desarrollen habilidades prácticas en análisis estadístico utilizando el lenguaje de programación R. A través de 5 sesiones, cubriremos desde lo básico de R hasta análisis de regresión lineal múltiple.
+
+### Objetivos de aprendizaje
+
+Al finalizar este curso, serás capaz de:
+
+- Utilizar R y RStudio para análisis estadísticos
+- Aplicar técnicas de estadística descriptiva e inferencial
+- Realizar pruebas de hipótesis y ANOVA
+- Ejecutar análisis de correlación y regresión (simple y múltiple)
+- Interpretar y comunicar resultados estadísticos
+
+## Estructura del curso
+
+El curso consta de **5 sesiones prácticas**:
+
+1. **Sesión 1:** Introducción a R + Estadística descriptiva (I)
+2. **Sesión 2:** Estadística descriptiva (II) + Prueba de hipótesis (I)
+3. **Sesión 3:** Prueba de hipótesis (II) + ANOVA
+4. **Sesión 4:** Correlación bivariada + Regresión lineal simple
+5. **Sesión 5:** Regresión lineal múltiple
+
+## Información del curso
+
+::: {.callout-note}
+## Detalles
+
+- **Profesora:** Carollina Aguilera
+- **Ayudante:** Fran Sofía Núñez 
+- **Horario:** [Días y horario]
+- **Sala:** [Sala o modalidad]
+:::
+
+## Antes de comenzar
+
+Para seguir este curso necesitarás:
+
+- Instalar [R](https://cran.r-project.org/) 
+- Instalar [RStudio](https://posit.co/download/rstudio-desktop/)
+- Conocimientos básicos de estadística
+
+Revisa la sección [Recursos](recursos.qmd) para guías de instalación y materiales complementarios.
+
+---
+
+::: {.callout-tip}
+## Contacto
+
+Para consultas del curso, puedes contactarme por fransofia.nr@gmail.com.
+:::

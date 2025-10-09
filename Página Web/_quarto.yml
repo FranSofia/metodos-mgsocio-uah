@@ -1,0 +1,54 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Taller de Métodos y Técnicas de Investigación I"
+  navbar:
+    background: primary
+    search: true
+    left:
+      - text: "Inicio"
+        file: index.qmd
+      - text: "Programa"
+        file: syllabus.qmd
+      - text: "Evaluaciones"
+        file: evaluacion.qmd
+      - text: "Recursos"
+        file: recursos.qmd
+      - text: "Clases"
+        menu:
+          - text: "Sesión 1: Intro a R y Estadística Descriptiva I"
+            file: lectures/01-intro.qmd
+          - text: "Sesión 2: Estadística Descriptiva II e Hipótesis I"
+            file: lectures/02-statistics.qmd
+          - text: "Sesión 3: Prueba de Hipótesis II y ANOVA"
+            file: lectures/03-inferential-statistics.qmd
+          - text: "Sesión 4: Correlación y Regresión Simple"
+            file: lectures/04-corr-regression.qmd
+          - text: "Sesión 5: Regresión Lineal Múltiple"
+            file: lectures/05-regression.qmd
+    right:
+      - icon: github
+        href: https://github.com/TU-USUARIO/taller-metodos
+        
+  sidebar: false
+
+format:
+  html:
+    theme: 
+      light: [cosmo, styles/styles.scss]
+    css: styles/styles.scss
+    mainfont: "Source Sans Pro"
+    monofont: "Fira Code"
+    include-in-header:
+      - text: |
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+execute:
+  freeze: auto
+  warning: false
+  message: false
+

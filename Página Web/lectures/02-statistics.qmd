@@ -1,0 +1,21 @@
+---
+title: "Sesión 2: Estadística Descriptiva (II) y Prueba de Hipótesis (I)"
+subtitle: "Taller de Métodos y Técnicas de Investigación I"
+---
+
+::: {.callout-note}
+## En construcción
+
+Contenido en desarrollo. Disponible próximamente.
+:::
+
+## Objetivos de la sesión
+
+- Calcular medidas de dispersión
+- Crear visualizaciones avanzadas
+- Introducción a pruebas de hipótesis
+- Realizar pruebas t
+
+---
+
+*Última actualización: [Fecha]*

@@ -1,0 +1,21 @@
+---
+title: "Sesión 4: Correlación Bivariada y Regresión Lineal Simple"
+subtitle: "Taller de Métodos y Técnicas de Investigación I"
+---
+
+::: {.callout-note}
+## En construcción
+
+Contenido en desarrollo. Disponible próximamente.
+:::
+
+## Objetivos de la sesión
+
+- Calcular correlaciones de Pearson y Spearman
+- Crear matrices de correlación
+- Ajustar modelos de regresión simple
+- Interpretar coeficientes de regresión
+
+---
+
+*Última actualización: [Fecha]*
