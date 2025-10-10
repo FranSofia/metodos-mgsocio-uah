@@ -100,15 +100,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Source+Sans+Pro:wght@300;400;600&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet">
 
 
-<link rel="stylesheet" href="styles/styles.scss">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -171,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/TU-USUARIO/taller-metodos"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/fransofia/metodos-mgsocio-uah"> <i class="bi bi-github" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -186,13 +182,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#lenguaje-de-programación" id="toc-lenguaje-de-programación" class="nav-link active" data-scroll-target="#lenguaje-de-programación">Lenguaje de Programación</a>
+  <ul class="collapse">
+  <li><a href="#r-y-rstudio" id="toc-r-y-rstudio" class="nav-link" data-scroll-target="#r-y-rstudio">R y RStudio</a></li>
+  <li><a href="#paquetes-de-r" id="toc-paquetes-de-r" class="nav-link" data-scroll-target="#paquetes-de-r">Paquetes de R</a></li>
+  </ul></li>
+  <li><a href="#guías-y-tutoriales" id="toc-guías-y-tutoriales" class="nav-link" data-scroll-target="#guías-y-tutoriales">Guías y Tutoriales</a>
+  <ul class="collapse">
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a></li>
+  <li><a href="#estadística-en-r" id="toc-estadística-en-r" class="nav-link" data-scroll-target="#estadística-en-r">Estadística en R</a></li>
+  <li><a href="#visualización-de-datos" id="toc-visualización-de-datos" class="nav-link" data-scroll-target="#visualización-de-datos">Visualización de Datos</a></li>
+  <li><a href="#quartor-markdown" id="toc-quartor-markdown" class="nav-link" data-scroll-target="#quartor-markdown">Quarto/R Markdown</a></li>
+  </ul></li>
+  <li><a href="#datos-para-práctica" id="toc-datos-para-práctica" class="nav-link" data-scroll-target="#datos-para-práctica">Datos para Práctica</a>
+  <ul class="collapse">
+  <li><a href="#datasets-del-curso" id="toc-datasets-del-curso" class="nav-link" data-scroll-target="#datasets-del-curso">Datasets del Curso</a></li>
+  <li><a href="#repositorios-de-datos-sociales" id="toc-repositorios-de-datos-sociales" class="nav-link" data-scroll-target="#repositorios-de-datos-sociales">Repositorios de Datos Sociales</a></li>
+  </ul></li>
+  <li><a href="#hojas-de-referencia-cheatsheets" id="toc-hojas-de-referencia-cheatsheets" class="nav-link" data-scroll-target="#hojas-de-referencia-cheatsheets">Hojas de Referencia (Cheatsheets)</a></li>
+  <li><a href="#comunidades-y-ayuda" id="toc-comunidades-y-ayuda" class="nav-link" data-scroll-target="#comunidades-y-ayuda">Comunidades y Ayuda</a>
+  <ul class="collapse">
+  <li><a href="#foros-y-comunidades" id="toc-foros-y-comunidades" class="nav-link" data-scroll-target="#foros-y-comunidades">Foros y Comunidades</a></li>
+  <li><a href="#canales-de-youtube-en-español" id="toc-canales-de-youtube-en-español" class="nav-link" data-scroll-target="#canales-de-youtube-en-español">Canales de YouTube (en español)</a></li>
+  <li><a href="#blogs-y-tutoriales" id="toc-blogs-y-tutoriales" class="nav-link" data-scroll-target="#blogs-y-tutoriales">Blogs y Tutoriales</a></li>
+  </ul></li>
+  <li><a href="#consejos-para-aprender-r" id="toc-consejos-para-aprender-r" class="nav-link" data-scroll-target="#consejos-para-aprender-r">Consejos para Aprender R</a></li>
+  <li><a href="#material-complementario" id="toc-material-complementario" class="nav-link" data-scroll-target="#material-complementario">Material Complementario</a>
+  <ul class="collapse">
+  <li><a href="#libros-avanzados-para-profundizar" id="toc-libros-avanzados-para-profundizar" class="nav-link" data-scroll-target="#libros-avanzados-para-profundizar">Libros Avanzados (para profundizar)</a></li>
+  <li><a href="#cursos-online" id="toc-cursos-online" class="nav-link" data-scroll-target="#cursos-online">Cursos Online</a></li>
+  </ul></li>
+  <li><a href="#contacto" id="toc-contacto" class="nav-link" data-scroll-target="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Recursos</h1>
+<div class="quarto-title-block"><div><h1 class="title">Recursos</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -209,21 +243,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="software-necesario" class="level2">
-<h2 class="anchored" data-anchor-id="software-necesario">Software Necesario</h2>
+<section id="lenguaje-de-programación" class="level2">
+<h2 class="anchored" data-anchor-id="lenguaje-de-programación">Lenguaje de Programación</h2>
 <section id="r-y-rstudio" class="level3">
 <h3 class="anchored" data-anchor-id="r-y-rstudio">R y RStudio</h3>
 <p>Para este curso necesitas instalar:</p>
 <ol type="1">
-<li><strong>R</strong> (versión 4.0 o superior)
+<li><p><strong>R</strong></p>
 <ul>
 <li>Descarga desde: <a href="https://cran.r-project.org/">https://cran.r-project.org/</a></li>
 <li>Selecciona tu sistema operativo y sigue las instrucciones</li>
 </ul></li>
-<li><strong>RStudio</strong> (IDE recomendado)
+<li><p><strong>RStudio</strong> (IDE recomendado)</p>
 <ul>
 <li>Descarga desde: <a href="https://posit.co/download/rstudio-desktop/">https://posit.co/download/rstudio-desktop/</a></li>
 <li>Versión gratuita (Desktop) es suficiente</li>
+<li>Si quieren otro IDE, pueden usar Positron, que es un nuevo IDE que combina Python y R en un interfaz amable. O si vienen del mundo más ligado a la ciencia de datos “pura”, también pueden usar VS Code. Pero el lenguaje de programación será siempre R.</li>
 </ul></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -237,41 +272,64 @@ Video tutoriales de instalación
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><a href="https://www.youtube.com/watch?v=...">Instalar R y RStudio en Windows</a></li>
-<li><a href="https://www.youtube.com/watch?v=...">Instalar R y RStudio en Mac</a></li>
-<li><a href="https://www.youtube.com/watch?v=...">Instalar R y RStudio en Linux</a></li>
+<li><a href="https://www.youtube.com/watch?v=hbgzW3Cvda4">Instalar R y RStudio en Windows</a></li>
+<li><a href="https://www.youtube.com/watch?v=0qLkkK7ouBY">Instalar R y RStudio en Mac</a></li>
+<li><a href="https://www.youtube.com/watch?v=FAqaMHTxPGg">Instalar R y RStudio en Linux</a></li>
 </ul>
-<p>(Puedes agregar tus propios videos o usar los disponibles en YouTube)</p>
+<p>(Pueden usar cualquier tutorial que deseen, lo de arriba solo son referencias rápidas. De cualquier manera, es bastante intuitivo)</p>
 </div>
 </div>
 </section>
 <section id="paquetes-de-r" class="level3">
 <h3 class="anchored" data-anchor-id="paquetes-de-r">Paquetes de R</h3>
 <p>Durante el curso usaremos principalmente estos paquetes. Puedes instalarlos copiando este código en tu consola de R:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes para manipulación de datos</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)  <span class="co"># Incluye dplyr, ggplot2, tidyr, etc.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes para estadística</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"psych"</span>)      <span class="co"># Estadística descriptiva</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"car"</span>)        <span class="co"># Análisis de regresión</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"lmtest"</span>)     <span class="co"># Tests para modelos lineales</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes para manipulación y limpieza de datos</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)   <span class="co"># dplyr, ggplot2, tidyr, readr, etc.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"haven"</span>)       <span class="co"># Importar SPSS, Stata, SAS</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"readxl"</span>)      <span class="co"># Leer Excel</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rio"</span>)         <span class="co"># Import/export flexible</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"janitor"</span>)     <span class="co"># Limpiar datos y tablas</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"labelled"</span>)    <span class="co"># Etiquetas de variables.</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes para tablas y reportes</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"knitr"</span>)      <span class="co"># Para reportes</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"kableExtra"</span>) <span class="co"># Tablas elegantes</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"gt"</span>)         <span class="co"># Tablas modernas</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes para estadística descriptiva e inferencial básica</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"psych"</span>)       <span class="co"># Descriptivos</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"DescTools"</span>)   <span class="co"># Medidas y tests clásicos</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"summarytools"</span>)<span class="co"># Tablas descriptivas rápidas</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes para visualización</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)    <span class="co"># Ya incluido en tidyverse</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"patchwork"</span>)  <span class="co"># Combinar gráficos</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes para test de hipótesis y modelos lineales</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"car"</span>)         <span class="co"># Regresión, ANOVA, supuestos</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"lmtest"</span>)      <span class="co"># Tests para modelos lineales</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"sandwich"</span>)    <span class="co"># Errores robustos (White, HC)</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"estimatr"</span>)    <span class="co"># Regresión con errores robustos fáciles</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"margins"</span>)     <span class="co"># Efectos marginales</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes para tablas y reportes</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"broom"</span>)       <span class="co"># Convertir modelos a dataframes</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"stargazer"</span>)   <span class="co"># Tablas de regresión (LaTeX, html, texto)</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"modelsummary"</span>)<span class="co"># Alternativa moderna a stargazer</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"knitr"</span>)       </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"kableExtra"</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"gt"</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes para visualización</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)     <span class="co"># (ya incluido en tidyverse)</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"patchwork"</span>)   <span class="co"># Combinar gráficos</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggpubr"</span>)      <span class="co"># Gráficos “estadísticos” fáciles</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes útiles para la investigación social</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"survey"</span>)      <span class="co"># Si trabajaran con datos muestrales</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"srvyr"</span>)       <span class="co"># Survey pero con lenguaje dplyr</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"Hmisc"</span>)       <span class="co"># Recodificación, descriptivos avanzados</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="guías-y-tutoriales" class="level2">
 <h2 class="anchored" data-anchor-id="guías-y-tutoriales">Guías y Tutoriales</h2>
-<section id="introducción-a-r" class="level3">
-<h3 class="anchored" data-anchor-id="introducción-a-r">Introducción a R</h3>
+<section id="r" class="level3">
+<h3 class="anchored" data-anchor-id="r">R</h3>
 <ul>
 <li><a href="https://es.r4ds.hadley.nz/">R para Ciencia de Datos (en español)</a> - Wickham &amp; Grolemund</li>
+<li><a href="https://cdr-book.github.io/index.html">Fundamentos de ciencia de datos con R</a> - (Eds.) Fernández-Avilés y Montero</li>
 <li><a href="https://education.rstudio.com/learn/beginner/">Introducción a R - RStudio Education</a></li>
 <li><a href="https://swirlstats.com/">swirl: Learn R, in R</a> - Tutoriales interactivos</li>
 </ul>
@@ -280,6 +338,7 @@ Video tutoriales de instalación
 <h3 class="anchored" data-anchor-id="estadística-en-r">Estadística en R</h3>
 <ul>
 <li><a href="https://learningstatisticswithr.com/">Learning Statistics with R</a> - Danielle Navarro (libro completo gratis)</li>
+<li><a href="https://www.econometrics-with-r.org/">Introduction to Econometrics with R</a> - Hanck, Arnold, Gerber y Schmelzer (de mis favoritos)</li>
 <li><a href="https://www.statmethods.net/">Quick-R</a> - Referencia rápida de métodos estadísticos</li>
 <li><a href="https://stats.oarc.ucla.edu/r/">UCLA Statistical Consulting</a> - Excelentes tutoriales por método estadístico</li>
 </ul>
@@ -305,15 +364,15 @@ Video tutoriales de instalación
 <h2 class="anchored" data-anchor-id="datos-para-práctica">Datos para Práctica</h2>
 <section id="datasets-del-curso" class="level3">
 <h3 class="anchored" data-anchor-id="datasets-del-curso">Datasets del Curso</h3>
-<p>Los datasets utilizados en clases están disponibles en la carpeta <code>data/</code> de este sitio web:</p>
+<p>Los datasets utilizados en clases están disponibles en la carpeta <code>data/</code> de este sitio web (en el repositorio de <a href="https://github.com/FranSofia/metodos-mgsocio-uah">GitHub</a>):</p>
 <ul>
-<li><code>ejemplo.csv</code> - Dataset ejemplo para Sesión 1</li>
-<li>[Otros datasets que uses]</li>
+<li><code>ejemplo.csv</code> - Dataset ejemplo para Sesión XX</li>
+<li>Por ejemplo, para la sesión 1, usaremos <code>data/ene-2025-jja.csv</code>, que es la última base de datos de la Encuesta Nacional de Empleo realizada mensualmente (agregada por trimestres (en este caso, jja es junio, julio y agosto))</li>
 </ul>
 </section>
 <section id="repositorios-de-datos-sociales" class="level3">
 <h3 class="anchored" data-anchor-id="repositorios-de-datos-sociales">Repositorios de Datos Sociales</h3>
-<p><strong>Chile:</strong> - <a href="http://observatorio.ministeriodesarrollosocial.gob.cl/encuesta-casen">CASEN</a> - Encuesta de Caracterización Socioeconómica Nacional - <a href="https://coes.cl/encuesta-panel/">ELSOC</a> - Estudio Longitudinal Social de Chile - <a href="https://www.cepchile.cl/opinion-publica/encuesta-cep/">CEP</a> - Encuestas Centro de Estudios Públicos</p>
+<p><strong>Chile:</strong> - <a href="http://observatorio.ministeriodesarrollosocial.gob.cl/encuesta-casen">CASEN</a> - Encuesta de Caracterización Socioeconómica Nacional - <a href="https://www.ine.gob.cl/enut">ENUT</a> - Encuesta Nacional sobre el Uso del Tiempo - <a href="https://www.ine.gob.cl/estadisticas/sociales/mercado-laboral/ocupacion-y-desocupacion">ENE</a> - Encuesta Nacional de Empleo</p>
 <p><strong>Internacional:</strong> - <a href="https://data.worldbank.org/">World Bank Open Data</a> - <a href="https://data.oecd.org/">OECD Data</a> - <a href="https://www.gapminder.org/data/">Gapminder</a> - <a href="https://ourworldindata.org/">Our World in Data</a></p>
 <p><strong>Repositorios generales:</strong> - <a href="https://www.kaggle.com/datasets">Kaggle Datasets</a> - <a href="https://archive.ics.uci.edu/ml/index.php">UCI Machine Learning Repository</a> - <a href="https://www.data.gov/">Data.gov</a></p>
 </section>
@@ -342,8 +401,10 @@ Video tutoriales de instalación
 <section id="canales-de-youtube-en-español" class="level3">
 <h3 class="anchored" data-anchor-id="canales-de-youtube-en-español">Canales de YouTube (en español)</h3>
 <ul>
-<li><a href="https://www.youtube.com/@rparacienciadedatos">R para Ciencia de Datos</a></li>
-<li><a href="https://www.youtube.com/@Riffomonas">Riffomonas Project</a> (inglés, pero muy didáctico)</li>
+<li><a href="https://www.youtube.com/@omarbellochavolla?si=yDgy4Jbioim_Nnst">Omar Bello (Estadística, Fisiología Humana y Metodología de la Investigación)</a>. Muy útil para R y Python</li>
+<li><a href="youtube.com/@codigomaquina?si=pBARPbqGLLn5ufHR">Código Máquina (Data Science)</a>. Más enfocado a <em>Data Science</em> y Python, pero útil</li>
+<li><a href="https://www.youtube.com/@econometriavirtual4192">Econometría Virtual</a>. Cursos de econometría de la UBA en R.<br>
+-<a href="https://www.youtube.com/@gesteban_gomez">Esteban Gomez - TidyveRso</a>. Muy útil !</li>
 </ul>
 </section>
 <section id="blogs-y-tutoriales" class="level3">
@@ -428,6 +489,8 @@ Haz clic para expandir consejos
 <p>¿Tienes sugerencias de recursos que deberían estar aquí? Escríbeme a [email] o abre un issue en el <a href="https://github.com/TU-USUARIO/taller-metodos">repositorio de GitHub</a>.</p>
 
 
+<!-- -->
+
 </section>
 
 </main> <!-- /main -->
@@ -510,6 +573,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -817,7 +931,226 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Recursos"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lenguaje de Programación</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">### R y RStudio</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>Para este curso necesitas instalar:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**R** </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Descarga desde: <span class="co">[</span><span class="ot">https://cran.r-project.org/</span><span class="co">](https://cran.r-project.org/)</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Selecciona tu sistema operativo y sigue las instrucciones</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**RStudio** (IDE recomendado)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Descarga desde: <span class="co">[</span><span class="ot">https://posit.co/download/rstudio-desktop/</span><span class="co">](https://posit.co/download/rstudio-desktop/)</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Versión gratuita (Desktop) es suficiente</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Si quieren otro IDE, pueden usar Positron, que es un nuevo IDE que combina Python y R en un interfaz amable. O si vienen del mundo más ligado a la ciencia de datos "pura", también pueden usar VS Code. Pero el lenguaje de programación será siempre R. </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Video tutoriales de instalación</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Instalar R y RStudio en Windows</span><span class="co">](https://www.youtube.com/watch?v=hbgzW3Cvda4)</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Instalar R y RStudio en Mac</span><span class="co">](https://www.youtube.com/watch?v=0qLkkK7ouBY)</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Instalar R y RStudio en Linux</span><span class="co">](https://www.youtube.com/watch?v=FAqaMHTxPGg)</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>(Pueden usar cualquier tutorial que deseen, lo de arriba solo son referencias rápidas. De cualquier manera, es bastante intuitivo)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">### Paquetes de R</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>Durante el curso usaremos principalmente estos paquetes. Puedes instalarlos copiando este código en tu consola de R:</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes para manipulación y limpieza de datos</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)   <span class="co"># dplyr, ggplot2, tidyr, readr, etc.</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"haven"</span>)       <span class="co"># Importar SPSS, Stata, SAS</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"readxl"</span>)      <span class="co"># Leer Excel</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rio"</span>)         <span class="co"># Import/export flexible</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"janitor"</span>)     <span class="co"># Limpiar datos y tablas</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"labelled"</span>)    <span class="co"># Etiquetas de variables.</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes para estadística descriptiva e inferencial básica</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"psych"</span>)       <span class="co"># Descriptivos</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"DescTools"</span>)   <span class="co"># Medidas y tests clásicos</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"summarytools"</span>)<span class="co"># Tablas descriptivas rápidas</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes para test de hipótesis y modelos lineales</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"car"</span>)         <span class="co"># Regresión, ANOVA, supuestos</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"lmtest"</span>)      <span class="co"># Tests para modelos lineales</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"sandwich"</span>)    <span class="co"># Errores robustos (White, HC)</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"estimatr"</span>)    <span class="co"># Regresión con errores robustos fáciles</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"margins"</span>)     <span class="co"># Efectos marginales</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes para tablas y reportes</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"broom"</span>)       <span class="co"># Convertir modelos a dataframes</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"stargazer"</span>)   <span class="co"># Tablas de regresión (LaTeX, html, texto)</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"modelsummary"</span>)<span class="co"># Alternativa moderna a stargazer</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"knitr"</span>)       </span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"kableExtra"</span>)</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"gt"</span>)</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes para visualización</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)     <span class="co"># (ya incluido en tidyverse)</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"patchwork"</span>)   <span class="co"># Combinar gráficos</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggpubr"</span>)      <span class="co"># Gráficos “estadísticos” fáciles</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes útiles para la investigación social</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"survey"</span>)      <span class="co"># Si trabajaran con datos muestrales</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"srvyr"</span>)       <span class="co"># Survey pero con lenguaje dplyr</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"Hmisc"</span>)       <span class="co"># Recodificación, descriptivos avanzados</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="fu">## Guías y Tutoriales</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="fu">###  R</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">R para Ciencia de Datos (en español)</span><span class="co">](https://es.r4ds.hadley.nz/)</span> - Wickham &amp; Grolemund</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Fundamentos de ciencia de datos con R</span><span class="co">](https://cdr-book.github.io/index.html)</span> - (Eds.) Fernández-Avilés y Montero</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Introducción a R - RStudio Education</span><span class="co">](https://education.rstudio.com/learn/beginner/)</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">swirl: Learn R, in R</span><span class="co">](https://swirlstats.com/)</span> - Tutoriales interactivos</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estadística en R</span></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Learning Statistics with R</span><span class="co">](https://learningstatisticswithr.com/)</span> - Danielle Navarro (libro completo gratis)</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Introduction to Econometrics with R</span><span class="co">](https://www.econometrics-with-r.org/)</span> - Hanck, Arnold, Gerber y Schmelzer (de mis favoritos)</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Quick-R</span><span class="co">](https://www.statmethods.net/)</span> - Referencia rápida de métodos estadísticos</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">UCLA Statistical Consulting</span><span class="co">](https://stats.oarc.ucla.edu/r/)</span> - Excelentes tutoriales por método estadístico</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="fu">### Visualización de Datos</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">ggplot2: Elegant Graphics for Data Analysis</span><span class="co">](https://ggplot2-book.org/)</span></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">R Graphics Cookbook</span><span class="co">](https://r-graphics.org/)</span></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Fundamentals of Data Visualization</span><span class="co">](https://clauswilke.com/dataviz/)</span> - Claus Wilke</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a><span class="fu">### Quarto/R Markdown</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Quarto Documentation</span><span class="co">](https://quarto.org/docs/guide/)</span></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">R Markdown: The Definitive Guide</span><span class="co">](https://bookdown.org/yihui/rmarkdown/)</span></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">R Markdown Cookbook</span><span class="co">](https://bookdown.org/yihui/rmarkdown-cookbook/)</span></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="fu">## Datos para Práctica</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a><span class="fu">### Datasets del Curso</span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>Los datasets utilizados en clases están disponibles en la carpeta <span class="in">`data/`</span> de este sitio web (en el repositorio de <span class="co">[</span><span class="ot">GitHub</span><span class="co">](https://github.com/FranSofia/metodos-mgsocio-uah)</span>):</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`ejemplo.csv`</span> - Dataset ejemplo para Sesión XX</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Por ejemplo, para la sesión 1, usaremos <span class="in">`data/ene-2025-jja.csv`</span>, que es la última base de datos de la Encuesta Nacional de Empleo realizada mensualmente (agregada por trimestres (en este caso, jja es junio, julio y agosto))</span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a><span class="fu">### Repositorios de Datos Sociales</span></span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>**Chile:**</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">CASEN</span><span class="co">](http://observatorio.ministeriodesarrollosocial.gob.cl/encuesta-casen)</span> - Encuesta de Caracterización Socioeconómica Nacional</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">ENUT</span><span class="co">](https://www.ine.gob.cl/enut)</span> - Encuesta Nacional sobre el Uso del Tiempo</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">ENE</span><span class="co">](https://www.ine.gob.cl/estadisticas/sociales/mercado-laboral/ocupacion-y-desocupacion)</span> - Encuesta Nacional de Empleo</span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>**Internacional:**</span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">World Bank Open Data</span><span class="co">](https://data.worldbank.org/)</span></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">OECD Data</span><span class="co">](https://data.oecd.org/)</span></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Gapminder</span><span class="co">](https://www.gapminder.org/data/)</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Our World in Data</span><span class="co">](https://ourworldindata.org/)</span></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>**Repositorios generales:**</span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Kaggle Datasets</span><span class="co">](https://www.kaggle.com/datasets)</span></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">UCI Machine Learning Repository</span><span class="co">](https://archive.ics.uci.edu/ml/index.php)</span></span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Data.gov</span><span class="co">](https://www.data.gov/)</span></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hojas de Referencia (Cheatsheets)</span></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>Descarga estas guías de referencia rápida:</span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">RStudio IDE Cheatsheet</span><span class="co">](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf)</span></span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Data Transformation with dplyr</span><span class="co">](https://rstudio.github.io/cheatsheets/data-transformation.pdf)</span></span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Data Visualization with ggplot2</span><span class="co">](https://rstudio.github.io/cheatsheets/data-visualization.pdf)</span></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">R Markdown</span><span class="co">](https://rstudio.github.io/cheatsheets/rmarkdown.pdf)</span></span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>Todas las cheatsheets de RStudio: <span class="co">[</span><span class="ot">https://posit.co/resources/cheatsheets/</span><span class="co">](https://posit.co/resources/cheatsheets/)</span></span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a><span class="fu">## Comunidades y Ayuda</span></span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a><span class="fu">### Foros y Comunidades</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Stack Overflow (tag: r)</span><span class="co">](https://stackoverflow.com/questions/tagged/r)</span> - Preguntas técnicas</span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">RStudio Community</span><span class="co">](https://community.rstudio.com/)</span> - Comunidad oficial</span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">r/rstats (Reddit)</span><span class="co">](https://www.reddit.com/r/rstats/)</span> - Discusiones y noticias</span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a><span class="fu">### Canales de YouTube (en español)</span></span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Omar Bello (Estadística, Fisiología Humana y Metodología de la Investigación)</span><span class="co">](https://www.youtube.com/@omarbellochavolla?si=yDgy4Jbioim_Nnst)</span>. Muy útil para R y Python</span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Código Máquina (Data Science)</span><span class="co">](youtube.com/@codigomaquina?si=pBARPbqGLLn5ufHR)</span>. Más enfocado a *Data Science* y Python, pero útil</span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Econometría Virtual</span><span class="co">](https://www.youtube.com/@econometriavirtual4192)</span>. Cursos de econometría de la UBA en R.  </span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a>-<span class="co">[</span><span class="ot">Esteban Gomez - TidyveRso</span><span class="co">](https://www.youtube.com/@gesteban_gomez)</span>. Muy útil !</span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a><span class="fu">### Blogs y Tutoriales</span></span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">R-bloggers</span><span class="co">](https://www.r-bloggers.com/)</span> - Agregador de blogs sobre R</span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Towards Data Science</span><span class="co">](https://towardsdatascience.com/tagged/r-programming)</span> - Artículos técnicos</span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## Consejos para Aprender R</span></span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a><span class="fu">## Haz clic para expandir consejos</span></span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. Practica regularmente</span></span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a>No basta con ver código, hay que escribirlo. Dedica tiempo cada semana a practicar.</span>
+<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. Aprende a buscar ayuda</span></span>
+<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Usa <span class="in">`?funcion`</span> o <span class="in">`help(funcion)`</span> en R</span>
+<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Busca en Google: "how to <span class="co">[</span><span class="ot">tarea</span><span class="co">]</span> in R"</span>
+<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Lee los mensajes de error con calma</span>
+<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. No memorices, entiende</span></span>
+<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a>Es mejor entender la lógica que memorizar código. Usa las cheatsheets como apoyo.</span>
+<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. Comenta tu código</span></span>
+<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a>Tu yo del futuro te lo agradecerá. Explica qué hace cada sección.</span>
+<span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. Empieza simple</span></span>
+<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a>No trates de hacer visualizaciones complejas desde el inicio. Domina lo básico primero.</span>
+<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6. Aprende de ejemplos</span></span>
+<span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a>Estudia código de otros, modifícalo, entiéndelo.</span>
+<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a><span class="fu">### 7. Sé paciente</span></span>
+<span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a>Todos los programadores cometen errores constantemente. Es parte del proceso.</span>
+<span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a><span class="fu">## Material Complementario</span></span>
+<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a><span class="fu">### Libros Avanzados (para profundizar)</span></span>
+<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-202"><a href="#cb2-202" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Advanced R</span><span class="co">](https://adv-r.hadley.nz/)</span> - Hadley Wickham</span>
+<span id="cb2-203"><a href="#cb2-203" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Hands-On Programming with R</span><span class="co">](https://rstudio-education.github.io/hopr/)</span></span>
+<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Text Mining with R</span><span class="co">](https://www.tidytextmining.com/)</span></span>
+<span id="cb2-205"><a href="#cb2-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-206"><a href="#cb2-206" aria-hidden="true" tabindex="-1"></a><span class="fu">### Cursos Online</span></span>
+<span id="cb2-207"><a href="#cb2-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-208"><a href="#cb2-208" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Coursera: R Programming</span><span class="co">](https://www.coursera.org/learn/r-programming)</span></span>
+<span id="cb2-209"><a href="#cb2-209" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">DataCamp: Introduction to R</span><span class="co">](https://www.datacamp.com/courses/free-introduction-to-r)</span></span>
+<span id="cb2-210"><a href="#cb2-210" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">edX: Data Science: R Basics</span><span class="co">](https://www.edx.org/course/data-science-r-basics)</span></span>
+<span id="cb2-211"><a href="#cb2-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-212"><a href="#cb2-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-213"><a href="#cb2-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-214"><a href="#cb2-214" aria-hidden="true" tabindex="-1"></a><span class="fu">## Contacto</span></span>
+<span id="cb2-215"><a href="#cb2-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-216"><a href="#cb2-216" aria-hidden="true" tabindex="-1"></a>¿Tienes sugerencias de recursos que deberían estar aquí? Escríbeme a <span class="co">[</span><span class="ot">email</span><span class="co">]</span> o abre un issue en el <span class="co">[</span><span class="ot">repositorio de GitHub</span><span class="co">](https://github.com/TU-USUARIO/taller-metodos)</span>.</span>
+<span id="cb2-217"><a href="#cb2-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-218"><a href="#cb2-218" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 
