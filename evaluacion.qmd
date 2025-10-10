@@ -16,19 +16,17 @@ La evaluación del curso se basa en la aplicación práctica de las técnicas es
 
 : {tbl-colwidths="[40,30,30]"}
 
-### 1. Ejercicios Prácticos (40%)
+### 1. Trabajo práctico (40%)
 
-Cada sesión incluye ejercicios prácticos que deben ser resueltos y entregados. Cada ejercicio vale 8%.
+[AÚN NO DEFINIDO.]
 
 **Formato de entrega:**
-- Archivo `.qmd` o `.Rmd` con código y respuestas
+- Script de R, RProject, Carpetas, etc., en un zip
+- PDF con el texto, incluyendo lo que se solicite en la pauta (incluido en el zip)
+- Si se quiere, deseable también el archivo `.qmd` o `.Rmd` con código y respuestas. Pero no es necesario hacer los trabajos en Quarto o RMarkdown si no quieren o no saben.
 - Debe incluir código comentado y narrativa explicativa
 - Se evaluará: código funcional, interpretación correcta, claridad de presentación
 
-**Criterios de evaluación:**
-- Código ejecutable y reproducible (30%)
-- Correcta aplicación de técnicas estadísticas (40%)
-- Interpretación adecuada de resultados (30%)
 
 ::: {.callout-tip}
 ## Consejo
@@ -37,72 +35,19 @@ Comenta tu código y explica tu razonamiento. No basta con obtener el resultado 
 
 ---
 
-### 2. Trabajo Práctico Parcial (25%)
+### 2. Trabajo final (60%)
 
 **Fecha de entrega:** [Fecha]  
-**Modalidad:** Individual
+**Modalidad:** [No definido]
 
-Análisis estadístico aplicado que integra contenidos de las sesiones 1-3:
 
-- Análisis descriptivo de un conjunto de datos
-- Visualizaciones apropiadas
-- Pruebas de hipótesis pertinentes
-- Informe con interpretación de resultados
-
-**Extensión:** 4-6 páginas (sin contar código ni anexos)
-
-**Formato de entrega:**
-- Documento `.qmd` o `.Rmd` 
-- Output HTML renderizado
-- Datos utilizados (si son propios)
-
-**Rúbrica:**
-
-| Criterio | Excelente (100%) | Bueno (75%) | Suficiente (50%) | Insuficiente (25%) |
-|----------|------------------|-------------|------------------|--------------------|
-| **Manipulación de datos** | Prepara datos correctamente, maneja valores perdidos, crea variables necesarias | Prepara datos adecuadamente con mínimos errores | Preparación básica con algunos problemas | Problemas significativos en preparación |
-| **Análisis descriptivo** | Estadísticos apropiados, tablas claras, visualizaciones efectivas | Análisis adecuado con pequeñas omisiones | Análisis básico pero incompleto | Análisis inadecuado o incorrecto |
-| **Inferencia estadística** | Pruebas apropiadas, supuestos verificados, interpretación correcta | Pruebas adecuadas con interpretación mayormente correcta | Pruebas básicas con interpretación parcial | Pruebas inapropiadas o interpretación incorrecta |
-| **Presentación** | Narrativa clara, código bien comentado, formato profesional | Presentación clara con mínimos problemas | Presentación básica pero comprensible | Presentación confusa o desorganizada |
-
----
-
-### 3. Trabajo Práctico Final (35%)
-
-**Fecha de entrega:** [Fecha]  
-**Modalidad:** Individual o parejas (a definir)
-
-Proyecto de análisis estadístico integral que aplica todos los contenidos del curso:
-
-- Formulación de pregunta de investigación
-- Análisis exploratorio de datos
-- Análisis de correlaciones
-- Modelos de regresión (simple y múltiple)
-- Interpretación sustantiva de resultados
-- Discusión de limitaciones
-
-**Extensión:** 8-12 páginas (sin contar código ni anexos)
-
-**Componentes obligatorios:**
-1. Introducción con pregunta de investigación
-2. Descripción de datos y variables
-3. Análisis exploratorio (descriptivos + visualizaciones)
-4. Análisis de correlaciones
-5. Modelos de regresión con interpretación
-6. Conclusiones y limitaciones
-7. Anexo con código completo
-
-**Opciones de datos:**
-- Dataset proporcionado por el curso
-- Datos de tesis o investigación propia (con aprobación previa)
-- Bases de datos públicas (ej. CASEN, ELSOC, World Bank)
 
 ::: {.callout-important}
-## Fecha importante
-Si usarás datos propios, debes enviar una descripción breve para aprobación antes del [fecha].
+# Pautas
+**Rúbrica detallada:** [Se compartirá con anticipación y las ayudantías también abrirán espacio para preguntas personales sobre los avances de sus trabajos personales].
 :::
 
-**Rúbrica detallada:** [Se compartirá con al menos 2 semanas de anticipación]
+
 
 ---
 
@@ -120,7 +65,7 @@ Todo el código debe ser **completamente reproducible**. Esto significa que:
 
 Se valorará:
 
-- Tablas bien formateadas (usando `kable`, `gt`, etc.)
+- Tablas bien formateadas 
 - Gráficos con títulos, etiquetas de ejes claros
 - Interpretación en lenguaje claro, no solo técnico
 - Ortografía y redacción cuidada
@@ -134,7 +79,7 @@ Está permitido y es recomendado:
 - Discutir ideas con compañeros/as
 
 **No está permitido:**
-- Copiar código de compañeros/as sin citarlo
+- Copiar código de compañeros/as u otros/as sin citarlo
 - Presentar trabajo ajeno como propio
 
 ::: {.callout-warning}
@@ -150,8 +95,8 @@ Se utiliza la escala de 1.0 a 7.0, con nota mínima de aprobación 4.0.
 
 ## Entrega de Evaluaciones
 
-Todas las entregas se realizan vía [plataforma que uses: Moodle/Canvas/Email]:
+Todas las entregas se realizan vía [A DEFINIR]:
 
-- **Formato:** Archivo `.qmd` o `.Rmd` + HTML renderizado
+- **Formato:** Archivo `.R` y `.pdf`, o `.qmd`-`.Rmd` +
 - **Nombre de archivo:** `apellido_nombre_evaluacion.qmd`
-- **Hora límite:** 23:59 de la fecha ind
+- **Hora límite:** 23:59 de la fecha indicada

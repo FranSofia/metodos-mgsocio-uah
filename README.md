@@ -2,7 +2,7 @@
 
 Sitio web del curso "Taller de Métodos y Técnicas de Investigación I" del Magíster en Sociología.
 
-**Sitio web:** [https://TU-USUARIO.github.io/taller-metodos](https://TU-USUARIO.github.io/taller-metodos)
+**Sitio web:** [https://fransofia.github.io/metodos-mgsocio-uah/](https://fransofia.github.io/metodos-mgsocio-uah/)
 
 ## Descripción
 
@@ -42,13 +42,15 @@ Este sitio está construido con:
 
 ### Para estudiantes
 
-Visita el [sitio web del curso](https://TU-USUARIO.github.io/taller-metodos) para acceder a todos los materiales.
+Visita el [sitio web del curso](https://fransofia.github.io/metodos-mgsocio-uah/) para acceder a todos los materiales de manera pedagógica. 
+
+Para visitar el repositorio y bajar carpetas específicas, visita [https://github.com/FranSofia/metodos-mgsocio-uah](https://github.com/FranSofia/metodos-mgsocio-uah)
 
 ### Para desarrolladores/docentes
 
 1. Clona el repositorio:
 ```bash
-git clone https://github.com/TU-USUARIO/taller-metodos.git
+git clone https://github.com/FranSofia/metodos-mgsocio-uah.git
 ```
 
 2. Abre el proyecto en RStudio
@@ -71,13 +73,13 @@ Este material está bajo licencia [CC BY-SA 4.0](https://creativecommons.org/lic
 
 ## Contacto
 
-[Tu nombre]  
-[Tu email]  
-[Tu institución]
+[Fran Sofía Núñez Rebolledo]  
+[fransofia.nr@gmail.com]  
+[Universidad de Chile e Instituto Nacional de Estadísticas]
 
 ---
 
-**Semestre:** [Año y semestre]  
-**Última actualización:** [Fecha]
+**Semestre:** [2025]  
+**Última actualización:** [15 de octubre]
 
 

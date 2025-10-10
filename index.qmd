@@ -3,23 +3,30 @@ title: "Taller de Métodos y Técnicas de Investigación I"
 subtitle: "Magíster en Sociología"
 ---
 
-## Bienvenida/o
+## ¡Bienvenides!
 
-Este es el sitio web del curso **Taller de Métodos y Técnicas de Investigación I**, enfocado en la aplicación práctica de técnicas estadísticas usando R.
+Este es el sitio web del curso **Taller de Métodos y Técnicas de Investigación I**, enfocado en la aplicación práctica de técnicas estadísticas usando R. En este sitio, se irá subiendo el material de apoyo para las sesiones de ayudantía del curso.
 
 ## Descripción del curso
 
-Este taller está diseñado para que estudiantes del Magíster en Sociología desarrollen habilidades prácticas en análisis estadístico utilizando el lenguaje de programación R. A través de 5 sesiones, cubriremos desde lo básico de R hasta análisis de regresión lineal múltiple.
+El curso pretende ofrecer una breve introducción a las técnicas de investigación y análisis cuantitativo más utilizadas en sociología. Para ello se comenzará haciendo una revisión general de los principales conceptos, supuestos y aplicaciones de técnicas básicas de análisis estadístico descriptivo e inferencial (prueba de hipótesis). Luego de ello, se introducen los aspectos básicos de técnicas estadísticas avanzadas—particularmente de modelos de regresión multivariados—. Finalmente, se discuten los usos de estos modelos: cómo comprender su interpretación, y cómo usarlos para trabajar preguntas de investigación concretas. A lo largo del curso, se espera que los estudiantes entiendan la lógica de investigación cuantitativa, su aplicación a través del uso del software estadístico R, así como la interpretación de resultados a través de la lectura de artículos científicos.
+
+En suma, este taller está diseñado para que estudiantes del Magíster en Sociología desarrollen habilidades prácticas en análisis estadístico utilizando el lenguaje de programación R. En esta página web, a través de 5 sesiones (las de ayudantía), cubriremos desde lo básico de R hasta análisis de regresión lineal múltiple. Además, dejaremos recursos para que puedan utilizarlo en sus investigaciones de Magíster. 
 
 ### Objetivos de aprendizaje
 
-Al finalizar este curso, serás capaz de:
+**Objetivo general**: 
 
-- Utilizar R y RStudio para análisis estadísticos
-- Aplicar técnicas de estadística descriptiva e inferencial
-- Realizar pruebas de hipótesis y ANOVA
-- Ejecutar análisis de correlación y regresión (simple y múltiple)
-- Interpretar y comunicar resultados estadísticos
+  - Introducir a los/as estudiantes en el uso, aplicación e interpretación de técnicas estadísticas descriptivas e inferenciales utilizadas comúnmente en la investigación sociológica
+
+**Objetivos específicos**: 
+
+  - Introducir los/as estudiantes en el uso de conceptos básicos del análisis estadístico (variable, muestra/población, distribución muestral, estimación de parámetros, etc.)
+  - Introducir a los/as estudiantes en la aplicación de técnicas estadísticas univariadas, bivariadas y multivariadas 
+  - Familiarizar a los/as estudiantes con el uso base de datos y de paquetes estadísticos (particularmente R)
+  - Familiarizar a los/as estudiantes con la lectura de artículos sociológicos cuantitativos, y con la formulación de modelos estadísticos para resolver problemas sociológicos 
+
+
 
 ## Estructura del curso
 
@@ -38,8 +45,8 @@ El curso consta de **5 sesiones prácticas**:
 
 - **Profesora:** Carollina Aguilera
 - **Ayudante:** Fran Sofía Núñez 
-- **Horario:** [Días y horario]
-- **Sala:** [Sala o modalidad]
+- **Horario de Ayudantía:** Martes a las 19.00 hrs
+- **Modalidad:** Online via *Teams*
 :::
 
 ## Antes de comenzar

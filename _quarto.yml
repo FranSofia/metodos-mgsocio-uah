@@ -30,22 +30,19 @@ website:
             file: lectures/05-regression.qmd
     right:
       - icon: github
-        href: https://github.com/TU-USUARIO/taller-metodos
+        href: https://github.com/fransofia/metodos-mgsocio-uah
         
   sidebar: false
 
 format:
   html:
     theme: 
-      light: [cosmo, styles/styles.scss]
-    css: styles/styles.scss
-    mainfont: "Source Sans Pro"
-    monofont: "Fira Code"
-    include-in-header:
-      - text: |
-          <link rel="preconnect" href="https://fonts.googleapis.com">
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-          <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+      - default
+      - styles/styles.scss
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    code-tools: true
 
 execute:
   freeze: auto

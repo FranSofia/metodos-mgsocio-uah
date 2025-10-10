@@ -1,24 +1,26 @@
 /*-- scss:defaults --*/
 
-// Colores principales
-$primary: #2C3E50;        // Azul oscuro profesional
-$secondary: #3498DB;      // Azul brillante para acentos
-$success: #27AE60;        // Verde para mensajes positivos
-$info: #16A085;           // Turquesa para información
-$warning: #F39C12;        // Naranja para advertencias
-$danger: #E74C3C;         // Rojo para errores
+// Colores principales - Inspirado en Metropolis/Beamer
+$primary: #69000C;        // Rojo oscuro académico
+$secondary: #5F6A72;      // Gris azulado para acentos
+$accent: #E0C5C6;         // Rojo grisáceo para highlights (más suave)
+$success: #2E7D32;        // Verde sobrio
+$info: #5F6A72;           // Gris para información
+$warning: #8C2028;        // Rojo grisáceo para advertencias (coherente)
+$danger: #7F000D;         // Mismo rojo principal para errores
 
-// Colores de fondo
+// Colores de fondo y texto
 $body-bg: #FFFFFF;
-$body-color: #2C3E50;
-$code-bg: #F8F9FA;
-$code-color: #E74C3C;
+$body-color: #212121;     // Gris muy oscuro (casi negro)
+$text-muted: #616161;     // Gris medio
+$code-bg: #F5F5F5;        // Gris muy claro
+$code-color: #69000C;     // Mismo rojo principal para código inline
 
-// Tipografía
-$font-family-sans-serif: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-$font-family-monospace: "Fira Code", "Source Code Pro", Menlo, Monaco, Consolas, "Courier New", monospace;
+// Tipografía - Fira Sans como en Metropolis
+$font-family-sans-serif: "Fira Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-monospace: "Fira Code", "Fira Mono", "Source Code Pro", Menlo, Monaco, Consolas, "Courier New", monospace;
 
-$headings-font-family: "Montserrat", $font-family-sans-serif;
+$headings-font-family: "Fira Sans", $font-family-sans-serif;
 $headings-font-weight: 600;
 $headings-color: $primary;
 
@@ -32,42 +34,72 @@ $h3-font-size: 1.5rem;
 $spacer: 1rem;
 
 // Enlaces
-$link-color: $secondary;
-$link-hover-color: darken($secondary, 15%);
+$link-color: $primary;
+$link-hover-color: $accent;
 $link-decoration: none;
 $link-hover-decoration: underline;
 
 // Navbar
 $navbar-bg: $primary;
 $navbar-fg: white;
-$navbar-hl: $secondary;
+$navbar-hl: $accent;
 
 /*-- scss:rules --*/
+
+// Importar Fira Sans desde Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&family=Fira+Mono:wght@400;500&display=swap');
 
 // Estilos generales del body
 body {
   font-size: $font-size-base;
   line-height: 1.7;
   color: $body-color;
+  font-weight: 400;
 }
 
-// Mejoras para títulos
+// Mejoras para títulos - Estilo Metropolis
 h1, h2, h3, h4, h5, h6 {
   margin-top: 1.5em;
   margin-bottom: 0.5em;
   font-weight: $headings-font-weight;
-  line-height: 1.3;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
-h1 {
-  border-bottom: 3px solid $secondary;
+h1, .h1 {
+  border-bottom: 4px solid $primary !important;
   padding-bottom: 0.3em;
   margin-bottom: 1em;
+  font-weight: 700;
+  color: $primary !important;
 }
 
-h2 {
-  border-bottom: 2px solid lighten($secondary, 20%);
+h2, .h2 {
+  border-bottom: 3px solid lighten($primary, 45%) !important;
   padding-bottom: 0.2em;
+  color: $primary !important;
+}
+
+h3, .h3 {
+  color: $primary !important;
+  font-weight: 600;
+  border-bottom: none !important;
+}
+
+h4, h5, h6, .h4, .h5, .h6 {
+  color: $primary !important;
+  border-bottom: none !important;
+}
+
+// Forzar que NO haya otros colores en bordes de títulos
+.content h1, .content h2, .content h3,
+article h1, article h2, article h3,
+main h1, main h2, main h3 {
+  border-bottom-color: rgba(127, 0, 13, 0.85) !important;
+}
+
+.content h1, article h1, main h1 {
+  border-bottom-color: $primary !important;
 }
 
 // Mejorar apariencia de código
@@ -77,14 +109,18 @@ code {
   padding: 0.2em 0.4em;
   border-radius: 3px;
   font-size: 0.9em;
+  font-family: $font-family-monospace;
+  font-weight: 500;
 }
 
 pre {
-  background-color: #F8F9FA;
-  border: 1px solid #DEE2E6;
-  border-radius: 5px;
+  background-color: #FAFAFA;
+  border: 1px solid #E0E0E0;
+  border-left: 4px solid $primary;
+  border-radius: 4px;
   padding: 1em;
   overflow-x: auto;
+  font-size: 0.95em;
 }
 
 pre code {
@@ -95,99 +131,117 @@ pre code {
 
 // Bloques de código con botón de copiar
 div.sourceCode {
-  background-color: #F8F9FA;
-  border: 1px solid #DEE2E6;
-  border-radius: 5px;
+  background-color: #FAFAFA;
+  border: 1px solid #E0E0E0;
+  border-left: 4px solid $primary;
+  border-radius: 4px;
   margin: 1em 0;
 }
 
-// Estilo para callouts (cajas de información)
+// Estilo para callouts - Minimalista académico
 .callout {
   margin: 1.5em 0;
-  padding: 1em;
-  border-left: 5px solid;
-  border-radius: 0.25rem;
-  background-color: #F8F9FA;
+  padding: 1em 1em 1em 1.5em;
+  border-left: 4px solid;
+  border-radius: 0;
+  background-color: #FAFAFA;
   
   .callout-header {
     font-weight: 600;
     margin-bottom: 0.5em;
+    font-family: $headings-font-family;
   }
 }
 
 .callout-note {
-  border-left-color: $info;
-  background-color: lighten($info, 45%);
-  
-  .callout-icon::before {
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="%2316A085" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>');
-  }
+  border-left-color: $secondary;
+  background-color: #F5F5F5;
 }
 
 .callout-tip {
   border-left-color: $success;
-  background-color: lighten($success, 50%);
+  background-color: #F1F8F4;
 }
 
 .callout-warning {
   border-left-color: $warning;
-  background-color: lighten($warning, 40%);
+  background-color: #FFF3E0;
 }
 
 .callout-important {
   border-left-color: $danger;
-  background-color: lighten($danger, 40%);
+  background-color: #FFEBEE;
 }
 
-// Tablas más bonitas
+// Tablas estilo académico
 table {
   margin: 1.5em 0;
   border-collapse: collapse;
   width: 100%;
+  font-size: 0.95em;
 }
 
 thead {
   background-color: $primary;
   color: white;
+  font-weight: 600;
 }
 
 th, td {
-  padding: 0.75em;
+  padding: 0.75em 1em;
   text-align: left;
-  border-bottom: 1px solid #DEE2E6;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #FAFAFA;
 }
 
 tbody tr:hover {
-  background-color: #F8F9FA;
+  background-color: #F5F5F5;
 }
 
-// Estilo para el navbar
+// Estilo para el navbar - Minimalista
 .navbar {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(140, 21, 21, 0.15);
+  border-bottom: 3px solid darken($primary, 5%);
 }
 
 .navbar-brand {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.3rem;
+  letter-spacing: -0.02em;
+}
+
+.navbar-nav .nav-link {
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: $accent !important;
 }
 
 // Tabla de contenidos (TOC)
 #TOC {
-  border-left: 2px solid $secondary;
+  border-left: 3px solid $primary;
   padding-left: 1em;
 }
 
 #TOC a {
   color: $body-color;
   text-decoration: none;
+  font-weight: 400;
+  transition: all 0.2s ease;
 }
 
 #TOC a:hover {
-  color: $secondary;
+  color: $primary;
+  font-weight: 500;
 }
 
 #TOC .active {
-  color: $secondary;
+  color: $primary;
   font-weight: 600;
 }
 
@@ -201,34 +255,48 @@ li {
   margin-bottom: 0.5em;
 }
 
-// Blockquotes
+// Blockquotes estilo académico
 blockquote {
-  border-left: 4px solid $secondary;
+  border-left: 4px solid $primary;
   padding-left: 1em;
   margin: 1.5em 0;
-  color: lighten($body-color, 20%);
+  color: $text-muted;
   font-style: italic;
+  background-color: #FAFAFA;
+  padding: 1em 1em 1em 1.5em;
 }
 
 // Botones
 .btn {
-  border-radius: 5px;
-  padding: 0.5em 1em;
-  font-weight: 500;
+  border-radius: 3px;
+  padding: 0.6em 1.2em;
+  font-weight: 600;
   text-decoration: none;
   display: inline-block;
   transition: all 0.3s ease;
+  font-family: $headings-font-family;
+  letter-spacing: 0.02em;
 }
 
 .btn-primary {
+  background-color: $primary;
+  color: white;
+  border: none;
+  
+  &:hover {
+    background-color: darken($primary, 8%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(140, 21, 21, 0.45);
+  }
+}
+
+.btn-secondary {
   background-color: $secondary;
   color: white;
   border: none;
   
   &:hover {
-    background-color: darken($secondary, 10%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background-color: darken($secondary, 8%);
   }
 }
 
@@ -236,18 +304,18 @@ blockquote {
 img {
   max-width: 100%;
   height: auto;
-  border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  margin: 1em 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin: 1.5em 0;
 }
 
-// Footer personalizado (si quieres agregar uno)
+// Footer personalizado
 .footer {
   margin-top: 3em;
   padding: 2em 0;
-  border-top: 1px solid #DEE2E6;
+  border-top: 2px solid #E0E0E0;
   text-align: center;
-  color: lighten($body-color, 30%);
+  color: $text-muted;
   font-size: 0.9em;
 }
 
@@ -255,9 +323,9 @@ img {
 .cell-output {
   margin: 1em 0;
   padding: 1em;
-  background-color: #FFFFFF;
-  border: 1px solid #DEE2E6;
-  border-radius: 5px;
+  background-color: #FAFAFA;
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
 }
 
 // Estilo para figuras generadas por R
@@ -267,10 +335,53 @@ img {
 }
 
 .figure-caption {
-  color: lighten($body-color, 20%);
+  color: $text-muted;
   font-size: 0.9em;
   font-style: italic;
   margin-top: 0.5em;
+}
+
+// Separador visual entre secciones
+hr {
+  margin: 2.5em 0;
+  border: 0;
+  border-top: 2px solid lighten($primary, 50%);
+}
+
+// Destacar elementos importantes
+strong, b {
+  color: $primary;
+  font-weight: 600;
+}
+
+// Enlaces en el contenido
+.content a:not(.btn) {
+  color: $primary;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    border-bottom-color: $primary;
+  }
+}
+
+// Página principal - Hero section
+.hero-banner {
+  background: linear-gradient(135deg, $primary 0%, darken($primary, 10%) 100%);
+  color: white;
+  padding: 3em 0;
+  margin-bottom: 2em;
+  border-radius: 0;
+}
+
+// Cards o secciones de contenido
+.content-section {
+  margin: 2em 0;
+  padding: 1.5em;
+  background-color: #FAFAFA;
+  border-left: 4px solid $primary;
+  border-radius: 0;
 }
 
 // Responsive: ajustes para móviles
@@ -294,6 +405,10 @@ img {
   .navbar-brand {
     font-size: 1.1rem;
   }
+  
+  table {
+    font-size: 0.85em;
+  }
 }
 
 // Animación suave al hacer scroll
@@ -306,9 +421,40 @@ p code, li code {
   font-weight: 500;
 }
 
-// Separador visual entre secciones
-hr {
-  margin: 2em 0;
-  border: 0;
-  border-top: 2px solid lighten($secondary, 30%);
+// Mejora para el título del sitio
+.navbar-title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+// Estilo para badges o etiquetas
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.6em;
+  font-size: 0.85em;
+  font-weight: 600;
+  border-radius: 3px;
+  background-color: $primary;
+  color: white;
+}
+
+// Mejora accesibilidad de contraste
+::selection {
+  background-color: $primary;
+  color: white;
+}
+
+// Estilos para divs de ejemplo o ejercicios
+.exercise, .example {
+  margin: 1.5em 0;
+  padding: 1em;
+  background-color: #FAFAFA;
+  border-left: 4px solid $accent;
+  border-radius: 0;
+  
+  .exercise-title, .example-title {
+    font-weight: 600;
+    color: $primary;
+    margin-bottom: 0.5em;
+  }
 }

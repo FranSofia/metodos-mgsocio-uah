@@ -2,28 +2,31 @@
 title: "Recursos"
 ---
 
-## Software Necesario
+## Lenguaje de Programación
 
 ### R y RStudio
 
 Para este curso necesitas instalar:
 
-1. **R** (versión 4.0 o superior)
+1. **R** 
+   
    - Descarga desde: [https://cran.r-project.org/](https://cran.r-project.org/)
    - Selecciona tu sistema operativo y sigue las instrucciones
 
 2. **RStudio** (IDE recomendado)
+   
    - Descarga desde: [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/)
    - Versión gratuita (Desktop) es suficiente
+   - Si quieren otro IDE, pueden usar Positron, que es un nuevo IDE que combina Python y R en un interfaz amable. O si vienen del mundo más ligado a la ciencia de datos "pura", también pueden usar VS Code. Pero el lenguaje de programación será siempre R. 
 
 ::: {.callout-tip}
 ## Video tutoriales de instalación
 
-- [Instalar R y RStudio en Windows](https://www.youtube.com/watch?v=...)
-- [Instalar R y RStudio en Mac](https://www.youtube.com/watch?v=...)
-- [Instalar R y RStudio en Linux](https://www.youtube.com/watch?v=...)
+- [Instalar R y RStudio en Windows](https://www.youtube.com/watch?v=hbgzW3Cvda4)
+- [Instalar R y RStudio en Mac](https://www.youtube.com/watch?v=0qLkkK7ouBY)
+- [Instalar R y RStudio en Linux](https://www.youtube.com/watch?v=FAqaMHTxPGg)
 
-(Puedes agregar tus propios videos o usar los disponibles en YouTube)
+(Pueden usar cualquier tutorial que deseen, lo de arriba solo son referencias rápidas. De cualquier manera, es bastante intuitivo)
 :::
 
 ### Paquetes de R
@@ -31,35 +34,59 @@ Para este curso necesitas instalar:
 Durante el curso usaremos principalmente estos paquetes. Puedes instalarlos copiando este código en tu consola de R:
 
 ```r
-# Paquetes para manipulación de datos
-install.packages("tidyverse")  # Incluye dplyr, ggplot2, tidyr, etc.
+# Paquetes para manipulación y limpieza de datos
+install.packages("tidyverse")   # dplyr, ggplot2, tidyr, readr, etc.
+install.packages("haven")       # Importar SPSS, Stata, SAS
+install.packages("readxl")      # Leer Excel
+install.packages("rio")         # Import/export flexible
+install.packages("janitor")     # Limpiar datos y tablas
+install.packages("labelled")    # Etiquetas de variables.
 
-# Paquetes para estadística
-install.packages("psych")      # Estadística descriptiva
-install.packages("car")        # Análisis de regresión
-install.packages("lmtest")     # Tests para modelos lineales
+# Paquetes para estadística descriptiva e inferencial básica
+install.packages("psych")       # Descriptivos
+install.packages("DescTools")   # Medidas y tests clásicos
+install.packages("summarytools")# Tablas descriptivas rápidas
+
+# Paquetes para test de hipótesis y modelos lineales
+install.packages("car")         # Regresión, ANOVA, supuestos
+install.packages("lmtest")      # Tests para modelos lineales
+install.packages("sandwich")    # Errores robustos (White, HC)
+install.packages("estimatr")    # Regresión con errores robustos fáciles
+install.packages("margins")     # Efectos marginales
+
 
 # Paquetes para tablas y reportes
-install.packages("knitr")      # Para reportes
-install.packages("kableExtra") # Tablas elegantes
-install.packages("gt")         # Tablas modernas
+install.packages("broom")       # Convertir modelos a dataframes
+install.packages("stargazer")   # Tablas de regresión (LaTeX, html, texto)
+install.packages("modelsummary")# Alternativa moderna a stargazer
+install.packages("knitr")       
+install.packages("kableExtra")
+install.packages("gt")
 
 # Paquetes para visualización
-install.packages("ggplot2")    # Ya incluido en tidyverse
-install.packages("patchwork")  # Combinar gráficos
+install.packages("ggplot2")     # (ya incluido en tidyverse)
+install.packages("patchwork")   # Combinar gráficos
+install.packages("ggpubr")      # Gráficos “estadísticos” fáciles
+
+# Paquetes útiles para la investigación social
+install.packages("survey")      # Si trabajaran con datos muestrales
+install.packages("srvyr")       # Survey pero con lenguaje dplyr
+install.packages("Hmisc")       # Recodificación, descriptivos avanzados
 ```
 
 ## Guías y Tutoriales
 
-### Introducción a R
+###  R
 
 - [R para Ciencia de Datos (en español)](https://es.r4ds.hadley.nz/) - Wickham & Grolemund
+- [Fundamentos de ciencia de datos con R](https://cdr-book.github.io/index.html) - (Eds.) Fernández-Avilés y Montero
 - [Introducción a R - RStudio Education](https://education.rstudio.com/learn/beginner/)
 - [swirl: Learn R, in R](https://swirlstats.com/) - Tutoriales interactivos
 
 ### Estadística en R
 
 - [Learning Statistics with R](https://learningstatisticswithr.com/) - Danielle Navarro (libro completo gratis)
+- [Introduction to Econometrics with R](https://www.econometrics-with-r.org/) - Hanck, Arnold, Gerber y Schmelzer (de mis favoritos)
 - [Quick-R](https://www.statmethods.net/) - Referencia rápida de métodos estadísticos
 - [UCLA Statistical Consulting](https://stats.oarc.ucla.edu/r/) - Excelentes tutoriales por método estadístico
 
@@ -80,17 +107,17 @@ install.packages("patchwork")  # Combinar gráficos
 
 ### Datasets del Curso
 
-Los datasets utilizados en clases están disponibles en la carpeta `data/` de este sitio web:
+Los datasets utilizados en clases están disponibles en la carpeta `data/` de este sitio web (en el repositorio de [GitHub](https://github.com/FranSofia/metodos-mgsocio-uah)):
 
-- `ejemplo.csv` - Dataset ejemplo para Sesión 1
-- [Otros datasets que uses]
+- `ejemplo.csv` - Dataset ejemplo para Sesión XX
+- Por ejemplo, para la sesión 1, usaremos `data/ene-2025-jja.csv`, que es la última base de datos de la Encuesta Nacional de Empleo realizada mensualmente (agregada por trimestres (en este caso, jja es junio, julio y agosto))
 
 ### Repositorios de Datos Sociales
 
 **Chile:**
 - [CASEN](http://observatorio.ministeriodesarrollosocial.gob.cl/encuesta-casen) - Encuesta de Caracterización Socioeconómica Nacional
-- [ELSOC](https://coes.cl/encuesta-panel/) - Estudio Longitudinal Social de Chile
-- [CEP](https://www.cepchile.cl/opinion-publica/encuesta-cep/) - Encuestas Centro de Estudios Públicos
+- [ENUT](https://www.ine.gob.cl/enut) - Encuesta Nacional sobre el Uso del Tiempo
+- [ENE](https://www.ine.gob.cl/estadisticas/sociales/mercado-laboral/ocupacion-y-desocupacion) - Encuesta Nacional de Empleo
 
 **Internacional:**
 - [World Bank Open Data](https://data.worldbank.org/)
@@ -126,8 +153,10 @@ Todas las cheatsheets de RStudio: [https://posit.co/resources/cheatsheets/](http
 
 ### Canales de YouTube (en español)
 
-- [R para Ciencia de Datos](https://www.youtube.com/@rparacienciadedatos)
-- [Riffomonas Project](https://www.youtube.com/@Riffomonas) (inglés, pero muy didáctico)
+- [Omar Bello (Estadística, Fisiología Humana y Metodología de la Investigación)](https://www.youtube.com/@omarbellochavolla?si=yDgy4Jbioim_Nnst). Muy útil para R y Python
+- [Código Máquina (Data Science)](youtube.com/@codigomaquina?si=pBARPbqGLLn5ufHR). Más enfocado a *Data Science* y Python, pero útil
+- [Econometría Virtual](https://www.youtube.com/@econometriavirtual4192). Cursos de econometría de la UBA en R.  
+-[Esteban Gomez - TidyveRso](https://www.youtube.com/@gesteban_gomez). Muy útil !
 
 ### Blogs y Tutoriales
 
