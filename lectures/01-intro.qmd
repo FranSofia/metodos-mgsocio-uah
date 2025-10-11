@@ -1,7 +1,7 @@
 ---
 title: "Sesión 1: Introducción a R y Estadística Descriptiva (I)"
 subtitle: "Taller de Métodos y Técnicas de Investigación I [BORRADOR]"
-date: "2024-03-15"
+date: "2025-10-21"
 format:
   html:
     code-fold: false
@@ -15,8 +15,9 @@ format:
 Al finalizar esta sesión serás capaz de:
 
 - Navegar en la interfaz de RStudio
+- Obtener conocimientos básicos sobre R y su lógica de programación
 - Crear y manipular objetos básicos en R (vectores, dataframes)
-- Importar datos desde archivos CSV
+- Importar datos, cargar paquetes, crear funciones de usuario
 - Calcular medidas de tendencia central
 - Crear tablas de frecuencia simples y de contingencia
 
@@ -29,9 +30,10 @@ Al finalizar esta sesión serás capaz de:
 R es un lenguaje de programación especializado en análisis estadístico y visualización de datos. Es:
 
 - **Gratuito y de código abierto**
+- Se ha consolidado en las últimas décadas como una herramienta de primer nivel para el análisis estadístico y programación ([Fernández-Avilés y Montero, 2024](https://cdr-book.github.io/index.html))
 - **Potente** para análisis estadísticos complejos
 - **Versátil** con miles de paquetes disponibles
-- **Reproducible** - tu análisis queda documentado en código
+- **Reproducible**: tu análisis queda documentado en código :)
 
 ### La interfaz de RStudio
 
@@ -42,6 +44,8 @@ RStudio tiene 4 paneles principales:
 3. **Environment** (arriba derecha): Muestra tus objetos/datos cargados
 4. **Files/Plots/Help** (abajo derecha): Archivos, gráficos, ayuda
 
+Estos paneles se pueden modificar a comodidad, así como el theme del IDE, el tamaño y fuente de la letra y código, etc. Lo importante no es sólo que aprendas a usar las herramientas que nos entrega RStudio, sino que también lo hagas una herramienta propia para usar R de la manera más cómoda posible. Al final, como R es un *lenguaje* de programación, cada quien puede hablarlo como quiera, con sus mañas y prácticas. 
+
 ::: {.callout-tip}
 ## Consejo
 Siempre trabaja con **scripts** (archivos .R o .qmd) en lugar de escribir directo en la consola. Así tu trabajo queda guardado y es reproducible.
@@ -50,6 +54,10 @@ Siempre trabaja con **scripts** (archivos .R o .qmd) en lugar de escribir direct
 ---
 
 ## 2. Conceptos básicos de R
+
+R, ante todo, es "un sistema para **computación estadística**: software de **análisis de datos** y **lenguaje de programación**" ([Cano en Fernández-Avilés y Montero, 2024](https://cdr-book.github.io/ch-110003.html)). Es ampliamente utilizado en investigación y docencia, pero también ha tomado un lugar importante en la industria y el servicio público. 
+
+R nació como una adaptación (en clave software libre y bajo la lógica de programación reproducible) del lenguaje S, complementándolo con un excelente soporte para el uso estadístico ([Wickham y Grolemund, 2023](https://es.r4ds.hadley.nz/01-intro.html)). R tiene una lógica de programación llamada Programación Orientada a Objetos (OOP, por sus cifras en inglés: *object-oriented programming*), el cual permite un polimorfismo muy útil y versatil para programación estadística y que se relaciona con la *encapsulación* de objetos ([Wickham, 2019](https://adv-r.hadley.nz/introduction.html)). Más allá de tecnicismos, veremos todo esto en el curso, con ejemplos aplicados a sus investigaciones del Magíster.   
 
 ### Preparación
 
@@ -61,6 +69,7 @@ Siempre trabaja con **scripts** (archivos .R o .qmd) en lugar de escribir direct
 # Cargar librerías necesarias
 library(tidyverse)  # Para manipulación de datos
 library(psych)      # Para estadística descriptiva
+library(sjmisc)     # Para explorar datos
 
 # Configuración
 options(scipen = 999)  # Evitar notación científica
@@ -109,12 +118,304 @@ length(edades)  # Largo del vector
 Los nombres de objetos:
 - Pueden contener letras, números, `.` y `_`
 - NO pueden empezar con números
-- R distingue entre mayúsculas y minúsculas (`edad ≠ Edad`)
+- R distingue entre mayúsculas y minúsculas (`edad ≠ Edad`), lo que se suele conocer como un lenguaje *key-sensitive*
 :::
+
+#### Crear objetos: vectores y matrices
+
+Guardar objetos también nos permite hacer operaciones matemáticas más complejas, por ejemplo para el uso de una calculadora de algebra lineal. También se pueden hacer simulaciones, con una distribución deseada, para hacer más interesante nuestras operaciones. Veamos primero la creación de objetos y luego operaciones más complejas
+
+```{r algebra-lineal-objetos, collapse=TRUE}
+#| label: algebra-lineal-objetos
+
+# a) Creación de un vector de números naturales del 1 al 8
+vector1 <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 25, 44, 36, 20, 50, 88)
+vector1
+
+# b) Creación de un vector con números reales comprendidos entre 1 y 6
+set.seed(123)
+vector2 <- runif(60, 1, 6)
+vector2
+
+# c) Creación de un vector con números que provienen de una distribución normal
+vector3 <- rnorm(30, 0, 2)
+vector3
+
+# d) Creación de un vector con caracteres (letras)
+vector4 <- c("Lima", "Ucayali", "Loreto", "San Juan", "Pucallpa")
+vector4
+
+# e) Creación de un vector que combine números y texto
+vector5 <- c("rojo", 3, "Azul", 7, "morado", 10)
+vector5
+
+#OTRO CASOS CON VECTORES
+#a) Crea un vector con los primeros 20 números pares.
+vector1 <- seq(2, 40, by = 2)
+vector1
+
+#b) Simular 50 valores entre 5 y 15, pero solo números enteros (valores repetidos).
+vector2 <- sample(5:15, 50, replace = TRUE)
+vector2
+
+# Simular 50 valores entre 5 y 150, pero solo números enteros (valores no repetidos).
+vector2 <- sample(5:150, 50, replace = FALSE)
+vector2
+# Crear un vector con categorías de satisfacción (Baja, Media, Alta) y conviértelo en 
+#factor ordenado.
+vector3 <- factor(sample(c("Baja", "Media", "Alta"), 30, replace = TRUE), 
+                  levels = c("Baja", "Media", "Alta"), 
+                  ordered = TRUE)
+vector3
+
+# Generar un vector con los primeros 15 valores de una progresión geométrica de razón 3.
+vector4 <- 2*(3/11)^(0:14)
+vector4
+
+# Generar 100 valores de un proceso AR(1):
+#Xt=0.7Xt-1+et donde et~N(0,1)
+set.seed(123)
+vector5 <- numeric(100)
+vector5[1] <- rnorm(1)
+for (t in 2:100) {
+  vector5[t] <- 0.7 * vector5[t-1] + rnorm(1)
+}
+vector5
+
+#--Graficar la serie de tiempo
+plot.ts(vector5, col="#7F000D", main="Proceso AR(1)")
+
+```
+
+¿Y si quisieramos operaciones con vectores? Hagamos un ejercicio. Sean los vectores $A$ y $B$, ambos con la misma cantidad de números aleatorios. El vector $A$ contiene datos que provienen de una distribución chi-cuadrada con 3 grados de libertad (gl), mientras que el vector $B$ contiene datos que provienen de una distribución uniforme definida en el intervalo $[3, 5]$. Entonces, hallemos con R la solución a los siguientes cálculos: 
+
+1. $2A+5B$
+
+2. $\sin(A)+\cos(B)−\tan(A+B)$
+
+3. $\sqrt[3]{A} + \exp(B) - 4B^2$
+
+4. $\log(A+1)+B^3-10 \sqrt{B}$
+
+```{r algebra-lineal-operaciones, collapse=TRUE}
+#| label: algebra-lineal-objetos-operaciones
+
+# Definimos objetos para la creación de los objetos según instrucciones
+n=80
+A<-rchisq(n,3) # Distribución Chi-Cuadrada con 3 gl
+B<-runif(n,3,5) # Distribución uniforme [3,5]
+
+# Hallar los siguientes cálculos:
+#1) 2A+5B
+R1 <- 2*A + 5*B
+R1
+
+#2) sin(A)+cos(B)−tan(A+B)
+R2 <- sin(A) + cos(B) - tan(A + B)
+R2
+
+#3) raiz_cúbica(A) + exp(B) - 4B^2
+R3 <- A^(1/3) + exp(B) - 4*B^2
+R3
+
+#4) log(A+1)+B^3-10raiz(B)
+R4 <- log(A + 1) + B^3 - 10*sqrt(B)
+R4
+
+```
+
+¡¡¿¿¿Y matrices??!! Podemos hacerlo de distintas maneras: 
+
+```{r algebra-matricial, collapse=TRUE}
+#| label: algebra-matricial
+
+# 1️⃣ Declaración de Matrices en R (Forma Manual))
+A <- matrix(c(6,5,4,1.2,6,4,7,7,8,2.5,1.15,6,4,5,7,3), nrow=4, byrow=TRUE)
+A
+
+B <- matrix(c(5, sqrt(7), exp(2), 7, -1/7, 6), nrow=2, byrow=TRUE)
+B
+
+
+
+#2️⃣ Declaración de Matrices Aleatoriass
+A <- matrix(rnorm(36), nrow=6)  # 6×6 con distribución normal estándar
+A
+
+B <- matrix(runif(25, 7, 20), nrow=5)  # 5×5 con distribución uniforme en [7,20]
+B
+
+C <- diag(rnorm(16,6,1.75), nrow=4)  # 4×4 con valores en la diagonal
+C
+
+
+D <- diag(1, nrow=5)  # Matriz identidad de orden 5
+D
+
+E <- diag(0, nrow=5)  # Matriz nula de orden 5
+E
+
+G <- diag(rnorm(5))  # Matriz diagonal
+G[upper.tri(G)] <- rnorm(5)  # Convertir en matriz triangular superior
+G
+
+G <- diag(rnorm(5))
+G[lower.tri(G)] <- rnorm(5)  # Convertir en matriz triangular inferior
+G
+
+```
+
+
+Con ello, podemos hacer las siguiente operaciones: 
+
+```{r algebra-matricial-operaciones, collapse=TRUE}
+#| label: algebra-matricial-operaciones
+
+#3️⃣ Transpuesta de una Matriz
+A <- matrix(rnorm(36,3,0.2), nrow=9)
+A
+t(A)  # Transpuesta
+
+#4️⃣ Traza de una Matriz
+A <- matrix(rnorm(25), nrow=5)
+A
+traza <- sum(diag(A))
+paste("La traza es:", traza)
+
+
+#5️⃣ Suma de Matrices
+A <- matrix(rnorm(30), nrow=6)
+B <- matrix(rnorm(30,5,2), nrow=6)
+A + B  # Suma de matrices
+
+#6️⃣ Producto de un Escalar por una Matriz
+C <- matrix(rnorm(40,6,1), nrow=8)
+sqrt(7) * C  # Producto con un escalar
+
+A <- matrix(runif(42), nrow=7)
+B <- matrix(runif(42,4,6), nrow=7)
+P <- 2.35 * A + log(13) * B  # Combinación lineal de matrices
+P
+
+#7️⃣ Multiplicación de Matrices
+A <- matrix(runif(30,1,3), nrow=5)  # 5×6
+B <- matrix(runif(30,2,9), nrow=6)  # 6×5
+A %*% B  # Producto de matrices
+(1/2*A) %*% (exp(3)*B)
+(1/17*B) %*% (4*A)
+
+#8️⃣ Determinante de una Matriz
+A <- matrix(runif(36,1,10), nrow=6)
+A
+det(A)  # Determinante de la matriz
+
+#9️⃣ Rango de una Matriz
+A <- matrix(runif(25,10,36), nrow=5)
+A
+qr(A)$rank  # Rango de la matriz
+
+
+B <- matrix(runif(28,9,100), nrow=7)
+B
+qr(B)$rank
+
+
+#🔟 Inversa de una Matriz
+A <- matrix(runif(36,0,10), nrow=6)
+A
+inv <- solve(A)  # Inversa de la matriz
+inv
+round(A %*% inv)  # Verificación: debe aproximarse a la matriz identidad
+
+```
+
+
+Incluso podríamos calcular MCO matricialmente^[La expresión $\hat{\beta} = (X^\top X)^{-1} X^\top y$ se puede demostrar, pero no es objeto de esta clase (ni curso)]. Solo tendríamos que seguir la expresión que se obtiene al derivar los estimadores MCO con notación matricial, es decir, 
+$$
+\hat{\beta} = (X^\top X)^{-1} X^\top y
+$$
+donde nuestra variable dependiente es un vector-columna de $n\times 1$ dimensiones; los parámetros $\beta$ también son un vector columna $k+1\times 1$ dimensiones; las variables independientes son una matriz de $n\times k+1$ dimensiones; y los residuos del modelo son de $n\times 1$ dimensiones. De manera tal que se tiene 
+$$
+Y_{n\times 1} = \begin{bmatrix}
+Y_1 \\
+Y_2 \\
+\vdots \\
+Y_n
+\end{bmatrix}, \quad 
+X_{n\times (k+1)} =
+\begin{bmatrix}
+1 & X_{11} & a_{12} & \cdots & a_{1k} \\
+1 & X_{21} & a_{22} & \cdots & a_{2k} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & X_{n1} & a_{n2} & \cdots & a_{nk}
+\end{bmatrix},
+\quad
+\beta_{k+1\times 1} =
+\begin{bmatrix}
+\beta_0 \\
+\beta_1 \\
+\vdots \\
+\beta_k
+\end{bmatrix}, 
+\quad
+U_{n\times 1} =
+\begin{bmatrix}
+U_1 \\
+U_2 \\
+\vdots \\
+U_n
+\end{bmatrix}
+$$
+
+Simulemos, entonces, un caso conocido: la ecuación de Mincer. Un ejemplo relativamente básico de esta sería el siguiente: 
+$$
+\ln \text{salario}_i = \ln \beta_0 + \beta_1 \text{educ}_i +\beta_2 \text{exp}_i+\beta_3 \text{exp}_i^2+ \beta_4 \text{dummy-mujer}_i + u_i
+$$
+donde la variable dependiente es salario del individuo $i$, a la cual se le aplica un logaritmo natural; $\beta_0$ es el intercepto (salario de alguien sin educación ni experiencia (ni mujer)); $\text{educ}_i$ es la variable que registra los años de escolaridad del individuo $i$; $\text{exp}_i$ es la variable que contiene la experiencia laboral del individuo $i$; $\text{dummy-mujer}_i$ es una variable que identifica si $i$ es mujer o no; y $u_i$ es el término de error. Veamos cómo podríamos hacer esto en R con una simulación: 
+
+
+```{r MCO-matrices, collapse=TRUE}
+#| label: MCO-matricial
+
+# MCO "a mano" (solo betas) + comparación con lm()
+set.seed(2025)
+
+# 1) Simulación tipo Mincer
+n <- 1000
+esc   <- pmax(0, round(rnorm(n, 12, 2)))
+exp   <- pmax(0, round(rnorm(n, 15, 5)))
+mujer <- rbinom(n, 1, 0.45)
+
+b0 <- 1.5; b_esc <- 0.08; b_exp <- 0.10; b_exp2 <- -0.002; b_muj <- -0.20
+eps <- rnorm(n, 0, 0.30)
+y <- b0 + b_esc*esc + b_exp*exp + b_exp2*(exp^2) + b_muj*mujer + eps  # log ingreso
+
+# 2) Matriz de diseño y vector
+X <- cbind(1, esc, exp, exp^2, mujer) # Matriz X
+colnames(X) <- c("(Intercept)", "esc", "exp", "exp2", "mujer")
+
+# 3) Betas por álgebra matricial:  β̂ = (X'X)^(-1) X'y
+beta_hat <- solve(t(X) %*% X) %*% (t(X) %*% y) 
+
+# 4) Comparación con lm()
+beta_lm <- coef(lm(y ~ esc + exp + I(exp^2) + mujer))
+
+# 5) Mostrar lado a lado
+out <- cbind(beta_manual = as.numeric(beta_hat), beta_lm = as.numeric(beta_lm))
+rownames(out) <- colnames(X)
+round(out, 6)
+
+
+```
+
 
 ### Tipos de datos
 
-```{r}
+No obstante, para todo ello, ¡hay que aprender R! Probablemente muchxs de ustedes ya saben algo de R. A su vez, si saben R pero no como derivar MCO no se preocupen, no es necesario saber esto para hacer una regresión en R. Es más, como vieron, `lm()` que es la función más básica para realizar regresiones lineales en R realiza la operación matricial que hicimos en una sola línea de código (`lm(y ~ esc + exp + I(exp^2) + mujer)`). Todo lo anterior, por tanto, fueron ejemplos de cosas que se pueden hacer en R, utilizándolo más "en bruto" y para que puedan visualizar su potencial. 
+
+Pero volvamos a R. Los objetos de R tienen distintas "clases". Para efectos del curso, podemos pensar esto como la naturaleza de variables, i.e., como variables cuantitativas (discretas y continuas) y cualitativas (ordinales y nominales). Los objetos de R tienen categorías similares. Pero también tienen combinaciones, como los objetos `dbl+lbl`, que son numéricos y con etiquetas. Adicionalmente, también podemos encontrar datos de tipo lógico (`TRUE` y `FALSE`). 
+
+```{r, collapse=TRUE}
 #| label: tipos-datos
 
 # Numérico
@@ -138,7 +439,7 @@ nivel_educacion
 
 ## 3. Trabajar con DataFrames
 
-Los **dataframes** son tablas de datos, similares a hojas de Excel. Cada columna es una variable, cada fila es una observación.
+Los **dataframes** son tablas de datos, similares a hojas de Excel. Cada columna es una variable, cada fila es una observación. Es en este formato en el que trabajaremos con bases de datos reales. 
 
 ### Crear un dataframe
 
@@ -158,27 +459,52 @@ estudiantes <- data.frame(
 estudiantes
 ```
 
-### Explorar datos
+Pero partamos inmediatamente con bases de datos reales. Tomemos la Encuesta Nacional de Empleo, realizada por el INE mes a mes y que agrupa datos trimestrales. Para ello, utilizaremos la función `read.csv()`, del paquete `utils`, pues las bases de datos vienen en formato `.csv`. Una vez que cargamos los datos, exploraremos nuestra base de datos. No obstante, conviene saber antes que los archivos `.csv` son archivos de texto, que generalmente hay que especificar el delimitador que usa para separar las columnas (`;` o `,` comúnmente). 
 
 ```{r}
+#| label: cargar-ene
+
+datos <- read.csv("data-sesiones/ene-2025-07-jja.csv", # Ruta
+                  sep=",", # Delimitador
+                  encoding = "UTF-8" # UTF-8 o Latin-1
+                  )
+
+head(datos) # UPS
+
+datos <- read.csv("data-sesiones/ene-2025-07-jja.csv", # Ruta
+                  sep=";", # Delimitador
+                  encoding = "Latin-1", # UTF-8 o Latin-1
+                  stringsAsFactors = F # character to factor
+                  ) 
+
+head(datos) # :D
+```
+
+
+
+
+### Explorar datos
+
+```{r , collapse=TRUE}
 #| label: explorar-datos
 
 # Estructura del dataframe
-str(estudiantes)
+str(datos)
 
-# Primeras filas
-head(estudiantes, 3)
+# Estructura con glimpse
+glimpse(datos)
 
 # Dimensiones (filas x columnas)
-dim(estudiantes)
+dim(datos)
 
-# Resumen estadístico
-summary(estudiantes)
+
 ```
 
-### Acceder a variables
+### Explorar variables
 
-```{r}
+En el formato `data.frame`, las columnas son las variables y las filas son las observaciones, i.e., la información de cada persona encuestada para cada variable (columna). En este sentido, a través de la fila vemos lo que respondió cada informante en las preguntas que se les realizó en la determinada encuesta (o en las variables derivadas del cuestionario). Por ello, conviene revisar los manuales metodológicos, los libros de códigos, los cuestionarios, etc., de la encuesta que estemos usando. Para nuestro caso, revisando el [Libro de Códigos de la ENE](https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/metadatos/2020/encuesta-nacional-de-empleo---año-de-referencia-2020.pdf?sfvrsn=bc1fb0e6_8), podríamos revisar las siguientes variables:
+
+```{r , collapse=TRUE}
 #| label: acceder-variables
 
 # Acceder a una columna específica con $
@@ -187,47 +513,88 @@ estudiantes$edad
 # Otra forma: usando corchetes
 estudiantes[, "edad"]
 
-# Calcular estadísticos de una variable
-mean(estudiantes$nota)
-sd(estudiantes$nota)
-```
 
----
+# Ahora con funciones de R y variables de la ENE 
+# Condición de actividad (Ocupados (1), Desocupado (2) y Fuerza de la FDT (3))
+frq(datos$activ) # Proporción de activ
 
-## 4. Importar datos
+# Clasificación Internacional de Nivel Educacional (CINE) 1997
+frq(datos$cine97) # Proporción CINE 97
 
-En la práctica, casi siempre importaremos datos desde archivos externos.
-
-### Importar CSV
-
-```{r}
-#| label: importar-csv
-#| eval: false
-
-# Importar archivo CSV
-datos <- read.csv("../data/ejemplo.csv")
-
-# Con tidyverse (recomendado)
-datos <- read_csv("../data/ejemplo.csv")
-
-# Ver primeras filas
-head(datos)
+# Condición de actividad económica general
+## Ver categorias en documento
+frq(datos$cae_general)
 ```
 
 ::: {.callout-tip}
 ## Tip: Rutas relativas
-Usa rutas relativas desde tu archivo .qmd:
+Usa rutas relativas desde tu archivo .R:
 - `../data/archivo.csv` (sube una carpeta, entra a data)
 - Nunca uses `C:/Mi Computador/...` (no funcionará en otros computadores)
 :::
 
-### Para esta sesión: datos simulados
+Obviamente, como son muy astutxs, ya se estarán preguntando si se pueden hacer análisis más refinados. Ciertamente sí, y eso iremos viendo a lo largo del curso y también en esta sesión. Pero por poner un ejemplo, la ENE se utiliza para para calcular indicadores como la tasa de ocupación, desempleo, de participación, de ocupación informal, etc. Aunque aún no veremos cómo hacerlo estimando nuestra muestra a nivel poblacional (con muestras complejas (`survey` y `srvyr`)).
 
-Crearemos datos de ejemplo sobre una encuesta de satisfacción:
+La ENE calcula la tasa de ocupación como 
+$$
+\text{Tasa de ocupacion} = \frac{\text{Ocupados/as}}{\text{Poblacion en edad de trabajar}} \times 100
+$$
+Como ya les parecerá obvio por su astucia, vimos una variable que nos permitiría cómo calcular esto: `activ`. Dado que `1. Ocupados/as`, entonces, solo habría que
+
+```{r , collapse=TRUE}
+#| label: tasa-ocupacion
+
+## Tasa de ocupación muestral (sin survey)
+## Requiere en 'datos' las variables: activ (1=ocupado, 2/3=no (o sea PET)) y edad
+
+# 1) Variables auxiliares equivalentes a Stata
+datos$oc    <- ifelse(datos$activ == 1, 1, 0)        # ocupado
+datos$may15 <- ifelse(datos$edad  >= 15, 1, 0)       # PET potencial (15+)
+
+# 2) Tasa de ocupación (toc)
+datos$toc <- ifelse(datos$may15 == 1, datos$oc, NA_real_)
+
+# 3) Estimación muestral de la tasa de ocupación (subpoblación edad>=15)
+numerador   <- sum(datos$oc  [datos$may15 == 1 & !is.na(datos$activ)], na.rm = TRUE)
+denominador <- sum(          datos$may15 == 1 & !is.na(datos$activ))
+toc_muestra <- numerador / denominador
+
+toc_muestra                    # proporción
+toc_muestra * 100              # porcentaje
+
+
+```
+
+Esto significaría que, a nivel muestral, la tasa de ocupación es del 51,36%. Pero, antes de pasar un procesamiento más refinado de los datos, para justamente obtener indicadores y análisis estadísticos mejores, hay que mencionar que el código anterior podría estar mucho más optimizado. ¿Cómo? Con nuestro nuevo amigo que nos acompañará todo el curso: `dplyr`, paquete dentro de `tidyverse`. Con él, y sus funciones, podremos calcular la tasa de ocupación (muestral) con una línea de código concateando procesos con `|>` (o `%>%` que viene en `magritrr`, también paquete incluido en `tidyverse`): 
+
+```{r, collapse=TRUE}
+#| label: tasa-ocup-dplyr
+
+toc_muestra <- datos |>
+  mutate(oc = activ == 1, # Creamos ocupado (oc) y mayores de 15 (may15)
+         may15 = edad >= 15) |>  
+  filter(may15, !is.na(activ)) |>  # Filtramos mayores de 15 y sin NA en activ
+  summarise(toc = mean(oc)) |> # Calculamos promedio de ocupados
+  pull(toc)   # Extraemos el valor numérico
+
+toc_muestra          # Proporción
+toc_muestra * 100    # Porcentaje
+
+
+```
+
+
+
+
+## 4. Estadística Descriptiva y análisis exploratorio (I)
+
+Antes de avanzar 
+
+
+La estadística descriptiva resume y organiza datos. Comenzaremos con **medidas de tendencia central**.
 
 ```{r}
-#| label: datos-ejemplo
-
+#| label: borrar-esto
 # Simular datos de encuesta
 set.seed(123)  # Para reproducibilidad
 
@@ -246,11 +613,6 @@ encuesta <- data.frame(
 head(encuesta, 10)
 ```
 
----
-
-## 5. Estadística Descriptiva (I)
-
-La estadística descriptiva resume y organiza datos. Comenzaremos con **medidas de tendencia central**.
 
 ### Medidas de tendencia central
 
