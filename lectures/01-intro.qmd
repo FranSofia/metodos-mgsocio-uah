@@ -51,6 +51,8 @@ Estos paneles se pueden modificar a comodidad, así como el theme del IDE, el ta
 Siempre trabaja con **scripts** (archivos .R o .qmd) en lugar de escribir directo en la consola. Así tu trabajo queda guardado y es reproducible.
 :::
 
+Antes de comenzar, cabe aclarar que iremos tratando de exponer el contenido de R no tanto en orden como si fuera solo un curso de R, sino que siguiendo la lógica de un curso de metodología. Para ello, temáticamente, iremos avanzando en función de los contenidos del programa y, *en virtud de ello*, veremos *cómo hacer* esto en R. Ahora bien, no por ello no nos detendremos todo lo que necesiten en algún aspecto de R que quieran profundizar. Recuerden que este curso es para aportarles herramienrtas **metodológicas** para sus investigaciones de Magíster, para las que probablemente tengan que hacer un uso extensivo de R (incluso para investigaciones más cualitativas). 
+
 ---
 
 ## 2. Conceptos básicos de R
@@ -70,6 +72,8 @@ R nació como una adaptación (en clave software libre y bajo la lógica de prog
 library(tidyverse)  # Para manipulación de datos
 library(psych)      # Para estadística descriptiva
 library(sjmisc)     # Para explorar datos
+library(haven)      # Para cargar archivos .dta o .sav
+library(kableExtra) # Para presentacion de resultados
 
 # Configuración
 options(scipen = 999)  # Evitar notación científica
@@ -584,217 +588,558 @@ toc_muestra * 100    # Porcentaje
 ```
 
 
+Dicho esto, es momento de avanzar en nuestro análisis exploratorio de datos usando una base que nos permita profundizar en estadística descriptiva. Para ello, trabajaremos con la **Encuesta Suplementaria de Ingresos (ESI)**, que es un módulo complementario de la ENE aplicado anualmente en el trimestre noviembre-enero.
 
+---
 
-## 4. Estadística Descriptiva y análisis exploratorio (I)
+## 4. Trabajando con la Encuesta Suplementaria de Ingresos (ESI)
 
-Antes de avanzar 
+### ¿Qué es la ESI?
 
+La Encuesta Suplementaria de Ingresos (ESI) es un módulo de la ENE que se aplica una vez al año y tiene como objetivo principal caracterizar los ingresos de las personas y los hogares en Chile. Esta encuesta nos permite, entre otras cosas:
 
-La estadística descriptiva resume y organiza datos. Comenzaremos con **medidas de tendencia central**.
+- Analizar la distribución de ingresos en la población
+- Estudiar brechas salariales por género, edad, nivel educacional
+- Examinar la relación entre educación y ingresos
+- Comprender la estructura de ingresos laborales
+
+Para nuestros propósitos metodológicos, esta base es ideal porque contiene variables tanto cuantitativas (edad, ingresos) como cualitativas (sexo, nivel educacional, condición de actividad), lo que nos permitirá aplicar las distintas herramientas de estadística descriptiva que aprenderemos.
+
+### Cargando la base de datos
+
+Cargaremos la ESI 2024 directamente desde el sitio web del INE. Usaremos el paquete `haven` para leer archivos en formato Stata (.dta):
 
 ```{r}
-#| label: borrar-esto
-# Simular datos de encuesta
+#| label: cargar-esi-completo
+#| message: false
+#| warning: false
+
+# Cargar la ESI 2024 desde el INE
+esi2024 <- haven::read_dta("https://www.ine.gob.cl/docs/default-source/encuesta-suplementaria-de-ingresos/bbdd/stata_esi/2024/esi_2024.dta?sfvrsn=627c0f59_4&download=true")
+
+# Explorar la estructura
+esi2024 |> 
+  glimpse()
+```
+
+Como pueden observar, la base contiene 85.172 observaciones y 282 variables. Para este ejercicio, trabajaremos con un subconjunto de variables que nos permitirán realizar análisis descriptivos básicos.
+
+### Selección y preparación de variables
+
+Para facilitar nuestro trabajo, seleccionaremos y renombraremos algunas variables clave. Adicionalmente, filtraremos la base de datos para observaciones que cumplan con 1) estar ocupados y 2) tener ingreso totales del trabajo. Finalmente, re-escribiremos sobre la base de datos, algo que no es recomendable, pero dado que no volveremos a usar `esi2024` no habrá problemas en este caso. 
+
+```{r}
+#| label: preparar-esi
+#| message: false
+
+# Seleccionar y preparar variables de interés
+esi2024 <- esi2024 |> 
+  select(
+    sexo,           # Sexo de la persona
+    edad,           # Edad en años cumplidos
+    nivel,          # Nivel educacional más alto alcanzado
+    ing_t_t,        # Ingreso total del trabajo
+    activ,          # Condición de actividad
+    region          # Región de residencia
+  ) |> 
+  # Filtrar solo personas ocupadas con ingresos válidos
+  filter(
+    activ == 1,           # Solo ocupados
+    !is.na(ing_t_t),      # Con dato de ingreso
+    ing_t_t > 0           # Ingresos positivos
+  ) |> 
+  # Crear etiquetas descriptivas
+  mutate(
+    # Etiqueta para sexo
+    sexo_etiq = case_when(
+      sexo == 1 ~ "Hombre",
+      sexo == 2 ~ "Mujer",
+      TRUE ~ "Otro"
+    ),
+    # Recodificar nivel educacional en categorías agregadas
+    nivel_etiq = case_when(
+      nivel == 0 ~ "Sin educación",
+      nivel %in% c(1, 2, 3) ~ "Secundaria incompleta",
+      nivel %in% c(4, 5, 6) ~ "Secundaria completa",
+      nivel %in% c(7, 8, 9) ~ "Superior",
+      nivel %in% c(10, 11, 12) ~ "Postgrado",
+      TRUE ~ "Otros"
+    ),
+    nivel_etiq = factor(nivel_etiq, levels = c(
+      "Sin educación", "Secundaria incompleta", "Secundaria completa",
+      "Superior", "Postgrado", "Otros"
+    ))
+  )
+
+# Verificar dimensiones de la base filtrada
+dim(esi2024)
+
+
+```
+
+::: {.callout-note}
+## Nota sobre el filtrado
+Hemos filtrado la base para trabajar solo con personas **ocupadas** (`activ == 1`) que reportan ingresos del trabajo válidos. Esto es importante porque:
+
+1. Los ingresos del trabajo solo aplican a personas que trabajan
+2. Los valores `NA` o cero en ingresos podrían indicar no respuesta o situaciones especiales
+3. Para análisis de brechas salariales, necesitamos comparar personas que efectivamente están en el mercado laboral
+:::
+
+---
+
+## 5. Estadística Descriptiva: Medidas de Tendencia Central
+
+La estadística descriptiva nos permite resumir y organizar grandes volúmenes de datos en medidas que facilitan su comprensión. Comenzaremos con las **medidas de tendencia central**, que nos indican dónde se "centra" la distribución de nuestros datos.
+
+### 5.1 La Media (Promedio)
+
+La media aritmética es la medida de tendencia central más utilizada. Se calcula sumando todos los valores y dividiendo por el número de observaciones:
+
+$$
+\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}
+$$
+
+En R, la función `mean()` nos permite calcularla fácilmente:
+
+```{r}
+#| label: media-ingresos
+
+# Ingreso promedio mensual
+ingreso_promedio <- mean(esi2024$ing_t_t, na.rm = TRUE)
+
+# Mostrar con formato
+paste("El ingreso promedio mensual es:", 
+      scales::dollar(ingreso_promedio, big.mark = ".", 
+                     decimal.mark = ",", prefix = "$"))
+```
+
+La media es útil porque **usa toda la información disponible** (cada observación contribuye al cálculo). Sin embargo, tiene una limitación importante: **es sensible a valores extremos** (outliers).
+
+### 5.2 La Mediana
+
+La mediana es el valor que divide la distribución en dos mitades iguales: 50% de las observaciones están por debajo y 50% por encima. Es más **robusta** a valores extremos que la media.
+
+```{r}
+#| label: mediana-ingresos
+
+# Ingreso mediano mensual
+ingreso_mediano <- median(esi2024$ing_t_t, na.rm = TRUE)
+
+paste("El ingreso mediano mensual es:", 
+      scales::dollar(ingreso_mediano, big.mark = ".", 
+                     decimal.mark = ",", prefix = "$"))
+```
+
+### 5.3 Comparación: Media vs Mediana
+
+Comparemos ambas medidas:
+
+```{r}
+#| label: comparacion-media-mediana
+
+# Crear tabla comparativa
+tibble(
+  Medida = c("Media", "Mediana", "Diferencia", "% Diferencia"),
+  Valor = c(
+    scales::dollar(ingreso_promedio, big.mark = ".", decimal.mark = ",", prefix = "$"),
+    scales::dollar(ingreso_mediano, big.mark = ".", decimal.mark = ",", prefix = "$"),
+    scales::dollar(ingreso_promedio - ingreso_mediano, big.mark = ".", decimal.mark = ",", prefix = "$"),
+    paste0(round(((ingreso_promedio - ingreso_mediano)/ingreso_mediano)*100, 1), "%")
+  )
+) |> 
+  kable(caption = "Comparación entre media y mediana de ingresos")
+```
+
+**Interpretación:** La diferencia entre media y mediana nos indica que la distribución de ingresos está **sesgada hacia la derecha** (positivamente). Esto significa que hay algunas personas con ingresos muy altos que "arrastran" la media hacia arriba, mientras que la mediana nos da una mejor idea del ingreso "típico" de una persona en Chile. En cualquier caso, conviene comparar ambas medidas, pues nos entrega información sobre la distribución de nuestra variable. 
+
+::: {.callout-important}
+## ¿Cuándo usar media o mediana?
+
+- **Usa la media** cuando:
+  - La distribución es aproximadamente simétrica
+  - No hay valores extremos (outliers)
+  - Necesitas usar toda la información disponible (ej: calcular promedios)
+
+- **Usa la mediana** cuando:
+  - La distribución tiene sesgo (asimétrica)
+  - Hay valores extremos que pueden distorsionar la media
+  - Quieres saber el valor "típico" (ej: salario mediano)
+:::
+
+En la siguiente sesión veremos más medidas títpicas de la estadística descriptiva. Pero, por ahora, quedemonos con estas dos y veamos qué podemos hacer con ellas en R.
+
+
+### 5.4 Visualizando media y mediana
+
+Un histograma nos ayuda a visualizar esta diferencia:
+
+```{r}
+#| label: fig-dist-ingresos
+#| fig-cap: "Distribución de ingresos del trabajo con media y mediana"
+#| fig-width: 10
+#| fig-height: 6
+#| warning: false
+
+# Crear histograma con líneas de tendencia central
+esi2024 |> 
+  ggplot(aes(x = ing_t_t)) +
+  geom_histogram(bins = 50, fill = "#2A5783", alpha = 0.7, color = "white") +
+  geom_vline(aes(xintercept = ingreso_promedio, color = "Media"), 
+             linewidth = 1.2, linetype = "dashed") +
+  geom_vline(aes(xintercept = ingreso_mediano, color = "Mediana"), 
+             linewidth = 1.2, linetype = "dashed") +
+  scale_x_continuous(
+    labels = scales::dollar_format(big.mark = ".", decimal.mark = ",", prefix = "$"),
+    limits = c(0, 3000000)  # Limitar eje x para mejor visualización
+  ) +
+  scale_color_manual(
+    name = "Medidas de\ntendencia central",
+    values = c("Media" = "#9C0824", "Mediana" = "#09622A")
+  ) +
+  labs(
+    title = "Distribución de Ingresos del Trabajo en Chile (ESI 2024)",
+    subtitle = "Solo personas ocupadas con ingresos reportados",
+    x = "Ingreso mensual del trabajo",
+    y = "Frecuencia (número de personas)",
+    caption = "Fuente: INE, Encuesta Suplementaria de Ingresos 2024"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    legend.position = "right"
+  )
+```
+
+**Observaciones del gráfico:**
+- La mayoría de las personas se concentra en ingresos más bajos
+- La distribución tiene una "cola" hacia la derecha (ingresos altos)
+- La mediana (línea verde) está más cerca del centro de la concentración de personas
+- La media (línea roja) está desplazada hacia la derecha por efecto de los ingresos altos
+
+---
+
+## 6. Análisis por grupos: Estadística descriptiva bivariada
+
+Una de las aplicaciones más útiles de la estadística descriptiva es **comparar grupos**. Por ejemplo, ¿existen diferencias en los ingresos según el sexo de las personas? ¿O según su nivel educacional?
+
+### 6.1 Ingresos por sexo
+
+Calculemos las medidas de tendencia central separadas por sexo:
+
+```{r}
+#| label: ingresos-por-sexo
+
+# Estadísticas por sexo
+esi2024 |> 
+  group_by(sexo_etiq) |> 
+  summarise(
+    n = n(),
+    Media = mean(ing_t_t, na.rm = TRUE),
+    Mediana = median(ing_t_t, na.rm = TRUE),
+    .groups = "drop"
+  ) |> 
+  mutate(
+    Media = scales::dollar(Media, big.mark = ".", 
+                           decimal.mark = ",", prefix = "$"),
+    Mediana = scales::dollar(Mediana, big.mark = ".", decimal.mark = ",", prefix = "$")
+  ) |> 
+  kable(
+    caption = "Ingresos del trabajo por sexo",
+    col.names = c("Sexo", "N", "Ingreso Promedio", "Ingreso Mediano")
+  )
+```
+
+::: {.callout-warning}
+## Brecha salarial de género
+Los datos muestran una diferencia significativa en los ingresos entre hombres y mujeres. Esta es la llamada **brecha salarial de género**, un fenómeno persistente en Chile y el mundo que tiene múltiples causas (segregación ocupacional, discriminación, interrupciones en trayectorias laborales, etc.).
+:::
+
+### 6.2 Visualización de la brecha
+
+Podemos visualizar esta diferencia con un boxplot:
+
+```{r}
+#| label: fig-boxplot-sexo
+#| fig-cap: "Distribución de ingresos por sexo"
+#| fig-width: 10
+#| fig-height: 6
+#| warning: false
+
+esi2024 |> 
+  ggplot(aes(x = sexo_etiq, y = ing_t_t, fill = sexo_etiq)) +
+  geom_boxplot(alpha = 0.7, outlier.alpha = 0.3) +
+  scale_y_continuous(
+    labels = scales::dollar_format(big.mark = ".", decimal.mark = ",", prefix = "$"),
+    limits = c(0, 2500000)
+  ) +
+  scale_fill_manual(values = c("Hombre" = "#4292c6", "Mujer" = "#ef3b2c")) +
+  labs(
+    title = "Distribución de Ingresos del Trabajo por Sexo",
+    subtitle = "Chile, 2024",
+    x = NULL,
+    y = "Ingreso mensual del trabajo",
+    caption = "Fuente: INE, ESI 2024\nNota: Se excluyen outliers extremos para mejor visualización"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", size = 14)
+  )
+```
+
+**Lectura del boxplot:**
+- La línea horizontal dentro de la caja es la **mediana**
+- Los bordes de la caja representan el **25% y 75%** de los datos (rango intercuartílico)
+- Los "bigotes" se extienden hasta aproximadamente 1.5 veces el rango intercuartílico
+- Los puntos son **valores atípicos** (outliers)
+
+---
+
+## 7. Tablas de frecuencia con datos reales
+
+Las tablas de frecuencia son fundamentales para resumir variables categóricas. Veamos algunos ejemplos con la ESI.
+
+### 7.1 Distribución por nivel educacional
+
+```{r}
+#| label: tabla-educacion
+
+# Tabla de frecuencias
+tabla_educ <- esi2024 |> 
+  count(nivel_etiq, name = "Frecuencia") |> 
+  mutate(
+    Porcentaje = round((Frecuencia / sum(Frecuencia)) * 100, 1),
+    `Porcentaje acumulado` = cumsum(Porcentaje)
+  )
+
+tabla_educ |> 
+  kable(
+    caption = "Distribución de personas ocupadas por nivel educacional",
+    col.names = c("Nivel Educacional", "Frecuencia", "Porcentaje", "% Acumulado")
+  )
+```
+
+### 7.2 Visualización de la distribución educacional
+
+```{r}
+#| label: fig-educacion
+#| fig-cap: "Distribución de nivel educacional"
+#| fig-width: 10
+#| fig-height: 7
+#| warning: false
+
+esi2024 |> 
+  filter(!is.na(nivel_etiq)) |> 
+  count(nivel_etiq) |> 
+  mutate(
+    porcentaje = (n / sum(n)) * 100,
+    nivel_etiq = fct_reorder(nivel_etiq, n)
+  ) |> 
+  ggplot(aes(x = nivel_etiq, y = porcentaje)) +
+  geom_col(fill = "#E9C6EF", alpha = 0.8) +
+  geom_text(aes(label = paste0(round(porcentaje, 1), "%")), 
+            hjust = -0.2, size = 3.5) +
+  coord_flip() +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +  # Deja espacio para etiquetas
+  labs(
+    title = "Distribución de Personas Ocupadas por Nivel Educacional",
+    subtitle = "Chile, 2024",
+    x = NULL,
+    y = "Porcentaje",
+    caption = "Fuente: INE, ESI 2024"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    panel.grid.major.y = element_blank()
+  )
+```
+
+### 7.3 Tabla de contingencia: Sexo x Nivel educacional
+
+Las **tablas de contingencia** (o tablas cruzadas) nos permiten analizar la relación entre dos variables categóricas:
+
+```{r}
+#| label: tabla-contingencia-sexo-educ
+
+# Tabla de contingencia
+tabla_sexo_educ <- esi2024 |> 
+  filter(!is.na(nivel_etiq)) |> 
+  count(sexo_etiq, nivel_etiq) |> 
+  pivot_wider(names_from = sexo_etiq, values_from = n, values_fill = 0)
+
+tabla_sexo_educ |> 
+  kable(caption = "Distribución de nivel educacional por sexo")
+```
+
+Podemos también ver las proporciones por fila (qué % de cada nivel educacional es hombre/mujer):
+
+```{r}
+#| label: proporciones-sexo-educ
+
+# Proporciones por fila
+esi2024 |> 
+  filter(!is.na(nivel_etiq)) |> 
+  count(nivel_etiq, sexo_etiq) |> 
+  group_by(nivel_etiq) |> 
+  mutate(
+    prop = n / sum(n) * 100
+  ) |> 
+  select(-n) |> 
+  pivot_wider(names_from = sexo_etiq, values_from = prop, values_fill = 0) |> 
+  mutate(across(where(is.numeric), ~round(.x, 1))) |> 
+  kable(
+    caption = "Distribución porcentual por sexo dentro de cada nivel educacional",
+    col.names = c("Nivel Educacional", "% Hombres", "% Mujeres")
+  )
+```
+
+---
+
+## 8. Ingresos por nivel educacional
+
+Un análisis clásico en economía laboral es examinar cómo los ingresos varían según el nivel educacional (el **retorno** a la educación):
+
+```{r}
+#| label: ingresos-por-educacion
+
+# Ingresos promedio por nivel educacional
+esi2024 |> 
+  filter(!is.na(nivel_etiq)) |> 
+  group_by(nivel_etiq) |> 
+  summarise(
+    n = n(),
+    Ingreso_Promedio = mean(ing_t_t, na.rm = TRUE),
+    Ingreso_Mediano = median(ing_t_t, na.rm = TRUE),
+    .groups = "drop"
+  ) |> 
+  mutate(
+    Ingreso_Promedio = scales::dollar(Ingreso_Promedio, big.mark = ".", decimal.mark = ",", prefix = "$"),
+    Ingreso_Mediano = scales::dollar(Ingreso_Mediano, big.mark = ".", decimal.mark = ",", prefix = "$")
+  ) |> 
+  kable(
+    caption = "Ingresos del trabajo por nivel educacional",
+    col.names = c("Nivel Educacional", "N", "Ingreso Promedio", "Ingreso Mediano")
+  )
+```
+
+### Visualización: Ingresos por educación
+
+```{r}
+#| label: fig-ingresos-educacion
+#| fig-cap: "Ingresos medianos por nivel educacional"
+#| fig-width: 10
+#| fig-height: 7
+#| warning: false
+
+esi2024 |> 
+  filter(!is.na(nivel_etiq)) |> 
+  group_by(nivel_etiq) |> 
+  summarise(
+    ingreso_mediano = median(ing_t_t, na.rm = TRUE),
+    .groups = "drop"
+  ) |> 
+  mutate(nivel_etiq = fct_reorder(nivel_etiq, ingreso_mediano)) |> 
+  ggplot(aes(x = nivel_etiq, y = ingreso_mediano)) +
+  geom_col(fill = "#69000C", alpha = 0.7) +
+  geom_text(
+    aes(label = scales::dollar(ingreso_mediano, big.mark = ".", prefix = "$", accuracy = 1)),
+    hjust = -0.1, size = 3
+  ) +
+  coord_flip() +
+  scale_y_continuous(
+    labels = scales::dollar_format(big.mark = ".", prefix = "$"),
+    limits = c(0, max(esi2024 |> 
+                        filter(!is.na(nivel_etiq)) |> 
+                        group_by(nivel_etiq) |> 
+                        summarise(med = median(ing_t_t, na.rm = TRUE)) |> 
+                        pull(med)) * 1.15),
+    expand = c(0, 0)
+  ) +
+  labs(
+    title = "Ingreso Mediano del Trabajo por Nivel Educacional",
+    subtitle = "Chile, 2024",
+    x = NULL,
+    y = "Ingreso mediano mensual",
+    caption = "Fuente: INE, ESI 2024"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    panel.grid.major.y = element_blank()
+  )
+```
+
+::: {.callout-tip}
+## Interpretación
+Observamos una clara **relación positiva** entre nivel educacional e ingresos: a mayor educación, mayores ingresos medianos. Este es uno de los hallazgos más robustos en economía laboral y justifica (en parte) la inversión en educación como una forma de movilidad social.
+
+Sin embargo, noten que el "salto" más grande está en los niveles más altos de educación (de media completa a superior y de superior a postgrado). ¿Por qué se produce este salto? ¿Es solo por un aumento lineal (exponencial en rigor) en el ingreso *en función* de los años estudiando, o bien hay algo que impacta en el salario y no se puede ver en el gráfico?
+:::
+
+---
+
+## 9. Ejercicios prácticos
+
+Ahora es tu turno de practicar con el dataframe simulado `encuesta`. Estos ejercicios te ayudarán a consolidar los conceptos aprendidos.
+
+Primero, creemos el dataframe de práctica:
+
+```{r}
+#| label: crear-encuesta-practica
+
+# Simular datos de encuesta para ejercicios
 set.seed(123)  # Para reproducibilidad
 
 encuesta <- data.frame(
   id = 1:100,
   edad = sample(18:65, 100, replace = TRUE),
-  sexo = sample(c("Mujer", "Hombre", "Otro"), 100, 
-                replace = TRUE, prob = c(0.5, 0.48, 0.02)),
+  sexo = sample(c("Mujer", "Hombre"), 100, 
+                replace = TRUE, prob = c(0.52, 0.48)),
   educacion = sample(c("Básica", "Media", "Técnica", "Universitaria", "Postgrado"), 
-                     100, replace = TRUE),
+                     100, replace = TRUE, 
+                     prob = c(0.10, 0.30, 0.25, 0.30, 0.05)),
   satisfaccion = sample(1:7, 100, replace = TRUE),
-  ingreso = rnorm(100, mean = 800000, sd = 300000)
+  ingreso = round(rnorm(100, mean = 800000, sd = 300000), -3)
 )
 
 # Vista previa
 head(encuesta, 10)
 ```
 
-
-### Medidas de tendencia central
-
-Son valores que representan el "centro" de los datos:
-
-::: {.callout-note}
-## Definiciones
-
-- **Media (promedio)**: Suma de valores / cantidad de valores
-- **Mediana**: Valor que divide los datos en dos mitades iguales
-- **Moda**: Valor más frecuente
-:::
-
-```{r}
-#| label: tendencia-central
-
-# Media
-mean(encuesta$edad)
-
-# Mediana
-median(encuesta$edad)
-
-# Para variables categóricas: tabla de frecuencias
-table(encuesta$educacion)
-
-# Moda (el valor más frecuente)
-# R no tiene función directa, usamos table
-tabla_educacion <- table(encuesta$educacion)
-names(tabla_educacion)[which.max(tabla_educacion)]
-```
-
-### Comparación media vs mediana
-
-```{r}
-#| label: fig-media-mediana
-#| fig-cap: "Distribución de ingresos con media y mediana"
-#| fig-width: 8
-#| fig-height: 5
-
-# Crear histograma con media y mediana
-ggplot(encuesta, aes(x = ingreso)) +
-  geom_histogram(bins = 30, fill = "steelblue", alpha = 0.7) +
-  geom_vline(aes(xintercept = mean(ingreso), color = "Media"), 
-             linewidth = 1.2, linetype = "dashed") +
-  geom_vline(aes(xintercept = median(ingreso), color = "Mediana"), 
-             linewidth = 1.2, linetype = "dashed") +
-  scale_color_manual(name = "", 
-                     values = c("Media" = "red", "Mediana" = "blue")) +
-  theme_minimal() +
-  labs(title = "Distribución de Ingresos",
-       x = "Ingreso (CLP)",
-       y = "Frecuencia") +
-  scale_x_continuous(labels = scales::comma)
-```
-
-**Interpretación:** La media es sensible a valores extremos, mientras que la mediana es más robusta.
-
 ---
-
-## 6. Tablas de frecuencia
-
-Las tablas de frecuencia organizan datos categóricos contando cuántas veces aparece cada valor.
-
-### Tabla de frecuencia simple
-
-```{r}
-#| label: tabla-simple
-
-# Frecuencias absolutas
-table(encuesta$sexo)
-
-# Frecuencias relativas (proporciones)
-prop.table(table(encuesta$sexo))
-
-# Frecuencias relativas en porcentaje
-prop.table(table(encuesta$sexo)) * 100
-```
-
-### Tabla más elaborada
-
-```{r}
-#| label: tabla-elaborada
-
-# Crear tabla con frecuencias y porcentajes
-tabla_sexo <- as.data.frame(table(encuesta$sexo))
-colnames(tabla_sexo) <- c("Sexo", "Frecuencia")
-tabla_sexo$Porcentaje <- round(prop.table(tabla_sexo$Frecuencia) * 100, 1)
-
-# Mostrar con kable
-library(knitr)
-kable(tabla_sexo, caption = "Distribución por sexo")
-```
-
-### Tabla de contingencia (dos variables)
-
-Las tablas de contingencia cruzan dos variables categóricas:
-
-```{r}
-#| label: tabla-contingencia
-
-# Tabla de contingencia: sexo x educación
-tabla_cruzada <- table(encuesta$sexo, encuesta$educacion)
-tabla_cruzada
-
-# Agregar totales marginales
-addmargins(tabla_cruzada)
-```
-
-### Proporciones por fila o columna
-
-```{r}
-#| label: proporciones-tabla
-
-# Proporciones por fila (cada fila suma 100%)
-prop.table(tabla_cruzada, margin = 1) * 100
-
-# Proporciones por columna (cada columna suma 100%)
-prop.table(tabla_cruzada, margin = 2) * 100
-```
-
----
-
-## 7. Visualización de frecuencias
-
-### Gráfico de barras
-
-```{r}
-#| label: fig-barras
-#| fig-cap: "Distribución de nivel educacional"
-#| fig-width: 8
-#| fig-height: 5
-
-ggplot(encuesta, aes(x = educacion)) +
-  geom_bar(fill = "steelblue", alpha = 0.8) +
-  theme_minimal() +
-  labs(title = "Distribución de Nivel Educacional",
-       x = "Nivel Educacional",
-       y = "Frecuencia") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
-### Gráfico de barras agrupadas
-
-```{r}
-#| label: fig-barras-agrupadas
-#| fig-cap: "Nivel educacional por sexo"
-#| fig-width: 10
-#| fig-height: 6
-
-ggplot(encuesta, aes(x = educacion, fill = sexo)) +
-  geom_bar(position = "dodge") +
-  theme_minimal() +
-  labs(title = "Nivel Educacional por Sexo",
-       x = "Nivel Educacional",
-       y = "Frecuencia",
-       fill = "Sexo") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
----
-
-## 8. Ejercicios prácticos
 
 ::: {.callout-tip}
-## Ejercicio 1: Calcular estadísticos
+## Ejercicio 1: Calcular estadísticos básicos
 
 Usando los datos de `encuesta`:
 
-a) Calcula la edad promedio
-b) Calcula la edad mediana
+a) Calcula la edad promedio y mediana
+b) Calcula el ingreso promedio y mediano
 c) ¿Cuál es la satisfacción promedio?
-d) ¿Cuál es el ingreso mediano?
+d) Interpreta: ¿La distribución de ingresos está sesgada? ¿Cómo lo sabes?
 
-**Pista:** Usa las funciones `mean()` y `median()`
+**Pista:** Usa las funciones `mean()` y `median()`. Compara los resultados.
 :::
 
 ```{r}
-#| label: ejercicio-1
+#| label: ejercicio-1-template
 #| eval: false
 #| code-fold: true
 
-# Tu código aquí
+# a) Edad
+mean(encuesta$edad)
+median(encuesta$edad)
+
+# b) Ingreso
+
+
+# c) Satisfacción
+
+
+# d) Interpretación
+# Escribe tu respuesta aquí
 
 ```
 
@@ -804,38 +1149,58 @@ d) ¿Cuál es el ingreso mediano?
 ```{r}
 #| label: solucion-1
 
-# a) Edad promedio
-mean(encuesta$edad)
+# a) Edad promedio y mediana
+cat("Edad promedio:", round(mean(encuesta$edad), 1), "años\n")
+cat("Edad mediana:", median(encuesta$edad), "años\n\n")
 
-# b) Edad mediana
-median(encuesta$edad)
+# b) Ingreso promedio y mediano
+cat("Ingreso promedio:", scales::dollar(mean(encuesta$ingreso), prefix = "$", big.mark = "."), "\n")
+cat("Ingreso mediano:", scales::dollar(median(encuesta$ingreso), prefix = "$", big.mark = "."), "\n\n")
 
 # c) Satisfacción promedio
-mean(encuesta$satisfaccion)
+cat("Satisfacción promedio:", round(mean(encuesta$satisfaccion), 2), "(escala 1-7)\n\n")
 
-# d) Ingreso mediano
-median(encuesta$ingreso)
+# d) Interpretación
+cat("Interpretación:\n")
+cat("Media:", scales::dollar(mean(encuesta$ingreso), prefix = "$", big.mark = "."), "\n")
+cat("Mediana:", scales::dollar(median(encuesta$ingreso), prefix = "$", big.mark = "."), "\n")
+cat("\nLa media es", 
+    ifelse(mean(encuesta$ingreso) > median(encuesta$ingreso), "mayor", "menor"),
+    "que la mediana, lo que sugiere un sesgo",
+    ifelse(mean(encuesta$ingreso) > median(encuesta$ingreso), "positivo (hacia la derecha)", "negativo (hacia la izquierda)"),
+    "en la distribución de ingresos.")
 ```
 :::
 
 ---
 
 ::: {.callout-tip}
-## Ejercicio 2: Tablas de frecuencia
+## Ejercicio 2: Tabla de frecuencias
 
 Crea una tabla de frecuencias para la variable `educacion` que incluya:
 - Frecuencia absoluta
 - Frecuencia relativa (porcentaje)
+- Porcentaje acumulado
 
-**Pista:** Usa `table()` y `prop.table()`
+**Pista:** Usa `table()`, `prop.table()` y `cumsum()`
 :::
 
 ```{r}
-#| label: ejercicio-2
+#| label: ejercicio-2-template
 #| eval: false
 #| code-fold: true
 
 # Tu código aquí
+# 1. Crear tabla de frecuencias absolutas
+
+
+# 2. Calcular porcentajes
+
+
+# 3. Agregar porcentaje acumulado
+
+
+# 4. Presentar en formato tabla (usa kable)
 
 ```
 
@@ -845,13 +1210,22 @@ Crea una tabla de frecuencias para la variable `educacion` que incluya:
 ```{r}
 #| label: solucion-2
 
-# Crear tabla
+# Crear tabla de frecuencias completa
 tabla_educ <- as.data.frame(table(encuesta$educacion))
-colnames(tabla_educ) <- c("Nivel", "Frecuencia")
-tabla_educ$Porcentaje <- round(prop.table(tabla_educ$Frecuencia) * 100, 1)
+colnames(tabla_educ) <- c("Nivel_Educacional", "Frecuencia")
 
-# Mostrar
-kable(tabla_educ)
+tabla_educ <- tabla_educ |> 
+  mutate(
+    Porcentaje = round((Frecuencia / sum(Frecuencia)) * 100, 1),
+    Porcentaje_Acumulado = cumsum(Porcentaje)
+  )
+
+# Mostrar con kable
+kable(
+  tabla_educ,
+  caption = "Distribución de nivel educacional",
+  col.names = c("Nivel Educacional", "Frecuencia", "Porcentaje (%)", "% Acumulado")
+)
 ```
 :::
 
@@ -861,17 +1235,27 @@ kable(tabla_educ)
 ## Ejercicio 3: Tabla de contingencia
 
 Crea una tabla de contingencia entre `sexo` y `educacion`.
-Luego calcula las proporciones por fila.
 
-¿Qué porcentaje de mujeres tiene educación universitaria?
+a) ¿Cuántos hombres tienen educación universitaria?
+b) ¿Cuántas mujeres tienen educación media?
+c) Calcula las proporciones por fila (% dentro de cada sexo)
+d) ¿Qué porcentaje de las mujeres tiene educación universitaria?
+
+**Pista:** Usa `table()` y `prop.table()` con `margin = 1` para proporciones por fila
 :::
 
 ```{r}
-#| label: ejercicio-3
+#| label: ejercicio-3-template
 #| eval: false
 #| code-fold: true
 
-# Tu código aquí
+# a) y b) Crear tabla de contingencia
+
+
+# c) Proporciones por fila
+
+
+# d) Interpretación
 
 ```
 
@@ -881,66 +1265,585 @@ Luego calcula las proporciones por fila.
 ```{r}
 #| label: solucion-3
 
-# Tabla de contingencia
-tabla <- table(encuesta$sexo, encuesta$educacion)
-tabla
+# a) y b) Tabla de contingencia
+tabla_sexo_educ <- table(encuesta$sexo, encuesta$educacion)
+print("Tabla de contingencia: Sexo x Educación")
+tabla_sexo_educ
 
-# Proporciones por fila
-prop_fila <- prop.table(tabla, margin = 1) * 100
+cat("\na) Hombres con educación universitaria:", tabla_sexo_educ["Hombre", "Universitaria"], "\n")
+cat("b) Mujeres con educación media:", tabla_sexo_educ["Mujer", "Media"], "\n\n")
+
+# c) Proporciones por fila (% dentro de cada sexo)
+prop_fila <- prop.table(tabla_sexo_educ, margin = 1) * 100
+print("Porcentajes por sexo:")
 round(prop_fila, 1)
 
-# El porcentaje de mujeres con educación universitaria es:
-prop_fila["Mujer", "Universitaria"]
+# d) Porcentaje de mujeres con educación universitaria
+cat("\nd) Porcentaje de mujeres con educación universitaria:", 
+    round(prop_fila["Mujer", "Universitaria"], 1), "%")
+```
+:::
+
+## Ejercicio 4: Análisis de ingresos por grupo
+
+Ahora realizaremos un análisis más complejo, comparando ingresos entre diferentes grupos.
+
+::: {.callout-tip}
+## Ejercicio 4: Ingresos por sexo y educación
+
+Usando el dataframe `encuesta`:
+
+a) Calcula el ingreso promedio y mediano por sexo
+b) Calcula el ingreso promedio por nivel educacional
+c) Crea un gráfico de boxplot comparando ingresos entre hombres y mujeres
+d) Interpreta: ¿Existe una brecha salarial en estos datos simulados?
+
+**Pista:** Usa `group_by()` y `summarise()` de `dplyr`, y `ggplot()` para el gráfico
+:::
+
+```{r}
+#| label: ejercicio-4-template
+#| eval: false
+#| code-fold: true
+
+# a) Ingresos por sexo
+encuesta |> 
+  group_by(sexo) |> 
+  summarise(
+    # completar aquí
+  )
+
+# b) Ingresos por educación
+
+
+# c) Boxplot
+
+
+# d) Interpretación
+# Escribe tu análisis aquí
+
+```
+
+::: {.callout-tip collapse="true"}
+## Solución Ejercicio 4
+
+```{r}
+#| label: solucion-4
+
+# a) Ingresos por sexo
+cat("=== Ingresos por sexo ===\n\n")
+resumen_sexo <- encuesta |> 
+  group_by(sexo) |> 
+  summarise(
+    n = n(),
+    Ingreso_Promedio = mean(ingreso, na.rm = TRUE),
+    Ingreso_Mediano = median(ingreso, na.rm = TRUE),
+    .groups = "drop"
+  ) |> 
+  mutate(
+    Ingreso_Promedio = scales::dollar(Ingreso_Promedio, prefix = "$", big.mark = "."),
+    Ingreso_Mediano = scales::dollar(Ingreso_Mediano, prefix = "$", big.mark = ".")
+  )
+
+kable(resumen_sexo, 
+      caption = "Ingresos por sexo",
+      col.names = c("Sexo", "N", "Ingreso Promedio", "Ingreso Mediano"))
+
+# b) Ingresos por educación
+cat("\n=== Ingresos por nivel educacional ===\n\n")
+resumen_educ <- encuesta |> 
+  group_by(educacion) |> 
+  summarise(
+    n = n(),
+    Ingreso_Promedio = mean(ingreso, na.rm = TRUE),
+    Ingreso_Mediano = median(ingreso, na.rm = TRUE),
+    .groups = "drop"
+  ) |> 
+  arrange(desc(Ingreso_Mediano)) |> 
+  mutate(
+    Ingreso_Promedio = scales::dollar(Ingreso_Promedio, prefix = "$", big.mark = "."),
+    Ingreso_Mediano = scales::dollar(Ingreso_Mediano, prefix = "$", big.mark = ".")
+  )
+
+kable(resumen_educ,
+      caption = "Ingresos por nivel educacional",
+      col.names = c("Educación", "N", "Ingreso Promedio", "Ingreso Mediano"))
+```
+
+```{r}
+#| label: solucion-4-grafico
+#| fig-cap: "Comparación de ingresos por sexo"
+#| fig-width: 8
+#| fig-height: 6
+
+# c) Boxplot de ingresos por sexo
+ggplot(encuesta, aes(x = sexo, y = ingreso, fill = sexo)) +
+  geom_boxplot(alpha = 0.7) +
+  scale_y_continuous(
+    labels = scales::dollar_format(prefix = "$", big.mark = ".")
+  ) +
+  scale_fill_manual(values = c("Hombre" = "#4292c6", "Mujer" = "#ef3b2c")) +
+  labs(
+    title = "Distribución de Ingresos por Sexo",
+    subtitle = "Datos simulados de encuesta",
+    x = NULL,
+    y = "Ingreso mensual",
+    caption = "Fuente: Datos simulados para ejercicio"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", size = 13)
+  )
+
+# d) Interpretación
+cat("\n=== Interpretación ===\n\n")
+media_h <- mean(encuesta$ingreso[encuesta$sexo == "Hombre"])
+media_m <- mean(encuesta$ingreso[encuesta$sexo == "Mujer"])
+brecha <- ((media_h - media_m) / media_h) * 100
+
+cat("En estos datos simulados:\n")
+cat("- Ingreso promedio hombres:", scales::dollar(media_h, prefix = "$", big.mark = "."), "\n")
+cat("- Ingreso promedio mujeres:", scales::dollar(media_m, prefix = "$", big.mark = "."), "\n")
+cat("- Brecha salarial:", round(brecha, 1), "%\n\n")
+
+if (brecha > 5) {
+  cat("Existe una brecha salarial favorable a los hombres del", round(brecha, 1), "%.\n")
+  cat("Esto significa que, en promedio, las mujeres ganan", 
+      round(100 - (media_m/media_h * 100), 1), 
+      "% menos que los hombres en esta muestra simulada.")
+} else if (brecha < -5) {
+  cat("Existe una brecha salarial favorable a las mujeres del", round(abs(brecha), 1), "%.")
+} else {
+  cat("No se observa una brecha salarial significativa (diferencia menor al 5%).")
+}
 ```
 :::
 
 ---
 
-## Resumen
+::: {.callout-tip}
+## Ejercicio 5: Visualización avanzada
 
-En esta sesión aprendimos:
+Crea un gráfico que muestre la distribución de edad por nivel educacional.
 
-- ✅ Navegar en RStudio y crear scripts
-- ✅ Crear y manipular objetos básicos (vectores, dataframes)
-- ✅ Importar datos desde CSV
-- ✅ Calcular medidas de tendencia central (media, mediana, moda)
-- ✅ Crear tablas de frecuencia simples y de contingencia
-- ✅ Visualizar datos con gráficos de barras
+Puedes elegir entre:
+- Un histograma facetado por educación
+- Un boxplot con educación en el eje X y edad en el eje Y
+- Un gráfico de violín
+
+**Bonus:** Agrega títulos, etiquetas y personaliza los colores.
+:::
+
+```{r}
+#| label: ejercicio-5-template
+#| eval: false
+#| code-fold: true
+
+# Tu código aquí
+# Crea el gráfico que prefieras usando ggplot()
+
+```
+
+::: {.callout-tip collapse="true"}
+## Solución Ejercicio 5
+
+```{r}
+#| label: solucion-5-opcion1
+#| fig-cap: "Distribución de edad por nivel educacional (boxplot)"
+#| fig-width: 10
+#| fig-height: 6
+
+# Opción 1: Boxplot
+ggplot(encuesta, aes(x = educacion, y = edad, fill = educacion)) +
+  geom_boxplot(alpha = 0.7) +
+  geom_jitter(width = 0.2, alpha = 0.3, size = 0.8) +  # Agregar puntos individuales
+  scale_fill_brewer(palette = "Set2") +
+  labs(
+    title = "Distribución de Edad según Nivel Educacional",
+    subtitle = "Datos simulados de encuesta (N=100)",
+    x = "Nivel Educacional",
+    y = "Edad (años)",
+    caption = "Fuente: Datos simulados para ejercicio"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", size = 13),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
+
+```{r}
+#| label: solucion-5-opcion2
+#| fig-cap: "Distribución de edad por nivel educacional (violín)"
+#| fig-width: 10
+#| fig-height: 6
+
+# Opción 2: Gráfico de violín
+ggplot(encuesta, aes(x = educacion, y = edad, fill = educacion)) +
+  geom_violin(alpha = 0.6, trim = FALSE) +
+  geom_boxplot(width = 0.1, alpha = 0.8, outlier.alpha = 0) +
+  scale_fill_viridis_d(option = "plasma") +
+  labs(
+    title = "Distribución de Edad según Nivel Educacional",
+    subtitle = "Gráfico de violín con boxplot incorporado",
+    x = "Nivel Educacional",
+    y = "Edad (años)",
+    caption = "Fuente: Datos simulados para ejercicio\nEl ancho del violín representa la densidad de datos"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", size = 13),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
+
+```{r}
+#| label: solucion-5-opcion3
+#| fig-cap: "Histogramas de edad por nivel educacional"
+#| fig-width: 12
+#| fig-height: 8
+
+# Opción 3: Histogramas facetados
+ggplot(encuesta, aes(x = edad, fill = educacion)) +
+  geom_histogram(bins = 15, alpha = 0.8, color = "white") +
+  facet_wrap(~educacion, ncol = 3) +
+  scale_fill_brewer(palette = "Set1") +
+  labs(
+    title = "Distribución de Edad por Nivel Educacional",
+    subtitle = "Histogramas separados para cada categoría",
+    x = "Edad (años)",
+    y = "Frecuencia",
+    caption = "Fuente: Datos simulados para ejercicio"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", size = 13),
+    strip.text = element_text(face = "bold", size = 10)
+  )
+```
+:::
 
 ---
 
-## Recursos adicionales
+## 10. Resumen de la sesión
 
-### Lecturas recomendadas
+En esta primera sesión hemos cubierto aspectos fundamentales tanto de R como de estadística descriptiva:
 
-- Navarro, D. (2015). *Learning Statistics with R*. Capítulos 3-5. [Disponible online](https://learningstatisticswithr.com/)
-- Wickham, H., & Grolemund, G. (2017). *R for Data Science*. Capítulos 1-4. [Disponible online](https://r4ds.had.co.nz/)
+### ✅ Conceptos de R aprendidos
 
-### Videos
+- **Interfaz de RStudio**: Navegación entre paneles (Editor, Consola, Environment, Files/Plots)
+- **Operaciones básicas**: R como calculadora avanzada
+- **Creación de objetos**: Vectores, matrices y dataframes
+- **Operaciones vectoriales y matriciales**: Incluyendo álgebra lineal
+- **Importación de datos**: Archivos CSV y Stata (.dta)
+- **Manipulación de datos con `dplyr`**: 
+  - `select()`: Seleccionar columnas
+  - `filter()`: Filtrar filas
+  - `mutate()`: Crear/modificar variables
+  - `group_by()` y `summarise()`: Agrupar y resumir
+  - Operador pipe `|>`: Encadenar operaciones
+- **Exploración de datos**: `glimpse()`, `head()`, `str()`, `dim()`
+- **Visualización con `ggplot2`**: Histogramas, boxplots, gráficos de barras
+
+### ✅ Conceptos estadísticos aprendidos
+
+- **Medidas de tendencia central**:
+  - Media: Promedio aritmético, sensible a valores extremos
+  - Mediana: Valor central, robusta a outliers
+  - Cuándo usar cada una según la distribución de los datos
+  
+- **Distribuciones asimétricas**: Interpretación de sesgo positivo/negativo comparando media y mediana
+
+- **Tablas de frecuencia**:
+  - Frecuencias absolutas y relativas
+  - Frecuencias acumuladas
+  - Tablas de contingencia (cruce de dos variables)
+  - Proporciones por fila y columna
+
+- **Análisis bivariado descriptivo**:
+  - Comparación de estadísticos entre grupos
+  - Identificación de brechas (ej: brecha salarial de género)
+  - Visualización de diferencias entre grupos
+
+- **Interpretación de gráficos**:
+  - Histogramas: Forma de la distribución
+  - Boxplots: Mediana, rango intercuartílico, outliers
+  - Gráficos de barras: Frecuencias y proporciones
+
+### 🎯 Aplicaciones prácticas
+
+Trabajamos con dos bases de datos reales:
+1. **ENE (Encuesta Nacional de Empleo)**: Cálculo de tasas de ocupación
+2. **ESI (Encuesta Suplementaria de Ingresos)**: Análisis de ingresos, brechas salariales, y retornos a la educación
+
+Estos análisis nos permitieron ver cómo la estadística descriptiva es fundamental para:
+- **Caracterizar** poblaciones y muestras
+- **Identificar** patrones y tendencias
+- **Comparar** grupos (género, educación, edad)
+- **Comunicar** hallazgos de manera efectiva
+
+---
+
+## 11. Recursos adicionales
+
+### 📚 Lecturas recomendadas
+
+**Sobre R:**
+- Wickham, H., & Grolemund, G. (2023). [*R para Ciencia de Datos*](https://es.r4ds.hadley.nz/). Capítulos 1-5 y 9-11.
+- Fernández-Avilés, G., & Montero, J.M. (2024). [*Ciencia de Datos en R*](https://cdr-book.github.io/index.html). Capítulos 1-3.
+- Wickham, H. (2019). [*Advanced R*](https://adv-r.hadley.nz/). Para profundizar en programación orientada a objetos.
+
+**Sobre Estadística Descriptiva:**
+- Navarro, D. (2015). [*Learning Statistics with R*](https://learningstatisticswithr.com/). Capítulos 3-5.
+- Verzani, J. (2014). *Using R for Introductory Statistics*. Capítulos 1-4.
+
+**Documentación oficial:**
+- [Documentación de `dplyr`](https://dplyr.tidyverse.org/)
+- [Documentación de `ggplot2`](https://ggplot2.tidyverse.org/)
+- [RStudio Cheatsheets](https://posit.co/resources/cheatsheets/) (especialmente Data Transformation y Data Visualization)
+
+### 🎥 Videos recomendados
 
 - [Introducción a RStudio (10 min)](https://www.youtube.com/watch?v=lVKMsaWju8w)
-- [R para principiantes](https://www.youtube.com/watch?v=_V8eKsto3Ug)
+- [R para principiantes - Tutorial completo](https://www.youtube.com/watch?v=_V8eKsto3Ug)
+- [Visualización de datos con ggplot2](https://www.youtube.com/watch?v=h29g21z0a68)
 
-### Práctica adicional
+### 💻 Práctica interactiva
 
-- [Swirl - Learn R, in R](https://swirlstats.com/) - Tutorial interactivo
+- [Swirl - Learn R, in R](https://swirlstats.com/) - Tutorial interactivo dentro de R
 - [R for Data Science - Ejercicios](https://r4ds.hadley.nz/data-transform.html#exercises-9)
+- [DataCamp - Introduction to R (gratis)](https://www.datacamp.com/courses/free-introduction-to-r)
+
+### 🔗 Bases de datos para practicar
+
+- [Encuesta Nacional de Empleo (ENE) - INE Chile](https://www.ine.gob.cl/estadisticas/sociales/mercado-laboral/ocupacion-y-desocupacion)
+- [Encuesta Suplementaria de Ingresos (ESI) - INE Chile](https://www.ine.gob.cl/estadisticas/sociales/ingresos-y-gastos/encuesta-suplementaria-de-ingresos)
+- [CASEN - Ministerio de Desarrollo Social](http://observatorio.ministeriodesarrollosocial.gob.cl/encuesta-casen)
+- [Datasets incluidos en R](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html)
 
 ---
 
-## Para la próxima sesión
+## 12. Preparación para la próxima sesión
+
+En la **Sesión 2** continuaremos con estadística descriptiva, enfocándonos en:
+
+1. **Medidas de dispersión**:
+   - Rango, varianza, desviación estándar
+   - Rango intercuartílico
+   - Coeficiente de variación
+
+2. **Medidas de posición**:
+   - Cuartiles, deciles, percentiles
+   - Interpretación y aplicaciones
+
+3. **Introducción a pruebas de hipótesis**:
+   - Conceptos básicos de inferencia estadística
+   - Distribución normal
+   - Intervalos de confianza
+
+### 📝 Tarea para la próxima sesión
 
 ::: {.callout-important}
-## Tareas
+## Tarea obligatoria
 
-1. Completar los 3 ejercicios de esta sesión
-2. Instalar el paquete `psych`: `install.packages("psych")`
-3. Traer un dataset propio (opcional) o trabajaremos con datos de ejemplo
-4. Leer: Navarro, Capítulo 5 (Medidas de dispersión)
+Elige **una** de las siguientes bases de datos y realiza un análisis descriptivo básico:
+
+**Opción 1: ENE (Encuesta Nacional de Empleo)**
+- Descarga: [ENE más reciente](https://www.ine.gob.cl/estadisticas/sociales/mercado-laboral/ocupacion-y-desocupacion)
+- Analiza: Tasas de participación laboral por región y sexo
+
+**Opción 2: ESI (Encuesta Suplementaria de Ingresos)**
+- Ya usamos esta base en clase
+- Analiza: Ingresos por región y sector económico
+
+**Opción 3: Base de datos propia**
+- Si tienes datos de tu investigación de magíster, úsalos
+- Realiza análisis descriptivo básico
+
+**Entregables (documento .Rmd o .qmd):**
+
+1. Breve descripción de la base de datos (origen, año, n° observaciones)
+2. Selección de 3-4 variables de interés
+3. Análisis descriptivo que incluya:
+   - Tablas de frecuencia para variables categóricas
+   - Medidas de tendencia central para variables numéricas
+   - Al menos 2 visualizaciones (gráficos)
+4. Interpretación de los resultados (2-3 párrafos)
+
+**Formato de entrega:**
+- Archivo .Rmd o .qmd con código y texto
+- Renderizado a HTML o PDF
+- Fecha límite: Antes de la Sesión 2
 :::
+
+### 💡 Consejos para la tarea
+
+- Revisa el código de esta sesión como referencia
+- Usa comentarios (`#`) para explicar tu código
+- Sigue las buenas prácticas: nombres descriptivos de objetos, código indentado
+- Si tienes dudas, consulta la documentación: `?nombre_funcion`
+- Practica el flujo: importar → explorar → limpiar → analizar → visualizar
+
+---
+
+## 13. Código completo de la sesión
+
+Si quieres replicar todo el análisis de esta sesión, aquí está el código completo:
+
+```{r}
+#| label: codigo-completo
+#| eval: false
+#| code-fold: true
+#| code-summary: "Ver código completo de la sesión"
+
+# ============================================
+# SESIÓN 1: CÓDIGO COMPLETO
+# Taller de Métodos y Técnicas de Investigación I
+# ============================================
+
+# 1. PREPARACIÓN ----
+library(tidyverse)
+library(psych)
+library(sjmisc)
+library(haven)
+options(scipen = 999)
+
+# 2. CARGAR ENE ----
+datos <- read.csv("data-sesiones/ene-2025-07-jja.csv",
+                  sep = ";",
+                  encoding = "Latin-1",
+                  stringsAsFactors = FALSE)
+
+# Explorar
+glimpse(datos)
+frq(datos$activ)
+
+# Calcular tasa de ocupación (muestral)
+toc_muestra <- datos |>
+  mutate(
+    oc = activ == 1,
+    may15 = edad >= 15
+  ) |>
+  filter(may15, !is.na(activ)) |>
+  summarise(toc = mean(oc)) |>
+  pull(toc)
+
+cat("Tasa de ocupación muestral:", round(toc_muestra * 100, 2), "%\n")
+
+# 3. CARGAR ESI ----
+esi2024 <- haven::read_dta("https://www.ine.gob.cl/docs/default-source/encuesta-suplementaria-de-ingresos/bbdd/stata_esi/2024/esi_2024.dta?sfvrsn=627c0f59_4&download=true")
+
+# Preparar datos
+esi_trabajo <- esi2024 |>
+  select(sexo, edad, nivel, ing_t_t, activ, region) |>
+  filter(activ == 1, !is.na(ing_t_t), ing_t_t > 0) |>
+  mutate(
+    sexo_etiq = case_when(
+      sexo == 1 ~ "Hombre",
+      sexo == 2 ~ "Mujer",
+      TRUE ~ "Otro"
+    ),
+    nivel_etiq = case_when(
+      nivel == 1 ~ "Sin educación",
+      nivel == 2 ~ "Básica incompleta",
+      nivel == 3 ~ "Básica completa",
+      nivel == 4 ~ "Media incompleta",
+      nivel == 5 ~ "Media completa",
+      nivel == 6 ~ "Técnica incompleta",
+      nivel == 7 ~ "Técnica completa",
+      nivel == 8 ~ "Universitaria incompleta",
+      nivel == 9 ~ "Universitaria completa",
+      nivel == 10 ~ "Postgrado",
+      TRUE ~ "Sin información"
+    )
+  )
+
+# 4. ESTADÍSTICA DESCRIPTIVA ----
+
+# Media y mediana de ingresos
+mean(esi_trabajo$ing_t_t)
+median(esi_trabajo$ing_t_t)
+
+# Por sexo
+esi_trabajo |>
+  group_by(sexo_etiq) |>
+  summarise(
+    n = n(),
+    Media = mean(ing_t_t),
+    Mediana = median(ing_t_t)
+  )
+
+# 5. VISUALIZACIONES ----
+
+# Histograma con media y mediana
+ggplot(esi_trabajo, aes(x = ing_t_t)) +
+  geom_histogram(bins = 50, fill = "steelblue", alpha = 0.7) +
+  geom_vline(aes(xintercept = mean(ing_t_t), color = "Media"),
+             linewidth = 1.2, linetype = "dashed") +
+  geom_vline(aes(xintercept = median(ing_t_t), color = "Mediana"),
+             linewidth = 1.2, linetype = "dashed") +
+  scale_x_continuous(limits = c(0, 3000000)) +
+  theme_minimal()
+
+# Boxplot por sexo
+ggplot(esi_trabajo, aes(x = sexo_etiq, y = ing_t_t, fill = sexo_etiq)) +
+  geom_boxplot(alpha = 0.7) +
+  scale_y_continuous(limits = c(0, 2500000)) +
+  theme_minimal()
+
+# 6. TABLAS DE FRECUENCIA ----
+
+# Tabla educación
+table(esi_trabajo$nivel_etiq)
+prop.table(table(esi_trabajo$nivel_etiq)) * 100
+
+# Tabla de contingencia
+table(esi_trabajo$sexo_etiq, esi_trabajo$nivel_etiq)
+
+# 7. EJERCICIOS CON DATOS SIMULADOS ----
+set.seed(123)
+encuesta <- data.frame(
+  id = 1:100,
+  edad = sample(18:65, 100, replace = TRUE),
+  sexo = sample(c("Mujer", "Hombre"), 100, replace = TRUE, prob = c(0.52, 0.48)),
+  educacion = sample(c("Básica", "Media", "Técnica", "Universitaria", "Postgrado"),
+                     100, replace = TRUE, prob = c(0.10, 0.30, 0.25, 0.30, 0.05)),
+  satisfaccion = sample(1:7, 100, replace = TRUE),
+  ingreso = round(rnorm(100, mean = 800000, sd = 300000), -3)
+)
+
+# Análisis básico
+summary(encuesta)
+table(encuesta$educacion)
+```
+
+---
 
 ::: {.callout-note}
-## Recordatorio
+## Nota final
 
-La entrega de ejercicios es el [fecha]. Formato: archivo `.qmd` + HTML renderizado.
+Esta sesión establece las bases para todo el curso. Es fundamental que te sientas cómodo/a con:
+- La lógica de programación en R
+- La manipulación básica de datos
+- El cálculo e interpretación de estadísticos descriptivos
+- La creación de visualizaciones
+
+Si algún concepto no quedó claro, **no dudes en consultar**. Los contenidos son acumulativos y necesitarás estas herramientas en todas las sesiones siguientes.
+
+¡Nos vemos en la Sesión 2! 🚀
 :::
+
+
+
+
+
+
+
+
+
+
+
