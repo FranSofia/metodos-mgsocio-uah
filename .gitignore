@@ -9,7 +9,11 @@
 .RData
 .Ruserdata
 *.Rproj
+
+# Archivos grandes de datos
 data/Casen 2022.sav
+lectures/data-sesiones/Casen 2022.sav
+*.sav
 
 # Archivos del sistema
 .DS_Store
