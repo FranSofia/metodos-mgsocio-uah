@@ -4,13 +4,12 @@ title: "Programa del Curso"
 
 ## Información General
 
-**Curso:** Taller de Métodos y Técnicas de Investigación I  
-**Programa:** Magíster en Sociología  
-**Profesor/a:** Carolina Aguilera  
-**Ayudante:** Fran Sofía Núñez Rebolledo
-**Créditos y carácter:** 5 créditos y de carácter obligatorio
-**Horas cronológicas de dedicación:** 
-  
+- **Curso:** Taller de Métodos y Técnicas de Investigación I  
+- **Programa:** Magíster en Sociología  
+- **Profesor/a:** Carolina Aguilera  
+- **Ayudante:** Fran Sofía Núñez Rebolledo
+- **Créditos y carácter:** 5 créditos y de carácter obligatorio
+- **Horas cronológicas de dedicación:** 
   - *Docencia directa*: 42 hrs. 
   - *Trabajo autónomo*: 135 hrs.
 
@@ -38,12 +37,13 @@ El curso se estructura en sesiones prácticas donde se combinan:
 - Ejercicios prácticos guiados
 - Trabajo autónomo con datos reales
 
-Se espera que las y los estudiantes traigan su computador con R y RStudio instalados a cada sesión.
+Se espera que las y los estudiantes tengan un computador con R y RStudio instalados a cada sesión. Los contenido por sesión son los de la *ayudantía*. Los de las cátedra los pueden encontrar en el programa del curso. 
 
-## Contenidos por Sesión
+## Contenidos por Sesión 
 
 ### Sesión 1: Introducción a R y Estadística Descriptiva (I)
-**Fecha:** [Fecha]
+
+**Fecha:** 21 de octubre, 2025.
 
 - Interfaz de RStudio y flujo de trabajo
 - Tipos de objetos en R (vectores, dataframes, listas)
@@ -51,8 +51,12 @@ Se espera que las y los estudiantes traigan su computador con R y RStudio instal
 - Medidas de tendencia central
 - Tablas de frecuencia y contingencia
 
-**Lecturas:**
-- [Referencias]
+#### Lecturas
+
+- [Fernández-Avilés, G. y Montero, J-M. (Eds.). (2024). *Fundamentos de ciencia de datos con R*. McGraw-Hill Interamericana de España](https://cdr-book.github.io/index.html) 
+- [Cano, E. L. En Fernández-Avilés, G. y Montero, J-M. (Eds.). (2024). *R para ciencia de datos*. McGraw-Hill Interamericana de España](https://cdr-book.github.io/ch-110003.html)
+- [Wickham, H. y Grolemund, G. (2023). *R Para Ciencia de Datos* (traducción). O'Reilly Media](https://es.r4ds.hadley.nz/01-intro.html)
+- [Wickham, H. (2019). *Advanced R*. Second Edition: CRC Press y Taylor & Francis Group](https://adv-r.hadley.nz/index.html)
 
 ---
 
@@ -65,8 +69,12 @@ Se espera que las y los estudiantes traigan su computador con R y RStudio instal
 - Prueba t para una muestra
 - Prueba t para muestras independientes
 
-**Lecturas:**
-- [Referencias]
+#### Lecturas
+
+- [Wackerly, Dennis D. and William, Mendenhall and Scheaffer, Richard L. S. (2010). *Estadística matemática con aplicaciones*. Cengage Learning Editores](https://www.cimat.mx/ciencia_para_jovenes/bachillerato/libros/[Wackerly,Mendenhall,Scheaffer]Estadistica_Matematica_con_Aplicaciones.pdf)
+- DeGroot, Morris and Schervish, Mark. (2014). *Probability and Statistics*. Pearson Education Limited
+- [Blitzstein, Joseph K. and Hwang, Jessica. (2019). *Introduction to Probability*. Second Edition: Taylor & Francis Group](https://uni.dcdev.ro/y2s2/ps/Introduction%20to%20Probability%20by%20Joseph%20K.%20Blitzstein,%20Jessica%20Hwang%20(z-lib.org).pdf)
+- [Canavos, George C. (1988). *Probabilidad y Estadística. Aplicaciones y métodos*. McGraw-Hill](https://gsosa61.wordpress.com/wp-content/uploads/2008/03/10-canavos-g-probabilidad-y-estadistica-aplicaciones-y-metodos.pdf)
 
 ---
 

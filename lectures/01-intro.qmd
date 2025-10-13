@@ -103,6 +103,7 @@ En R guardamos información en **objetos** usando `<-`:
 
 ```{r}
 #| label: crear-objetos
+#| collapse: true
 
 # Crear un objeto numérico
 edad <- 25
@@ -120,6 +121,7 @@ length(edades)  # Largo del vector
 ::: {.callout-note}
 ## Nota importante
 Los nombres de objetos:
+
 - Pueden contener letras, números, `.` y `_`
 - NO pueden empezar con números
 - R distingue entre mayúsculas y minúsculas (`edad ≠ Edad`), lo que se suele conocer como un lenguaje *key-sensitive*
@@ -129,8 +131,10 @@ Los nombres de objetos:
 
 Guardar objetos también nos permite hacer operaciones matemáticas más complejas, por ejemplo para el uso de una calculadora de algebra lineal. También se pueden hacer simulaciones, con una distribución deseada, para hacer más interesante nuestras operaciones. Veamos primero la creación de objetos y luego operaciones más complejas
 
-```{r algebra-lineal-objetos, collapse=TRUE}
-#| label: algebra-lineal-objetos
+```{r}
+#| label: vectores-objetos
+#| collapse: true
+
 
 # a) Creación de un vector de números naturales del 1 al 8
 vector1 <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 25, 44, 36, 20, 50, 88)
@@ -201,8 +205,9 @@ plot.ts(vector5, col="#7F000D", main="Proceso AR(1)")
 
 4. $\log(A+1)+B^3-10 \sqrt{B}$
 
-```{r algebra-lineal-operaciones, collapse=TRUE}
-#| label: algebra-lineal-objetos-operaciones
+```{r }
+#| label: vectores-objetos-operaciones
+#| collapse: true 
 
 # Definimos objetos para la creación de los objetos según instrucciones
 n=80
@@ -230,7 +235,7 @@ R4
 
 ¡¡¿¿¿Y matrices??!! Podemos hacerlo de distintas maneras: 
 
-```{r algebra-matricial, collapse=TRUE}
+```{r collapse=TRUE}
 #| label: algebra-matricial
 
 # 1️⃣ Declaración de Matrices en R (Forma Manual))
@@ -272,8 +277,8 @@ G
 
 Con ello, podemos hacer las siguiente operaciones: 
 
-```{r algebra-matricial-operaciones, collapse=TRUE}
-#| label: algebra-matricial-operaciones
+```{r collapse=TRUE}
+#| label: matrices-operaciones
 
 #3️⃣ Transpuesta de una Matriz
 A <- matrix(rnorm(36,3,0.2), nrow=9)
@@ -378,7 +383,7 @@ $$
 donde la variable dependiente es salario del individuo $i$, a la cual se le aplica un logaritmo natural; $\beta_0$ es el intercepto (salario de alguien sin educación ni experiencia (ni mujer)); $\text{educ}_i$ es la variable que registra los años de escolaridad del individuo $i$; $\text{exp}_i$ es la variable que contiene la experiencia laboral del individuo $i$; $\text{dummy-mujer}_i$ es una variable que identifica si $i$ es mujer o no; y $u_i$ es el término de error. Veamos cómo podríamos hacer esto en R con una simulación: 
 
 
-```{r MCO-matrices, collapse=TRUE}
+```{r collapse=TRUE}
 #| label: MCO-matricial
 
 # MCO "a mano" (solo betas) + comparación con lm()
@@ -742,10 +747,15 @@ Comparemos ambas medidas:
 tibble(
   Medida = c("Media", "Mediana", "Diferencia", "% Diferencia"),
   Valor = c(
-    scales::dollar(ingreso_promedio, big.mark = ".", decimal.mark = ",", prefix = "$"),
-    scales::dollar(ingreso_mediano, big.mark = ".", decimal.mark = ",", prefix = "$"),
-    scales::dollar(ingreso_promedio - ingreso_mediano, big.mark = ".", decimal.mark = ",", prefix = "$"),
-    paste0(round(((ingreso_promedio - ingreso_mediano)/ingreso_mediano)*100, 1), "%")
+    scales::dollar(ingreso_promedio, big.mark = ".", 
+                   decimal.mark = ",", prefix = "$"),
+    scales::dollar(ingreso_mediano, big.mark = ".", 
+                   decimal.mark = ",", prefix = "$"),
+    scales::dollar(ingreso_promedio - ingreso_mediano, 
+                   big.mark = ".", decimal.mark = ",", 
+                   prefix = "$"),
+    paste0(round(((ingreso_promedio - ingreso_mediano)/ingreso_mediano)*100, 
+                 1), "%")
   )
 ) |> 
   kable(caption = "Comparación entre media y mediana de ingresos")
@@ -870,7 +880,8 @@ esi2024 |>
   ggplot(aes(x = sexo_etiq, y = ing_t_t, fill = sexo_etiq)) +
   geom_boxplot(alpha = 0.7, outlier.alpha = 0.3) +
   scale_y_continuous(
-    labels = scales::dollar_format(big.mark = ".", decimal.mark = ",", prefix = "$"),
+    labels = scales::dollar_format(big.mark = ".", 
+                                   decimal.mark = ",", prefix = "$"),
     limits = c(0, 2500000)
   ) +
   scale_fill_manual(values = c("Hombre" = "#4292c6", "Mujer" = "#ef3b2c")) +
@@ -889,6 +900,7 @@ esi2024 |>
 ```
 
 **Lectura del boxplot:**
+
 - La línea horizontal dentro de la caja es la **mediana**
 - Los bordes de la caja representan el **25% y 75%** de los datos (rango intercuartílico)
 - Los "bigotes" se extienden hasta aproximadamente 1.5 veces el rango intercuartílico
@@ -1015,12 +1027,19 @@ esi2024 |>
     .groups = "drop"
   ) |> 
   mutate(
-    Ingreso_Promedio = scales::dollar(Ingreso_Promedio, big.mark = ".", decimal.mark = ",", prefix = "$"),
-    Ingreso_Mediano = scales::dollar(Ingreso_Mediano, big.mark = ".", decimal.mark = ",", prefix = "$")
+    Ingreso_Promedio = scales::dollar(Ingreso_Promedio,
+                                      big.mark = ".", 
+                                      decimal.mark = ",", 
+                                      prefix = "$"),
+    Ingreso_Mediano = scales::dollar(Ingreso_Mediano, 
+                                     big.mark = ".", 
+                                     decimal.mark = ",", 
+                                     prefix = "$")
   ) |> 
   kable(
     caption = "Ingresos del trabajo por nivel educacional",
-    col.names = c("Nivel Educacional", "N", "Ingreso Promedio", "Ingreso Mediano")
+    col.names = c("Nivel Educacional", "N", 
+                  "Ingreso Promedio", "Ingreso Mediano")
   )
 ```
 
@@ -1044,7 +1063,9 @@ esi2024 |>
   ggplot(aes(x = nivel_etiq, y = ingreso_mediano)) +
   geom_col(fill = "#69000C", alpha = 0.7) +
   geom_text(
-    aes(label = scales::dollar(ingreso_mediano, big.mark = ".", prefix = "$", accuracy = 1)),
+    aes(label = scales::dollar(ingreso_mediano, 
+                               big.mark = ".", 
+                               prefix = "$", accuracy = 1)),
     hjust = -0.1, size = 3
   ) +
   coord_flip() +

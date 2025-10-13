@@ -3,6 +3,12 @@ title: "Sesión 2: Estadística Descriptiva (II) y Prueba de Hipótesis (I)"
 subtitle: "Taller de Métodos y Técnicas de Investigación I"
 ---
 
+
+
+
+
+
+
 En esta sesión entraremos de lleno en estadística descriptiva, retomando desde contenidos de la sesión pasada, pero con un enfoque más riguroso. Sumado a esto, nos enfocaremos más en esto desde una perspectiva más estadística y usando R aplicadamente, sin deternos tanto en R mismo. Aunque también aprovecharé de mostrarle como crear funciones de usuario para hacer estadísticas descriptivas con una sola función. 
 
 
@@ -14,6 +20,12 @@ En esta sesión entraremos de lleno en estadística descriptiva, retomando desde
 - Introducción a test de hipótesis y estadística inferencial
 
 Pero antes de comenzar, carguemos los paquetes que utilizaremos, donde además les muestro mi forma favorita de cargar y traer paquetes en un solo paso (con `pacman`). 
+
+
+
+
+
+
 
 ```{r}
 #| label: cargar-paquetes
@@ -50,7 +62,6 @@ pacman::p_load(tidyverse, # colección de paquetes, dplyr entre ellos, pero tamb
                scales) # para ajustar gráficos
 ```
 
-
 ```{r}
 #| label: cargar-paquetes-real
 #| include: false
@@ -65,6 +76,12 @@ pacman::p_load(tidyverse, # colección de paquetes, dplyr entre ellos, pero tamb
 
 options(scipen = 999)
 ```
+
+
+
+
+
+
 
 
 
@@ -98,6 +115,12 @@ Una variable es una característica o atributo que puede tomar valores diferente
   
 En R, para crear una variable cualitativa, deben escribirse entre comillas sus categorías, como ya vimos la sesión pasada. Por ejemplo, 
 
+
+
+
+
+
+
 ```{r}
 #| label: eg-variables-categoricas
 #| collapse: true 
@@ -117,7 +140,19 @@ class(var_ordinal_likert) # Comprobar naturaleza de la variable
 
 ```
 
+
+
+
+
+
+
 Suele ser útil, en R, asignarles números a las variables cualitativas para un análisis estadísticos posteriores. Por ejemplo, podríamos tomar `var_ordinal_likert` y, *además* de que tenga sus categorías asociadas, también tengan un número. Por ejemplo, que `"Muy malo"` sea `1` y `"Muy bueno"` sea `5`. Esto podemos hacerlo de dos maneras que mostramos de inmediato. Por cierto, la segunda la hacemos con `haven` que es un paquete dentro de `tidyverse`, y que usualmente usaremos ese paquete para cargar bases de datos, pero que también sirve para recodificar:
+
+
+
+
+
+
 
 ```{r}
 #| label: eg-variables-categoricas2
@@ -154,6 +189,12 @@ var_ordinal_likert <- haven::labelled(
 var_ordinal_likert
 ```
 
+
+
+
+
+
+
 2. **Variables cuantitativas**: son variables medidas en una escala númerica, como la edad, temperatura, estatura, etc. Y, por lo tanto, que el número mismo indica ordinalidad y jerarquía entre los valores ($x<x+1$). También hay dos tipos de variables cuantitativas
 
   - *Variable cuantitativa discreta*: es aquella que *solo* puede tomar números específicos como valores, sin poder tomar un valor intermedio entre dos valores específicos. Es decir, que se expresan en números enteros. Matemáticamente, simplemente son variables en que sus valores $x \in \mathbb{N}$. Un ejemplo, puede ser el número de ventas (no se puede vender -100), la edad de las personas encuestadas (no se puede tener -2), etc. 
@@ -162,6 +203,12 @@ var_ordinal_likert
   
   En R, las variables cuantitativas tienen por categorías números, sin "...". Además, si se quiere dejar como variable cuantitativa discreta (`integer`), se le puede añadir una `L` después del número. Esto es porque en R cualquier literal numérico sin sufijo se interpreta por defecto como tipo `numeric` (variable cuantitativa). Al añadir la `L` se le indica a R que es un `integer` (número entero). No obstante, generalmente para el análisis estadístico no afectará mucho. 
   
+
+
+
+
+
+
 ```{r}
 #| label: eg-variables-cuantitativas
 #| collapse: true
@@ -178,6 +225,12 @@ class(var_continua_altura)  # numeric
 class(var_continua_peso)    # numeric
 
 ```
+
+
+
+
+
+
 
 
 ## Estadísticas descriptivas 
@@ -204,6 +257,12 @@ A su vez, las estadísticas descriptivas se pueden clasificar en tres grupos:
 Antes de seguir profundizando esto, utilizaremos bases de datos reales y conocidas para ir ejemplificando el contenido con datos observacionales. Partamos con la Encuesta de Caracterización Socioeconómica Nacional (CASEN) más actual, la CASEN 2022. Esta se puede obtener en el [siguiente link](https://observatorio.ministeriodesarrollosocial.gob.cl/encuesta-casen-2022), que cuenta con 202.231 casos (encuestados) y 918 variables. 
 
 
+
+
+
+
+
+
 ```{r}
 #| label: cargar-casen
 #| collapse: true
@@ -222,6 +281,12 @@ dim(casen2022)
 # casen2022<-haven::read_dta(".../CASEN 2022.dta")
 
 ```
+
+
+
+
+
+
 
 Continuemos. Antes de pasar a estos tres grupos de estadísticas descriptivas, conviene tener en claro el concepto de estadísticos de orden. Los **estadísticos de orden** es la ordenación de un conjunto de datos u obsrvaciones, dond $y_k$ es el $k-$ésimo menor valor del conjunto de observaciones. Por ejemplo, si tenemos estos cuatro datos: 
 $$
@@ -250,6 +315,12 @@ $$
 \bar{x} = \frac{0.7 + 1.2 + 0.9 + 0.6 + 1.4 + 1.8 + 2.5}{7} = 1.3.
 $$
 En R, la media se obtiene simplemente con el comando `mean()`. Veamos como obtener la media de alguna variable de interés en la CASEN 2022.  
+
+
+
+
+
+
 ```{r}
 #| label: eg-mean
 #| collapse: true
@@ -259,6 +330,12 @@ mean(casen2022$ytrabajocor) # Ingreso del trabajo corregido
 mean(casen2022$ytrabajocor,
      na.rm = TRUE) # ahora si :)
 ```
+
+
+
+
+
+
 Como se ve, el salario promedio de los encuestados de la CASEN 2022 es de 667.690CLP. El comando `na.rm = TRUE` es para sacar las observaciones `NA` de la variable, las cuales registran los casos 
   
 #### Mediana  
@@ -291,6 +368,12 @@ Por lo tanto, la mediana en este caso es el promedio simple entre los dos númer
 
 En R esto se obtiene con `median()`:
 
+
+
+
+
+
+
 ```{r }
 #| label: eg-median
 #| collapse: true
@@ -298,6 +381,12 @@ En R esto se obtiene con `median()`:
 median(casen2022$ytrabajocor,
      na.rm = TRUE) # Ingreso del trabajo corregido
 ``` 
+
+
+
+
+
+
   
 Como vemos, la mediana de los ingresos del trabajo (salario), es 480.000 CLP. Lo cual habla bastante de la dispersión de los ingresos, pues el promedio  es de 667.690 CLP. Siguiendo la lógica de los estadísticos de orden, lo que tenemos es que el $50\%$ de los encuestados gana 480.000 CLP *o menos*. Y, sin embargo, el promedio es de 667.690 CLP, i.e., de 187.690 CLP más. Esto se debe a que hay ingresos muy altos, que elevan el promedio. Y la media es una medida *sensible* a los valores extremos. En breve, profundizaremos sobre esto, pero tiene que ver con robustez de las medidas de localización, lo cual será clave más adelante para para realizas **estimaciones** con estas medidas. 
   
@@ -314,6 +403,12 @@ $$
 Para un conjunto de valores puede haber más de una moda.
 
 En R, no hay un "paquete base" para extraer la moda. Pero si se puede hacer una función, o bien, usar paquetes. Veamos
+
+
+
+
+
+
 
 ```{r}
 #| label: eg-mode
@@ -338,6 +433,12 @@ pacman::p_load(modeest)
 modeest::mfv(casen2022$ytrabajocor, na_rm = TRUE)
 
 ```
+
+
+
+
+
+
 Como se puede observar, la moda de los ingresos del trabajo es de 400.000 CLP. Es decir, que el valor que más se repite entre los salarios de los encuestados es de 400 lucas. 
 
 
@@ -449,6 +550,12 @@ En palabras: dadas observaciones $x_1, \dots, x_n$, la media podada de nivel $k$
 
 En R, esto se puede hacer de dos formas, con una función o con `mean()` y especificaciones: 
 
+
+
+
+
+
+
 ```{r}
 #| label: eg-media-podada
 #| collapse: true
@@ -479,6 +586,12 @@ mean(casen2022$ytrabajocor,
 
 ```
 
+
+
+
+
+
+
 ### Medias Windorizadas (opcional) 
 
 Esto es una medición opcional en el sentido de que no se usa mucho. Pero puede ser útil. Supongamos que los datos están dado por:
@@ -507,6 +620,12 @@ $$
 :::
 
 En palabras: dadas observaciones $x_1, \dots, x_n$, la media winsorizada de nivel $k$ será el promedio de los valores que se obtiene luego de sustituir $k$ observaciones de cada uno de sus extremos (las $k$ más grandes y las $k$ más pequeñas) por el valor inmediatamente anterior o posterior. En R, se puede hacer con funciones nuevamente, o con el paquete `DescTools`.
+
+
+
+
+
+
 
 ```{r}
 #| label: eg-media-winsorizada
@@ -553,6 +672,12 @@ x_wins <- Winsorize(x, val = umbrales)
 mean(x_wins)
 
 ```
+
+
+
+
+
+
 
 #### Síntesis 
   
@@ -619,6 +744,12 @@ $$
   
 En R es mucho más fácil que estos cálculos tediosos. Esto se hace con el comando de R Base `var()`. No obstante, hay que tener en cuenta que `var()` es por defecto la varianaza muestra. Asumiendo que tenemos datos poblaciales podemos hacer dos cosas^[Esto no lo haré para los datos muestrales de la CASEN 2022. Principalmente, porque para eso usaremos, más adelante, paquetes especializados, como `survey` y `srvyr`]. Veamos cómo: 
   
+
+
+
+
+
+
 ```{r}
 #| label: eg-varianza
 #| collapse: true
@@ -645,6 +776,12 @@ var_casen_muestral
 
 ```
 
+
+
+
+
+
+
 ### La desviación estándar
 
 Una vez se tiene la varianza, la desviación estándar es muy fácil de calcular, pues es simplemente la raíz cuadrada de la varianza. La *desviación estándar* también es una medida de dispersión de los elementos del conjunto de observaciones con respecto a su media. 
@@ -658,6 +795,12 @@ $$
 x_1 = 0.7; \, x_2 = 1.2; \, x_3 = 0.9; \, x_4 = 0.6; \, x_5 = 1.4; \, x_6 = 1.8; \, x_7 = 2.5,
 $$
 entonces, la desviación estándar de estos datos es: $\hat{\sigma} = 0.62$. A diferencia de lo que ocurre con la varianza, la desviación estándar está medida en las mismas unidades que el conjunto de observaciones bajo análisis. Como veremos más adelante, esto hace que su interpretación sea más fácil y explica por qué se usa más que la varianza como medida de dispersión. Por lo tanto, la ventaja principal es esa. La desviación estándar está medida en las mismas unidades que las observaciones que estamos trabajando, y no así la varianza. En R es muy simple de hacer, con `sd()`. Al igual que con `var()`, `sd()` calcula por defecto al desviación estándar muestral. 
+
+
+
+
+
+
 
 ```{r}
 #| label: eg-desviacion-estandar
@@ -686,6 +829,12 @@ sd_casen_muestral
 
 
 ```
+
+
+
+
+
+
 
 Considerando la desviación estándar es una medida de dispersión que describe la descripción de los datos en las mismas unidades que el conjunto de observaciones nos sirve para comparar ahora `var_casen_muestral` con `sd_casen_muestral`. En el primer caso, `var_casen_muestral = 665844368478`, significa simplemente que la varianza de los datos es de ese valor, esa es su varianza. En cambio, `sd_casen_muestral = 815992.9` implica que la variación de los datos es de 815.992 CLP, pues la variable `ytrabajocor` mide pesos chilenos. En el caso de la varianza, nos dice cuán dispersos están los datos respecto a la media. En el caso de la desviación estándar, es también una medida de dispersión de los elementos del conjunto de observaciones con respecto a su media, pero que está en las unidades de la variable en cuestión, es decir, que hay una dispersión de los datos de 815.992 CLP respecto de la media (667.690 CLP, como habíamos visto). Por cierto, los valores elevados de dispersión son típicos en los ingresos, pues dada la desigualdad en estos, suelen tener una alta dispersión los datos de ingresos. 
 
@@ -748,6 +897,12 @@ $$
 $$
 Por lo que valores aberrantes o *outliers* tienen efectos brutales en el rango. En R es muy fácil de hacer, se puede "manualmente" o con `range()` y `diff()`. Lo mostramos y luego pasamos a la primera medida de dispersión robusta: el rango intercuartil. 
 
+
+
+
+
+
+
 ```{r}
 #| label: eg-rango
 #| collapse: true
@@ -776,6 +931,12 @@ r_casen_2
 
 ```
 
+
+
+
+
+
+
 ### El rango intercuartil
 
 El **primer cuartil** de un conjunto de observaciones de una variable, que denotaremos por $q_1$, es el valor para el cual el 25\% de las observaciones son más pequeñas y el 75\% son más grandes. En otras palabras, el primer cuartil es la mediana del 50\% más pequeño de los datos.
@@ -803,6 +964,12 @@ $$
 RIC(e) \in [16,18]
 $$ 
 De modo que **el RIC es una medida de dispersión de los datos robusta a la presencia de _outliers_**. Para calcular cuartiles en R se usa `quantile()`. Lo importante es especificar adecuadamente el cuantil de interés (50%, 75%, etc.) A su vez, entre los paquete de R base, específicamente en `stats`, se tiene `IQR()` nos permite calcular rangos intercuartiles. 
+
+
+
+
+
+
 
 ```{r}
 #| label: eg-IQR
@@ -835,6 +1002,12 @@ q1_casen; q2_casen; q3_casen; ric_casen; ric_casen2
 ```
 
 
+
+
+
+
+
+
 ## 1.3. Medidas de posición
 
 ### Los percentiles 
@@ -852,6 +1025,12 @@ $$
 p_{10} = 48, \quad p_{25} = 52, \quad p_{50} = 60, \quad p_{75} = 68, \quad p_{100} = 76.
 $$
 En R no hay una distinción entre cuantiles y percentiles a nivel de comando. Ahora bien, para obtener los percentiles en la posición que nos interesan podemos hacer lo siguiente: 
+
+
+
+
+
+
 
 ```{r}
 #| label: eg-percentiles
@@ -884,6 +1063,12 @@ percentiles
 percentiles_casen
 
 ```
+
+
+
+
+
+
 
 ## 1.4. Transformaciones lineales de los datos descriptivos 
 
@@ -959,6 +1144,12 @@ Veamos cómo graficar estos tipos de gráficos en R usando `ggplot2` y datos rea
 
 ### Gráficos de barras
 
+
+
+
+
+
+
 ```{r eg-barplots, echo=TRUE, collapse=TRUE}
 #| label: eg-barplots
 #| collapse: true
@@ -979,7 +1170,19 @@ ggplot(casen2022, aes(x = factor(sexo, labels = c("Hombre", "Mujer")))) +
 
 ```
 
+
+
+
+
+
+
 Si queremos agregarle más colores^[Yo uso las paletas de colores de [aquí](https://r-charts.com/es/colores/)], cambiar el tamaño de las letras, ponerle caption, etc., solo hay que usar comandos de `ggplot2` que sirvan para ello y seguir su gramática "en capas" adecuadamente 
+
+
+
+
+
+
 
 ```{r}
 #| label: eg-barplots2
@@ -1006,8 +1209,20 @@ ggplot(casen2022, aes(x = factor(sexo, labels = c("Hombre", "Mujer")),
   )
 
 ``` 
+
+
+
+
+
+
   
 Más allá de "enchular" el gráfico, lo importante es que el gráfico es más fácil de comprender rápidamente que una tabla de frecuencias, como vimos con `frq()`. Y cuando se agrega más categorías, facilita aún más. Por ejemplo, veamos Clasificación Internacional Normalizada de Educación (CINE-F). Para ello usaremos `cinef13_area` de la CASEN 2022, pero excluiremos las categorías sin datos 
+
+
+
+
+
+
 
 ```{r}
 #| label: eg-barplots3
@@ -1056,6 +1271,12 @@ ggplot(df_area, aes(x = area, y = n, fill = area)) +
 
 
 ```   
+
+
+
+
+
+
   
 Esto es mucho más amable que una tabla en la que comparamos números, porque permite una comparación visual entre categorías. Entonces, la ganancia del gráfico de barra se da en la medida que haya más categorías a analizar. 
   
@@ -1067,6 +1288,12 @@ Este tipo de visualizaciones es recomendable para resumir gráficamente la infor
 En un histograma, la altura de cada barra representa cuántas observaciones en el conjunto de datos caen dentro de un cierto rango (intervalo) de la variable cuantitativa bajo análisis. Un elemento fundamental al momento de hacer un histograma es la definición del número de rangos (intervalos) de la variable cuantitativa que se considerarán para agrupar los datos. Si no se elige el número correcto (ancho adecuado) para dichos intervalos, se corre el riesgo de que el histograma no refleje las características esenciales del conjunto de datos, llevándonos a malinterpretar cómo se distribuyen las observaciones. 
   
 Veamos la distribución de los ingresos del trabajo en un histograma: 
+
+
+
+
+
+
 ```{r}
 #| label: eg-histogram
 #| collapse: true
@@ -1087,7 +1314,19 @@ ggplot(casen2022, aes(x = ytrabajocor)) +
   )
 ```
 
+
+
+
+
+
+
 Como se ve, la desigualdad de los ingresos nuevamente ataca. Al haber pocas personas con ingresos muy altos, y muchas personas con ingresos bajos, ni se alcanzan a ver las personas de ingresos altos. Ciertamente, esta forma de elefante dentro de una serpiente hacia un lado del gráfico es habitual verla en gráficos de distribución en los ingresos. Podemos para ver cómo varía esto, por ejemplo, usar percentiles, deciles, quintiles, etc., para filtar casos y observar la distribución empírica de los ingresos, e.g., para el 90% de los ingresos (excluyendo al 10% más alto):
+
+
+
+
+
+
 
 ```{r}
 #| label: eg-histogram2
@@ -1111,7 +1350,19 @@ casen2022 |>
     )
 ```
 
+
+
+
+
+
+
 ¿Y si queremos, por ejemplo, para el 80%? Solo basta modificar `dau < x` en el código, pues `dau` es la variable del Decil autónomo nacional dentro de la CASEN 2022. 
+
+
+
+
+
+
 
 ```{r}
 #| label: eg-histogram3
@@ -1136,7 +1387,19 @@ casen2022 |>
 ```
 
 
+
+
+
+
+
+
 Algo que también se puede hacer, similar a los histogramas, es observar esto con *kernels*, que son como histogramas pero con densidad y continuos (no en barras). Esto se hace con `geom_density()`. Además, esto nos facilita (para visualizar la distribución empírica) ver nuestra variable de interés agrupada según otra variable que nos interese. Por ejemplo, podríamso ver el ingreso del trabajo según sexo. 
+
+
+
+
+
+
 
 ```{r}
 #| label: eg-kernels
@@ -1165,7 +1428,19 @@ casen2022 |>
 ```
 
 
+
+
+
+
+
+
 Otra cosa que puede resultarnos util es ver donde está mediana en el gráfico. Aprovechamos de mostrar como se verían los gráficos ya no superpuestos, sino al lado: 
+
+
+
+
+
+
 
 ```{r}
 #| label: eg-kernels2
@@ -1206,6 +1481,12 @@ ggplot(df, aes(x = ytrabajocor, fill = sexo, color = sexo)) +
 
 ```
 
+
+
+
+
+
+
 ### Gráfico de cajas (boxplots)
 
 Cuando son gráficos univariados este tipo de visualizaciones tipo *boxplot* es recomendable para resumir gráficamente la información de una **variable cuantitativa** (continua o discreta). Un grafico de caja o *boxplot* muestra las **características de la distribución** de las observaciones de una variable cuantitativa: “mínimo”, primer cuartil ($q_1$), mediana, tercer cuartil ($q_3$), “máximo”. También etiqueta posibles valores atípicos como puntos separados en el gráfico. En un gráfico de caja, pues, se tiene que:
@@ -1220,6 +1501,12 @@ $$
 $$
 
 Veamos como hacer esto con `ggplot2`. Usaremos otra variable cuantitativa, y ya no ingresos del trabajo porque, dada su dispersión se verá así: 
+
+
+
+
+
+
 
 ```{r}
 #| label: eg-boxplot
@@ -1242,7 +1529,19 @@ ggplot(casen2022, aes(y = ytrabajocor)) +
 
 ```
 
+
+
+
+
+
+
 Probemos con otra variable que sea interesante, por ejemplo con la varriable `tot_per_h` que registra el "Total de personas en el hogar" de los hogares encuestados por la CASEN
+
+
+
+
+
+
 
 ```{r}
 #| label: eg-boxplot2
@@ -1267,6 +1566,12 @@ casen2022 |>
     )
 ```
 
+
+
+
+
+
+
 La intepretación del boxplot, entonces, debe incluir lo siguiente: 
 
 - La mediana está en 3 miembros, lo que indica que la mitad de los hogares tiene 3 o menos personas y la otra mitad 3 o más.
@@ -1289,6 +1594,12 @@ En conjunto, el gráfico revela que la mayoría de los hogares chilenos encuesta
 Esta visualización es recomendable para resumir gráficamente la información sobre la relación entre **dos variables categóricas**. Específicamente, este gráfico destaca cómo una variable categórica puede diferir entre las categorías de otra variable categórica. Por ejemplo, podríamos mostrar cómo la matrícula en la educación superior difiere por género.
 
 Para ello, tomaré la variable `e6a_asiste` que responde a la pregunta ¿Cuál es el nivel educacional al que asiste?, dado que supone que asiste, al momento de ser encuestado/a, a un establecimiento educacional o no. En este caso, solo tomaremos la categoría `13` que es "13. Profesional (Carreras 4 o más años)". Aunque no es una variable sobre la matricula como tal, es un buen *proxy*^[Para ello, hay muchas bases de datos que si registran esta información. Además, el MINEDUC una buena plataforma de datos abiertos, pero para centrarnos, en este capítulo, en la CASEN] 
+
+
+
+
+
+
 
 ```{r}
 #| label: eg-barplot-bivariado
@@ -1321,6 +1632,12 @@ ggplot(df_asiste_prof, aes(x = sexo, y = n, fill = sexo)) +
 
 
 
+
+
+
+
+
+
 ### Boxplots bivariados 
 
 Este tipo de visualización es recomendable para resumir gráficamente la información de la relación entre una *variable categórica* y una *variable cuantitativa*. Concretamente, se visualizan los gráficos de cajas para una variable cuantitativa, separados para cada valor posible de una variable categórica. Por lo tanto, permite ver cómo la variable cuantitativa se distribuye dentro de cada valor de una variable categórica.
@@ -1328,6 +1645,12 @@ Este tipo de visualización es recomendable para resumir gráficamente la inform
 Para ello, podríamos ver el ingreso del trabajo (variable continua) por sexo (categórica). Pero, como ya vimos, los boxplots con variables con *tanta dispersión*, se ven feos y *comunican* mal. Ahora bien, algo que es recomendable para comprimir la escala y reducir la asimetría entre los valores para variables con mucha dispersión es aplicarle un logaritmo a la variable de interés. De hecho, esto es algo que se hace bastante con el ingreso. No me interesa profundizar en esto ahora, porque es algo que trateremos cuando lleguemos a regresiones. No obstante, si es de interés, en este punto, el capítulo 2 de @masteringmetrics ofrece una explicación didáctica y profunda. Además, en el apéndice de dicho capítulo, específicamente en el apartado "*Building Models with Logs*" o "Modelos logarítmicos" --en la traducción del libro--, se profundiza específicamente en la utilidad de aplicar logaritmos a variables como el ingreso. 
 
 Veamos cómo queda el gráfico, que además `ggplot2` tiene funciones para realizar transformaciones logarítmicas de las varaibles sin hacer recodificación previa. Primero lo hago con codificación previa ("manual") y luego en ggplot mismo. 
+
+
+
+
+
+
 
 ```{r}
 #| label: eg-boxplot-bivariado
@@ -1379,6 +1702,12 @@ casen2022 |>
 ```
 
 
+
+
+
+
+
+
 Como se puede observar, la comparación de ambos *boxplots* deja claro que, al final, la forma de la distribución (posición de cuartiles, mediana y “bigotes”) es exactamente la misma: la transformación logarítmica sólo reescala los datos de manera monotónica, sin alterar su orden ni la detección de *outliers*. De modo general, sobre los gráficos podemos decir: 
 
 - La mediana del ingreso de los hombres está algo por encima de la de las mujeres, lo cual se ve en ambos casos.
@@ -1419,6 +1748,12 @@ Podemos hacer ambas, pero la verdad es que dependerá mucho de la variable cuál
 
 Ahora bien, veamos cómo quedaría con ingreso esto. Primero tomaremos los déciles, registrados por la casen en `dau` (Decil autónomo nacional) que se calculan tomando todos los ingresos del hogar (o sea, ya no ingresos del trabajo de los encuestados encuestado) y se dividen, siguiendo la lógica explicada en las *medidas de posición*, en 10 grupos. En este caso, el grupo 1 es el grupo de ingresos más bajos (el 10% más pobre) y el 10 es el de ingresos más altos (el 10% más rico). Luego, para ver si es un problema de que sean pocos grupos, lo haremos para percentiles (100 grupos). Para la otra variable, en ambos casos, usaremos `esc` que mide los años de escolaridad (solo personas de 15 años en adelante) como variable cuantitativa discreta.
 
+
+
+
+
+
+
 ```{r}
 #| label: scatter-plot
 #| collapse: true
@@ -1452,9 +1787,21 @@ casen2022 |>
 
 ```
 
+
+
+
+
+
+
 Ahora bien, en ninguno de los casos se ve bien. Esto es por dos motivos: 1) ambas variables son discretas con muy pocos valores únicos (`esc` y `dau`). Pero, incluso si aumentamos a 100 grupos, y ya no usamos `dau`, tampoco funciona. En realidad, esto nuevamente se debe a la naturaleza de la variable ingreso, que es continua y tiene un rango muy alto. 2) Esto último produce lo que se conoce como *overplotting*, que en nuestro caso, con más de 200.000 observaciones, incluso un pequeño desplazamiento de jitter deja millones de puntos amontonados, de modo que no se distingue ninguna tendencia ni densidad real.
 
 Entonces, para lo que queremos graficar, en este caso, ingresos y su asociación son el nivel de escolaridad, no nos sirve tomar dos variables discretas, aunque sean cuantitativas ambas. Probemos, entonces, si el viejo logaritmo nos ayuda en este caso. 
+
+
+
+
+
+
 
 
 ```{r}
@@ -1473,9 +1820,21 @@ casen2022 |>
     theme_minimal(base_family = "serif", base_size = 14)
 ```
 
+
+
+
+
+
+
 Como se ve, ahora si el gráfico nos comunica algo más comprensible. Además, se puede ver cómo va reduciendo la dispersión en cuanto avanzan los años de escolaridad. Es importante resaltar la cantidad de *outliers* que hay que notienen ingresos autónomos, aún avancen los años de escolaridad. Esto también puede tener que ver con que estamos usando ingresos autónomos del hogar y no de los individuos. Pero, a saber. No voy a profundizar en esto ahora. 
 
 Lo que si me parece más interesante ahora es adelantar algo bacán que se puede hacer con `ggplot2` y los *scatterplots*. Esta tendencia que vemos en los datos, también podemos inmediatamente modelarla. El paquete permite, al graficar la dispersión de los datos, trazar una linea de tendencia con bandas de error estándar mediante un modelo lineal. Como ya advertimos antes, ahora es aún más útil aplicar `log()`, porque dado que los ingresos no se comportan con una distribución normal, transformamos el eje x (`yautcorh`) de una escala linear a una escala logarítmica. Esto nos permitirá un mejor ajuste de la línea de regresión estimada. Luego, cuando lleguemos a regresiones, veremos la utilidad de esto, como ya he ido adelantando. También podemos ajustar los valores de ingres a una notación mas adecuada, en este caso, pesos chilenos.
+
+
+
+
+
+
 
 
 ```{r}
@@ -1508,6 +1867,12 @@ ggplot(
   )
 ```
 
+
+
+
+
+
+
 Entonces, y ahora sí, el gráfico muestra, en escala logarítmica, cómo varía el ingreso autónomo corregido del hogar según los años de escolaridad (para personas de 15 años en adelante). De este *scatter plot* se puede interpretar que hay
 
 1. **Tendencia creciente**. La línea de tendencia sube de izquierda a derecha, lo que indica que a más años de escolaridad corresponde, en promedio, un ingreso mayor; 
@@ -1523,4 +1888,4 @@ En suma, el gráfico confirma una asociación positiva entre educación e ingres
 
 Finalmente, respecto a los gráficos de tipo *scatter plot*, hay que tener ojo qué tipo de variables vamos a visualizar. No basta con asociar dos variables cuantitativas, sino que también hay que fijarse en si son discretas, continuas, en la cantidad de observaciones, etc.; en definitiva, en la naturaleza de las variables asociadas. A menudo, tendremos que realizar transformaciones a nuestras variables para que el gráfico **comunique mejor** el carácter de la asociación de las variables de interés.
 
-## 3. Estadística inferencial
+
