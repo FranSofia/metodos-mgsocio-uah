@@ -1,6 +1,8 @@
 ---
 title: "Sesión 2: Estadística Descriptiva (II) y Prueba de Hipótesis (I)"
 subtitle: "Taller de Métodos y Técnicas de Investigación I"
+execute:
+  freeze: true
 ---
 
 En esta sesión entraremos de lleno en estadística descriptiva, retomando desde contenidos de la sesión pasada, pero con un enfoque más riguroso. Sumado a esto, nos enfocaremos más en esto desde una perspectiva más estadística y usando R aplicadamente, sin deternos tanto en R mismo. Aunque también aprovecharé de mostrarle como crear funciones de usuario para hacer estadísticas descriptivas con una sola función. 
