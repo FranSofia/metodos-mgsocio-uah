@@ -998,7 +998,7 @@ ggplot(casen2022, aes(x = factor(sexo, labels = c("Hombre", "Mujer")),
     title = "Distribución de Sexo en CASEN 2022", 
     caption = "Elaboración propia a partir de Encuesta CASEN 2022"
   ) +
-  theme_minimal(base_family = "serif", base_size = 12) +
+  theme_minimal(base_family = "Fira Sans", base_size = 12) +
   theme(
     plot.title     = element_text(size = 18, face = "bold", hjust = 0.5),
     axis.title     = element_text(size = 14),
@@ -1049,7 +1049,7 @@ ggplot(df_area, aes(x = area, y = n, fill = area)) +
     y = "Frecuencia",
     title = "Distribución de Áreas CINE-F (códigos 1–10)"
   ) +
-  theme_minimal(base_family = "serif", base_size = 14) +
+  theme_minimal(base_family = "Fira Sans", base_size = 12) +
   theme(
     axis.text.x    = element_text(angle = 45, hjust = 1),
     plot.title     = element_text(face = "bold", size = 16, hjust = 0.5),
@@ -1081,7 +1081,7 @@ ggplot(casen2022, aes(x = ytrabajocor)) +
     y = "Frecuencia",
     title = "Histograma de ytrabajocor"
   ) +
-  theme_minimal(base_family = "serif", base_size = 14) +
+  theme_minimal(base_family = "Fira Sans", base_size = 14) +
   theme(
     plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
     axis.title = element_text(size = 14),
@@ -1105,7 +1105,7 @@ casen2022 |>
       y = "Frecuencia",
       title = "Histograma de ytrabajocor (deciles 1–9)"
     ) +
-    theme_minimal(base_family = "serif", base_size = 14) +
+    theme_minimal(base_family = "Fira Sans", base_size = 12) +
     theme(
       plot.title     = element_text(face = "bold", size = 16, hjust = 0.5),
       axis.title     = element_text(size = 14),
@@ -1129,7 +1129,7 @@ casen2022 |>
       y = "Frecuencia",
       title = "Histograma de ytrabajocor (deciles 1–8)"
     ) +
-    theme_minimal(base_family = "serif", base_size = 14) +
+    theme_minimal(base_family = "Fira Sans", base_size = 12) +
     theme(
       plot.title     = element_text(face = "bold", size = 16, hjust = 0.5),
       axis.title     = element_text(size = 14),
@@ -1236,7 +1236,7 @@ ggplot(casen2022, aes(y = ytrabajocor)) +
     y     = "Ingreso de trabajo corregido",
     title = "Boxplot de ingreso de trabajo corregido"
   ) +
-  theme_minimal(base_family = "serif", base_size = 14) +
+  theme_minimal(base_family = "Fira Sans", base_size = 14) +
   theme(
     plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
     axis.text  = element_text(size = 12)
@@ -1262,7 +1262,7 @@ casen2022 |>
       y     = "Total de personas en el hogar",
       title = "Boxplot de total de personas en el hogar"
     ) +
-    theme_minimal(base_family = "serif", base_size = 14) +
+    theme_minimal(base_family = "Fira Sans", base_size = 12) +
     theme(
       plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
       axis.text  = element_text(size = 12)
@@ -1312,7 +1312,7 @@ ggplot(df_asiste_prof, aes(x = sexo, y = n, fill = sexo)) +
     y     = "Número de estudiantes en carreras profesionales (4+ años)",
     title = "Asistencia a la universidad (Profesional) por sexo"
   ) +
-  theme_minimal(base_family = "serif", base_size = 14) +
+  theme_minimal(base_family = "Fira Sans", base_size = 12) +
   theme(
     plot.title     = element_text(face = "bold", size = 16, hjust = 0.5),
     axis.text      = element_text(size = 12),
