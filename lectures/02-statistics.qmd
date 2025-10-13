@@ -1525,4 +1525,679 @@ En suma, el gráfico confirma una asociación positiva entre educación e ingres
 
 Finalmente, respecto a los gráficos de tipo *scatter plot*, hay que tener ojo qué tipo de variables vamos a visualizar. No basta con asociar dos variables cuantitativas, sino que también hay que fijarse en si son discretas, continuas, en la cantidad de observaciones, etc.; en definitiva, en la naturaleza de las variables asociadas. A menudo, tendremos que realizar transformaciones a nuestras variables para que el gráfico **comunique mejor** el carácter de la asociación de las variables de interés.
 
-## 3. Estadística inferencial
+## 3. Estadística inferencial: una introducción
+
+Retomemos algunas cosas y veamos algunas cosas con las que deberíamos haber comenzado todo, pero que por cuestiones del curso no alcanzan. Partamos por qué es una *variable aleatoria*.
+
+### Variables aleatorias: funciones y distribución de probabilidad
+
+La probabilidad es una medida que nos entrega un grado de *certidumbre* de que ocurra un evento *incierto*. La teoría de la probabilidad es la base de toda estadístíca y, por tanto, de la econometría. Y la base de la probabilidad es la teoría de conjuntos y la matemática. Teníamos que la probabilidad intenta *asignar* a cada evento de un experimento un valor $(\in \mathbb{R})$ para capturar la frecuencia del evento si el experiemento fuese repetido muchas veces. De ello, deducimos los axiomas de la probabilidad y otras propiedades que eran consecuencias de ellos. Finalmente, examinamos los tipos de probabilidades (conjunta, margianl y condicional), poniendo un énfasis especial en la probabilidad condicional y la independencia estadística entre eventos. Con todo eso, veamos qué es una variable aleatoria. 
+
+Una variable aleatoria es "una función de valor real para la cual el dominio es un espacio 
+muestral" ([Wackerly, et al., 2010, p. 76](https://www.cimat.mx/ciencia_para_jovenes/bachillerato/libros/[Wackerly,Mendenhall,Scheaffer]Estadistica_Matematica_con_Aplicaciones.pdf)). Una variable aleatoria (v.a.), así, toma valores que son determinados por un proceso aleatorio, que muchas veces puede ser un proceso natural estocástico.^[Un proceso estocástico es aquel cuyo resultado no puede preverse con certeza de antemano. En cambio, un proceso determinista produce siempre el mismo resultado cuando se parte de una misma condición inicial. Por ejemplo, lanzar una moneda es un proceso estocástico, mientras que sumar dos números concretos es un proceso determinista. Luego lo usaremos como homólogo de proceso aleatorio]. De tal modo, una v.a. no es más que una representación numérica de los resultados potenciales de un experimento. Formalmente,
+
+:::{.callout-note}
+### Definición
+Sea $\mbox{S}$ el espacio muestral de un experimento. Una función de valor real definida en $\mbox{S}$ se denomina *variable aleatoria* (DeGroot y Schervish, 2014, p. 93)
+:::
+
+De tal modo, dado que una variable aleatoria es un resumen numérico de algún resultado de interés. Y que, formalmente, es una función que asocia un número real a cada elemento de $\mbox{S}$, podemos representarla matemáticamente como
+$$
+\begin{aligned}
+    X&:\mbox{S} \longrightarrow \mathbb{R}\\
+    &u \longrightarrow X(u).
+\end{aligned}
+$$
+Por ejemplo, imaginemos que lanzamos una moneda 2 veces, tal que su  espacio muestral es $S = \{cc, cs, sc, ss\}$. Definimos, pues, la variable aleatoria $X$ que es el número de caras en los dos lanzamientos.
+$$
+\begin{aligned}
+    X(cc) &= 2 \\
+    X(cs) &= 1 \\
+    X(sc) &= 1 \\
+    X(ss) &= 0
+\end{aligned}
+$$
+En el fondo, para cada caso que saliera cara, $c$, la función arrojaba cuántos $c$ hay en el espacio muestral en función de cómo la evaluáramos. Por ende, $X$ puede tomar los valores 0, 1 y 2, solamente. En efecto, la principal virtud de las variables aleatorias es que nos permiten describir eventos de forma sencilla. Tomando el caso anterior,
+
+- $\{X = 0\} \iff$ Todos los elementos en $S$ que no tienen caras  = $\{ss\}$. Por lo tanto,
+$$
+    \Pr(X = 0) = \Pr(\{ss\}) = \frac{1}{4}.
+$$
+
+- $\{X = 1\} \iff$ Todos los elementos en $S$ que tienen una cara = $\{cs, sc\}$. Por lo tanto,
+$$
+\Pr(X = 1) = \Pr(\{cs, sc\}) = \frac{1}{4} + \frac{1}{4} = \frac{1}{2}.
+$$
+
+- $\{X = 2\} \iff$ Todos los elementos en $S$ que tienen dos caras = $\{cc\}$. Por lo tanto,
+$$
+\Pr(X = 2) = \Pr(\{cc\}) = \frac{1}{4}.
+$$
+
+Ahora bien, a partir de un espacio muestral podemos crear diversas variables aleatorias. En el ejemplo anterior creamos el número de caras, pero también podemos denotar por $Y$ la v.a. que cuenta el número de sellos.
+$$
+\begin{aligned}
+Y(cc) &= 0 \\
+Y(cs) &= 1 \\
+Y(sc) &= 1 \\
+Y(ss) &= 2
+\end{aligned}
+$$
+A partir de un espacio muestral podemos crear diversas variables aleatorias. En el ejemplo anterior creamos el número de caras, pero también podemos denotar por $Y$ la v.a. que cuenta el número de sellos. Finalmente, notemos que por definición
+$$
+X + Y = 2.
+$$
+#### Tipos de variables aleatorias y distribuciones de probabilidad asociada
+
+
+Quizás como ya podrían intuir, hay dos grandes grupos de variables aleatorias: las discretas y las continuas. En este curso, no profundizaremos en esto, pero si mencionaremos brevemente algunas cuestiones importantes antes de llegar al estadística inferencial. 
+
+#### Variables aleatorias discretas
+
+Una variable aleatoria discreta es aquella que toma un número finito o numerable de valores. Por ejemplo, el el resultado de lanzar un dado. Formalmente, diremos que 
+
+:::{.callout-note}
+### Definición
+Una v.a. $X$ es \textit{discreta} si existe un conjunto finito $A = \{a_1, a_2, ..., a_n\}$ tal que 
+$$
+\Pr(X \text{ toma valores en } A) = 1.
+$$
+:::
+
+
+Tenemos, entonces, que la variable aleatoria captura la información contenida en todo el espacio muestral del experimento en una cantidad numérica. Ahora bien, el valor del experimento, por definición, no se conoce, dada su naturaleza aleatoria. Lo que conocemos, en cambio, es $\mathbb{S}$. Es decir, que conocemos todos los resultados potenciales del experimento aleatorio. Del lanzamiento de un dado, no sabemos qué va salir exactamente, pero sí sabemos que solo puede salir entre 1 y 6. No puede salir 7, ni Spiderman, ni Conchalí. Porque esos son valores que no pertenecen a $\mathbb{S}$. Entonces, tenemos que volver ahora al concepto de función de probabilidad, incorporando este nuevo conocimiento. 
+
+:::{.callout-note}
+### Definición
+Consideremos una v.a. discreta $X$ definida sobre un espacio muestral $\mathbb{S}$. Entonces la **función de probabilidad** (f.p.) de $X$ se define como: 
+$$
+f(x) = \Pr(X = x).
+$$ 
+:::
+
+La expresión $f(x) = \Pr(X = x)$ nos dice que la fdp de $X$ evaluada en un valor particular de $x$ se corresponde con la probabilidad de que la v.a. $X$ tome algún valor de $x$. Es decir, que $X$ corresponde a la v.a., mientras que $x$ corresponde algún valor particular de $X$. Además, se tiene que $f(x)>0$, i.e., es estrictamente positivo para $x$ en el soporte de $X$ y $f(x)=0$, i.e., vale 0 cualquier otro caso, o sea,  en caso contrario. 
+
+Por ejemplo, si se lanza una moneda honesta 2 veces. Entonces
+
+- Variable aleatoria $X$: número de caras en los 2 lanzamientos.
+
+- Variable aleatoria $Y$: número de sellos en los 2 lanzamientos.
+
+¿Cuál es la f.p. de $X$? Ya deberíamos saber que
+$$
+f(0) = \frac{1}{4}, \quad f(1) = \frac{1}{2}, \quad f(2) = \frac{1}{4}, \quad f(x) = 0 \quad \text{para cualquier otro valor de } x.
+$$
+pero ahora además le agregamos que $f(x)=0$ es cualquier otro valor. ¿Y cuál es la f.p. de $Y$? Por simetría, ya veíamos que era exactamente la misma probabilidad que la f.p. de $X$. Ahora bien, a pesar de que $X$ e $Y$ tienen la misma **función de probabilidad**, *no* son la misma v.a. Por ejemplo, cuando salen 2 caras, tenemos que $X(cc)=2$ e $Y(cc)=0$. Veamos ejemplos de variables aleatorias discretas y sus distribuciones de probabilidad. 
+
+
+##### Distribución uniforme discreta
+
+Una distribución uniforme discreta (UD) corresponde a una función de probabilidad donde todos los eventos tienen la misma probabilidad, como el lanzamiento de un dado. Si se tiene que $m$ y $n$ son números enteros tales que $m \leq n$, que $X$ es una v.a. discreta, $X$ tendrá una distribución uniforme discreta entre los eventos $m$ y $n$, o $X\sim UD(m,n)$ si se cumple que
+$$
+f(x) =
+\begin{cases}
+\frac{1}{n-m+1} & x=m, m+1, \ldots, n\\
+0 & \text{en caso contrario}
+\end{cases}
+$$
+Notemos, además, que la distribución de probabilidad de una v.a. discreta suma 1.
+
+##### Distribución de Bernoulli 
+
+Una variable aleatoria $X$ sigue una **distribución de Bernoulli** si solo toma dos valores, específicamente $0$ o $1$. Es decir que $X$ sigue una distribución de Bernoulli de parámetro $p\in [0,1]$ si $X$ toma valores $0$ o $1$ y si $\Pr(X=1)=p$. Esto lo denotamos como $X\sim \mbox{Bern}(p)$
+
+Entonces, si $X \sim \mbox{Bern}(p)$ la función de probabilidad, denotada por $f(x)$ es
+$$
+f(x) =
+\begin{cases}
+    p & \text{si } x = 1, \\
+    1 - p & \text{si } x = 0, \\
+    0 & \text{si } x \notin \{0, 1\}
+\end{cases}
+$$
+Es habitual para experimentos con solo dos resultados posibles que se interpreten los dos resultados posibles como éxito y fracaso, i.e., $X=1$ es considerado como éxito y $X=0$ como fracaso. Por ejemplo, si al lanzar una moneda, definimos $X$ según: si sale cara, $X = 1$; y si sale sello, $X = 0$. Entonces, 
+$$
+p = \frac{1}{2}, \quad X \sim \text{Ber}(0,5). 
+$$
+
+##### Distribución Binomial: Ensayos de Bernoulli y coeficiente binomial
+
+Antes de ver distribución binomial, conviene ver un concepto previo, los famosos "**Ensayos de Bernoulli**". Una *secuencia de ensayos de Bernoulli* es una secuencia $X_1, X_2, \dots, X_n$ de variables aleatorias independientes con distribución común $\mbox{Bern}(p)$, donde $0 \leq p \leq 1$. Es decir, una secuencia de $n$ ensayos de Bernoulli es una secuencia de ensayos que cumple lo siguiente:
+
+1. Solo dos resultados posibles en cada ensayo: 1 (éxito) y 0 (fracaso).
+
+2. Ensayos *independientes*.
+
+3. La misma probabilidad de éxito en cada ensayo.
+
+De tal modo, formalizando, diremos que una **secuencia de ensayos de Bernoulli** es una seguidilla de variables aleatorias independientes, tal que
+$$
+X_1 \sim \mbox{Bern}(p), X_2 \sim \mbox{Bern}(p), \ldots , X_n \sim \mbox{Bern}(p)
+$$
+donde $0\leq p \leq 1$. En otras palabras, una secuencia de $n$ ensayos de Bernoulli cumple co que se realizan $n$ experimentos donde hay dos resultados posibles (éxito o fracaso, 1 o 0), que son independientes y donde la probabilidad de éxito es la misma para cada ensayo. Ahora bien, cuando hablemos de la *distribución* de una secuencia de $n$ ensayos de Bernoullli con parámetro $p$ o probabilidad de éxito $p$, estamos hablando de una **distribución binomial**. 
+
+Una variable aleatoria $X$ sigue una **distribución binomial** con parámetros $n$ y $p$ si $X$ tiene una distribución discreta con función de probabilidad:
+$$
+f(x) = 
+\begin{cases}
+\binom{n}{x} p^x (1-p)^{n-x} & \text{para } x = 0, 1, 2, \dots, n, \\
+0 & \text{si no.}
+\end{cases}
+$$
+El parámetro $n$ es un entero mayor o igual que uno, mientras que $p$ pertenece al intervalo $\{0,1\}$. Escribimos $X \sim \text{Bin}(n, p)$ y decimos "**$X$ sigue una Binomial con parámetros $n$ y $p$**".
+
+Algo que se suele ver en conteo y combinatoria, y que no incluyo en este apunte, es el **coeficiente binomial**. Este se escribe como
+$$
+\binom{n}{x} = \frac{n!}{x!(n-x)!}
+$$
+y en combinatoria representa el número de formas de escoger (sin importar el orden) un subconjunto de $x$ objetos extraídos de un conjunto de $n$ objetos distintos. Por ejemplo, si se tiene $n=5$ frutas distintas y queremos saber de cuántas maneras puede elegir $x=2$ de ellas, se hace lo siguiente: 
+$$
+\binom{n}{x} = \frac{n!}{x!(n-x)!} = \frac{5!}{2!3!} = \frac{120}{2 \cdot 6} = 10
+$$
+Es decir, hay 10 pares distintos que se pueden formar. Esto tiene las siguiente propiedades clave (que usaremos para un teorema de sobre la distribución binomial y ensayos de Bernoulli, por eso lo coloco): 
+
+- **Simetría**  
+  $$\binom{n}{x} = \binom{n}{n - x}$$  
+  Elegir \(x\) de \(n\) es lo mismo que elegir los \(n - x\) que quedan fuera.
+
+- **Valor en los extremos**  
+  $$\binom{n}{0} = \binom{n}{n} = 1$$  
+  Sólo hay una forma de no escoger nada o de escoger todo.
+
+- **Relación recursiva (Triángulo de Pascal)**  
+  $$\binom{n}{x} = \binom{n - 1}{x - 1} + \binom{n - 1}{x}$$
+
+Además, de las propieidades, una **Aplicación en el Teorema del Binomio** es la siguiente: en la expansión de $(a + b)^n$, los coeficientes vienen dados por:
+
+$$
+(a + b)^n = \sum_{x = 0}^{n} \binom{n}{x}\,a^x\,b^{\,n - x}.
+$$
+
+Respecto a la **interpretación probabilística** del coeficiente binomial, tenemos que fijarnos en lo siguiente. En un experimento de Bernoulli (éxito o fracaso) con probabilidad de éxito \(p\) en cada ensayo, la probabilidad de obtener exactamente \(x\) éxitos en \(n\) ensayos es:
+
+$$
+P(X = x) = \binom{n}{x}\,p^x\,(1 - p)^{\,n - x}.
+$$
+
+En resumen, $\displaystyle \binom{n}{x}$ cuenta de cuántas maneras puedes elegir $x$ elementos de un total de $n$, y aparece de forma natural en combinatoria, en el desarrollo de potencias binomiales y en distribuciones de probabilidad.
+
+Con todo esto, veremos un Teorema, que nos permite relacionar la distribución binomial con los ensayos de Bernoulli. Con ello, sabremos bien para qué nos sirve este tipo de distribución. 
+
+::: {.callout-note}
+### Teorema: Distribución Binomial y ensayos de Bernoulli. 
+
+Sea $X_1, X_2, \dots, X_n$ variables aleatorias independientes, con distribuciones Bernoulli de parámetro $p$. Diremos, por tanto, que se trata de $n$ ensayos de Bernoulli con probabilidad de éxito $p$, donde se sobreentiende que son independientes. Denotamos por $S$ el número de éxitos en los $n$ ensayos, es decir
+$$
+S = X_1 + X_2 + \dots + X_n.
+$$
+Entonces $S \sim \mbox{Bin}(n, p)$.
+:::
+
+
+#### Distribución Geométrica
+
+Una variable aleatoria $X$ sigue una distribución geométrica de parámetro $p$, $0 < p < 1$, si $X$ tiene una distribución discreta con función de probabilidad:
+$$
+f(x) =
+    \begin{cases} 
+    pq^x & \text{para } x = 0, 1, 2, \dots \\
+    0 & \text{si no.}
+    \end{cases}
+$$
+donde $q = 1 - p$. En este caso, escribimos $X \sim \mbox{Geo}(p)$
+
+::: {.callout-note}
+### Teorema: Distribución Geómetrica y ensayos de Bernoulli. 
+
+Consideremos $X_1,X_2,X_3, \ldots$ v.a. $\mbox{Ber}(p)$ independientes. Denotemos, pues, $Y$ por el número de fracasos antes del primer éxito de la secuencia anterior. Entonces, $X$ sigue una distribución geométrica de parámetro $p$.
+:::
+
+#### Relación Bernoulli, Binomial y Geométrica
+
+Como ya se podría intuir, este tres tipos de distribuciones de variables aleatorias discretas, están relacionadas. Y lo están de la siguiente manera: 
+
+- Cuando realizamos un experimento que tiene **solo dos resultados posibles**, estamos ante un ensayo Bernoulli
+
+- Si tenemos una secuencia $X_1, X_2, \dots, X_n$ de variables aleatorias independientes con distribución común $\mbox{Bern}(p)$, la suma de ``éxitoa'' tendrá una distribución $\mbox{Bin}(n,p)$. Es básicamente, la suma una secuencia de experimentos con distribución $\mbox{Bern}(p)$
+
+- Si en esta misma secuencia denotamos como $Y$ el número de ``fracasos'' antes del primer "éxito", $Y$ tendrá una distribución $\mbox{Geo}(p)$
+
+
+Por ejemplo, si lanzamos una moneda en la que definimos $X=1$ si sale cara y $X=0$ si sale sello. Supongamos que el resultado fue el siguiente en 8 lanzamientos:
+$$
+S = \{\text{s, s, c, s, c, c, s, s}\}
+$$ 
+Tenemos, pues que 
+
+1. El lanzamiento particular de cada moneda tiene $\mbox{Ber}(0,5)$. 
+
+2. Si definimos $Y$ como el número de caras si lanzamos la moneda 8 veces, tenemos que el número de caras fue $c=3$. La distribución de los lanzamientos, así, es de $\mbox{Bin}(n=8, p=0,5$).
+
+3. Si definimos $Z$ como el número de fracasos antes del primer éxito, dado que hubo dos sellos $X=0$ antes de cara $X=1$, entonces, tenemos, dado que la v.a., sigue una distribución tal qeu $\mbox{Geo}(0,5)$, entonces, que va tener un $\Pr(Y)=q^2p$
+
+Gráficamente puede ser aún más claro. Veamos este ejemplo en R. 
+
+```{r}
+#| label: relacion-distribuciones
+#| collapse: true
+pacman::p_load(dplyr, ggplot2, scales, purrr, tidyr)
+
+set.seed(2025)
+N <- 10000
+p <- 0.5
+n <- 8
+
+# 1) Simulaciones
+sim_data <- tibble(
+  Ber = rbinom(N, size = 1, prob = p),
+  Bin = rbinom(N, size = n, prob = p),
+  Geo = rgeom(N, prob = p)
+) |> 
+  pivot_longer(everything(), names_to = "Distrib", values_to = "x")
+
+# 2) PMF empírica
+df_pmf <- sim_data |> 
+  count(Distrib, x) |> 
+  group_by(Distrib) |> 
+  mutate(prob = n / sum(n)) |> 
+  ungroup()
+
+# 3) Graficar
+ggplot(df_pmf, aes(x = factor(x), y = prob, fill = Distrib)) +
+  geom_col(color = "black", width = 0.7, position = position_dodge(width = 0.8)) +
+  facet_wrap(~ Distrib, scales = "free_x", strip.position = "top") +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  scale_fill_manual(values = c("Ber" = "#4E79A7", "Bin" = "#2CA02C", "Geo" = "#E15759")) +
+  labs(
+    x     = "Valor de la variable aleatoria",
+    y     = "Probabilidad empírica",
+    title = "Relación entre Bernoulli, Binomial y Geométrica (p = 0.5, n = 8)"
+  ) +
+  theme_minimal(base_family = "serif", base_size = 14) +
+  theme(
+    plot.title    = element_text(face = "bold", size = 16, hjust = 0.5),
+    strip.text    = element_text(face = "bold", size = 14),
+    axis.text     = element_text(size = 12),
+    legend.position = "none"
+  )
+
+
+```
+
+
+##### Distribución de Poisson 
+
+La distribución de Poisson es algo que podríamos colocar más adelante. Pero al ser también una distribución propia de variables aleatorias discretas decido dejarla aquí. La distribución de Poisson permite modelar el número de éxistos en un determinado intervalo de *tiempo*. Por ejemplo, si en 1 hora vendo 20 chocolates promedio, puedo modelar esto con Poisson con parámetro 20. Formalmente tenemos lo siguiente.
+
+Sea $\lambda>0$. La v.a. $X$ tiene una distribución de Poisson de parámetro $\lambda$, lo cual denotamos como $X\sim \mbox{Poi}(\lambda)$, si su función de probabilidad satiface
+$$
+f(x) = \frac{e^{-\lambda}\lambda^x}{x!}, \qquad x= 0, 1, 2, \ldots 
+$$
+Aquí es donde conviene haber visto algunas cosas antes, particularmente los términos Esperanza y Varianza en este contexto. Pero da igual porque lo pondré en el apartado siguiente. Solo quería seguir la lógica de colocar las distribuciones juntas. Una vez visto esta distribución, esperanza y varianza (siguiente sección), pasaremos a las variables aleatorias continuas y sus distribuciones. Lo que tenemos que ver ahora, respecto a la distribución de Poisson, son sus propiedades. 
+
+**Propiedades de la Distribución de Poisson**
+
+1. Si $X\sim \mbox{Poi}(\lambda)$ entonces
+$$
+\mbox{E}(X) = \lambda, \qquad \mbox{Var}(X)=\lambda
+$$
+
+2. Si $X\sim \mbox{Poi}(\lambda_1)$, $Y\sim \mbox{Poi}(\lambda_2)$, y $X$ e $Y$ son independientes, entonces se tiene que
+$$
+X+Y \sim \mbox{Poi}(\lambda_1 +\lambda_2).
+$$
+Es decir, la suma de las v.a. independientes Poisson es Poisson, y el parámetro de las sumas es la suma de los parámetros de las variables individuales. 
+
+Como ya mencionamos, la distribución de Poisson es principalmente utilizada para contar el número de éxitos en un determinado intervalo de tiempo o región del espacio, pues una Poisson es una **muy buena _aproximación_ para una binomial** con un $n$ que tiende a infinito y un parámetro $p$ muy pequeño. En efecto, si se tiene qeu $X_n \sim \mbox{Bin}(n,p)$ y $n$ tiende a infinito, entonces $X_n$ *converge* a Poisson de parámetro $\lambda = np$, i.e., 
+$$
+\lim_{n\to \infty} (\Pr(X_n=x)) = \frac{e^{-\lambda}\lambda^x}{x!}
+$$
+Por lo tanto, es recomentable usar este tipo de distribución en el caso que nos enfrentemos a una distribución binomial con un número de ensayos $n$ bastante grande y una probabilidad de éxito $p$ pequeña. 
+
+
+#### Distribuciones de variables aleatorias continuas
+
+ diferencia de las v.a. discretas, las v.a. continuas son aquellas que pueden tomar **cualquier valor** de un intervalo de una recta real. Es decir, cualquier número real. Un ejemplo puede ser el tiempo, los ingresos, distancias, etc. De tal modo, las v.a. continuas describen el resultado de situaciones de probabilidades en donde lso valores de la v.a. forman un *continuum* de valores y, por tanto, no es posible *listar* valores. De tal modo, conviene aprehenderlos mediante intervalos. Formalmente, tenemos lo siguiente: 
+
+:::{.callout-note}
+### Definición 
+La v.a. $X$ tiene una **distribución continua** si existe una función $f$ definida sobre la recta real, que toma valores mayores o iguales que 0, tal que cualquier para intervalo la probabilidad de que $X$ tome valores en el intervalo que va de $a$ a $b$ es igual a la integral de $f$ sobre el intervalo. Matemáticamente,
+$$
+\Pr(a<X<b) = \int^b_a f(x)dx
+$$
+:::
+
+Ciertamente los intervalos dependerán de lo que queramos modelar. Si $a\leq b$, entonces,
+$$
+\Pr(a\leq X\leq b) = \int^b_a f(x)dx
+$$
+Si, e.g., $b=+\infty$, entonces
+$$
+\Pr(a\geq X) = \int^\infty_a f(x)dx
+$$
+O, si $a=-\infty$, entonces,
+$$
+\Pr(X\leq b) = \int^b_{-\infty} f(x)dx
+$$
+Diremos, ademñas, que $f(x)$ es la **función de _densidad_ de probabilidad** (o f.d.p.), y ya no solo la f.p., de la v.a. $X$. El conjunto de valores de $x$ donde $f(x)>0$, se conoce como el **soporte** de $X$. Un ejemplo de esto, lo podríamos observar con lo siguiente. Sea la v.a. continua $X$, cuya f.d.p. está dad por
+$$
+f(x)=
+\begin{cases}
+  \frac{x}{2} & \text{si } \quad 0 \leq x \leq 2,\\
+  0 & \text{si no}
+\end{cases}
+$$
+Deberíamos calcular, entonces, $\Pr(1\leq X \leq 1,5)$. Y siguiendo la definición, tendríamos que
+$$
+\Pr(1\leq X \leq 1,5) = \int^{1,5}_1 \frac{x}{2} dx
+$$
+Si resolvemos la integral:
+$$
+\begin{aligned}
+  \int^{1,5}_1 \frac{x}{2} dx &= \frac{1}{2}\int^{1,5}_1 xdx \quad || \text{ regla de la potencia}\\
+  &= \frac{1}{2}\frac{x^2}{2} \quad || \text{ simplificamos}\\
+  &= 0,5[0,5x^2]^{1,5}_1 \quad || F(b)- F(a)\\
+  &| \lim _{x\to \:1+}\left(0.5x^2\right)=0,5 \\
+  &| \lim _{x\to \:1,5-}\left(0.5x^2\right)=1,125 \\
+  &= 1,125-0,5\\
+  &= 0,625
+\end{aligned}
+$$
+**Propiedades de una v.a. continua**. Para garantizar que se cumple con los **axiomas de probabilidad**, la f.d.p. $f(x)$ de la v.a. continua $X$ debe cumplir con:
+
+1. Ser positiva:
+$$
+f(x) \geq 0 \text{ para todo } - \infty \leq x \leq \infty
+$$
+
+2. La probabilidad del soporte de $X$ igual a uno
+$$
+\int^\infty_{-\infty} f(x)dx =1
+$$
+##### Función de distribución cumulativa
+
+Otro concepto relevante que surge una vez conocemos las v.a. continuas, es el de función de distribución cumulativa. Ahora bien, también tenemos cumulativa para v.a. discretas. Veremos ambas y las propiedades de todas las funciondes cumulativas, además de especialmente fijarnos en el caso de v.a. continuas. 
+
+:::{.callout-note}
+### Definición
+La **función de distribución cumulativa (f.d.c.) de una v.a. $X$ es la función
+$$
+F(x) = \Pr(X \leq x)
+$$
+Abreviaremos la f.d.c. como función de distribución, como función cumulativa o cumulativa. La cumulativa está definida para toda v.a. (discreta o continua), y la denotamos con mayúscula $F(\cdot)$ para distinguirla de la f.d.p y f.p. 
+:::
+
+##### Distribución uniforme para el caso de v.a. continuas
+
+Partimos con una distribución que ya vimos, pero ahora para el caso de las v.a. continuas. Arrancamos por su definición 
+
+:::{.callout-note}
+### Definición
+Decimos que la v.a. $X$ sigue una distribución uniforme en el intervalo $[a,b]$, donde $a$ y $b$ son números reales con $a<b$, si $X$ toma valores entre $a$ y $b$, y la probabilidad de que $X$ tome valores en cualquier subintervalo de $[a,b]$ es proporcional al largo del subintervalo. Si esto es así, escribimos $X\sim \mbox{U}(a,b)$. 
+:::
+
+Pondré solo un ejemplo. **Cumulativa de una v.a. discreta**: supongamos que $X\sim \mbox{Bin}(4, 1/2)$, de modo que su f.p. está dadar por 
+$$
+f(x)= 
+\begin{cases}
+\frac{4}{x}(1/2)^4, & \quad x=0, 1, 2, 3, 4,\\
+0, & \quad \text{en caso contrario}
+\end{cases}
+$$
+Y queremos calcular $F(2)$. Esto es, 
+$$
+\begin{aligned}
+  F(2) &= \Pr(X\leq 2)\\
+  &=\Pr(X=0) + \Pr(X=1)+\Pr(X=2)\\
+  &=0,5^4+4\cdot 0,5^4+6\cdot 0,5^4\\
+  &= \frac{11}{16}
+\end{aligned}
+$$
+
+Si hicieramos esto con todos los valores que toma $x$, y no solo $2$, se puede construir la función cumulativa completa. En R, en el paquete `stats` hay funciones específicas para distribuciones binomiales que usamos antes. Pero vale la pena especificar que `dbinom()`, proporciona la densidad, `pbinom()` proporciona la función de distribución, `qbinom()` proporciona la función cuantílica y `rbinom()` genera desviaciones aleatorias. Gráficamente es más facil verlo, así que lo hacemos en R podemos graficarlo así: 
+
+```{r}
+#| label: eg-fdc-discreta
+#| collapse: true
+
+
+pacman::p_load(dplyr, ggplot2, 
+               patchwork) # Para combinar gráficos.
+
+# Preparar datos para Binomial(4, 0.5)
+df <- tibble(
+  x        = 0:4,
+  pmf      = dbinom(x, size = 4, prob = 0.5),
+  cdf      = pbinom(x, size = 4, prob = 0.5)
+) |> 
+  mutate(prev_cdf = lag(cdf, default = 0))
+
+# Gráfico PMF
+p_pmf <- ggplot(df, aes(x = x, y = pmf)) +
+  geom_segment(aes(xend = x, y = 0, yend = pmf)) +
+  geom_point(size = 3) +
+  scale_x_continuous(breaks = 0:4) +
+  scale_y_continuous(limits = c(0, max(df$pmf) * 1.1)) +
+  labs(x = "x", y = "f(x)", title = "PMF de Binomial(4, 0.5)") +
+  theme_minimal(base_family = "sans", base_size = 14) +
+  theme(plot.title = element_text(face = "bold", hjust = 0.5))
+
+# Gráfico CDF
+p_cdf <- ggplot(df, aes(x = x)) +
+  geom_step(aes(y = cdf), direction = "hv") +
+  geom_point(aes(y = cdf), size = 3) +
+  geom_point(aes(y = prev_cdf), shape = 21, fill = "white", size = 3) +
+  scale_x_continuous(breaks = 0:4) +
+  scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.25)) +
+  labs(x = "x", y = "F(x)", title = "CDF de Binomial(4, 0.5)") +
+  theme_minimal(base_family = "sans", base_size = 14) +
+  theme(plot.title = element_text(face = "bold", hjust = 0.5))
+
+# Mostrar ambos juntos
+p_pmf + p_cdf
+
+
+```
+
+Puse un ejemplo por lo siguiente: en la primera figura se muestra la función de probabilidad de $X$, donde se centra en 2. En la siguiente figura, se muestra la función cumulativa de $X$. Como se ve, hay saltos y tiene forma de escalera. Esto ocurre porque, en la medida que nos movemos hacia la derecha, $0,1, \ldots, 4$, cada valor del soporte de $X$ añade a su propia probabilidad de ocurrencia a la probabilidad que la función ya venía acumulando. Por esto mismo, **el "tamaño" del salto para un valor particualr de $X$ es igual a la probabilidad de que $X$ tome dicho valor**. Por ejemplo, $\Pr(X=2)$ se expresa la linea vertical (el "salto") del punto blanco al negro en el valor $2$ de las abscisas. 
+
+**Cumulativa de una v.a. continua**: Para definir esto, partamos con una **propiedad** de toda cumulativa de una v.a. continua. Sea $X$ una v.a. continua con cumativa $F$ y f.d.p. $f$. Entonces,
+$$
+F(x)= \int^x_{-\infty}f(u)du
+$$
+Aquí la demostración es directa, pues
+$$
+F(x)= \Pr (X \leq x) = \int^x_{-\infty}f(u)du
+$$
+lo único que cambia respecto a lo que ya sabíamos es que la variable de integración *no puede ser* $x$ dado que $x$ es el límite superior de la integral. Por eso se usa $u$, como variable auxiliar.
+
+
+##### Distribución exponencial
+
+Con la distribución exponencial, explicaremos lo mismo que explicamos antes con la uniforme, i.e., f.d.p., la cumulativa, sus propiedades, esperanza y varianza. La distribución exponencial es útil para modelar el **tiempo de espera** hasta el primer éxito en un determinado experimento, donde se sabe que los éxitos llegan a una tasa de $\lambda$ éxitos *en promedio* por unidad de tiempo^[Se podría denominar esta distribució como la contraparte continua de una v.a. geométrica, pues se utiliza frecuentemente para representar tiempo de espera antes del éxito. En rigor, la distribución exponencial es un caso particular de la distribución gamma.]. 
+
+:::{.callout-note}
+### Definición
+Una v.a. continua $X$ tiene una **distribución exponencial** con parámetro $\lambda>0$ si su densidad de probabilidad es de la forma
+$$
+f(x)=
+\begin{cases}
+  \lambda e^{-\lambda x}, & \text{ si } x \geq 0,\\
+  0 & \text{ en caso contrario.}
+\end{cases}
+$$
+En tal caso, escribimos $X\sim \mbox{Exp}(\lambda)$
+:::
+
+Gráficamente, podemos visualizar esto (para distintos parámetros de $\lambda$) de la siguiente manera: 
+
+```{r}
+#| label: dist-exponencial-fdp
+#| collapse: true
+#| warning: false
+
+
+pacman::p_load(dplyr, ggplot2, scales)
+
+lambdas <- c(0.5, 1.0, 1.5)
+
+df_expo <- expand.grid(
+  x      = seq(0, 6, length.out = 1000),
+  lambda = lambdas
+) |> 
+  as_tibble() |> 
+  mutate(
+    f     = lambda * exp(-lambda * x),
+    label = sprintf("λ = %.1f", lambda)
+  )
+
+ggplot(df_expo, aes(x = x, y = f, color = label)) +
+  geom_line(size = 1) +
+  scale_x_continuous(labels = comma) +
+  scale_y_continuous(labels = comma) +
+  scale_color_manual(
+    breaks = c("λ = 0.5", "λ = 1.0", "λ = 1.5"),
+    values = c(
+      "λ = 0.5" = "#1F77B4",
+      "λ = 1.0" = "#7F7F7F",
+      "λ = 1.5" = "#2CA02C"
+    )
+  ) +
+  labs(
+    x     = "x",
+    y     = expression(f[X](x)),
+    title = "F.d.p. de la distribución Exponencial para distintos λ",
+    color = "Parámetro λ"
+  ) +
+  theme_minimal(base_family = "serif", base_size = 14) +
+  theme(
+    plot.title   = element_text(face = "bold", size = 16, hjust = 0.5),
+    legend.title = element_text(size = 12),
+    legend.text  = element_text(size = 12),
+    axis.text    = element_text(size = 12)
+  )
+
+```
+
+
+### Distribución normal estándar
+
+Sobre esta distribución, nos detendremos un poco más. Veremos, no solo su función de densidad y cumulativa, sino que también los percentiles de una normal estándar y propiedes importantes. Esta será nuestro vinculo directo con el otro aspecto que habíamos mencionado como relevante para la inferencia estadística y causal además de la Ley de los Grandes Números: el Teorema del Límite Central. 
+
+Además, la distribución normal estándar es bastante importante para las ciencias sociales y naturales. Esta distribución provee buen ajuste de los datos para muchos fenómenos naturales, económicos y sociales. Por ejemplo, los datos de altura suelen distribuirse de manera normal estándar, o al menos aproximarse como tal. Por otro lado, podríamos pensar que, e.g., la altura es la suma de multiples factores: edad, genética, sexo, alimentación, etc. Justamente el TLC muestra que el **promedio** de un número lo *suficientemente grande* de v.a. independientes sigue una distribución *muy cecana* a una normal. Así,  cuando una v.a. resulta de sumar **muchas v.a. aleatorias independientes**, la distribución normal es una *buena aproximación* de la v.a. que resulta. En ello reside el vínculo de esta distribución con el TLC y, lo que posteriormente veremos en inferencia estadística y modelamiento de fenómenos de interés.
+
+:::{.callout-note}
+### Definición
+Una variable aleatoria continua sigue una distribución normal estándar si la función de densidad viene dada por
+$$
+\phi(x) = \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2}, \qquad -\infty < x < + \infty 
+$$
+Notemos, además, que el soporte de la distribución normal estándar son todos los $\mathbb{R}$, i.e., $-\infty < x < + \infty$.
+
+Por otro lado, se puede probar que $\int^{+\infty}_{-\infty} \phi (X) dx =1$, lo cual está unido al hehco de que $\phi(x)>0$ para todo $x$ establece que $\phi(x)$ efectivamente define una densidad de probabilidad
+:::
+
+Gráficamente, la densidad de una distribución normal estándar se ve así:
+
+```{r}
+#| label: fdp-normal-estandar
+#| collapse: true
+#| warning: false
+pacman::p_load(dplyr, ggplot2, grid)
+
+# Crear datos para la densidad de la normal estándar
+df_norm <- data.frame(x = seq(-4, 4, length.out = 1000)) |>
+  mutate(phi = dnorm(x))
+
+# Graficar densidad y marcar intervalos de 68% y 95%
+ggplot(df_norm, aes(x = x, y = phi)) +
+  geom_line(size = 1, color = "#104E8B") +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "#24693D") +
+  geom_vline(xintercept = c(-2, 2), linetype = "dashed", color = "#8B1A1A") +
+  # Flecha para 68%
+  geom_segment(aes(x = -1, y = 0.25, xend = 1, yend = 0.25),
+               arrow = arrow(ends = "both", length = unit(0.2, "cm")),
+               color = "#24693D", size = 1) +
+  annotate("text", x = 0, y = 0.27, label = "68%", color = "#24693D", size = 4) +
+  # Flecha para 95%
+  geom_segment(aes(x = -2, y = 0.06, xend = 2, yend = 0.06),
+               arrow = arrow(ends = "both", length = unit(0.2, "cm")),
+               color = "#8B1A1A", size = 1) +
+  annotate("text", x = 0, y = 0.08, label = "95%", color = "#8B1A1A", size = 4) +
+  labs(
+    x     = "x",
+    y     = expression(phi(x)),
+    title = "Densidad de la normal estándar"
+  ) +
+  theme_minimal(base_family = "serif", base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
+    axis.text  = element_text(size = 12)
+  )
+
+
+```
+
+Como se puede observar, la distribución aquí está centrada en una media de $0$. La *probabilidad* de que nuestra variable aleatoria tome valores entre $[-1, 1]$ es del 68%. A su vez, que la v.a. tome valores $[-2, 2]$ es del 95%. Por otro lado, la *forma* de la densidad de la distribución es similar a una campana. Por ello, cuando una distribución toma dicha *forma*, se le suele decir que toma forma de **campana de Gauss**. 
+
+Como en todas las otras distribuciones, a partir de la f.d.p. podemos definir su f.d.c., que denotaremos por $\Phi$. Definamosla: 
+
+
+:::{.callout-note}
+### Definición
+La función cumulativa correspondiente a $\phi(x)$, que se denota por $\Phi(x)$, está dada por
+$$
+\Phi(x) = \int^x_{-\infty} \phi(x)du
+$$
+Un punto importante, es que la función cumulativa de una normal estándar no tiene una expresión cerrada, por lo cual se usan tablas (con Excel o similares) para calcular sus valores. 
+
+Por otro lado, una consecuencia directa de la **simetría** antes mencionada (y graficada) para $\phi(x)$ es que su cumulativa $\Phi(\cdot)$ evaluada en $-x$ es 
+$$
+\Phi(-x) = 1 - \Phi(x)
+$$
+:::
+
+#### Propiedades de la Distribución Normal Estándar
+
+Por último, dejamos expresadas las propiedades de una distribución normal estándar. No las demostraré, luego que es más útil ver algunas cuestiones antes, particularmente al ver familia de distribuciones normales.  
+
+::: {.callout-note}
+### Propiedades de la Distribución Normal Estándar
+
+Supongamos que la v.a. $Z$ sigue una distribución normal estándar, que denotamos como $Z \sim \mathcal{N}(0,1)$. Entonces, 
+
+1. Se tiene que $\mbox{E}(Z)=0,$
+
+2. Se tiene que $\mbox{Var}(Z)=1,$
+
+3. Se tiene que $\mbox{E}(Z^3)=0,$
+
+4. Se tiene que $\mbox{Var}(Z^4)=3$
+:::
+
+
+## 4. Inferencia estadística: idea general e introducción a los test de hipótesis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
