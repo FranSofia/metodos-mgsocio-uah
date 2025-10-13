@@ -9,6 +9,7 @@
 .RData
 .Ruserdata
 *.Rproj
+data/Casen 2022.sav
 
 # Archivos del sistema
 .DS_Store
