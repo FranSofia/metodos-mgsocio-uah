@@ -2544,9 +2544,6 @@ Hay que insistir en la importancia de este resultado. Extrememos el caso. Imagin
 Por otro lado, hasta ahora, hemos visto la Ley de los Grandes Números (LGN) afirma que, para $n$ grande, la media muestral es *aproximadamente* una constante (la experanza $\mu$). Acabamos de ver, además, que el TCL afirma que, para $n$ grande, la media muestral se distribuye *aproximadamente* normal con media $\mu$ y varianza $\sigma^2/n$. Visto así, podría parecer contradictorio que la media muestral, al mismo tiempo, sea aproximadamente constante y distribuirse aproximadamente normal. Pero no hay contradicción, porque como ya podríamos intuir, la varianza de $\bar{X}_n$ tiende a cero cuando $n$ tiende a infinito. 
 
 
-
-
-
 ## 5. Test de hipotesis: una introducción
 
 La estadística es una ciencia, disciplina o rama de las matemáticas que estudia la recolección, análisis, interpretación y presentación de masas de información numérica^[Es discutible si está dentro de la matemática o tiene autonomía disciplinar. Lo coloco justamente porque es una discusión, y que no llevaré a cabo aquí. Mi opinión es que es una disciplina autónoma de las matemáticas y que, más bien, se fundamenta la teoría matemática, particularmente en la de la probabilidad. Pero no lo veo como una *rama* de la matemática. Ver discusiones de esto en (Wackerly, et al., 2010; DeGroot y Schervish, 2014)]. Ante todo, la "*estadística  es una teoría de la información, siendo la inferencia su objetivo*" ([Wackerly, et al., 2010, p. 2](https://www.cimat.mx/ciencia_para_jovenes/bachillerato/libros/[Wackerly,Mendenhall,Scheaffer]Estadistica_Matematica_con_Aplicaciones.pdf)). En esta línea, al ser una ciencia que tiene como fin principal *inferir* acerca de una población, con base a información contenida en una muestra de esa población, he enfatizado ello en la decisión de dedicarle un capítulo a la estadística inferencial como simplemente estadística. 
