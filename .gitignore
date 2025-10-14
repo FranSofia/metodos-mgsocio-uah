@@ -14,6 +14,8 @@
 data/Casen 2022.sav
 lectures/data-sesiones/Casen 2022.sav
 *.sav
+*.RDS
+*.rds
 
 # Archivos del sistema
 .DS_Store
@@ -23,6 +25,3 @@ Thumbs.db
 *~
 *.tmp
 *.bak
-
-# Archivos de RStudio
-.Rproj.user
