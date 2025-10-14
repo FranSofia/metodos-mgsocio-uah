@@ -2814,7 +2814,7 @@ T = \sum_{i=1}^{n}X_{i},
 $$ 
 y que nos arrojó un $t_{obs} = 16{.}270$, que hacía muy improbable que no existiera efecto, ergo, razonable rechazar $H_0$ y aceptar, en cambio, $H_1$; mediante el calculo del $p-$value, que era $\approx 0$. Esto, como ya dijimos, fue solo una introducción. De ahora en adelante, profundizaremos en el $p-$*value* y la **significancia estadística**, para luego pasar a test de hipótesis como tal según el tipo de distribución. Como los cálculos son lateros, y los suele hacer la calculadora del programa estadístico que se use, lo que sigue será mucho más breve y acotado, dejando intuiciones más breves, definiciones formales y código en R para realizar los test. Con ello, nos iremos adentrando cada vez más al calculo de **estimadores** más especializados, hasta llegar modelos econométricos en el siguiente capítulo. 
 
-Por último, dejo dos formas más eficientes de calcular el $p-$value con `stats` de R. También uno que calcula exactamente el valor y sin notación científica, para ver lo realmente poco probable que era aceptar la hipótesis nula (realmente es aproximadamente 0) Solo como un adelanto de distintos test que iremos viendo: 
+Por último, dejo dos formas más eficientes de calcular el $p-$*value* con `stats` de R. También uno que calcula exactamente el valor y sin notación científica, para ver lo realmente poco probable que era aceptar la hipótesis nula (realmente es aproximadamente 0) Solo como un adelanto de distintos test que iremos viendo: 
 
 ```{r}
 #| label: eg-test-hipotesis-pre-subcapitulo-pvalue
