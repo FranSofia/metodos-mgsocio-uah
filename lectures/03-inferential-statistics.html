@@ -101,6 +101,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -188,6 +217,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#objetivos-de-la-sesión" id="toc-objetivos-de-la-sesión" class="nav-link active" data-scroll-target="#objetivos-de-la-sesión">Objetivos de la sesión</a></li>
+  <li><a href="#estadística-inferencial" id="toc-estadística-inferencial" class="nav-link" data-scroll-target="#estadística-inferencial">Estadística inferencial</a></li>
+  <li><a href="#test-de-hipótesis" id="toc-test-de-hipótesis" class="nav-link" data-scroll-target="#test-de-hipótesis">Test de hipótesis</a>
+  <ul class="collapse">
+  <li><a href="#estadísticos-de-prueba-y-p-value" id="toc-estadísticos-de-prueba-y-p-value" class="nav-link" data-scroll-target="#estadísticos-de-prueba-y-p-value">Estadísticos de prueba y <span class="math inline">\(p\)</span>-<em>value</em></a></li>
+  <li><a href="#significancia-estadística-vs.-significancia-práctica" id="toc-significancia-estadística-vs.-significancia-práctica" class="nav-link" data-scroll-target="#significancia-estadística-vs.-significancia-práctica">Significancia estadística vs.&nbsp;significancia práctica</a></li>
+  <li><a href="#del-concepto-al-ejemplo-con-enut" id="toc-del-concepto-al-ejemplo-con-enut" class="nav-link" data-scroll-target="#del-concepto-al-ejemplo-con-enut">Del concepto al ejemplo con ENUT</a>
+  <ul class="collapse">
+  <li><a href="#modelo-probabilístico-y-formulación-del-test" id="toc-modelo-probabilístico-y-formulación-del-test" class="nav-link" data-scroll-target="#modelo-probabilístico-y-formulación-del-test">Modelo probabilístico y formulación del test</a></li>
+  <li><a href="#construyendo-el-estadístico-de-prueba-caso-una-media" id="toc-construyendo-el-estadístico-de-prueba-caso-una-media" class="nav-link" data-scroll-target="#construyendo-el-estadístico-de-prueba-caso-una-media">Construyendo el estadístico de prueba (caso: una media)</a></li>
+  <li><a href="#interpretación-inferencial" id="toc-interpretación-inferencial" class="nav-link" data-scroll-target="#interpretación-inferencial">Interpretación inferencial</a></li>
+  <li><a href="#test-automático-con-t.test" id="toc-test-automático-con-t.test" class="nav-link" data-scroll-target="#test-automático-con-t.test">Test automático con <code>t.test()</code></a></li>
+  <li><a href="#interpretación-del-resultado" id="toc-interpretación-del-resultado" class="nav-link" data-scroll-target="#interpretación-del-resultado">Interpretación del resultado</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#test-bivariados" id="toc-test-bivariados" class="nav-link" data-scroll-target="#test-bivariados">Test bivariados</a>
+  <ul class="collapse">
+  <li><a href="#comparación-de-medias-entre-dos-grupos-hombres-y-mujeres" id="toc-comparación-de-medias-entre-dos-grupos-hombres-y-mujeres" class="nav-link" data-scroll-target="#comparación-de-medias-entre-dos-grupos-hombres-y-mujeres">Comparación de medias entre dos grupos: hombres y mujeres</a></li>
+  <li><a href="#exploración-de-la-variable-de-sexo" id="toc-exploración-de-la-variable-de-sexo" class="nav-link" data-scroll-target="#exploración-de-la-variable-de-sexo">Exploración de la variable de sexo</a></li>
+  <li><a href="#preparamos-los-datos" id="toc-preparamos-los-datos" class="nav-link" data-scroll-target="#preparamos-los-datos">Preparamos los datos</a></li>
+  <li><a href="#test-t-de-dos-muestras-independientes" id="toc-test-t-de-dos-muestras-independientes" class="nav-link" data-scroll-target="#test-t-de-dos-muestras-independientes">Test t de dos muestras independientes</a></li>
+  <li><a href="#interpretación-del-resultado-1" id="toc-interpretación-del-resultado-1" class="nav-link" data-scroll-target="#interpretación-del-resultado-1">Interpretación del resultado</a></li>
+  <li><a href="#chequeo-de-supuestos-y-tamaño-de-efecto" id="toc-chequeo-de-supuestos-y-tamaño-de-efecto" class="nav-link" data-scroll-target="#chequeo-de-supuestos-y-tamaño-de-efecto">Chequeo de supuestos y tamaño de efecto</a></li>
+  </ul></li>
+  <li><a href="#anova-comparación-de-medias-entre-más-de-dos-grupos" id="toc-anova-comparación-de-medias-entre-más-de-dos-grupos" class="nav-link" data-scroll-target="#anova-comparación-de-medias-entre-más-de-dos-grupos">ANOVA: comparación de medias entre más de dos grupos</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-diferencias-por-nivel-educativo" id="toc-ejemplo-diferencias-por-nivel-educativo" class="nav-link" data-scroll-target="#ejemplo-diferencias-por-nivel-educativo">Ejemplo: diferencias por nivel educativo</a></li>
+  <li><a href="#anova-de-una-vía" id="toc-anova-de-una-vía" class="nav-link" data-scroll-target="#anova-de-una-vía">ANOVA de una vía</a></li>
+  <li><a href="#tamaño-de-efecto-eta2" id="toc-tamaño-de-efecto-eta2" class="nav-link" data-scroll-target="#tamaño-de-efecto-eta2">Tamaño de efecto: <span class="math inline">\(\eta^2\)</span></a></li>
+  <li><a href="#extensiones-posibles" id="toc-extensiones-posibles" class="nav-link" data-scroll-target="#extensiones-posibles">Extensiones posibles</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -214,33 +273,677 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>En esta sesión entraremos de lleno en estadística inferencial, retomando desde contenidos de la sesión pasada, pero con un enfoque más riguroso. Ahora bien, si iremos viendo contenido más aplicado en técnicas y test estadísticos.</p>
+<section id="objetivos-de-la-sesión" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos-de-la-sesión">Objetivos de la sesión</h2>
+<ul>
+<li>Conocer test de hipótesis y aprender a realizarlos en R</li>
+<li>Conocer ANOVA y tests bivariados</li>
+</ul>
+<p>Primero llamamos los paquetes que utilizaremos en la sesión y la base de datos que utilizaremos</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"pacman"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, <span class="co"># colección de paquetes, dplyr entre ellos, pero también haven</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>               dplyr, <span class="co"># manipular datos</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>               psych, <span class="co"># para estadísticas descriptivas</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>               sjmisc, <span class="co"># explorar datos</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>               ggplot2, <span class="co"># para visualizar gráficos</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>               scales) <span class="co"># para ajustar gráficos</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar ENUT</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data-sesiones/enut.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="estadística-inferencial" class="level1">
+<h1>Estadística inferencial</h1>
+<p>Como habíamos visto en la sesión pasada, el objetivo de la estadística es usar la información contenida en una muestra para hacer inferencias para sacar conclusiones sobre la población de la que proviene. Dado que las poblaciones se describen mediante valores numéricos —los llamados <em>parámetros</em>—, gran parte del trabajo estadístico consiste en estimar uno o varios de esos parámetros a partir de la muestra. Una forma de <em>testear</em> si un estimador, a partir de nuestra muestra, contiene información suficiente para hacer afirmaciones poblaciones, es justamente a través de test o pruebas de hipótesis.</p>
+</section>
+<section id="test-de-hipótesis" class="level1">
+<h1>Test de hipótesis</h1>
+<p>Un test de hipótesis, por ahora solo simples, corresponde a un método para evaluar si una serie de datos observados (muestrales) se comportan según cierto escenario, esto es, como una <em>hipótesis</em> que haya sido planteada. Así, si se tiene un conjunto de datos u observaciones <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> se puede plantear:</p>
+<ul>
+<li>Una <strong>hipótesis nula</strong> (<span class="math inline">\(H_0\)</span>), que permitirá evaluar con los datos si estos se comportan según lo planteado cpor <span class="math inline">\(H_0\)</span>. O, de modo contrario,</li>
+<li>Una <strong>hipótesis alternativa</strong> (<span class="math inline">\(H_1\)</span> o <span class="math inline">\(H_A\)</span>), que implicará una proposición contraria a la hipótesis nula, es decir, una afirmación que se considerará verdadera si la evidencia muestral resulta inconsistente con lo planteado por <span class="math inline">\(H_0\)</span>.</li>
+</ul>
+<p>Para ello, se debe plantear un <strong>modelo probabilístico</strong> que <em>traduzca</em> la hipótesis nula en variables aleatorias que generaron las observaciones, de denotaremos como <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span>. Por tanto, en términos generales, el procedimiento de contraste de hipótesis sigue estos pasos:</p>
+<ol type="1">
+<li><p><strong>Plantear las hipótesis</strong>:</p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: afirmación inicial o de no efecto.</li>
+<li><span class="math inline">\(H_1\)</span>: afirmación alternativa o de efecto/diferencia.</li>
+</ul></li>
+<li><p><strong>Elegir el nivel de significancia</strong> <span class="math inline">\(\alpha\)</span> (por ejemplo, 0.05 o 0.01). Esto nos dirá con qué nivel de confianza podremos afirmar, a partir de nuestra muestra, sobre nuestra población.</p></li>
+<li><p><strong>Seleccionar la estadística de prueba</strong> adecuada (por ejemplo, <span class="math inline">\(Z\)</span>, <span class="math inline">\(t\)</span>, <span class="math inline">\(\chi^2\)</span>, <span class="math inline">\(F\)</span>, etc.), dependiendo del tipo de variable, tamaño de muestra y supuestos sobre la población.</p></li>
+<li><p><strong>Calcular el valor observado</strong> de la estadística de prueba con los datos muestrales.</p></li>
+<li><p><strong>Determinar la región crítica</strong> o <strong>valor p</strong>, y comparar con el nivel de significancia.</p></li>
+<li><p><strong>Tomar una decisión</strong>:</p>
+<ul>
+<li>Si la evidencia es suficientemente fuerte (es decir, el valor <span class="math inline">\(p &lt; \alpha\)</span> o el estadístico cae en la región crítica), <strong>se rechaza <span class="math inline">\(H_0\)</span></strong>.</li>
+<li>En caso contrario, <strong>no se rechaza <span class="math inline">\(H_0\)</span></strong>.</li>
+</ul></li>
+</ol>
+<p>De esta forma, un test de hipótesis no “demuestra” que una hipótesis sea verdadera, sino que evalúa si los datos <strong>son o no compatibles</strong> con el escenario que plantea la hipótesis nula. Entonces, veamos el paso a paso y luego testeemos cosas con R. En general, el nivel de significancia se elige por convención y, además, R te entrega el <span class="math inline">\(p\)</span>-<em>value</em> como tal. Así que decideremos ahí. No obstante, trataremos que al menos sea <span class="math inline">\(\alpha = 0{,}05\)</span>. Así pues, partiremos desde el punto 3.</p>
+<section id="estadísticos-de-prueba-y-p-value" class="level3">
+<h3 class="anchored" data-anchor-id="estadísticos-de-prueba-y-p-value">Estadísticos de prueba y <span class="math inline">\(p\)</span>-<em>value</em></h3>
+<p>Si definimos una hipótesis nula <span class="math inline">\(H_0\)</span> y una alternativa <span class="math inline">\(H_1\)</span>, necesitamos una manera <strong>objetiva</strong> de evaluar qué tan consistentes son nuestros datos con lo que plantea <span class="math inline">\(H_0\)</span>. Para eso se utilizan los <strong>estadísticos de prueba</strong>.</p>
+<p>Un <strong>estadístico de prueba</strong> es una cantidad numérica que se calcula a partir de la muestra y que resume, en una sola medida, la evidencia disponible contra la hipótesis nula. Su valor se compara con lo que se esperaría bajo <span class="math inline">\(H_0\)</span>, y según el resultado se decide si hay motivos suficientes para rechazarla.</p>
+<p>En términos más formales, el estadístico de prueba se construye de modo que su <strong>distribución bajo <span class="math inline">\(H_0\)</span></strong> sea conocida (por ejemplo, una distribución normal estándar, <span class="math inline">\(t\)</span> de Student, <span class="math inline">\(\chi^2\)</span>, o <span class="math inline">\(F\)</span>). Así, podemos cuantificar la probabilidad de obtener un valor tan extremo como el observado —o más— si <span class="math inline">\(H_0\)</span> fuera cierta.</p>
+<p>Por ejemplo:</p>
+<ul>
+<li>En una prueba sobre una media poblacional con varianza conocida, el estadístico suele seguir una <strong>distribución normal estándar (<span class="math inline">\(Z\)</span>)</strong>.</li>
+<li>Si la varianza es desconocida y la muestra es pequeña, se usa una <strong>distribución <span class="math inline">\(t\)</span> de Student</strong>.</li>
+<li>Para contrastar varianzas o ajustar modelos de regresión, pueden utilizarse <strong>estadísticos <span class="math inline">\(\chi^2\)</span> o <span class="math inline">\(F\)</span></strong>, respectivamente.</li>
+</ul>
+<p>En resumen, el estadístico de prueba actúa como un <strong>puente entre los datos y la teoría estadística</strong>, permitiendo traducir los resultados muestrales en evidencia cuantificable a favor o en contra de <span class="math inline">\(H_0\)</span>. Por lo tanto, tenemos la siguiente definición formal:</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-En construcción
+Definición
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Contenido en desarrollo. Disponible próximamente.</p>
+<p>Si se define <span class="math inline">\(t(x_1,x_2, \ldots, x_n)\)</span> como la función de los datos observador y <span class="math inline">\(T(X_1, X_2, \ldots, X_n)\)</span> la variable aleatoria correspondiente a estos, entonces el <strong>estadístico de prueba</strong> o el <em>test statistic</em>, es el que cálculo que se utilizará para <em>testear</em> <span class="math inline">\(H_0\)</span>. Para que <span class="math inline">\(T\)</span> sea un estadístico de prueba debe cumplir con dos condiciones:</p>
+<ol type="1">
+<li>La distribución que sigue <span class="math inline">\(T\)</span> dado <span class="math inline">\(H_0\)</span> es conocida o aproximadamente conocida</li>
+<li>A medida que aumenta <span class="math inline">\(t\)</span>, existe una mayor evidencia de que no se cumple <span class="math inline">\(H_0\)</span></li>
+</ol>
 </div>
 </div>
-<section id="objetivos-de-la-sesión" class="level2">
-<h2 class="anchored" data-anchor-id="objetivos-de-la-sesión">Objetivos de la sesión</h2>
+<p>Con ello, a raíz de las observaciones, <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>, se puede llegar a un valor <span class="math inline">\(t\)</span> observado o empírico, que le diremos <span class="math inline">\(t_{\text{obs}}\)</span>. Este corresponde al valor de la función de los datos observados y, a partir de este, calculamos su probabilidad dado que se cumple la hipótesis nula: <span class="math display">\[
+p_{\text{obs}} = \Pr( T \geq t_{\text{obs}} | H_0)
+\]</span> Este valor <span class="math inline">\(p_{\text{obs}}\)</span> es lo que conocemos como valor-p o <span class="math inline">\(p\)</span>-<em>value</em>, y corresponde a la probabilidad de que el estadístico de prueba sea mayor o igual al valor observado bajo el supuesto de que se cumple la hipótesis nula.</p>
+<p>Ahora bien, <strong>¿cuál es la intuición detrás del p-value?</strong> Bajo el supuesto de que se cumple la hipótesis nula, lógicamente, si la probabilidad de que el estadístico de prueba sea mayor o igual al valor observado, es decir, que difiera más de <span class="math inline">\(H_0\)</span>, podríamos afirmar que es poco probable que la hipótesis nula se cumpla efectivamente.</p>
+<p>Por ello, cuando el <span class="math inline">\(p\)</span>-<em>value</em> es <strong>muy bajo</strong>, estadísticamente hablando se puede afirmar que la <span class="math inline">\(H_0\)</span> no se cumple. En otras palabras, el valor-p nos permite cuantificar la evidencia contra la hipótesis nula y, por tanto, fundamentar la decisión estadística del contraste.</p>
+<p>Y, entonces, <strong>¿cuál es la utilidad del valor-p?</strong> Por convención, un test de hipótesis rechazará la hipótesis nula si el valor-p observado cumple que</p>
+<p><span class="math display">\[
+p_{\text{obs}} \leq 0{,}05
+\]</span> En tal caso, se dice que el resultado es <strong>estadísticamente significativo</strong> o que presenta <strong>significancia estadística al cinco por ciento</strong>. De forma más estricta, algunos estudios consideran niveles de significancia más exigentes, por ejemplo <span class="math display">\[
+p_{\text{obs}} \leq 0{,}01
+\]</span> En ese caso, se afirma que el resultado es <strong>altamente estadísticamente significativo</strong>, o que tiene <strong>significancia estadística al uno por ciento</strong>.En ambos escenarios, el valor-p nos informa sobre la <strong>intensidad de la evidencia</strong> contra la hipótesis nula: cuanto menor es el valor-p, mayor es la evidencia en su contra.</p>
+</section>
+<section id="significancia-estadística-vs.-significancia-práctica" class="level3">
+<h3 class="anchored" data-anchor-id="significancia-estadística-vs.-significancia-práctica">Significancia estadística vs.&nbsp;significancia práctica</h3>
+<p>Aun cuando por convención se tiende a interpretar el valor-p en función de un umbral fijo (como 0,05 o 0,01), en la práctica muchos investigadores optan por <strong>reportar el valor-p observado</strong> sin necesariamente dictaminar una decisión tajante respecto a <span class="math inline">\(H_0\)</span>. De este modo, se deja a criterio del lector o del analista la <strong>contundencia o relevancia</strong> de la evidencia empírica obtenida.</p>
+<p>Aquí conviene distinguir entre <strong>significancia estadística</strong> y <strong>significancia real o práctica</strong>. Un resultado puede ser estadísticamente significativo —es decir, mostrar un valor-p muy bajo— pero, al mismo tiempo, carecer de <strong>importancia práctica o sustantiva</strong> si la magnitud del efecto observado es demasiado pequeña como para tener relevancia en el mundo real.</p>
+<p>En consecuencia, un buen análisis inferencial no solo debe basarse en el valor-p, sino también en la <strong>interpretación del contexto</strong>, la <strong>magnitud del efecto</strong>, y la <strong>relevancia teórica o aplicada</strong> del resultado.</p>
+</section>
+<section id="del-concepto-al-ejemplo-con-enut" class="level2">
+<h2 class="anchored" data-anchor-id="del-concepto-al-ejemplo-con-enut">Del concepto al ejemplo con ENUT</h2>
+<p>Hasta aquí hemos visto la lógica general de un test: plantear <span class="math inline">\(H_0\)</span>, definir un estadístico de prueba cuya distribución bajo <span class="math inline">\(H_0\)</span> conocemos, obtener el valor observado y, con eso, calcular el <span class="math inline">\(p\)</span>-<em>value</em>. Ahora vamos a <strong>hacer eso mismo pero con nuestros datos</strong>.</p>
+<p>En la ENUT tenemos, entre muchas variables, una que nos interesa particularmente: el <strong>tiempo dedicado al trabajo no remunerado en un día tipo</strong>, que en nuestra base está guardada como <code>t_tdnr_dt</code>. A diferencia de la participación (que es 0/1: si hizo o no la actividad), esta variable <strong>mide cantidad de tiempo</strong> —por ejemplo, en minutos— que la persona efectivamente destinó a trabajo no remunerado.</p>
+<p>La pregunta inferencial que podemos hacernos es algo como:</p>
+<blockquote class="blockquote">
+<p>“¿Podemos afirmar, con base en la muestra ENUT, que el <strong>tiempo promedio diario</strong> dedicado al trabajo no remunerado es distinto de cierto valor de referencia?”</p>
+</blockquote>
+<p>Ese “valor de referencia” (<span class="math inline">\(\mu_0\)</span>) puede venir de una política, de una medición anterior, de otro país, o simplemente de una cifra redonda que queramos contrastar. Para ilustrar, supongamos que queremos testear si el <strong>promedio poblacional</strong> de minutos de trabajo no remunerado en un día tipo es <strong>igual a 240 minutos (4 horas)</strong>:</p>
 <ul>
-<li>Realizar pruebas t pareadas</li>
-<li>Aplicar pruebas no paramétricas</li>
-<li>Ejecutar ANOVA de un factor</li>
-<li>Realizar comparaciones post-hoc</li>
+<li><span class="math inline">\(H_0: \mu = 240\)</span></li>
+<li><span class="math inline">\(H_1: \mu \ne 240\)</span></li>
 </ul>
+<p>Es decir, <span class="math inline">\(H_0\)</span> dice: <em>“en la población, en promedio, se destinan 4 horas al día a trabajo no remunerado”</em> y <span class="math inline">\(H_1\)</span> dice <em>“no, no son 4 horas: es más o es menos”</em>. Antes de construir el estadístico de prueba, <strong>miremos la variable</strong> y dejemos los datos limpios (solo no perdidos):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>datos_trab_nor <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_tdnr_dt =</span> haven<span class="sc">::</span><span class="fu">zap_labels</span>(t_tdnr_dt),   <span class="co"># elimina las etiquetas</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_tdnr_dt =</span> <span class="fu">as.numeric</span>(t_tdnr_dt) </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(t_tdnr_dt) <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(t_tdnr_dt) <span class="sc">&amp;</span> t_tdnr_dt <span class="sc">&lt;</span> <span class="dv">96</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>datos_trab_nor <span class="sc">|&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  psych<span class="sc">::</span><span class="fu">describe</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          vars     n mean   sd median trimmed  mad min max range skew kurtosis
+t_tdnr_dt    1 27387 2.93 2.35    2.4    2.63 2.14   0  26    26 1.39     2.99
+            se
+t_tdnr_dt 0.01</code></pre>
+</div>
+</div>
+<p>Con esto obtenemos tres elementos clave que necesitamos para construir el test:</p>
+<ol type="1">
+<li>El <strong>tamaño muestral</strong> <span class="math inline">\(n = 27{,}387\)</span></li>
+<li>La <strong>media muestral</strong> <span class="math inline">\(\bar{x} = 2{,}93\)</span> horas</li>
+<li>La <strong>desviación estándar muestral</strong> <span class="math inline">\(s = 2{,}35\)</span> horas</li>
+</ol>
+<p>Con esos tres números ya podemos <strong>fabricar nuestro estadístico de prueba</strong>. Formalicemos lo que queremos hacer entonces. Antes de continuar, no obstante, conviene señalar que, en realidad, una aplicación correcta con la ENUT se deberían usar <strong>factores de expansión y diseño muestral</strong> (estratos y conglomerados) mediante <code>survey</code> o <code>srvyr</code>. Aquí usamos un esquema SRS solo para fines didácticos. Ahora sí, formalicemos.</p>
+<section id="modelo-probabilístico-y-formulación-del-test" class="level3">
+<h3 class="anchored" data-anchor-id="modelo-probabilístico-y-formulación-del-test">Modelo probabilístico y formulación del test</h3>
+<p>Para dar un paso más formal, recordemos que la inferencia estadística se basa en <strong>modelos probabilísticos</strong>. En este caso, podemos pensar que cada observación de la variable <code>t_tdnr_dt</code> corresponde a una <strong>variable aleatoria continua</strong>, que denotamos por <span class="math inline">\(X_i\)</span>, y que representa el <strong>tiempo (en horas)</strong> que la persona <span class="math inline">\(i\)</span> dedica al trabajo no remunerado en un día tipo.</p>
+<p>Supondremos, pues, que las observaciones provienen de una <strong>muestra aleatoria simple</strong> extraída de una población con media desconocida <span class="math inline">\(\mu\)</span> y varianza <span class="math inline">\(\sigma^2\)</span>. Formalmente:</p>
+<p><span class="math display">\[
+X_1, X_2, \ldots, X_n \quad \text{son i.i.d.} \quad \text{con} \quad \mathrm{E}[X_i] = \mu, ; \mbox{Var}(X_i) = \sigma^2.
+\]</span></p>
+<p>La hipótesis nula plantea que el <strong>promedio poblacional</strong> de tiempo diario dedicado al trabajo no remunerado <strong>es igual a</strong> un valor de referencia <span class="math inline">\(\mu_0\)</span> (que podemos definir según la evidencia), mientras que la alternativa sugiere que <strong>es distinto</strong>:</p>
+<p><span class="math display">\[
+H_0 : \mu = \mu_0 \quad \text{vs.} \quad H_1 : \mu \ne \mu_0.
+\]</span></p>
+<p>Para evaluar esto, usamos la <strong>media muestral</strong> <span class="math inline">\(\bar{X}\)</span> como estimador de <span class="math inline">\(\mu\)</span>:</p>
+<p><span class="math display">\[
+\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i.
+\]</span> Bajo las condiciones clásicas del Teorema Central del Límite, sabemos que <span class="math display">\[
+\frac{\bar{X} - \mu}{S / \sqrt{n}} \approx t_{(n-1)},
+\]</span> donde <span class="math inline">\(S\)</span> es la desviación estándar muestral. Este resultado es la base del <strong>test <span class="math inline">\(t\)</span> de una muestra</strong>.</p>
+</section>
+<section id="construyendo-el-estadístico-de-prueba-caso-una-media" class="level3">
+<h3 class="anchored" data-anchor-id="construyendo-el-estadístico-de-prueba-caso-una-media">Construyendo el estadístico de prueba (caso: una media)</h3>
+<p>El <strong>estadístico de prueba</strong> es la variable aleatoria:</p>
+<p><span class="math display">\[
+T = \frac{\bar{X} - \mu_0}{S / \sqrt{n}},
+\]</span> que mide, en unidades de error estándar, <strong>cuán lejos está la media muestral del valor hipotético <span class="math inline">\(\mu_0\)</span></strong>. El valor observado, <span class="math inline">\(t_{\text{obs}}\)</span>, se obtiene reemplazando <span class="math inline">\(\bar{X}\)</span>, <span class="math inline">\(S\)</span> y <span class="math inline">\(n\)</span> por sus valores de la muestra.</p>
+<p>Si <span class="math inline">\(H_0\)</span> fuera cierta, esperaríamos que <span class="math inline">\(T\)</span> siguiera aproximadamente una distribución <span class="math inline">\(t\)</span> de Student con <span class="math inline">\(n-1\)</span> grados de libertad. Valores extremos (positivos o negativos) indicarían evidencia contra <span class="math inline">\(H_0\)</span>.</p>
+<p>Entonces, solo por poner un ejemplo didáctico, supongamos que queremos evaluar si el <strong>tiempo promedio de trabajo no remunerado</strong> en un día tipo <strong>es igual a 4 horas</strong>. En notación formal:</p>
+<ul>
+<li><span class="math inline">\(H_0: \mu = 4\)</span></li>
+<li><span class="math inline">\(H_1: \mu \ne 4\)</span></li>
+</ul>
+<p>Como no conocemos la varianza poblacional (lo que casi siempre ocurre en ciencias sociales), utilizamos el <strong>estadístico <span class="math inline">\(t\)</span> de Student</strong>, definido como:</p>
+<p><span class="math display">\[
+T = \frac{\bar X - \mu_0}{S / \sqrt{n}}
+\]</span> donde:</p>
+<ul>
+<li><span class="math inline">\(\bar X\)</span> es la media muestral de <code>t_tdnr_dt</code>,</li>
+<li><span class="math inline">\(\mu_0\)</span> es el valor que afirma <span class="math inline">\(H_0\)</span> (en nuestro ejemplo, 4 horas),</li>
+<li><span class="math inline">\(S\)</span> es la desviación estándar muestral,</li>
+<li><span class="math inline">\(n\)</span> es el número de observaciones.</li>
+</ul>
+<p>Bajo la hipótesis nula, este estadístico <strong>sigue aproximadamente una distribución <span class="math inline">\(t\)</span> de Student con <span class="math inline">\(n - 1\)</span> grados de libertad</strong>. Esto nos permite calcular la probabilidad (valor-p) de observar un valor tan extremo como el nuestro si <span class="math inline">\(H_0\)</span> fuera cierta. Calculemos todo eso en R paso a paso:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valor bajo H0 (en horas)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mu0 <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>resumen_trab_nor <span class="ot">&lt;-</span> datos_trab_nor <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n    =</span> dplyr<span class="sc">::</span><span class="fu">n</span>(),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">xbar =</span> <span class="fu">mean</span>(t_tdnr_dt),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">s    =</span> <span class="fu">sd</span>(t_tdnr_dt)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>resumen_trab_nor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+      n  xbar     s
+  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 27387  2.93  2.35</code></pre>
+</div>
+</div>
+<p>Ahora obtenemos el valor observado del estadístico <span class="math inline">\(t\)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>n    <span class="ot">&lt;-</span> resumen_trab_nor<span class="sc">$</span>n</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> resumen_trab_nor<span class="sc">$</span>xbar</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>s    <span class="ot">&lt;-</span> resumen_trab_nor<span class="sc">$</span>s</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>t_obs <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu0) <span class="sc">/</span> (s <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>t_obs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -75.6363</code></pre>
+</div>
+</div>
+<p>Como la hipótesis alternativa es <strong>bilateral</strong> (<span class="math inline">\(\mu \ne \mu_0\)</span>), el valor-p se calcula como:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_obs), <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>p_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+</section>
+<section id="interpretación-inferencial" class="level3">
+<h3 class="anchored" data-anchor-id="interpretación-inferencial">Interpretación inferencial</h3>
+<p>El estadístico <span class="math inline">\(t_{\text{obs}}\)</span> obtenido refleja cuántos <strong>errores estándar</strong> separan nuestra media muestral de las 4 horas hipotéticas. Si <span class="math inline">\(|t_{\text{obs}}|\)</span> es grande, significa que el promedio observado está muy alejado del valor propuesto por <span class="math inline">\(H_0\)</span>, y por tanto, el valor-<span class="math inline">\(p\)</span> será pequeño.</p>
+<p>En términos probabilísticos, el valor-<span class="math inline">\(p\)</span> mide:</p>
+<p><span class="math display">\[
+p = \Pr\bigl(|T| \ge |t_{\text{obs}}| \mid H_0 \bigr),
+\]</span></p>
+<p>es decir, la <strong>probabilidad de obtener un valor tan extremo como el observado</strong> si realmente <span class="math inline">\(\mu = \mu_0\)</span>.</p>
+<p>Si <span class="math inline">\(p &lt; 0.05\)</span>, diremos que la evidencia empírica es suficientemente fuerte como para <strong>rechazar la hipótesis nula</strong>.</p>
+<p>En resumen:</p>
+<ul>
+<li>Si <span class="math inline">\(p\)</span> es <strong>pequeño</strong>, la muestra contradice <span class="math inline">\(H_0\)</span> → concluimos que el tiempo promedio <strong>no es 4 horas</strong>.</li>
+<li>Si <span class="math inline">\(p\)</span> es <strong>grande</strong>, los datos son consistentes con <span class="math inline">\(H_0\)</span> → no hay evidencia estadística para rechazarla.</li>
+</ul>
+</section>
+<section id="test-automático-con-t.test" class="level3">
+<h3 class="anchored" data-anchor-id="test-automático-con-t.test">Test automático con <code>t.test()</code></h3>
+<p>Sin embargo, en R <strong>no tenemos por qué hacer todo este cálculo manualmente</strong>. El propio lenguaje incluye funciones que realizan estas pruebas de hipótesis de manera automática, permitiéndonos concentrarnos en la interpretación de los resultados.</p>
+<p>En este caso, para contrastar una media poblacional utilizamos la función <code>t.test()</code>, indicando:</p>
+<ul>
+<li>el <strong>vector de datos</strong> (<code>t_tdnr_dt</code>),</li>
+<li>el <strong>valor bajo la hipótesis nula</strong> (<code>mu</code>),</li>
+<li>y el <strong>tipo de contraste</strong> (bilateral, unilateral hacia la izquierda o hacia la derecha).</li>
+</ul>
+<p>Por defecto, R realiza un test <strong>bilateral</strong>, que es justo el que necesitamos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(datos_trab_nor<span class="sc">$</span>t_tdnr_dt, <span class="at">mu =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  datos_trab_nor$t_tdnr_dt
+t = -75.636, df = 27386, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 4
+95 percent confidence interval:
+ 2.897934 2.953610
+sample estimates:
+mean of x 
+ 2.925772 </code></pre>
+</div>
+</div>
+</section>
+<section id="interpretación-del-resultado" class="level3">
+<h3 class="anchored" data-anchor-id="interpretación-del-resultado">Interpretación del resultado</h3>
+<p>Podemos interpretar esta salida así:</p>
+<ul>
+<li>El valor observado del estadístico de prueba es <strong>t = -75.64</strong>, con <strong>27,386 grados de libertad</strong>.</li>
+<li>El <strong>valor-p &lt; 2.2e-16</strong>, extremadamente inferior a cualquier nivel usual de significancia (<span class="math inline">\(\alpha = 0.05\)</span> o <span class="math inline">\(0.01\)</span>).</li>
+<li>Por tanto, <strong>rechazamos la hipótesis nula</strong> de que el tiempo promedio diario de trabajo no remunerado es de 4 horas.</li>
+<li>El intervalo de confianza al 95% para la media poblacional está entre <strong>2.90 y 2.95 horas</strong>, lo que confirma que el verdadero promedio se encuentra muy por debajo de las 4 horas planteadas por <span class="math inline">\(H_0\)</span>.</li>
+</ul>
+<p>En términos sustantivos, esto significa que, según los datos de la ENUT, las personas <strong>dedican en promedio menos de 3 horas al trabajo no remunerado en un día tipo</strong>, y esa diferencia respecto a las 4 horas hipotetizadas es <strong>estadísticamente significativa</strong>.</p>
+<p>Antes de terminar esta sección y ver test bivariados conviene señalar una cuestión por pura rigurosidad.</p>
+<section id="sobre-los-supuestos-del-test" class="level4">
+<h4 class="anchored" data-anchor-id="sobre-los-supuestos-del-test">Sobre los supuestos del test</h4>
+<p>El test supone:</p>
+<ol type="1">
+<li><strong>Independencia</strong> de las observaciones</li>
+<li><strong>Muestra aleatoria</strong> de la población de interés</li>
+<li><strong>Normalidad aproximada</strong> de la variable (o, al menos, de la media)</li>
+<li><strong>Varianza poblacional desconocida</strong> → usamos <span class="math inline">\(t\)</span></li>
+</ol>
+<p>Como nuestro <span class="math inline">\(n\)</span> es enorme (<span class="math inline">\(n \approx 27{,}000\)</span>), el TCL nos salva de casi todo: la media muestral es aproximadamente normal aunque la variable original sea medio fea. Pero igual es bueno verlo</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular media y mediana</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>resumen_tdnr <span class="ot">&lt;-</span> datos_trab_nor <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="at">media   =</span> <span class="fu">mean</span>(t_tdnr_dt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="at">mediana =</span> <span class="fu">median</span>(t_tdnr_dt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear histograma con líneas de tendencia central</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>datos_trab_nor <span class="sc">|&gt;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> t_tdnr_dt)) <span class="sc">+</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins  =</span> <span class="dv">50</span>,<span class="at">fill  =</span> <span class="st">"#2A5783"</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha =</span> <span class="fl">0.7</span>,<span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> resumen_tdnr<span class="sc">$</span>media, </span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">"Media"</span>),</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">linewidth =</span> <span class="fl">1.2</span>,</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype  =</span> <span class="st">"dashed"</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>             ) <span class="sc">+</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">xintercept =</span> resumen_tdnr<span class="sc">$</span>mediana, </span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"Mediana"</span>),</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">1.2</span>,</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype  =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">name   =</span> <span class="st">"Medidas de</span><span class="sc">\n</span><span class="st">tendencia central"</span>,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Media"</span> <span class="ot">=</span> <span class="st">"#9C0824"</span>, <span class="st">"Mediana"</span> <span class="ot">=</span> <span class="st">"#09622A"</span>)) <span class="sc">+</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">16</span>),</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">16</span>, <span class="dv">2</span>),</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">paste0</span>(x, <span class="st">" h"</span>)) <span class="sc">+</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"Distribución del tiempo diario de trabajo no remunerado"</span>,</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Variable `t_tdnr_dt` en horas (ENUT)"</span>,</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">x        =</span> <span class="st">"Horas de trabajo no remunerado (día tipo)"</span>,</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">y        =</span> <span class="st">"Frecuencia (número de personas)"</span>,</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption  =</span> <span class="st">"Fuente: Elaboración propia con datos ENUT"</span>) <span class="sc">+</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"Fira Sans"</span>) <span class="sc">+</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, </span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">size =</span> <span class="dv">14</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle   =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title    =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text       =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title      =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="03-inferential-statistics_files/figure-html/histograma-t_tdnr_dt-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Distribución del tiempo diario de trabajo no remunerado (ENUT)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Con <span class="math inline">\(n\)</span> grande, el test <span class="math inline">\(t\)</span> es bastante robusto a desviaciones de normalidad. El punto crítico pasa por la <strong>independencia</strong> y por que estemos usando <strong>una sola población</strong>.</p>
+</blockquote>
+</section>
+</section>
+</section>
+</section>
+<section id="test-bivariados" class="level1">
+<h1>Test bivariados</h1>
+<section id="comparación-de-medias-entre-dos-grupos-hombres-y-mujeres" class="level3">
+<h3 class="anchored" data-anchor-id="comparación-de-medias-entre-dos-grupos-hombres-y-mujeres">Comparación de medias entre dos grupos: hombres y mujeres</h3>
+<p>Ahora que ya vimos cómo contrastar una media poblacional con un valor fijo, podemos avanzar a un caso muy común en la práctica: <strong>comparar dos grupos</strong>. En este contexto, queremos saber si el <strong>tiempo promedio diario dedicado al trabajo no remunerado</strong> (<code>t_tdnr_dt</code>) <strong>difiere entre mujeres y hombres</strong>.</p>
+<p>La formulación estadística del contraste es:</p>
+<ul>
+<li><span class="math inline">\(H_0: \mu_{\text{mujeres}} = \mu_{\text{hombres}}\)</span></li>
+<li><span class="math inline">\(H_1: \mu_{\text{mujeres}} \ne \mu_{\text{hombres}}\)</span></li>
+</ul>
+<p>La hipótesis nula plantea que <strong>no hay diferencia promedio</strong> entre ambos grupos, mientras que la alternativa sostiene que <strong>sí existe una diferencia</strong>.</p>
+</section>
+<section id="exploración-de-la-variable-de-sexo" class="level3">
+<h3 class="anchored" data-anchor-id="exploración-de-la-variable-de-sexo">Exploración de la variable de sexo</h3>
+<p>Primero observamos cómo está codificada la variable <code>sexo</code> en la base ENUT:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sjmisc<span class="sc">::</span><span class="fu">frq</span>(datos<span class="sc">$</span>sexo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Sexo (x) &lt;numeric&gt; 
+# total N=48020 valid N=48020 mean=1.53 sd=0.50
+
+Value |         Label |     N | Raw % | Valid % | Cum. %
+--------------------------------------------------------
+    1 |        Hombre | 22609 | 47.08 |   47.08 |  47.08
+    2 |         Mujer | 25411 | 52.92 |   52.92 | 100.00
+   96 | Valor Perdido |     0 |  0.00 |    0.00 | 100.00
+ &lt;NA&gt; |          &lt;NA&gt; |     0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="preparamos-los-datos" class="level3">
+<h3 class="anchored" data-anchor-id="preparamos-los-datos">Preparamos los datos</h3>
+<p>Creamos un subconjunto con las variables relevantes, eliminando etiquetas y posibles valores perdidos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>datos_bivariado <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">sexo =</span> haven<span class="sc">::</span><span class="fu">zap_labels</span>(sexo),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sexo =</span> <span class="fu">as.factor</span>(sexo),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_tdnr_dt =</span> haven<span class="sc">::</span><span class="fu">zap_labels</span>(t_tdnr_dt),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_tdnr_dt =</span> <span class="fu">as.numeric</span>(t_tdnr_dt)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sexo), <span class="sc">!</span><span class="fu">is.na</span>(t_tdnr_dt), t_tdnr_dt <span class="sc">&lt;</span> <span class="dv">96</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>sjmisc<span class="sc">::</span><span class="fu">frq</span>(datos_bivariado<span class="sc">$</span>sexo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x &lt;categorical&gt; 
+# total N=27387 valid N=27387 mean=1.59 sd=0.49
+
+Value |     N | Raw % | Valid % | Cum. %
+----------------------------------------
+    1 | 11118 | 40.60 |   40.60 |  40.60
+    2 | 16269 | 59.40 |   59.40 | 100.00
+ &lt;NA&gt; |     0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
+</div>
+</div>
+<p>Antes de aplicar el test, visualizamos las distribuciones:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>datos_bivariado <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sexo, <span class="at">y =</span> t_tdnr_dt, <span class="at">fill =</span> sexo)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"gray20"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">outlier.colour =</span> <span class="st">"gray40"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">outlier.shape =</span> <span class="dv">16</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">outlier.size =</span> <span class="fl">1.8</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"#2A5783"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"#9C0824"</span>),</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Hombres"</span>, <span class="st">"Mujeres"</span>)) <span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title    =</span> <span class="st">"Distribución del tiempo diario de trabajo no remunerado según sexo"</span>,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Variable `t_tdnr_dt` en horas (ENUT)"</span>,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x        =</span> <span class="st">"Sexo"</span>,</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y        =</span> <span class="st">"Horas de trabajo no remunerado (día tipo)"</span>,</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption  =</span> <span class="st">"Fuente: Elaboración propia con datos ENUT"</span>) <span class="sc">+</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"Fira Sans"</span>) <span class="sc">+</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, </span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">size =</span> <span class="dv">14</span>,</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, </span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>),</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position  =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="03-inferential-statistics_files/figure-html/boxplot-bivariado-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Distribución del tiempo diario de trabajo no remunerado según sexo (ENUT)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Como muestra el gráfico, las <strong>mujeres (2)</strong> presentan una distribución desplazada hacia valores mayores, lo que sugiere que dedican más tiempo al trabajo no remunerado que los hombres.</p>
+</section>
+<section id="test-t-de-dos-muestras-independientes" class="level3">
+<h3 class="anchored" data-anchor-id="test-t-de-dos-muestras-independientes">Test t de dos muestras independientes</h3>
+<p>Aplicamos ahora el test formalmente. En R, se usa la misma función <code>t.test()</code>, indicando la variable de interés (<code>t_tdnr_dt</code>) y el factor de agrupación (<code>sexo</code>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(t_tdnr_dt <span class="sc">~</span> sexo, <span class="at">data =</span> datos_bivariado)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  t_tdnr_dt by sexo
+t = -54.612, df = 26829, p-value &lt; 2.2e-16
+alternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0
+95 percent confidence interval:
+ -1.493309 -1.389831
+sample estimates:
+mean in group 1 mean in group 2 
+        2.06942         3.51099 </code></pre>
+</div>
+</div>
+</section>
+<section id="interpretación-del-resultado-1" class="level3">
+<h3 class="anchored" data-anchor-id="interpretación-del-resultado-1">Interpretación del resultado</h3>
+<ul>
+<li>El <strong>estadístico de prueba t = -54.61</strong>, con <strong>26,829 grados de libertad</strong>, y un <strong>valor-p &lt; 2.2e-16</strong>.</li>
+<li>Dado que el valor-p es mucho menor que cualquier nivel usual de significancia (<span class="math inline">\(\alpha = 0.05\)</span> o <span class="math inline">\(0.01\)</span>), <strong>rechazamos la hipótesis nula</strong> de igualdad de medias.</li>
+<li>El <strong>intervalo de confianza al 95%</strong> para la diferencia de medias es [-1.49, -1.39], lo que confirma que las medias no son iguales (la diferencia no incluye el 0).</li>
+<li>En promedio, los hombres dedican <strong>2.07 horas</strong>, mientras que las mujeres dedican <strong>3.51 horas</strong> al trabajo no remunerado diario.</li>
+</ul>
+<p>En conclusión, existe una <strong>diferencia estadísticamente significativa</strong> en el tiempo promedio diario de trabajo no remunerado entre hombres y mujeres. En promedio, las <strong>mujeres dedican alrededor de una hora y media más</strong> que los hombres a este tipo de actividades, diferencia que resulta <strong>altamente significativa</strong> desde el punto de vista estadístico y también relevante en términos sociales.</p>
+</section>
+<section id="chequeo-de-supuestos-y-tamaño-de-efecto" class="level3">
+<h3 class="anchored" data-anchor-id="chequeo-de-supuestos-y-tamaño-de-efecto">Chequeo de supuestos y tamaño de efecto</h3>
+<p>Antes de pasar al ANOVA, conviene revisar brevemente los <strong>supuestos del test t de dos muestras independientes</strong>. El <strong>test de Welch</strong> —que R aplica por defecto— no asume igualdad de varianzas, pero es útil comprobar si esta condición se cumple empíricamente. Para ello, aplicamos un test F de comparación de varianzas:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(datos_bivariado, <span class="fu">var.test</span>(t_tdnr_dt <span class="sc">~</span> sexo))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    F test to compare two variances
+
+data:  t_tdnr_dt by sexo
+F = 0.62241, num df = 11117, denom df = 16268, p-value &lt; 2.2e-16
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.6015733 0.6440445
+sample estimates:
+ratio of variances 
+         0.6224123 </code></pre>
+</div>
+</div>
+<p>El resultado muestra un <strong>valor F = 0.622</strong> y un <strong>valor-p &lt; 2.2e-16</strong>, lo que indica que las varianzas <strong>no son iguales</strong> entre hombres y mujeres. Por tanto, es correcto haber utilizado el <strong>test t de Welch</strong>, que ajusta los grados de libertad sin asumir homocedasticidad. Por otro lado, dado el tamaño de muestra muy grande (<span class="math inline">\(n \approx 27{,}000\)</span>), casi cualquier diferencia resulta estadísticamente significativa.</p>
+<p>Para evaluar la magnitud real de la diferencia, calculamos el <strong><span class="math inline">\(d\)</span> de Cohen</strong>, que expresa cuántas desviaciones estándar separan los promedios de ambos grupos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>datos_bivariado <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sexo) <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n    =</span> <span class="fu">n</span>(),</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(t_tdnr_dt),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd   =</span> <span class="fu">sd</span>(t_tdnr_dt),</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  (\(df){</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    n1  <span class="ot">&lt;-</span> df<span class="sc">$</span>n[df<span class="sc">$</span>sexo <span class="sc">==</span> <span class="dv">1</span>]</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    n2  <span class="ot">&lt;-</span> df<span class="sc">$</span>n[df<span class="sc">$</span>sexo <span class="sc">==</span> <span class="dv">2</span>]</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    m1  <span class="ot">&lt;-</span> df<span class="sc">$</span>mean[df<span class="sc">$</span>sexo <span class="sc">==</span> <span class="dv">1</span>]</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    m2  <span class="ot">&lt;-</span> df<span class="sc">$</span>mean[df<span class="sc">$</span>sexo <span class="sc">==</span> <span class="dv">2</span>]</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    s1  <span class="ot">&lt;-</span> df<span class="sc">$</span>sd[df<span class="sc">$</span>sexo <span class="sc">==</span> <span class="dv">1</span>]</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    s2  <span class="ot">&lt;-</span> df<span class="sc">$</span>sd[df<span class="sc">$</span>sexo <span class="sc">==</span> <span class="dv">2</span>]</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    sd_pool <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(((n1 <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span>s1<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (n2 <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span>s2<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">diferencia_medias =</span> m1 <span class="sc">-</span> m2,</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">d_cohen           =</span> (m1 <span class="sc">-</span> m2)<span class="sc">/</span>sd_pool</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>  })()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  diferencia_medias d_cohen
+              &lt;dbl&gt;   &lt;dbl&gt;
+1             -1.44  -0.643</code></pre>
+</div>
+</div>
+<p>El resultado arroja una <strong>diferencia de medias de -1.44 horas</strong> y un <strong><span class="math inline">\(d\)</span> de Cohen ≈ -0.64</strong>, lo que corresponde a un <strong>efecto de magnitud moderada</strong>. Esto significa que, además de ser estadísticamente significativa, la diferencia entre hombres y mujeres en el tiempo diario dedicado al trabajo no remunerado es <strong>sustantivamente relevante</strong>, equivalente a más de <strong>media desviación estándar</strong>.</p>
+<p>Ahora bien, hasta aquí comparamos <strong>dos medias</strong> —hombres y mujeres— mediante un test t. Si quisiéramos comparar <strong>tres o más grupos</strong> (por ejemplo, regiones, tramos de edad o niveles educativos), aplicar varios tests t por separado no sería adecuado, ya que <strong>aumenta la probabilidad de error de tipo I</strong>.</p>
+<p>Para estos casos utilizamos el <strong>Análisis de Varianza (ANOVA)</strong>, que generaliza el test t y permite <strong>evaluar simultáneamente si existen diferencias entre múltiples medias poblacionales</strong> dentro de un mismo modelo. En la siguiente sección veremos cómo implementarlo en R, continuando con la misma lógica inferencial.</p>
+</section>
+</section>
+<section id="anova-comparación-de-medias-entre-más-de-dos-grupos" class="level1">
+<h1>ANOVA: comparación de medias entre más de dos grupos</h1>
+<p>Como vimos, el test <span class="math inline">\(t\)</span> permite contrastar la igualdad de medias entre <strong>dos grupos</strong>. Pero cuando queremos comparar <strong>tres o más</strong>, por ejemplo, por <strong>nivel educativo</strong>, <strong>nivel socioeconómico</strong> o <strong>región</strong>, aplicar varios tests <span class="math inline">\(t\)</span> independientes no sería adecuado, ya que aumentaría la probabilidad de cometer <strong>errores de tipo I</strong> (rechazar falsamente la hipótesis nula por azar).</p>
+<p>El <strong>Análisis de Varianza (ANOVA)</strong> permite resolver este problema de forma conjunta, evaluando si <strong>existen diferencias estadísticamente significativas entre las medias de más de dos grupos</strong> dentro de un mismo modelo.</p>
+<p>Formalmente, el ANOVA contrasta:</p>
+<p><span class="math display">\[
+H_0 : \mu_1 = \mu_2 = \cdots = \mu_k
+\quad \text{vs.} \quad
+H_1 : \text{al menos una media difiere.}
+\]</span></p>
+<p>donde <span class="math inline">\(k\)</span> es el número de grupos. La idea central es descomponer la variabilidad total observada en la variable de interés (aquí, el tiempo dedicado al trabajo no remunerado) en dos componentes:</p>
+<ol type="1">
+<li><strong>Variabilidad entre grupos:</strong> diferencias debidas a pertenecer a distintos niveles educativos.</li>
+<li><strong>Variabilidad dentro de los grupos:</strong> diferencias individuales no explicadas por el factor.</li>
+</ol>
+<p>El <strong>estadístico F</strong> mide la razón entre ambas fuentes de variación:</p>
+<p><span class="math display">\[
+F = \frac{\text{Varianza entre grupos}}{\text{Varianza dentro de los grupos}}
+\]</span></p>
+<p>Si el valor de F es grande y el correspondiente valor-p pequeño, se concluye que <strong>existen diferencias significativas</strong> entre las medias de al menos algunos grupos.</p>
+<section id="ejemplo-diferencias-por-nivel-educativo" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-diferencias-por-nivel-educativo">Ejemplo: diferencias por nivel educativo</h3>
+<p>Veamos si el <strong>tiempo promedio de trabajo no remunerado</strong> difiere según el <strong>nivel educativo</strong> (<code>nivel_educ</code>). Primero, preparamos los datos filtrando los valores válidos y convirtiendo la variable educativa en factor:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>datos_anova <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">nivel_educ =</span> haven<span class="sc">::</span><span class="fu">zap_labels</span>(nivel_educ),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">nivel_educ =</span> <span class="fu">factor</span>(nivel_educ,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Sin o primaria incompleta"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Primaria completa"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Secundaria completa"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Técnica o postsecundaria"</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Universitaria"</span>)),</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_tdnr_dt =</span> haven<span class="sc">::</span><span class="fu">zap_labels</span>(t_tdnr_dt),</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_tdnr_dt =</span> <span class="fu">as.numeric</span>(t_tdnr_dt)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(nivel_educ), <span class="sc">!</span><span class="fu">is.na</span>(t_tdnr_dt), t_tdnr_dt <span class="sc">&lt;</span> <span class="dv">96</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Visualizamos las distribuciones:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>datos_anova <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> nivel_educ, <span class="at">y =</span> t_tdnr_dt, <span class="at">fill =</span> nivel_educ)) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">color =</span> <span class="st">"gray30"</span>) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#9C0824"</span>, <span class="st">"#C7402D"</span>, <span class="st">"#F28E2B"</span>, <span class="st">"#7CA982"</span>, <span class="st">"#2A5783"</span>)) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribución del trabajo no remunerado por nivel educativo"</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Variable `t_tdnr_dt` en horas (ENUT)"</span>,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Nivel educativo"</span>,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Horas de trabajo no remunerado (día tipo)"</span>,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: Elaboración propia con datos ENUT"</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"Fira Sans"</span>) <span class="sc">+</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">20</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="03-inferential-statistics_files/figure-html/boxplot-anova-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Distribución del tiempo diario de trabajo no remunerado según nivel educativo (ENUT)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>El gráfico muestra una tendencia descendente: quienes tienen menor educación tienden a dedicar más tiempo al trabajo no remunerado, mientras que las personas con educación técnica o universitaria dedican menos horas.</p>
+</section>
+<section id="anova-de-una-vía" class="level3">
+<h3 class="anchored" data-anchor-id="anova-de-una-vía">ANOVA de una vía</h3>
+<p>Aplicamos el ANOVA formalmente con la función <code>aov()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>modelo_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(t_tdnr_dt <span class="sc">~</span> nivel_educ, <span class="at">data =</span> datos_anova)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Df Sum Sq Mean Sq F value Pr(&gt;F)    
+nivel_educ      4   1534   383.5   70.11 &lt;2e-16 ***
+Residuals   27380 149749     5.5                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>El resultado arroja un <strong>F = 70.11</strong> con <strong>valor-p &lt; 2 × 10⁻¹⁶</strong>, lo que indica diferencias <strong>altamente significativas</strong> entre los niveles educativos. Es decir, <strong>rechazamos <span class="math inline">\(H_0\)</span></strong> y concluimos que el tiempo promedio de trabajo no remunerado <strong>varía según el nivel educativo</strong>.</p>
+<p>Para identificar <strong>qué grupos difieren entre sí</strong>, realizamos una <strong>prueba post-hoc de Tukey</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(modelo_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = t_tdnr_dt ~ nivel_educ, data = datos_anova)
+
+$nivel_educ
+                                                          diff         lwr
+Primaria completa-Sin o primaria incompleta        -0.19917441 -0.36876754
+Secundaria completa-Sin o primaria incompleta       0.30681383  0.13694033
+Técnica o postsecundaria-Sin o primaria incompleta  0.40143614  0.22990038
+Universitaria-Sin o primaria incompleta             0.26157690  0.08577326
+Secundaria completa-Primaria completa               0.50598824  0.39848431
+Técnica o postsecundaria-Primaria completa          0.60061054  0.49049876
+Universitaria-Primaria completa                     0.46075131  0.34410222
+Técnica o postsecundaria-Secundaria completa        0.09462231 -0.01592080
+Universitaria-Secundaria completa                  -0.04523693 -0.16229325
+Universitaria-Técnica o postsecundaria             -0.13985923 -0.25931506
+                                                           upr     p adj
+Primaria completa-Sin o primaria incompleta        -0.02958127 0.0118540
+Secundaria completa-Sin o primaria incompleta       0.47668732 0.0000083
+Técnica o postsecundaria-Sin o primaria incompleta  0.57297189 0.0000000
+Universitaria-Sin o primaria incompleta             0.43738054 0.0004739
+Secundaria completa-Primaria completa               0.61349216 0.0000000
+Técnica o postsecundaria-Primaria completa          0.71072233 0.0000000
+Universitaria-Primaria completa                     0.57740040 0.0000000
+Técnica o postsecundaria-Secundaria completa        0.20516542 0.1338790
+Universitaria-Secundaria completa                   0.07181940 0.8298756
+Universitaria-Técnica o postsecundaria             -0.02040341 0.0122459</code></pre>
+</div>
+</div>
+<p>Los resultados muestran diferencias estadísticamente significativas entre la mayoría de los pares. En particular:</p>
+<ul>
+<li>Quienes tienen <strong>educación primaria o menos</strong> dedican <strong>más tiempo</strong> al trabajo no remunerado que los grupos con estudios secundarios, técnicos o universitarios.</li>
+<li>Las diferencias entre niveles <strong>secundario, técnico y universitario</strong> son menores y, en algunos casos, <strong>no significativas</strong> (por ejemplo, secundaria vs.&nbsp;universitaria, p ≈ 0.83).</li>
+</ul>
+<p>Esto confirma una <strong>brecha educativa clara</strong>: a medida que aumenta el nivel educativo, el tiempo destinado al trabajo no remunerado tiende a disminuir.</p>
 <hr>
-<p><em>Última actualización: [Fecha]</em></p>
+</section>
+<section id="tamaño-de-efecto-eta2" class="level3">
+<h3 class="anchored" data-anchor-id="tamaño-de-efecto-eta2">Tamaño de efecto: <span class="math inline">\(\eta^2\)</span></h3>
+<p>Como en el caso del test <span class="math inline">\(t\)</span>, con muestras grandes es importante complementar el análisis con una medida de <strong>magnitud del efecto</strong>. El <strong><span class="math inline">\(\eta^2\)</span> (eta cuadrado)</strong> indica la proporción de la variabilidad total explicada por el factor:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>SS <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo_anova)[[<span class="dv">1</span>]]<span class="sc">$</span><span class="st">`</span><span class="at">Sum Sq</span><span class="st">`</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>eta2 <span class="ot">&lt;-</span> SS[<span class="dv">1</span>] <span class="sc">/</span> <span class="fu">sum</span>(SS)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>eta2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01013896</code></pre>
+</div>
+</div>
+<p>El valor obtenido fue <strong><span class="math inline">\(\eta^2 ≈ 0.01\)</span></strong>, lo que corresponde a un <strong>efecto pequeño</strong> según las convenciones usuales (0.01 = pequeño, 0.06 = mediano, 0.14 = grande). Esto significa que, aunque las diferencias entre grupos son <strong>estadísticamente significativas</strong>, el <strong>nivel educativo explica solo alrededor del 1 %</strong> de la variabilidad en el tiempo de trabajo no remunerado. En términos sustantivos, las desigualdades educativas inciden, pero <strong>no son el principal determinante</strong> del tiempo dedicado a tareas no remuneradas.</p>
+</section>
+<section id="extensiones-posibles" class="level3">
+<h3 class="anchored" data-anchor-id="extensiones-posibles">Extensiones posibles</h3>
+<p>El ANOVA puede extenderse fácilmente para explorar diferencias por otras variables categóricas, como <strong>nivel socioeconómico (<code>NSE</code>)</strong>, <strong>condición de actividad (<code>cae</code>)</strong> o <strong>región (<code>glosa_region</code>)</strong>, e incluso para <strong>modelos multifactoriales</strong>, donde se analiza la interacción entre variables (por ejemplo, <strong>sexo × nivel educativo</strong>).</p>
+<p>Estas extensiones permiten profundizar en los <strong>determinantes sociales del trabajo no remunerado</strong>, integrando más dimensiones de desigualdad dentro del análisis inferencial.</p>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -682,27 +1385,679 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Sesión 3: Prueba de Hipótesis (II) y ANOVA"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Taller de Métodos y Técnicas de Investigación I"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## En construcción</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>Contenido en desarrollo. Disponible próximamente.</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## Objetivos de la sesión</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Realizar pruebas t pareadas</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Aplicar pruebas no paramétricas</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ejecutar ANOVA de un factor</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Realizar comparaciones post-hoc</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>*Última actualización: [Fecha]*</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Sesión 3: Prueba de Hipótesis (II) y ANOVA"</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Taller de Métodos y Técnicas de Investigación I"</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>En esta sesión entraremos de lleno en estadística inferencial, retomando desde contenidos de la sesión pasada, pero con un enfoque más riguroso. Ahora bien, si iremos viendo contenido más aplicado en técnicas y test estadísticos.  </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Objetivos de la sesión</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Conocer test de hipótesis y aprender a realizarlos en R</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Conocer ANOVA y tests bivariados </span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>Primero llamamos los paquetes que utilizaremos en la sesión y la base de datos que utilizaremos</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setear-base</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"C:/Users/Fran/OneDrive/Escritorio/UAH/MAGISTER ECONOMIA UCH/Ayudantías/Taller métodos/metodos-mgsocio-uah"</span>)</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: cargar-paquetes</span></span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a><span class="co">#| collapse: true</span></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"pacman"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, <span class="co"># colección de paquetes, dplyr entre ellos, pero también haven</span></span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>               dplyr, <span class="co"># manipular datos</span></span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>               psych, <span class="co"># para estadísticas descriptivas</span></span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>               sjmisc, <span class="co"># explorar datos</span></span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>               ggplot2, <span class="co"># para visualizar gráficos</span></span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a>               scales) <span class="co"># para ajustar gráficos</span></span>
+<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar ENUT</span></span>
+<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data-sesiones/enut.RDS"</span>)</span>
+<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a><span class="fu"># Estadística inferencial </span></span>
+<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a>Como habíamos visto en la sesión pasada, el objetivo de la estadística es usar la información contenida en una muestra para hacer inferencias para sacar conclusiones sobre la población de la que proviene. Dado que las poblaciones se describen mediante valores numéricos —los llamados *parámetros*—, gran parte del trabajo estadístico consiste en estimar uno o varios de esos parámetros a partir de la muestra. Una forma de *testear* si un estimador, a partir de nuestra muestra, contiene información suficiente para hacer afirmaciones poblaciones, es justamente a través de test o pruebas de hipótesis. </span>
+<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a><span class="fu"># Test de hipótesis </span></span>
+<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a>Un test de hipótesis, por ahora solo simples, corresponde a un método para evaluar si una serie de datos observados (muestrales) se comportan según cierto escenario, esto es, como una *hipótesis* que haya sido planteada. Así, si se tiene un conjunto de datos u observaciones $x_1, x_2, \ldots, x_n$ se puede plantear: </span>
+<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Una **hipótesis nula** ($H_0$), que permitirá evaluar con los datos si estos se comportan según lo planteado cpor $H_0$. O, de modo contrario, </span>
+<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Una **hipótesis alternativa** ($H_1$ o $H_A$), que implicará una proposición contraria a la hipótesis nula, es decir, una afirmación que se considerará verdadera si la evidencia muestral resulta inconsistente con lo planteado por $H_0$.</span>
+<span id="cb32-55"><a href="#cb32-55" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb32-56"><a href="#cb32-56" aria-hidden="true" tabindex="-1"></a>Para ello, se debe plantear un **modelo probabilístico** que *traduzca* la hipótesis nula en variables aleatorias que generaron las observaciones, de denotaremos como $X_1, X_2, \ldots, X_n$. Por tanto, en términos generales, el procedimiento de contraste de hipótesis sigue estos pasos:</span>
+<span id="cb32-57"><a href="#cb32-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-58"><a href="#cb32-58" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Plantear las hipótesis**:</span>
+<span id="cb32-59"><a href="#cb32-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-60"><a href="#cb32-60" aria-hidden="true" tabindex="-1"></a><span class="ss">   * </span>$H_0$: afirmación inicial o de no efecto.</span>
+<span id="cb32-61"><a href="#cb32-61" aria-hidden="true" tabindex="-1"></a><span class="ss">   * </span>$H_1$: afirmación alternativa o de efecto/diferencia.</span>
+<span id="cb32-62"><a href="#cb32-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-63"><a href="#cb32-63" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Elegir el nivel de significancia** $\alpha$ (por ejemplo, 0.05 o 0.01). Esto nos dirá con qué nivel de confianza podremos afirmar, a partir de nuestra muestra, sobre nuestra población. </span>
+<span id="cb32-64"><a href="#cb32-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-65"><a href="#cb32-65" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Seleccionar la estadística de prueba** adecuada (por ejemplo, $Z$, $t$, $\chi^2$, $F$, etc.), dependiendo del tipo de variable, tamaño de muestra y supuestos sobre la población.</span>
+<span id="cb32-66"><a href="#cb32-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-67"><a href="#cb32-67" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Calcular el valor observado** de la estadística de prueba con los datos muestrales.</span>
+<span id="cb32-68"><a href="#cb32-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-69"><a href="#cb32-69" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Determinar la región crítica** o **valor p**, y comparar con el nivel de significancia.</span>
+<span id="cb32-70"><a href="#cb32-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-71"><a href="#cb32-71" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**Tomar una decisión**:</span>
+<span id="cb32-72"><a href="#cb32-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-73"><a href="#cb32-73" aria-hidden="true" tabindex="-1"></a><span class="ss">   * </span>Si la evidencia es suficientemente fuerte (es decir, el valor $p &lt; \alpha$ o el estadístico cae en la región crítica), **se rechaza $H_0$**.</span>
+<span id="cb32-74"><a href="#cb32-74" aria-hidden="true" tabindex="-1"></a><span class="ss">   * </span>En caso contrario, **no se rechaza $H_0$**.</span>
+<span id="cb32-75"><a href="#cb32-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-76"><a href="#cb32-76" aria-hidden="true" tabindex="-1"></a>De esta forma, un test de hipótesis no “demuestra” que una hipótesis sea verdadera, sino que evalúa si los datos **son o no compatibles** con el escenario que plantea la hipótesis nula. Entonces, veamos el paso a paso y luego testeemos cosas con R. En general, el nivel de significancia se elige por convención y, además, R te entrega el $p$-*value* como tal. Así que decideremos ahí. No obstante, trataremos que al menos sea $\alpha = 0{,}05$. Así pues, partiremos desde el punto 3.   </span>
+<span id="cb32-77"><a href="#cb32-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-78"><a href="#cb32-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-79"><a href="#cb32-79" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estadísticos de prueba y $p$-*value*</span></span>
+<span id="cb32-80"><a href="#cb32-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-81"><a href="#cb32-81" aria-hidden="true" tabindex="-1"></a>Si definimos una hipótesis nula $H_0$ y una alternativa $H_1$, necesitamos una manera **objetiva** de evaluar qué tan consistentes son nuestros datos con lo que plantea $H_0$. Para eso se utilizan los **estadísticos de prueba**.</span>
+<span id="cb32-82"><a href="#cb32-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-83"><a href="#cb32-83" aria-hidden="true" tabindex="-1"></a>Un **estadístico de prueba** es una cantidad numérica que se calcula a partir de la muestra y que resume, en una sola medida, la evidencia disponible contra la hipótesis nula. Su valor se compara con lo que se esperaría bajo $H_0$, y según el resultado se decide si hay motivos suficientes para rechazarla.</span>
+<span id="cb32-84"><a href="#cb32-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-85"><a href="#cb32-85" aria-hidden="true" tabindex="-1"></a>En términos más formales, el estadístico de prueba se construye de modo que su **distribución bajo $H_0$** sea conocida (por ejemplo, una distribución normal estándar, $t$ de Student, $\chi^2$, o $F$). Así, podemos cuantificar la probabilidad de obtener un valor tan extremo como el observado —o más— si $H_0$ fuera cierta.</span>
+<span id="cb32-86"><a href="#cb32-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-87"><a href="#cb32-87" aria-hidden="true" tabindex="-1"></a>Por ejemplo:</span>
+<span id="cb32-88"><a href="#cb32-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-89"><a href="#cb32-89" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>En una prueba sobre una media poblacional con varianza conocida, el estadístico suele seguir una **distribución normal estándar ($Z$)**.</span>
+<span id="cb32-90"><a href="#cb32-90" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si la varianza es desconocida y la muestra es pequeña, se usa una **distribución $t$ de Student**.</span>
+<span id="cb32-91"><a href="#cb32-91" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Para contrastar varianzas o ajustar modelos de regresión, pueden utilizarse **estadísticos $\chi^2$ o $F$**, respectivamente.</span>
+<span id="cb32-92"><a href="#cb32-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-93"><a href="#cb32-93" aria-hidden="true" tabindex="-1"></a>En resumen, el estadístico de prueba actúa como un **puente entre los datos y la teoría estadística**, permitiendo traducir los resultados muestrales en evidencia cuantificable a favor o en contra de $H_0$. Por lo tanto, tenemos la siguiente definición formal:</span>
+<span id="cb32-94"><a href="#cb32-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-95"><a href="#cb32-95" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
+<span id="cb32-96"><a href="#cb32-96" aria-hidden="true" tabindex="-1"></a><span class="fu">### Definición</span></span>
+<span id="cb32-97"><a href="#cb32-97" aria-hidden="true" tabindex="-1"></a>Si se define $t(x_1,x_2, \ldots, x_n)$ como la función de los datos observador y $T(X_1, X_2, \ldots, X_n)$ la variable aleatoria correspondiente a estos, entonces el **estadístico de prueba** o el *test statistic*, es el que cálculo que se utilizará para *testear* $H_0$. Para que $T$ sea un estadístico de prueba debe cumplir con dos condiciones: </span>
+<span id="cb32-98"><a href="#cb32-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-99"><a href="#cb32-99" aria-hidden="true" tabindex="-1"></a><span class="ss">  1. </span>La distribución que sigue $T$ dado $H_0$ es conocida o aproximadamente conocida</span>
+<span id="cb32-100"><a href="#cb32-100" aria-hidden="true" tabindex="-1"></a><span class="ss">  2. </span>A medida que aumenta $t$, existe una mayor evidencia de que no se cumple $H_0$</span>
+<span id="cb32-101"><a href="#cb32-101" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb32-102"><a href="#cb32-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-103"><a href="#cb32-103" aria-hidden="true" tabindex="-1"></a>Con ello, a raíz de las observaciones, $x_1, x_2, \ldots, x_n$, se puede llegar a un valor $t$ observado o empírico, que le diremos $t_{\text{obs}}$. Este corresponde al valor de la función de los datos observados y, a partir de este, calculamos su probabilidad dado que se cumple la hipótesis nula:</span>
+<span id="cb32-104"><a href="#cb32-104" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-105"><a href="#cb32-105" aria-hidden="true" tabindex="-1"></a>p_{\text{obs}} = \Pr( T \geq t_{\text{obs}} | H_0)</span>
+<span id="cb32-106"><a href="#cb32-106" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-107"><a href="#cb32-107" aria-hidden="true" tabindex="-1"></a>Este valor $p_{\text{obs}}$ es lo que conocemos como valor-p o $p$-*value*, y corresponde a la probabilidad de que el estadístico de prueba sea mayor o igual al valor observado bajo el supuesto de que se cumple la hipótesis nula.</span>
+<span id="cb32-108"><a href="#cb32-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-109"><a href="#cb32-109" aria-hidden="true" tabindex="-1"></a>Ahora bien, **¿cuál es la intuición detrás del p-value?** Bajo el supuesto de que se cumple la hipótesis nula, lógicamente, si la probabilidad de que el estadístico de prueba sea mayor o igual al valor observado, es decir, que difiera más de $H_0$, podríamos afirmar que es poco probable que la hipótesis nula se cumpla efectivamente.</span>
+<span id="cb32-110"><a href="#cb32-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-111"><a href="#cb32-111" aria-hidden="true" tabindex="-1"></a>Por ello, cuando el $p$-*value* es **muy bajo**, estadísticamente hablando se puede afirmar que la $H_0$ no se cumple. En otras palabras, el valor-p nos permite cuantificar la evidencia contra la hipótesis nula y, por tanto, fundamentar la decisión estadística del contraste.</span>
+<span id="cb32-112"><a href="#cb32-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-113"><a href="#cb32-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-114"><a href="#cb32-114" aria-hidden="true" tabindex="-1"></a>Y, entonces, **¿cuál es la utilidad del valor-p?** Por convención, un test de hipótesis rechazará la hipótesis nula si el valor-p observado cumple que</span>
+<span id="cb32-115"><a href="#cb32-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-116"><a href="#cb32-116" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-117"><a href="#cb32-117" aria-hidden="true" tabindex="-1"></a>p_{\text{obs}} \leq 0{,}05</span>
+<span id="cb32-118"><a href="#cb32-118" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-119"><a href="#cb32-119" aria-hidden="true" tabindex="-1"></a>En tal caso, se dice que el resultado es **estadísticamente significativo** o que presenta **significancia estadística al cinco por ciento**. De forma más estricta, algunos estudios consideran niveles de significancia más exigentes, por ejemplo</span>
+<span id="cb32-120"><a href="#cb32-120" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-121"><a href="#cb32-121" aria-hidden="true" tabindex="-1"></a>p_{\text{obs}} \leq 0{,}01</span>
+<span id="cb32-122"><a href="#cb32-122" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-123"><a href="#cb32-123" aria-hidden="true" tabindex="-1"></a>En ese caso, se afirma que el resultado es **altamente estadísticamente significativo**, o que tiene **significancia estadística al uno por ciento**.En ambos escenarios, el valor-p nos informa sobre la **intensidad de la evidencia** contra la hipótesis nula: cuanto menor es el valor-p, mayor es la evidencia en su contra.</span>
+<span id="cb32-124"><a href="#cb32-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-125"><a href="#cb32-125" aria-hidden="true" tabindex="-1"></a><span class="fu">### Significancia estadística vs. significancia práctica</span></span>
+<span id="cb32-126"><a href="#cb32-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-127"><a href="#cb32-127" aria-hidden="true" tabindex="-1"></a>Aun cuando por convención se tiende a interpretar el valor-p en función de un umbral fijo (como 0,05 o 0,01), en la práctica muchos investigadores optan por **reportar el valor-p observado** sin necesariamente dictaminar una decisión tajante respecto a $H_0$.</span>
+<span id="cb32-128"><a href="#cb32-128" aria-hidden="true" tabindex="-1"></a>De este modo, se deja a criterio del lector o del analista la **contundencia o relevancia** de la evidencia empírica obtenida.</span>
+<span id="cb32-129"><a href="#cb32-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-130"><a href="#cb32-130" aria-hidden="true" tabindex="-1"></a>Aquí conviene distinguir entre **significancia estadística** y **significancia real o práctica**. Un resultado puede ser estadísticamente significativo —es decir, mostrar un valor-p muy bajo— pero, al mismo tiempo, carecer de **importancia práctica o sustantiva** si la magnitud del efecto observado es demasiado pequeña como para tener relevancia en el mundo real.</span>
+<span id="cb32-131"><a href="#cb32-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-132"><a href="#cb32-132" aria-hidden="true" tabindex="-1"></a>En consecuencia, un buen análisis inferencial no solo debe basarse en el valor-p, sino también en la **interpretación del contexto**, la **magnitud del efecto**, y la **relevancia teórica o aplicada** del resultado.</span>
+<span id="cb32-133"><a href="#cb32-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-134"><a href="#cb32-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-135"><a href="#cb32-135" aria-hidden="true" tabindex="-1"></a><span class="fu">## Del concepto al ejemplo con ENUT</span></span>
+<span id="cb32-136"><a href="#cb32-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-137"><a href="#cb32-137" aria-hidden="true" tabindex="-1"></a>Hasta aquí hemos visto la lógica general de un test: plantear $H_0$, definir un estadístico de prueba cuya distribución bajo $H_0$ conocemos, obtener el valor observado y, con eso, calcular el $p$-*value*. Ahora vamos a **hacer eso mismo pero con nuestros datos**.</span>
+<span id="cb32-138"><a href="#cb32-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-139"><a href="#cb32-139" aria-hidden="true" tabindex="-1"></a>En la ENUT tenemos, entre muchas variables, una que nos interesa particularmente: el **tiempo dedicado al trabajo no remunerado en un día tipo**, que en nuestra base está guardada como `t_tdnr_dt`. A diferencia de la participación (que es 0/1: si hizo o no la actividad), esta variable **mide cantidad de tiempo** —por ejemplo, en minutos— que la persona efectivamente destinó a trabajo no remunerado.</span>
+<span id="cb32-140"><a href="#cb32-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-141"><a href="#cb32-141" aria-hidden="true" tabindex="-1"></a>La pregunta inferencial que podemos hacernos es algo como:</span>
+<span id="cb32-142"><a href="#cb32-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-143"><a href="#cb32-143" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; “¿Podemos afirmar, con base en la muestra ENUT, que el **tiempo promedio diario** dedicado al trabajo no remunerado es distinto de cierto valor de referencia?”</span></span>
+<span id="cb32-144"><a href="#cb32-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-145"><a href="#cb32-145" aria-hidden="true" tabindex="-1"></a>Ese “valor de referencia” ($\mu_0$) puede venir de una política, de una medición anterior, de otro país, o simplemente de una cifra redonda que queramos contrastar. Para ilustrar, supongamos que queremos testear si el **promedio poblacional** de minutos de trabajo no remunerado en un día tipo es **igual a 240 minutos (4 horas)**:</span>
+<span id="cb32-146"><a href="#cb32-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-147"><a href="#cb32-147" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$H_0: \mu = 240$</span>
+<span id="cb32-148"><a href="#cb32-148" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$H_1: \mu \ne 240$</span>
+<span id="cb32-149"><a href="#cb32-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-150"><a href="#cb32-150" aria-hidden="true" tabindex="-1"></a>Es decir, $H_0$ dice: *“en la población, en promedio, se destinan 4 horas al día a trabajo no remunerado”* y $H_1$ dice *“no, no son 4 horas: es más o es menos”*. Antes de construir el estadístico de prueba, **miremos la variable** y dejemos los datos limpios (solo no perdidos):</span>
+<span id="cb32-151"><a href="#cb32-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-154"><a href="#cb32-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-155"><a href="#cb32-155" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: explorar-t_tdnr_dt</span></span>
+<span id="cb32-156"><a href="#cb32-156" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb32-157"><a href="#cb32-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-158"><a href="#cb32-158" aria-hidden="true" tabindex="-1"></a>datos_trab_nor <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb32-159"><a href="#cb32-159" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb32-160"><a href="#cb32-160" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_tdnr_dt =</span> haven<span class="sc">::</span><span class="fu">zap_labels</span>(t_tdnr_dt),   <span class="co"># elimina las etiquetas</span></span>
+<span id="cb32-161"><a href="#cb32-161" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_tdnr_dt =</span> <span class="fu">as.numeric</span>(t_tdnr_dt) </span>
+<span id="cb32-162"><a href="#cb32-162" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb32-163"><a href="#cb32-163" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(t_tdnr_dt) <span class="sc">|&gt;</span></span>
+<span id="cb32-164"><a href="#cb32-164" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(t_tdnr_dt) <span class="sc">&amp;</span> t_tdnr_dt <span class="sc">&lt;</span> <span class="dv">96</span>)</span>
+<span id="cb32-165"><a href="#cb32-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-166"><a href="#cb32-166" aria-hidden="true" tabindex="-1"></a>datos_trab_nor <span class="sc">|&gt;</span></span>
+<span id="cb32-167"><a href="#cb32-167" aria-hidden="true" tabindex="-1"></a>  psych<span class="sc">::</span><span class="fu">describe</span>()</span>
+<span id="cb32-168"><a href="#cb32-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-169"><a href="#cb32-169" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-170"><a href="#cb32-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-171"><a href="#cb32-171" aria-hidden="true" tabindex="-1"></a>Con esto obtenemos tres elementos clave que necesitamos para construir el test:</span>
+<span id="cb32-172"><a href="#cb32-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-173"><a href="#cb32-173" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>El **tamaño muestral** $n = 27{,}387$</span>
+<span id="cb32-174"><a href="#cb32-174" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>La **media muestral** $\bar{x} = 2{,}93$ horas</span>
+<span id="cb32-175"><a href="#cb32-175" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>La **desviación estándar muestral** $s = 2{,}35$ horas</span>
+<span id="cb32-176"><a href="#cb32-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-177"><a href="#cb32-177" aria-hidden="true" tabindex="-1"></a>Con esos tres números ya podemos **fabricar nuestro estadístico de prueba**. Formalicemos lo que queremos hacer entonces. Antes de continuar, no obstante, conviene señalar que, en realidad, una aplicación correcta con la ENUT se deberían usar **factores de expansión y diseño muestral** (estratos y conglomerados) mediante <span class="in">`survey`</span> o <span class="in">`srvyr`</span>. Aquí usamos un esquema SRS solo para fines didácticos. Ahora sí, formalicemos. </span>
+<span id="cb32-178"><a href="#cb32-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-179"><a href="#cb32-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-180"><a href="#cb32-180" aria-hidden="true" tabindex="-1"></a><span class="fu">### Modelo probabilístico y formulación del test</span></span>
+<span id="cb32-181"><a href="#cb32-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-182"><a href="#cb32-182" aria-hidden="true" tabindex="-1"></a>Para dar un paso más formal, recordemos que la inferencia estadística se basa en **modelos probabilísticos**. En este caso, podemos pensar que cada observación de la variable `t_tdnr_dt` corresponde a una **variable aleatoria continua**, que denotamos por $X_i$, y que representa el **tiempo (en horas)** que la persona $i$ dedica al trabajo no remunerado en un día tipo.</span>
+<span id="cb32-183"><a href="#cb32-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-184"><a href="#cb32-184" aria-hidden="true" tabindex="-1"></a>Supondremos, pues, que las observaciones provienen de una **muestra aleatoria simple** extraída de una población con media desconocida $\mu$ y varianza $\sigma^2$. Formalmente:</span>
+<span id="cb32-185"><a href="#cb32-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-186"><a href="#cb32-186" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-187"><a href="#cb32-187" aria-hidden="true" tabindex="-1"></a>X_1, X_2, \ldots, X_n \quad \text{son i.i.d.} \quad \text{con} \quad \mathrm{E}<span class="co">[</span><span class="ot">X_i</span><span class="co">]</span> = \mu, ; \mbox{Var}(X_i) = \sigma^2.</span>
+<span id="cb32-188"><a href="#cb32-188" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-189"><a href="#cb32-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-190"><a href="#cb32-190" aria-hidden="true" tabindex="-1"></a>La hipótesis nula plantea que el **promedio poblacional** de tiempo diario dedicado al trabajo no remunerado **es igual a** un valor de referencia $\mu_0$ (que podemos definir según la evidencia), mientras que la alternativa sugiere que **es distinto**:</span>
+<span id="cb32-191"><a href="#cb32-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-192"><a href="#cb32-192" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-193"><a href="#cb32-193" aria-hidden="true" tabindex="-1"></a>H_0 : \mu = \mu_0 \quad \text{vs.} \quad H_1 : \mu \ne \mu_0.</span>
+<span id="cb32-194"><a href="#cb32-194" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-195"><a href="#cb32-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-196"><a href="#cb32-196" aria-hidden="true" tabindex="-1"></a>Para evaluar esto, usamos la **media muestral** $\bar{X}$ como estimador de $\mu$:</span>
+<span id="cb32-197"><a href="#cb32-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-198"><a href="#cb32-198" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-199"><a href="#cb32-199" aria-hidden="true" tabindex="-1"></a>\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i.</span>
+<span id="cb32-200"><a href="#cb32-200" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-201"><a href="#cb32-201" aria-hidden="true" tabindex="-1"></a>Bajo las condiciones clásicas del Teorema Central del Límite, sabemos que</span>
+<span id="cb32-202"><a href="#cb32-202" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-203"><a href="#cb32-203" aria-hidden="true" tabindex="-1"></a>\frac{\bar{X} - \mu}{S / \sqrt{n}} \approx t_{(n-1)},</span>
+<span id="cb32-204"><a href="#cb32-204" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-205"><a href="#cb32-205" aria-hidden="true" tabindex="-1"></a>donde $S$ es la desviación estándar muestral. Este resultado es la base del **test $t$ de una muestra**.</span>
+<span id="cb32-206"><a href="#cb32-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-207"><a href="#cb32-207" aria-hidden="true" tabindex="-1"></a><span class="fu">### Construyendo el estadístico de prueba (caso: una media)</span></span>
+<span id="cb32-208"><a href="#cb32-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-209"><a href="#cb32-209" aria-hidden="true" tabindex="-1"></a>El **estadístico de prueba** es la variable aleatoria:</span>
+<span id="cb32-210"><a href="#cb32-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-211"><a href="#cb32-211" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-212"><a href="#cb32-212" aria-hidden="true" tabindex="-1"></a>T = \frac{\bar{X} - \mu_0}{S / \sqrt{n}},</span>
+<span id="cb32-213"><a href="#cb32-213" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-214"><a href="#cb32-214" aria-hidden="true" tabindex="-1"></a>que mide, en unidades de error estándar, **cuán lejos está la media muestral del valor hipotético $\mu_0$**. El valor observado, $t_{\text{obs}}$, se obtiene reemplazando $\bar{X}$, $S$ y $n$ por sus valores de la muestra.</span>
+<span id="cb32-215"><a href="#cb32-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-216"><a href="#cb32-216" aria-hidden="true" tabindex="-1"></a>Si $H_0$ fuera cierta, esperaríamos que $T$ siguiera aproximadamente una distribución $t$ de Student con $n-1$ grados de libertad. Valores extremos (positivos o negativos) indicarían evidencia contra $H_0$.</span>
+<span id="cb32-217"><a href="#cb32-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-218"><a href="#cb32-218" aria-hidden="true" tabindex="-1"></a>Entonces, solo por poner un ejemplo didáctico, supongamos que queremos evaluar si el **tiempo promedio de trabajo no remunerado** en un día tipo **es igual a 4 horas**.</span>
+<span id="cb32-219"><a href="#cb32-219" aria-hidden="true" tabindex="-1"></a>En notación formal:</span>
+<span id="cb32-220"><a href="#cb32-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-221"><a href="#cb32-221" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$H_0: \mu = 4$</span>
+<span id="cb32-222"><a href="#cb32-222" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$H_1: \mu \ne 4$</span>
+<span id="cb32-223"><a href="#cb32-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-224"><a href="#cb32-224" aria-hidden="true" tabindex="-1"></a>Como no conocemos la varianza poblacional (lo que casi siempre ocurre en ciencias sociales), utilizamos el **estadístico $t$ de Student**, definido como:</span>
+<span id="cb32-225"><a href="#cb32-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-226"><a href="#cb32-226" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-227"><a href="#cb32-227" aria-hidden="true" tabindex="-1"></a>T = \frac{\bar X - \mu_0}{S / \sqrt{n}}</span>
+<span id="cb32-228"><a href="#cb32-228" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-229"><a href="#cb32-229" aria-hidden="true" tabindex="-1"></a>donde:</span>
+<span id="cb32-230"><a href="#cb32-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-231"><a href="#cb32-231" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\bar X$ es la media muestral de <span class="in">`t_tdnr_dt`</span>,</span>
+<span id="cb32-232"><a href="#cb32-232" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\mu_0$ es el valor que afirma $H_0$ (en nuestro ejemplo, 4 horas),</span>
+<span id="cb32-233"><a href="#cb32-233" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$S$ es la desviación estándar muestral,</span>
+<span id="cb32-234"><a href="#cb32-234" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$n$ es el número de observaciones.</span>
+<span id="cb32-235"><a href="#cb32-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-236"><a href="#cb32-236" aria-hidden="true" tabindex="-1"></a>Bajo la hipótesis nula, este estadístico **sigue aproximadamente una distribución $t$ de Student con $n - 1$ grados de libertad**.</span>
+<span id="cb32-237"><a href="#cb32-237" aria-hidden="true" tabindex="-1"></a>Esto nos permite calcular la probabilidad (valor-p) de observar un valor tan extremo como el nuestro si $H_0$ fuera cierta. Calculemos todo eso en R paso a paso:</span>
+<span id="cb32-238"><a href="#cb32-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-241"><a href="#cb32-241" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-242"><a href="#cb32-242" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: estadistico-t-manual</span></span>
+<span id="cb32-243"><a href="#cb32-243" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb32-244"><a href="#cb32-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-245"><a href="#cb32-245" aria-hidden="true" tabindex="-1"></a><span class="co"># Valor bajo H0 (en horas)</span></span>
+<span id="cb32-246"><a href="#cb32-246" aria-hidden="true" tabindex="-1"></a>mu0 <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb32-247"><a href="#cb32-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-248"><a href="#cb32-248" aria-hidden="true" tabindex="-1"></a>resumen_trab_nor <span class="ot">&lt;-</span> datos_trab_nor <span class="sc">|&gt;</span></span>
+<span id="cb32-249"><a href="#cb32-249" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
+<span id="cb32-250"><a href="#cb32-250" aria-hidden="true" tabindex="-1"></a>    <span class="at">n    =</span> dplyr<span class="sc">::</span><span class="fu">n</span>(),</span>
+<span id="cb32-251"><a href="#cb32-251" aria-hidden="true" tabindex="-1"></a>    <span class="at">xbar =</span> <span class="fu">mean</span>(t_tdnr_dt),</span>
+<span id="cb32-252"><a href="#cb32-252" aria-hidden="true" tabindex="-1"></a>    <span class="at">s    =</span> <span class="fu">sd</span>(t_tdnr_dt)</span>
+<span id="cb32-253"><a href="#cb32-253" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb32-254"><a href="#cb32-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-255"><a href="#cb32-255" aria-hidden="true" tabindex="-1"></a>resumen_trab_nor</span>
+<span id="cb32-256"><a href="#cb32-256" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-257"><a href="#cb32-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-258"><a href="#cb32-258" aria-hidden="true" tabindex="-1"></a>Ahora obtenemos el valor observado del estadístico $t$:</span>
+<span id="cb32-259"><a href="#cb32-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-262"><a href="#cb32-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-263"><a href="#cb32-263" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: t-obs</span></span>
+<span id="cb32-264"><a href="#cb32-264" aria-hidden="true" tabindex="-1"></a>n    <span class="ot">&lt;-</span> resumen_trab_nor<span class="sc">$</span>n</span>
+<span id="cb32-265"><a href="#cb32-265" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> resumen_trab_nor<span class="sc">$</span>xbar</span>
+<span id="cb32-266"><a href="#cb32-266" aria-hidden="true" tabindex="-1"></a>s    <span class="ot">&lt;-</span> resumen_trab_nor<span class="sc">$</span>s</span>
+<span id="cb32-267"><a href="#cb32-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-268"><a href="#cb32-268" aria-hidden="true" tabindex="-1"></a>t_obs <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu0) <span class="sc">/</span> (s <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb32-269"><a href="#cb32-269" aria-hidden="true" tabindex="-1"></a>t_obs</span>
+<span id="cb32-270"><a href="#cb32-270" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-271"><a href="#cb32-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-272"><a href="#cb32-272" aria-hidden="true" tabindex="-1"></a>Como la hipótesis alternativa es **bilateral** ($\mu \ne \mu_0$), el valor-p se calcula como:</span>
+<span id="cb32-273"><a href="#cb32-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-276"><a href="#cb32-276" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-277"><a href="#cb32-277" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: pvalue-manual</span></span>
+<span id="cb32-278"><a href="#cb32-278" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_obs), <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>))</span>
+<span id="cb32-279"><a href="#cb32-279" aria-hidden="true" tabindex="-1"></a>p_value</span>
+<span id="cb32-280"><a href="#cb32-280" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-281"><a href="#cb32-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-282"><a href="#cb32-282" aria-hidden="true" tabindex="-1"></a><span class="fu">### Interpretación inferencial</span></span>
+<span id="cb32-283"><a href="#cb32-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-284"><a href="#cb32-284" aria-hidden="true" tabindex="-1"></a>El estadístico $t_{\text{obs}}$ obtenido refleja cuántos **errores estándar** separan nuestra media muestral de las 4 horas hipotéticas.</span>
+<span id="cb32-285"><a href="#cb32-285" aria-hidden="true" tabindex="-1"></a>Si $|t_{\text{obs}}|$ es grande, significa que el promedio observado está muy alejado del valor propuesto por $H_0$, y por tanto, el valor-$p$ será pequeño.</span>
+<span id="cb32-286"><a href="#cb32-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-287"><a href="#cb32-287" aria-hidden="true" tabindex="-1"></a>En términos probabilísticos, el valor-$p$ mide:</span>
+<span id="cb32-288"><a href="#cb32-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-289"><a href="#cb32-289" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-290"><a href="#cb32-290" aria-hidden="true" tabindex="-1"></a>p = \Pr\bigl(|T| \ge |t_{\text{obs}}| \mid H_0 \bigr),</span>
+<span id="cb32-291"><a href="#cb32-291" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-292"><a href="#cb32-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-293"><a href="#cb32-293" aria-hidden="true" tabindex="-1"></a>es decir, la **probabilidad de obtener un valor tan extremo como el observado** si realmente $\mu = \mu_0$.</span>
+<span id="cb32-294"><a href="#cb32-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-295"><a href="#cb32-295" aria-hidden="true" tabindex="-1"></a>Si $p &lt; 0.05$, diremos que la evidencia empírica es suficientemente fuerte como para **rechazar la hipótesis nula**.</span>
+<span id="cb32-296"><a href="#cb32-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-297"><a href="#cb32-297" aria-hidden="true" tabindex="-1"></a>En resumen:</span>
+<span id="cb32-298"><a href="#cb32-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-299"><a href="#cb32-299" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si $p$ es **pequeño**, la muestra contradice $H_0$ → concluimos que el tiempo promedio **no es 4 horas**.</span>
+<span id="cb32-300"><a href="#cb32-300" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si $p$ es **grande**, los datos son consistentes con $H_0$ → no hay evidencia estadística para rechazarla.</span>
+<span id="cb32-301"><a href="#cb32-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-302"><a href="#cb32-302" aria-hidden="true" tabindex="-1"></a><span class="fu">### Test automático con `t.test()`</span></span>
+<span id="cb32-303"><a href="#cb32-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-304"><a href="#cb32-304" aria-hidden="true" tabindex="-1"></a>Sin embargo, en R **no tenemos por qué hacer todo este cálculo manualmente**.</span>
+<span id="cb32-305"><a href="#cb32-305" aria-hidden="true" tabindex="-1"></a>El propio lenguaje incluye funciones que realizan estas pruebas de hipótesis de manera automática, permitiéndonos concentrarnos en la interpretación de los resultados.</span>
+<span id="cb32-306"><a href="#cb32-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-307"><a href="#cb32-307" aria-hidden="true" tabindex="-1"></a>En este caso, para contrastar una media poblacional utilizamos la función <span class="in">`t.test()`</span>, indicando:</span>
+<span id="cb32-308"><a href="#cb32-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-309"><a href="#cb32-309" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>el **vector de datos** (<span class="in">`t_tdnr_dt`</span>),</span>
+<span id="cb32-310"><a href="#cb32-310" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>el **valor bajo la hipótesis nula** (<span class="in">`mu`</span>),</span>
+<span id="cb32-311"><a href="#cb32-311" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>y el **tipo de contraste** (bilateral, unilateral hacia la izquierda o hacia la derecha).</span>
+<span id="cb32-312"><a href="#cb32-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-313"><a href="#cb32-313" aria-hidden="true" tabindex="-1"></a>Por defecto, R realiza un test **bilateral**, que es justo el que necesitamos.</span>
+<span id="cb32-314"><a href="#cb32-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-317"><a href="#cb32-317" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-318"><a href="#cb32-318" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: t-test-automatico</span></span>
+<span id="cb32-319"><a href="#cb32-319" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(datos_trab_nor<span class="sc">$</span>t_tdnr_dt, <span class="at">mu =</span> <span class="dv">4</span>)</span>
+<span id="cb32-320"><a href="#cb32-320" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-321"><a href="#cb32-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-322"><a href="#cb32-322" aria-hidden="true" tabindex="-1"></a><span class="fu">### Interpretación del resultado</span></span>
+<span id="cb32-323"><a href="#cb32-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-324"><a href="#cb32-324" aria-hidden="true" tabindex="-1"></a>Podemos interpretar esta salida así:</span>
+<span id="cb32-325"><a href="#cb32-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-326"><a href="#cb32-326" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>El valor observado del estadístico de prueba es **t = -75.64**, con **27,386 grados de libertad**.</span>
+<span id="cb32-327"><a href="#cb32-327" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>El **valor-p &lt; 2.2e-16**, extremadamente inferior a cualquier nivel usual de significancia ($\alpha = 0.05$ o $0.01$).</span>
+<span id="cb32-328"><a href="#cb32-328" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Por tanto, **rechazamos la hipótesis nula** de que el tiempo promedio diario de trabajo no remunerado es de 4 horas.</span>
+<span id="cb32-329"><a href="#cb32-329" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>El intervalo de confianza al 95% para la media poblacional está entre **2.90 y 2.95 horas**, lo que confirma que el verdadero promedio se encuentra muy por debajo de las 4 horas planteadas por $H_0$.</span>
+<span id="cb32-330"><a href="#cb32-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-331"><a href="#cb32-331" aria-hidden="true" tabindex="-1"></a>En términos sustantivos, esto significa que, según los datos de la ENUT, las personas **dedican en promedio menos de 3 horas al trabajo no remunerado en un día tipo**, y esa diferencia respecto a las 4 horas hipotetizadas es **estadísticamente significativa**.</span>
+<span id="cb32-332"><a href="#cb32-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-333"><a href="#cb32-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-334"><a href="#cb32-334" aria-hidden="true" tabindex="-1"></a>Antes de terminar esta sección y ver test bivariados conviene señalar una cuestión por pura rigurosidad.</span>
+<span id="cb32-335"><a href="#cb32-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-336"><a href="#cb32-336" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Sobre los supuestos del test</span></span>
+<span id="cb32-337"><a href="#cb32-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-338"><a href="#cb32-338" aria-hidden="true" tabindex="-1"></a>El test supone:</span>
+<span id="cb32-339"><a href="#cb32-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-340"><a href="#cb32-340" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Independencia** de las observaciones</span>
+<span id="cb32-341"><a href="#cb32-341" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Muestra aleatoria** de la población de interés</span>
+<span id="cb32-342"><a href="#cb32-342" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Normalidad aproximada** de la variable (o, al menos, de la media)</span>
+<span id="cb32-343"><a href="#cb32-343" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Varianza poblacional desconocida** → usamos $t$</span>
+<span id="cb32-344"><a href="#cb32-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-345"><a href="#cb32-345" aria-hidden="true" tabindex="-1"></a>Como nuestro $n$ es enorme ($n \approx 27{,}000$), el TCL nos salva de casi todo: la media muestral es aproximadamente normal aunque la variable original sea medio fea. Pero igual es bueno verlo</span>
+<span id="cb32-346"><a href="#cb32-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-349"><a href="#cb32-349" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-350"><a href="#cb32-350" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: histograma-t_tdnr_dt</span></span>
+<span id="cb32-351"><a href="#cb32-351" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Distribución del tiempo diario de trabajo no remunerado (ENUT)"</span></span>
+<span id="cb32-352"><a href="#cb32-352" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb32-353"><a href="#cb32-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-354"><a href="#cb32-354" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular media y mediana</span></span>
+<span id="cb32-355"><a href="#cb32-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-356"><a href="#cb32-356" aria-hidden="true" tabindex="-1"></a>resumen_tdnr <span class="ot">&lt;-</span> datos_trab_nor <span class="sc">|&gt;</span></span>
+<span id="cb32-357"><a href="#cb32-357" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(</span>
+<span id="cb32-358"><a href="#cb32-358" aria-hidden="true" tabindex="-1"></a><span class="at">media   =</span> <span class="fu">mean</span>(t_tdnr_dt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb32-359"><a href="#cb32-359" aria-hidden="true" tabindex="-1"></a><span class="at">mediana =</span> <span class="fu">median</span>(t_tdnr_dt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb32-360"><a href="#cb32-360" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-361"><a href="#cb32-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-362"><a href="#cb32-362" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear histograma con líneas de tendencia central</span></span>
+<span id="cb32-363"><a href="#cb32-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-364"><a href="#cb32-364" aria-hidden="true" tabindex="-1"></a>datos_trab_nor <span class="sc">|&gt;</span></span>
+<span id="cb32-365"><a href="#cb32-365" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> t_tdnr_dt)) <span class="sc">+</span></span>
+<span id="cb32-366"><a href="#cb32-366" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins  =</span> <span class="dv">50</span>,<span class="at">fill  =</span> <span class="st">"#2A5783"</span>,</span>
+<span id="cb32-367"><a href="#cb32-367" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha =</span> <span class="fl">0.7</span>,<span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb32-368"><a href="#cb32-368" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> resumen_tdnr<span class="sc">$</span>media, </span>
+<span id="cb32-369"><a href="#cb32-369" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">"Media"</span>),</span>
+<span id="cb32-370"><a href="#cb32-370" aria-hidden="true" tabindex="-1"></a>             <span class="at">linewidth =</span> <span class="fl">1.2</span>,</span>
+<span id="cb32-371"><a href="#cb32-371" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype  =</span> <span class="st">"dashed"</span></span>
+<span id="cb32-372"><a href="#cb32-372" aria-hidden="true" tabindex="-1"></a>             ) <span class="sc">+</span></span>
+<span id="cb32-373"><a href="#cb32-373" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb32-374"><a href="#cb32-374" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">xintercept =</span> resumen_tdnr<span class="sc">$</span>mediana, </span>
+<span id="cb32-375"><a href="#cb32-375" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"Mediana"</span>),</span>
+<span id="cb32-376"><a href="#cb32-376" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">1.2</span>,</span>
+<span id="cb32-377"><a href="#cb32-377" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype  =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb32-378"><a href="#cb32-378" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb32-379"><a href="#cb32-379" aria-hidden="true" tabindex="-1"></a>    <span class="at">name   =</span> <span class="st">"Medidas de</span><span class="sc">\n</span><span class="st">tendencia central"</span>,</span>
+<span id="cb32-380"><a href="#cb32-380" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Media"</span> <span class="ot">=</span> <span class="st">"#9C0824"</span>, <span class="st">"Mediana"</span> <span class="ot">=</span> <span class="st">"#09622A"</span>)) <span class="sc">+</span></span>
+<span id="cb32-381"><a href="#cb32-381" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">16</span>),</span>
+<span id="cb32-382"><a href="#cb32-382" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">16</span>, <span class="dv">2</span>),</span>
+<span id="cb32-383"><a href="#cb32-383" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">paste0</span>(x, <span class="st">" h"</span>)) <span class="sc">+</span></span>
+<span id="cb32-384"><a href="#cb32-384" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb32-385"><a href="#cb32-385" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"Distribución del tiempo diario de trabajo no remunerado"</span>,</span>
+<span id="cb32-386"><a href="#cb32-386" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Variable `t_tdnr_dt` en horas (ENUT)"</span>,</span>
+<span id="cb32-387"><a href="#cb32-387" aria-hidden="true" tabindex="-1"></a>    <span class="at">x        =</span> <span class="st">"Horas de trabajo no remunerado (día tipo)"</span>,</span>
+<span id="cb32-388"><a href="#cb32-388" aria-hidden="true" tabindex="-1"></a>    <span class="at">y        =</span> <span class="st">"Frecuencia (número de personas)"</span>,</span>
+<span id="cb32-389"><a href="#cb32-389" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption  =</span> <span class="st">"Fuente: Elaboración propia con datos ENUT"</span>) <span class="sc">+</span></span>
+<span id="cb32-390"><a href="#cb32-390" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"Fira Sans"</span>) <span class="sc">+</span></span>
+<span id="cb32-391"><a href="#cb32-391" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, </span>
+<span id="cb32-392"><a href="#cb32-392" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">size =</span> <span class="dv">14</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb32-393"><a href="#cb32-393" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle   =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb32-394"><a href="#cb32-394" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb32-395"><a href="#cb32-395" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title    =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb32-396"><a href="#cb32-396" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text       =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb32-397"><a href="#cb32-397" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title      =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>))</span>
+<span id="cb32-398"><a href="#cb32-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-399"><a href="#cb32-399" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-400"><a href="#cb32-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-401"><a href="#cb32-401" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Con $n$ grande, el test $t$ es bastante robusto a desviaciones de normalidad. El punto crítico pasa por la **independencia** y por que estemos usando **una sola población**.</span></span>
+<span id="cb32-402"><a href="#cb32-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-403"><a href="#cb32-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-404"><a href="#cb32-404" aria-hidden="true" tabindex="-1"></a><span class="fu"># Test bivariados </span></span>
+<span id="cb32-405"><a href="#cb32-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-406"><a href="#cb32-406" aria-hidden="true" tabindex="-1"></a><span class="fu">### Comparación de medias entre dos grupos: hombres y mujeres</span></span>
+<span id="cb32-407"><a href="#cb32-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-408"><a href="#cb32-408" aria-hidden="true" tabindex="-1"></a>Ahora que ya vimos cómo contrastar una media poblacional con un valor fijo, podemos avanzar a un caso muy común en la práctica: **comparar dos grupos**.</span>
+<span id="cb32-409"><a href="#cb32-409" aria-hidden="true" tabindex="-1"></a>En este contexto, queremos saber si el **tiempo promedio diario dedicado al trabajo no remunerado** (`t_tdnr_dt`) **difiere entre mujeres y hombres**.</span>
+<span id="cb32-410"><a href="#cb32-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-411"><a href="#cb32-411" aria-hidden="true" tabindex="-1"></a>La formulación estadística del contraste es:</span>
+<span id="cb32-412"><a href="#cb32-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-413"><a href="#cb32-413" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$H_0: \mu_{\text{mujeres}} = \mu_{\text{hombres}}$</span>
+<span id="cb32-414"><a href="#cb32-414" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$H_1: \mu_{\text{mujeres}} \ne \mu_{\text{hombres}}$</span>
+<span id="cb32-415"><a href="#cb32-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-416"><a href="#cb32-416" aria-hidden="true" tabindex="-1"></a>La hipótesis nula plantea que **no hay diferencia promedio** entre ambos grupos, mientras que la alternativa sostiene que **sí existe una diferencia**.</span>
+<span id="cb32-417"><a href="#cb32-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-418"><a href="#cb32-418" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exploración de la variable de sexo</span></span>
+<span id="cb32-419"><a href="#cb32-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-420"><a href="#cb32-420" aria-hidden="true" tabindex="-1"></a>Primero observamos cómo está codificada la variable <span class="in">`sexo`</span> en la base ENUT:</span>
+<span id="cb32-421"><a href="#cb32-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-424"><a href="#cb32-424" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-425"><a href="#cb32-425" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: explorar-sexo</span></span>
+<span id="cb32-426"><a href="#cb32-426" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb32-427"><a href="#cb32-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-428"><a href="#cb32-428" aria-hidden="true" tabindex="-1"></a>sjmisc<span class="sc">::</span><span class="fu">frq</span>(datos<span class="sc">$</span>sexo)</span>
+<span id="cb32-429"><a href="#cb32-429" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-430"><a href="#cb32-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-431"><a href="#cb32-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-432"><a href="#cb32-432" aria-hidden="true" tabindex="-1"></a><span class="fu">### Preparamos los datos</span></span>
+<span id="cb32-433"><a href="#cb32-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-434"><a href="#cb32-434" aria-hidden="true" tabindex="-1"></a>Creamos un subconjunto con las variables relevantes, eliminando etiquetas y posibles valores perdidos:</span>
+<span id="cb32-435"><a href="#cb32-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-438"><a href="#cb32-438" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-439"><a href="#cb32-439" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: preparar-bivariado</span></span>
+<span id="cb32-440"><a href="#cb32-440" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb32-441"><a href="#cb32-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-442"><a href="#cb32-442" aria-hidden="true" tabindex="-1"></a>datos_bivariado <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb32-443"><a href="#cb32-443" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb32-444"><a href="#cb32-444" aria-hidden="true" tabindex="-1"></a>    <span class="at">sexo =</span> haven<span class="sc">::</span><span class="fu">zap_labels</span>(sexo),</span>
+<span id="cb32-445"><a href="#cb32-445" aria-hidden="true" tabindex="-1"></a>    <span class="at">sexo =</span> <span class="fu">as.factor</span>(sexo),</span>
+<span id="cb32-446"><a href="#cb32-446" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_tdnr_dt =</span> haven<span class="sc">::</span><span class="fu">zap_labels</span>(t_tdnr_dt),</span>
+<span id="cb32-447"><a href="#cb32-447" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_tdnr_dt =</span> <span class="fu">as.numeric</span>(t_tdnr_dt)</span>
+<span id="cb32-448"><a href="#cb32-448" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb32-449"><a href="#cb32-449" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sexo), <span class="sc">!</span><span class="fu">is.na</span>(t_tdnr_dt), t_tdnr_dt <span class="sc">&lt;</span> <span class="dv">96</span>)</span>
+<span id="cb32-450"><a href="#cb32-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-451"><a href="#cb32-451" aria-hidden="true" tabindex="-1"></a>sjmisc<span class="sc">::</span><span class="fu">frq</span>(datos_bivariado<span class="sc">$</span>sexo)</span>
+<span id="cb32-452"><a href="#cb32-452" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-453"><a href="#cb32-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-454"><a href="#cb32-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-455"><a href="#cb32-455" aria-hidden="true" tabindex="-1"></a>Antes de aplicar el test, visualizamos las distribuciones:</span>
+<span id="cb32-456"><a href="#cb32-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-459"><a href="#cb32-459" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-460"><a href="#cb32-460" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: boxplot-bivariado</span></span>
+<span id="cb32-461"><a href="#cb32-461" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Distribución del tiempo diario de trabajo no remunerado según sexo (ENUT)"</span></span>
+<span id="cb32-462"><a href="#cb32-462" aria-hidden="true" tabindex="-1"></a>datos_bivariado <span class="sc">|&gt;</span></span>
+<span id="cb32-463"><a href="#cb32-463" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sexo, <span class="at">y =</span> t_tdnr_dt, <span class="at">fill =</span> sexo)) <span class="sc">+</span></span>
+<span id="cb32-464"><a href="#cb32-464" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
+<span id="cb32-465"><a href="#cb32-465" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span>,</span>
+<span id="cb32-466"><a href="#cb32-466" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"gray20"</span>,</span>
+<span id="cb32-467"><a href="#cb32-467" aria-hidden="true" tabindex="-1"></a>    <span class="at">outlier.colour =</span> <span class="st">"gray40"</span>,</span>
+<span id="cb32-468"><a href="#cb32-468" aria-hidden="true" tabindex="-1"></a>    <span class="at">outlier.shape =</span> <span class="dv">16</span>,</span>
+<span id="cb32-469"><a href="#cb32-469" aria-hidden="true" tabindex="-1"></a>    <span class="at">outlier.size =</span> <span class="fl">1.8</span></span>
+<span id="cb32-470"><a href="#cb32-470" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb32-471"><a href="#cb32-471" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"#2A5783"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"#9C0824"</span>),</span>
+<span id="cb32-472"><a href="#cb32-472" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Hombres"</span>, <span class="st">"Mujeres"</span>)) <span class="sc">+</span></span>
+<span id="cb32-473"><a href="#cb32-473" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title    =</span> <span class="st">"Distribución del tiempo diario de trabajo no remunerado según sexo"</span>,</span>
+<span id="cb32-474"><a href="#cb32-474" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Variable `t_tdnr_dt` en horas (ENUT)"</span>,</span>
+<span id="cb32-475"><a href="#cb32-475" aria-hidden="true" tabindex="-1"></a>       <span class="at">x        =</span> <span class="st">"Sexo"</span>,</span>
+<span id="cb32-476"><a href="#cb32-476" aria-hidden="true" tabindex="-1"></a>       <span class="at">y        =</span> <span class="st">"Horas de trabajo no remunerado (día tipo)"</span>,</span>
+<span id="cb32-477"><a href="#cb32-477" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption  =</span> <span class="st">"Fuente: Elaboración propia con datos ENUT"</span>) <span class="sc">+</span></span>
+<span id="cb32-478"><a href="#cb32-478" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"Fira Sans"</span>) <span class="sc">+</span></span>
+<span id="cb32-479"><a href="#cb32-479" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, </span>
+<span id="cb32-480"><a href="#cb32-480" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">size =</span> <span class="dv">14</span>,</span>
+<span id="cb32-481"><a href="#cb32-481" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb32-482"><a href="#cb32-482" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, </span>
+<span id="cb32-483"><a href="#cb32-483" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb32-484"><a href="#cb32-484" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb32-485"><a href="#cb32-485" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>),</span>
+<span id="cb32-486"><a href="#cb32-486" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb32-487"><a href="#cb32-487" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb32-488"><a href="#cb32-488" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position  =</span> <span class="st">"none"</span>)</span>
+<span id="cb32-489"><a href="#cb32-489" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-490"><a href="#cb32-490" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-491"><a href="#cb32-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-492"><a href="#cb32-492" aria-hidden="true" tabindex="-1"></a>Como muestra el gráfico, las **mujeres (2)** presentan una distribución desplazada hacia valores mayores, lo que sugiere que dedican más tiempo al trabajo no remunerado que los hombres.</span>
+<span id="cb32-493"><a href="#cb32-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-494"><a href="#cb32-494" aria-hidden="true" tabindex="-1"></a><span class="fu">### Test t de dos muestras independientes</span></span>
+<span id="cb32-495"><a href="#cb32-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-496"><a href="#cb32-496" aria-hidden="true" tabindex="-1"></a>Aplicamos ahora el test formalmente. En R, se usa la misma función <span class="in">`t.test()`</span>, indicando la variable de interés (<span class="in">`t_tdnr_dt`</span>) y el factor de agrupación (<span class="in">`sexo`</span>):</span>
+<span id="cb32-497"><a href="#cb32-497" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-500"><a href="#cb32-500" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-501"><a href="#cb32-501" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: t-test-bivariado</span></span>
+<span id="cb32-502"><a href="#cb32-502" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(t_tdnr_dt <span class="sc">~</span> sexo, <span class="at">data =</span> datos_bivariado)</span>
+<span id="cb32-503"><a href="#cb32-503" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-504"><a href="#cb32-504" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-505"><a href="#cb32-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-506"><a href="#cb32-506" aria-hidden="true" tabindex="-1"></a><span class="fu">### Interpretación del resultado</span></span>
+<span id="cb32-507"><a href="#cb32-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-508"><a href="#cb32-508" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>El **estadístico de prueba t = -54.61**, con **26,829 grados de libertad**, y un **valor-p &lt; 2.2e-16**.</span>
+<span id="cb32-509"><a href="#cb32-509" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Dado que el valor-p es mucho menor que cualquier nivel usual de significancia ($\alpha = 0.05$ o $0.01$), **rechazamos la hipótesis nula** de igualdad de medias.</span>
+<span id="cb32-510"><a href="#cb32-510" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>El **intervalo de confianza al 95%** para la diferencia de medias es <span class="co">[</span><span class="ot">-1.49, -1.39</span><span class="co">]</span>, lo que confirma que las medias no son iguales (la diferencia no incluye el 0).</span>
+<span id="cb32-511"><a href="#cb32-511" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>En promedio, los hombres dedican **2.07 horas**, mientras que las mujeres dedican **3.51 horas** al trabajo no remunerado diario.</span>
+<span id="cb32-512"><a href="#cb32-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-513"><a href="#cb32-513" aria-hidden="true" tabindex="-1"></a>En conclusión, existe una **diferencia estadísticamente significativa** en el tiempo promedio diario de trabajo no remunerado entre hombres y mujeres.</span>
+<span id="cb32-514"><a href="#cb32-514" aria-hidden="true" tabindex="-1"></a>En promedio, las **mujeres dedican alrededor de una hora y media más** que los hombres a este tipo de actividades, diferencia que resulta **altamente significativa** desde el punto de vista estadístico y también relevante en términos sociales.</span>
+<span id="cb32-515"><a href="#cb32-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-516"><a href="#cb32-516" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-517"><a href="#cb32-517" aria-hidden="true" tabindex="-1"></a><span class="fu">### Chequeo de supuestos y tamaño de efecto</span></span>
+<span id="cb32-518"><a href="#cb32-518" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-519"><a href="#cb32-519" aria-hidden="true" tabindex="-1"></a>Antes de pasar al ANOVA, conviene revisar brevemente los **supuestos del test t de dos muestras independientes**. El **test de Welch** —que R aplica por defecto— no asume igualdad de varianzas, pero es útil comprobar si esta condición se cumple empíricamente. Para ello, aplicamos un test F de comparación de varianzas:</span>
+<span id="cb32-520"><a href="#cb32-520" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-523"><a href="#cb32-523" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-524"><a href="#cb32-524" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: varianzas-tdnr-sexo</span></span>
+<span id="cb32-525"><a href="#cb32-525" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb32-526"><a href="#cb32-526" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(datos_bivariado, <span class="fu">var.test</span>(t_tdnr_dt <span class="sc">~</span> sexo))</span>
+<span id="cb32-527"><a href="#cb32-527" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-528"><a href="#cb32-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-529"><a href="#cb32-529" aria-hidden="true" tabindex="-1"></a>El resultado muestra un **valor F = 0.622** y un **valor-p &lt; 2.2e-16**, lo que indica que las varianzas **no son iguales** entre hombres y mujeres. Por tanto, es correcto haber utilizado el **test t de Welch**, que ajusta los grados de libertad sin asumir homocedasticidad. Por otro lado, dado el tamaño de muestra muy grande ($n \approx 27{,}000$), casi cualquier diferencia resulta estadísticamente significativa.</span>
+<span id="cb32-530"><a href="#cb32-530" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-531"><a href="#cb32-531" aria-hidden="true" tabindex="-1"></a>Para evaluar la magnitud real de la diferencia, calculamos el **$d$ de Cohen**, que expresa cuántas desviaciones estándar separan los promedios de ambos grupos:</span>
+<span id="cb32-532"><a href="#cb32-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-535"><a href="#cb32-535" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-536"><a href="#cb32-536" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: efecto-cohen</span></span>
+<span id="cb32-537"><a href="#cb32-537" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb32-538"><a href="#cb32-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-539"><a href="#cb32-539" aria-hidden="true" tabindex="-1"></a>datos_bivariado <span class="sc">|&gt;</span></span>
+<span id="cb32-540"><a href="#cb32-540" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sexo) <span class="sc">|&gt;</span></span>
+<span id="cb32-541"><a href="#cb32-541" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb32-542"><a href="#cb32-542" aria-hidden="true" tabindex="-1"></a>    <span class="at">n    =</span> <span class="fu">n</span>(),</span>
+<span id="cb32-543"><a href="#cb32-543" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(t_tdnr_dt),</span>
+<span id="cb32-544"><a href="#cb32-544" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd   =</span> <span class="fu">sd</span>(t_tdnr_dt),</span>
+<span id="cb32-545"><a href="#cb32-545" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb32-546"><a href="#cb32-546" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb32-547"><a href="#cb32-547" aria-hidden="true" tabindex="-1"></a>  (\(df){</span>
+<span id="cb32-548"><a href="#cb32-548" aria-hidden="true" tabindex="-1"></a>    n1  <span class="ot">&lt;-</span> df<span class="sc">$</span>n[df<span class="sc">$</span>sexo <span class="sc">==</span> <span class="dv">1</span>]</span>
+<span id="cb32-549"><a href="#cb32-549" aria-hidden="true" tabindex="-1"></a>    n2  <span class="ot">&lt;-</span> df<span class="sc">$</span>n[df<span class="sc">$</span>sexo <span class="sc">==</span> <span class="dv">2</span>]</span>
+<span id="cb32-550"><a href="#cb32-550" aria-hidden="true" tabindex="-1"></a>    m1  <span class="ot">&lt;-</span> df<span class="sc">$</span>mean[df<span class="sc">$</span>sexo <span class="sc">==</span> <span class="dv">1</span>]</span>
+<span id="cb32-551"><a href="#cb32-551" aria-hidden="true" tabindex="-1"></a>    m2  <span class="ot">&lt;-</span> df<span class="sc">$</span>mean[df<span class="sc">$</span>sexo <span class="sc">==</span> <span class="dv">2</span>]</span>
+<span id="cb32-552"><a href="#cb32-552" aria-hidden="true" tabindex="-1"></a>    s1  <span class="ot">&lt;-</span> df<span class="sc">$</span>sd[df<span class="sc">$</span>sexo <span class="sc">==</span> <span class="dv">1</span>]</span>
+<span id="cb32-553"><a href="#cb32-553" aria-hidden="true" tabindex="-1"></a>    s2  <span class="ot">&lt;-</span> df<span class="sc">$</span>sd[df<span class="sc">$</span>sexo <span class="sc">==</span> <span class="dv">2</span>]</span>
+<span id="cb32-554"><a href="#cb32-554" aria-hidden="true" tabindex="-1"></a>    sd_pool <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(((n1 <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span>s1<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (n2 <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span>s2<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb32-555"><a href="#cb32-555" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(</span>
+<span id="cb32-556"><a href="#cb32-556" aria-hidden="true" tabindex="-1"></a>      <span class="at">diferencia_medias =</span> m1 <span class="sc">-</span> m2,</span>
+<span id="cb32-557"><a href="#cb32-557" aria-hidden="true" tabindex="-1"></a>      <span class="at">d_cohen           =</span> (m1 <span class="sc">-</span> m2)<span class="sc">/</span>sd_pool</span>
+<span id="cb32-558"><a href="#cb32-558" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb32-559"><a href="#cb32-559" aria-hidden="true" tabindex="-1"></a>  })()</span>
+<span id="cb32-560"><a href="#cb32-560" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-561"><a href="#cb32-561" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-562"><a href="#cb32-562" aria-hidden="true" tabindex="-1"></a>El resultado arroja una **diferencia de medias de -1.44 horas** y un **$d$ de Cohen ≈ -0.64**, lo que corresponde a un **efecto de magnitud moderada**. Esto significa que, además de ser estadísticamente significativa, la diferencia entre hombres y mujeres en el tiempo diario dedicado al trabajo no remunerado es **sustantivamente relevante**, equivalente a más de **media desviación estándar**.</span>
+<span id="cb32-563"><a href="#cb32-563" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-564"><a href="#cb32-564" aria-hidden="true" tabindex="-1"></a>Ahora bien, hasta aquí comparamos **dos medias** —hombres y mujeres— mediante un test t.</span>
+<span id="cb32-565"><a href="#cb32-565" aria-hidden="true" tabindex="-1"></a>Si quisiéramos comparar **tres o más grupos** (por ejemplo, regiones, tramos de edad o niveles educativos), aplicar varios tests t por separado no sería adecuado, ya que **aumenta la probabilidad de error de tipo I**.</span>
+<span id="cb32-566"><a href="#cb32-566" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-567"><a href="#cb32-567" aria-hidden="true" tabindex="-1"></a>Para estos casos utilizamos el **Análisis de Varianza (ANOVA)**, que generaliza el test t y permite **evaluar simultáneamente si existen diferencias entre múltiples medias poblacionales** dentro de un mismo modelo. En la siguiente sección veremos cómo implementarlo en R, continuando con la misma lógica inferencial.</span>
+<span id="cb32-568"><a href="#cb32-568" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-569"><a href="#cb32-569" aria-hidden="true" tabindex="-1"></a><span class="fu"># ANOVA: comparación de medias entre más de dos grupos</span></span>
+<span id="cb32-570"><a href="#cb32-570" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-571"><a href="#cb32-571" aria-hidden="true" tabindex="-1"></a>Como vimos, el test $t$ permite contrastar la igualdad de medias entre **dos grupos**. Pero cuando queremos comparar **tres o más**, por ejemplo, por **nivel educativo**, **nivel socioeconómico** o **región**, aplicar varios tests $t$ independientes no sería adecuado, ya que aumentaría la probabilidad de cometer **errores de tipo I** (rechazar falsamente la hipótesis nula por azar).</span>
+<span id="cb32-572"><a href="#cb32-572" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-573"><a href="#cb32-573" aria-hidden="true" tabindex="-1"></a>El **Análisis de Varianza (ANOVA)** permite resolver este problema de forma conjunta, evaluando si **existen diferencias estadísticamente significativas entre las medias de más de dos grupos** dentro de un mismo modelo.</span>
+<span id="cb32-574"><a href="#cb32-574" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-575"><a href="#cb32-575" aria-hidden="true" tabindex="-1"></a>Formalmente, el ANOVA contrasta:</span>
+<span id="cb32-576"><a href="#cb32-576" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-577"><a href="#cb32-577" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-578"><a href="#cb32-578" aria-hidden="true" tabindex="-1"></a>H_0 : \mu_1 = \mu_2 = \cdots = \mu_k</span>
+<span id="cb32-579"><a href="#cb32-579" aria-hidden="true" tabindex="-1"></a>\quad \text{vs.} \quad</span>
+<span id="cb32-580"><a href="#cb32-580" aria-hidden="true" tabindex="-1"></a>H_1 : \text{al menos una media difiere.}</span>
+<span id="cb32-581"><a href="#cb32-581" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-582"><a href="#cb32-582" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-583"><a href="#cb32-583" aria-hidden="true" tabindex="-1"></a>donde $k$ es el número de grupos. La idea central es descomponer la variabilidad total observada en la variable de interés (aquí, el tiempo dedicado al trabajo no remunerado) en dos componentes:</span>
+<span id="cb32-584"><a href="#cb32-584" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-585"><a href="#cb32-585" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Variabilidad entre grupos:** diferencias debidas a pertenecer a distintos niveles educativos.</span>
+<span id="cb32-586"><a href="#cb32-586" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Variabilidad dentro de los grupos:** diferencias individuales no explicadas por el factor.</span>
+<span id="cb32-587"><a href="#cb32-587" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-588"><a href="#cb32-588" aria-hidden="true" tabindex="-1"></a>El **estadístico F** mide la razón entre ambas fuentes de variación:</span>
+<span id="cb32-589"><a href="#cb32-589" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-590"><a href="#cb32-590" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-591"><a href="#cb32-591" aria-hidden="true" tabindex="-1"></a>F = \frac{\text{Varianza entre grupos}}{\text{Varianza dentro de los grupos}}</span>
+<span id="cb32-592"><a href="#cb32-592" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb32-593"><a href="#cb32-593" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-594"><a href="#cb32-594" aria-hidden="true" tabindex="-1"></a>Si el valor de F es grande y el correspondiente valor-p pequeño, se concluye que **existen diferencias significativas** entre las medias de al menos algunos grupos.</span>
+<span id="cb32-595"><a href="#cb32-595" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-596"><a href="#cb32-596" aria-hidden="true" tabindex="-1"></a><span class="fu">### Ejemplo: diferencias por nivel educativo</span></span>
+<span id="cb32-597"><a href="#cb32-597" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-598"><a href="#cb32-598" aria-hidden="true" tabindex="-1"></a>Veamos si el **tiempo promedio de trabajo no remunerado** difiere según el **nivel educativo** (<span class="in">`nivel_educ`</span>).</span>
+<span id="cb32-599"><a href="#cb32-599" aria-hidden="true" tabindex="-1"></a>Primero, preparamos los datos filtrando los valores válidos y convirtiendo la variable educativa en factor:</span>
+<span id="cb32-600"><a href="#cb32-600" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-603"><a href="#cb32-603" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-604"><a href="#cb32-604" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: preparar-anova</span></span>
+<span id="cb32-605"><a href="#cb32-605" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb32-606"><a href="#cb32-606" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-607"><a href="#cb32-607" aria-hidden="true" tabindex="-1"></a>datos_anova <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb32-608"><a href="#cb32-608" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb32-609"><a href="#cb32-609" aria-hidden="true" tabindex="-1"></a>    <span class="at">nivel_educ =</span> haven<span class="sc">::</span><span class="fu">zap_labels</span>(nivel_educ),</span>
+<span id="cb32-610"><a href="#cb32-610" aria-hidden="true" tabindex="-1"></a>    <span class="at">nivel_educ =</span> <span class="fu">factor</span>(nivel_educ,</span>
+<span id="cb32-611"><a href="#cb32-611" aria-hidden="true" tabindex="-1"></a>                        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Sin o primaria incompleta"</span>,</span>
+<span id="cb32-612"><a href="#cb32-612" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Primaria completa"</span>,</span>
+<span id="cb32-613"><a href="#cb32-613" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Secundaria completa"</span>,</span>
+<span id="cb32-614"><a href="#cb32-614" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Técnica o postsecundaria"</span>,</span>
+<span id="cb32-615"><a href="#cb32-615" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Universitaria"</span>)),</span>
+<span id="cb32-616"><a href="#cb32-616" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_tdnr_dt =</span> haven<span class="sc">::</span><span class="fu">zap_labels</span>(t_tdnr_dt),</span>
+<span id="cb32-617"><a href="#cb32-617" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_tdnr_dt =</span> <span class="fu">as.numeric</span>(t_tdnr_dt)</span>
+<span id="cb32-618"><a href="#cb32-618" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb32-619"><a href="#cb32-619" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(nivel_educ), <span class="sc">!</span><span class="fu">is.na</span>(t_tdnr_dt), t_tdnr_dt <span class="sc">&lt;</span> <span class="dv">96</span>)</span>
+<span id="cb32-620"><a href="#cb32-620" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-621"><a href="#cb32-621" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-622"><a href="#cb32-622" aria-hidden="true" tabindex="-1"></a>Visualizamos las distribuciones:</span>
+<span id="cb32-623"><a href="#cb32-623" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-626"><a href="#cb32-626" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-627"><a href="#cb32-627" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: boxplot-anova</span></span>
+<span id="cb32-628"><a href="#cb32-628" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Distribución del tiempo diario de trabajo no remunerado según nivel educativo (ENUT)"</span></span>
+<span id="cb32-629"><a href="#cb32-629" aria-hidden="true" tabindex="-1"></a>datos_anova <span class="sc">|&gt;</span></span>
+<span id="cb32-630"><a href="#cb32-630" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> nivel_educ, <span class="at">y =</span> t_tdnr_dt, <span class="at">fill =</span> nivel_educ)) <span class="sc">+</span></span>
+<span id="cb32-631"><a href="#cb32-631" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">color =</span> <span class="st">"gray30"</span>) <span class="sc">+</span></span>
+<span id="cb32-632"><a href="#cb32-632" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#9C0824"</span>, <span class="st">"#C7402D"</span>, <span class="st">"#F28E2B"</span>, <span class="st">"#7CA982"</span>, <span class="st">"#2A5783"</span>)) <span class="sc">+</span></span>
+<span id="cb32-633"><a href="#cb32-633" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb32-634"><a href="#cb32-634" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribución del trabajo no remunerado por nivel educativo"</span>,</span>
+<span id="cb32-635"><a href="#cb32-635" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Variable `t_tdnr_dt` en horas (ENUT)"</span>,</span>
+<span id="cb32-636"><a href="#cb32-636" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Nivel educativo"</span>,</span>
+<span id="cb32-637"><a href="#cb32-637" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Horas de trabajo no remunerado (día tipo)"</span>,</span>
+<span id="cb32-638"><a href="#cb32-638" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: Elaboración propia con datos ENUT"</span></span>
+<span id="cb32-639"><a href="#cb32-639" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb32-640"><a href="#cb32-640" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"Fira Sans"</span>) <span class="sc">+</span></span>
+<span id="cb32-641"><a href="#cb32-641" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb32-642"><a href="#cb32-642" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb32-643"><a href="#cb32-643" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb32-644"><a href="#cb32-644" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">20</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb32-645"><a href="#cb32-645" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span></span>
+<span id="cb32-646"><a href="#cb32-646" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb32-647"><a href="#cb32-647" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-648"><a href="#cb32-648" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-649"><a href="#cb32-649" aria-hidden="true" tabindex="-1"></a>El gráfico muestra una tendencia descendente: quienes tienen menor educación tienden a dedicar más tiempo al trabajo no remunerado, mientras que las personas con educación técnica o universitaria dedican menos horas.</span>
+<span id="cb32-650"><a href="#cb32-650" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-651"><a href="#cb32-651" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-652"><a href="#cb32-652" aria-hidden="true" tabindex="-1"></a><span class="fu">### ANOVA de una vía</span></span>
+<span id="cb32-653"><a href="#cb32-653" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-654"><a href="#cb32-654" aria-hidden="true" tabindex="-1"></a>Aplicamos el ANOVA formalmente con la función <span class="in">`aov()`</span>:</span>
+<span id="cb32-655"><a href="#cb32-655" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-658"><a href="#cb32-658" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-659"><a href="#cb32-659" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: anova-nivel-educ</span></span>
+<span id="cb32-660"><a href="#cb32-660" aria-hidden="true" tabindex="-1"></a>modelo_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(t_tdnr_dt <span class="sc">~</span> nivel_educ, <span class="at">data =</span> datos_anova)</span>
+<span id="cb32-661"><a href="#cb32-661" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo_anova)</span>
+<span id="cb32-662"><a href="#cb32-662" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-663"><a href="#cb32-663" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-664"><a href="#cb32-664" aria-hidden="true" tabindex="-1"></a>El resultado arroja un **F = 70.11** con **valor-p &lt; 2 × 10⁻¹⁶**, lo que indica diferencias **altamente significativas** entre los niveles educativos.</span>
+<span id="cb32-665"><a href="#cb32-665" aria-hidden="true" tabindex="-1"></a>Es decir, **rechazamos $H_0$** y concluimos que el tiempo promedio de trabajo no remunerado **varía según el nivel educativo**.</span>
+<span id="cb32-666"><a href="#cb32-666" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-667"><a href="#cb32-667" aria-hidden="true" tabindex="-1"></a>Para identificar **qué grupos difieren entre sí**, realizamos una **prueba post-hoc de Tukey**:</span>
+<span id="cb32-668"><a href="#cb32-668" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-671"><a href="#cb32-671" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-672"><a href="#cb32-672" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tukey-nivel-educ</span></span>
+<span id="cb32-673"><a href="#cb32-673" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(modelo_anova)</span>
+<span id="cb32-674"><a href="#cb32-674" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-675"><a href="#cb32-675" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-676"><a href="#cb32-676" aria-hidden="true" tabindex="-1"></a>Los resultados muestran diferencias estadísticamente significativas entre la mayoría de los pares.</span>
+<span id="cb32-677"><a href="#cb32-677" aria-hidden="true" tabindex="-1"></a>En particular:</span>
+<span id="cb32-678"><a href="#cb32-678" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-679"><a href="#cb32-679" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Quienes tienen **educación primaria o menos** dedican **más tiempo** al trabajo no remunerado que los grupos con estudios secundarios, técnicos o universitarios.</span>
+<span id="cb32-680"><a href="#cb32-680" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Las diferencias entre niveles **secundario, técnico y universitario** son menores y, en algunos casos, **no significativas** (por ejemplo, secundaria vs. universitaria, p ≈ 0.83).</span>
+<span id="cb32-681"><a href="#cb32-681" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-682"><a href="#cb32-682" aria-hidden="true" tabindex="-1"></a>Esto confirma una **brecha educativa clara**: a medida que aumenta el nivel educativo, el tiempo destinado al trabajo no remunerado tiende a disminuir.</span>
+<span id="cb32-683"><a href="#cb32-683" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-684"><a href="#cb32-684" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb32-685"><a href="#cb32-685" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-686"><a href="#cb32-686" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tamaño de efecto: $\eta^2$</span></span>
+<span id="cb32-687"><a href="#cb32-687" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-688"><a href="#cb32-688" aria-hidden="true" tabindex="-1"></a>Como en el caso del test $t$, con muestras grandes es importante complementar el análisis con una medida de **magnitud del efecto**.</span>
+<span id="cb32-689"><a href="#cb32-689" aria-hidden="true" tabindex="-1"></a>El **$\eta^2$ (eta cuadrado)** indica la proporción de la variabilidad total explicada por el factor:</span>
+<span id="cb32-690"><a href="#cb32-690" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-693"><a href="#cb32-693" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-694"><a href="#cb32-694" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: efecto-anova</span></span>
+<span id="cb32-695"><a href="#cb32-695" aria-hidden="true" tabindex="-1"></a>SS <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo_anova)[[<span class="dv">1</span>]]<span class="sc">$</span><span class="st">`</span><span class="at">Sum Sq</span><span class="st">`</span></span>
+<span id="cb32-696"><a href="#cb32-696" aria-hidden="true" tabindex="-1"></a>eta2 <span class="ot">&lt;-</span> SS[<span class="dv">1</span>] <span class="sc">/</span> <span class="fu">sum</span>(SS)</span>
+<span id="cb32-697"><a href="#cb32-697" aria-hidden="true" tabindex="-1"></a>eta2</span>
+<span id="cb32-698"><a href="#cb32-698" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-699"><a href="#cb32-699" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-700"><a href="#cb32-700" aria-hidden="true" tabindex="-1"></a>El valor obtenido fue **$\eta^2 ≈ 0.01$**, lo que corresponde a un **efecto pequeño** según las convenciones usuales (0.01 = pequeño, 0.06 = mediano, 0.14 = grande).</span>
+<span id="cb32-701"><a href="#cb32-701" aria-hidden="true" tabindex="-1"></a>Esto significa que, aunque las diferencias entre grupos son **estadísticamente significativas**, el **nivel educativo explica solo alrededor del 1 %** de la variabilidad en el tiempo de trabajo no remunerado. En términos sustantivos, las desigualdades educativas inciden, pero **no son el principal determinante** del tiempo dedicado a tareas no remuneradas.</span>
+<span id="cb32-702"><a href="#cb32-702" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-703"><a href="#cb32-703" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-704"><a href="#cb32-704" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-705"><a href="#cb32-705" aria-hidden="true" tabindex="-1"></a><span class="fu">### Extensiones posibles</span></span>
+<span id="cb32-706"><a href="#cb32-706" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-707"><a href="#cb32-707" aria-hidden="true" tabindex="-1"></a>El ANOVA puede extenderse fácilmente para explorar diferencias por otras variables categóricas, como **nivel socioeconómico (`NSE`)**, **condición de actividad (`cae`)** o **región (`glosa_region`)**, e incluso para **modelos multifactoriales**, donde se analiza la interacción entre variables (por ejemplo, **sexo × nivel educativo**).</span>
+<span id="cb32-708"><a href="#cb32-708" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-709"><a href="#cb32-709" aria-hidden="true" tabindex="-1"></a>Estas extensiones permiten profundizar en los **determinantes sociales del trabajo no remunerado**, integrando más dimensiones de desigualdad dentro del análisis inferencial.</span>
+<span id="cb32-710"><a href="#cb32-710" aria-hidden="true" tabindex="-1"></a></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
