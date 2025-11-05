@@ -1,11 +1,11 @@
 ---
-title: "Taller de Métodos y Técnicas de Investigación I"
+title: "Taller de Métodos y Técnicas de Investigación II"
 subtitle: "Magíster en Sociología - Universidad Alberto Hurtado"
 ---
 
 ## ¡Bienvenides!
 
-Este es el sitio web del curso **Taller de Métodos y Técnicas de Investigación I** de la Universidad Alberto Hurtado, enfocado en la aplicación práctica de técnicas estadísticas usando R. En este sitio, se irá subiendo el material de apoyo para las sesiones de ayudantía del curso.
+Este es el sitio web del curso **Taller de Métodos y Técnicas de Investigación II** de la Universidad Alberto Hurtado, enfocado en la aplicación práctica de técnicas estadísticas usando R. En este sitio, se irá subiendo el material de apoyo para las sesiones de ayudantía del curso.
 
 ## Descripción del curso
 
