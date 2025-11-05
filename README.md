@@ -1,6 +1,6 @@
-# Taller de Métodos y Técnicas de Investigación I
+# Taller de Métodos y Técnicas de Investigación II
 
-Sitio web del curso "Taller de Métodos y Técnicas de Investigación I" del Magíster en Sociología.
+Sitio web del curso "Taller de Métodos y Técnicas de Investigación II" del Magíster en Sociología.
 
 **Sitio web:** [https://fransofia.github.io/metodos-mgsocio-uah/](https://fransofia.github.io/metodos-mgsocio-uah/)
 
