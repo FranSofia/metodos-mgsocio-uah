@@ -51,42 +51,42 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Taller de Métodos y Técnicas de Investigación I",
+    "title": "Taller de Métodos y Técnicas de Investigación II",
     "section": "",
-    "text": "Este es el sitio web del curso Taller de Métodos y Técnicas de Investigación I de la Universidad Alberto Hurtado, enfocado en la aplicación práctica de técnicas estadísticas usando R. En este sitio, se irá subiendo el material de apoyo para las sesiones de ayudantía del curso."
+    "text": "Este es el sitio web del curso Taller de Métodos y Técnicas de Investigación II de la Universidad Alberto Hurtado, enfocado en la aplicación práctica de técnicas estadísticas usando R. En este sitio, se irá subiendo el material de apoyo para las sesiones de ayudantía del curso."
   },
   {
     "objectID": "index.html#bienvenides",
     "href": "index.html#bienvenides",
-    "title": "Taller de Métodos y Técnicas de Investigación I",
+    "title": "Taller de Métodos y Técnicas de Investigación II",
     "section": "",
-    "text": "Este es el sitio web del curso Taller de Métodos y Técnicas de Investigación I de la Universidad Alberto Hurtado, enfocado en la aplicación práctica de técnicas estadísticas usando R. En este sitio, se irá subiendo el material de apoyo para las sesiones de ayudantía del curso."
+    "text": "Este es el sitio web del curso Taller de Métodos y Técnicas de Investigación II de la Universidad Alberto Hurtado, enfocado en la aplicación práctica de técnicas estadísticas usando R. En este sitio, se irá subiendo el material de apoyo para las sesiones de ayudantía del curso."
   },
   {
     "objectID": "index.html#descripción-del-curso",
     "href": "index.html#descripción-del-curso",
-    "title": "Taller de Métodos y Técnicas de Investigación I",
+    "title": "Taller de Métodos y Técnicas de Investigación II",
     "section": "Descripción del curso",
     "text": "Descripción del curso\nEl curso pretende ofrecer una breve introducción a las técnicas de investigación y análisis cuantitativo más utilizadas en sociología. Para ello se comenzará haciendo una revisión general de los principales conceptos, supuestos y aplicaciones de técnicas básicas de análisis estadístico descriptivo e inferencial (prueba de hipótesis). Luego de ello, se introducen los aspectos básicos de técnicas estadísticas avanzadas—particularmente de modelos de regresión multivariados—. Finalmente, se discuten los usos de estos modelos: cómo comprender su interpretación, y cómo usarlos para trabajar preguntas de investigación concretas. A lo largo del curso, se espera que los estudiantes entiendan la lógica de investigación cuantitativa, su aplicación a través del uso del software estadístico R, así como la interpretación de resultados a través de la lectura de artículos científicos.\nEn suma, este taller está diseñado para que estudiantes del Magíster en Sociología desarrollen habilidades prácticas en análisis estadístico utilizando el lenguaje de programación R. En esta página web, a través de 5 sesiones (las de ayudantía), cubriremos desde lo básico de R hasta análisis de regresión lineal múltiple. Además, dejaremos recursos para que puedan utilizarlo en sus investigaciones de Magíster.\n\nObjetivos de aprendizaje\nObjetivo general:\n\nIntroducir a los/as estudiantes en el uso, aplicación e interpretación de técnicas estadísticas descriptivas e inferenciales utilizadas comúnmente en la investigación sociológica\n\nObjetivos específicos:\n\nIntroducir los/as estudiantes en el uso de conceptos básicos del análisis estadístico (variable, muestra/población, distribución muestral, estimación de parámetros, etc.)\nIntroducir a los/as estudiantes en la aplicación de técnicas estadísticas univariadas, bivariadas y multivariadas\nFamiliarizar a los/as estudiantes con el uso base de datos y de paquetes estadísticos (particularmente R)\nFamiliarizar a los/as estudiantes con la lectura de artículos sociológicos cuantitativos, y con la formulación de modelos estadísticos para resolver problemas sociológicos"
   },
   {
     "objectID": "index.html#estructura-del-curso",
     "href": "index.html#estructura-del-curso",
-    "title": "Taller de Métodos y Técnicas de Investigación I",
+    "title": "Taller de Métodos y Técnicas de Investigación II",
     "section": "Estructura del curso",
     "text": "Estructura del curso\nEl curso consta de 5 sesiones prácticas:\n\nSesión 1: Introducción a R + Estadística descriptiva (I)\nSesión 2: Estadística descriptiva (II) + Prueba de hipótesis (I)\nSesión 3: Prueba de hipótesis (II) + ANOVA\nSesión 4: Correlación bivariada + Regresión lineal simple\nSesión 5: Regresión lineal múltiple"
   },
   {
     "objectID": "index.html#información-del-curso",
     "href": "index.html#información-del-curso",
-    "title": "Taller de Métodos y Técnicas de Investigación I",
+    "title": "Taller de Métodos y Técnicas de Investigación II",
     "section": "Información del curso",
     "text": "Información del curso\n\n\n\n\n\n\nDetalles\n\n\n\n\nProfesora: Carollina Aguilera\nAyudante: Fran Sofía Núñez\nHorario de Ayudantía: Martes a las 19.00 hrs\nModalidad: Online via Teams"
   },
   {
     "objectID": "index.html#antes-de-comenzar",
     "href": "index.html#antes-de-comenzar",
-    "title": "Taller de Métodos y Técnicas de Investigación I",
+    "title": "Taller de Métodos y Técnicas de Investigación II",
     "section": "Antes de comenzar",
     "text": "Antes de comenzar\nPara seguir este curso necesitarás:\n\nInstalar R\nInstalar RStudio\nConocimientos básicos de estadística\n\nRevisa la sección Recursos para guías de instalación y materiales complementarios.\n\n\n\n\n\n\n\nContacto\n\n\n\nPara consultas del curso, puedes contactarme por fransofia.nr@gmail.com."
   },
