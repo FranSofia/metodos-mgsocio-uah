@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "Taller de Métodos y Técnicas de Investigación I"
+  title: "Taller de Métodos y Técnicas de Investigación II"
   navbar:
     background: primary
     search: true

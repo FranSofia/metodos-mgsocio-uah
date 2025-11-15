@@ -1,6 +1,6 @@
 ---
 title: "Sesión 1: Introducción a R y Estadística Descriptiva (I)"
-subtitle: "Taller de Métodos y Técnicas de Investigación I [BORRADOR]"
+subtitle: "Taller de Métodos y Técnicas de Investigación II"
 date: "2025-10-21"
 format:
   html:
