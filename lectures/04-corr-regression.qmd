@@ -9,6 +9,8 @@ En esta sesión ya pasaremos a temas más "avanzados" respecto a la estadística
 #| label: cargar-paquetes-y-casen
 #| collapse: true
 
+if (!requireNamespace("pacman", quietly = TRUE))
+  install.packages("pacman")
 pacman::p_load(tidyverse, # colección de paquetes, dplyr entre ellos, pero también haven
                sjmisc, # explorar datos
                ggplot2, # para visualizar gráficos
