@@ -9,12 +9,18 @@ En esta sesión ya pasaremos a temas más "avanzados" respecto a la estadística
 #| label: cargar-paquetes-y-casen
 #| collapse: true
 
-if (!requireNamespace("pacman", quietly = TRUE))
+# Instalar pacman solo si no está instalado
+if (!"pacman" %in% rownames(installed.packages())) {
   install.packages("pacman")
-pacman::p_load(tidyverse, # colección de paquetes, dplyr entre ellos, pero también haven
-               sjmisc, # explorar datos
-               ggplot2, # para visualizar gráficos
-               scales) # para ajustar gráficos
+}
+
+pacman::p_load(
+  tidyverse,  # dplyr, readr, etc.
+  sjmisc,     # explorar datos
+  ggplot2,    # gráficos
+  scales      # ejes, formatos, etc.
+)
+
 
 ### Formato SPSS 
 casen2022<-read_sav("data-sesiones/Casen 2022.sav")

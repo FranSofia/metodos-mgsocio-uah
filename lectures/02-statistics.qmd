@@ -56,8 +56,11 @@ pacman::p_load(tidyverse, # colección de paquetes, dplyr entre ellos, pero tamb
 ```{r}
 #| label: cargar-paquetes-real
 #| include: false
-if (!requireNamespace("pacman", quietly = TRUE))
+# Instalar pacman solo si no está instalado
+if (!"pacman" %in% rownames(installed.packages())) {
   install.packages("pacman")
+}
+
 pacman::p_load(tidyverse, # colección de paquetes, dplyr entre ellos, pero también haven
                dplyr, # manipular datos
                psych, # para estadísticas descriptivas
