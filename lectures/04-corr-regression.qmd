@@ -9,9 +9,10 @@ En esta sesión ya pasaremos a temas más "avanzados" respecto a la estadística
 #| label: cargar-paquetes-y-casen
 #| collapse: true
 
-pacman::p_load(tidyverse, 
-               haven, 
-               sjmisc) 
+pacman::p_load(tidyverse, # colección de paquetes, dplyr entre ellos, pero también haven
+               sjmisc, # explorar datos
+               ggplot2, # para visualizar gráficos
+               scales) # para ajustar gráficos
 
 ### Formato SPSS 
 casen2022<-read_sav("data-sesiones/Casen 2022.sav")
@@ -160,5 +161,149 @@ $$
 $$  
 Al estar entre $0$ y $1$, y ser aproximadamente $0,37$, habla de una relación lineal **positiva moderada**: los años de escolaridad y el ingreso suben en conjunto, pero la asociación no es muy fuerte. En resumen, existe evidencia de que la escolaridad y el ingreso laboral se mueven en la misma dirección, con una correlación moderada que sugiere que otros factores además de los años de estudio también influyen en el nivel de ingreso.
 
+Ahora bien, ¿es posible profundizar en esta *relación*? Si tenemos una relación lineal **positiva moderada** entre ingresos del trabajo y años de escolaridad, entonces podemos ir observando mejor esta relación. Partamos de manera gráfica.
 
+### Gráficos de dispersión de puntos (*scatter plots*)
+
+Como ya mencionamos en la sesión 2, este tipo de gráficos es recomendable para resumir gráficamente la información de **la _asociación_ de dos variables cuantitativas**. Un gráfico de dispersión muestra cada observación como un punto en un sistema de coordenadas para dos variables cuantitativas. En nuestro caso, graficaremos la relación entre el ingreso del trabajo corregido (`ytrabajocor`) y los años de escolaridad (`esc`). Ahora bien, un problema común que surge en los gráficos de dispersión es cuando los datos de muchas observaciones se intentan presentar en una sola figura. En nuestro ejemplo, contamos con información de aproximadamente 89.000 personas ocupadas (las que tienen ingreso del trabajo). En estos casos, es recomendable procesar antes los datos o aplicar transformaciones que mejoren la visualización.
+
+Para la variable ingreso, como ya hemos visto antes, la transformación logarítmica es particularmente útil. Esto se debe a que los ingresos no se distribuyen normalmente: hay muchas personas con ingresos bajos o medios y pocas con ingresos muy altos. Esta asimetría (reflejada en el skewness de 12.12 que vimos en las estadísticas descriptivas) hace que un gráfico en escala lineal sea difícil de interpretar. La transformación logarítmica "comprime" los valores altos y "expande" los bajos, permitiendo visualizar mejor el patrón de asociación en todo el rango de ingresos.
+
+Veamos primero cómo se vería el gráfico sin procesar:
+
+```{r}
+#| label: scatter-ytrabajo-simple
+#| collapse: true
+
+# Scatter plot básico (sin transformación)
+casen2022 |>
+  filter(!is.na(esc), !is.na(ytrabajocor)) |>
+  ggplot(aes(x = esc, y = ytrabajocor)) +
+    geom_jitter(width = 0.2, alpha = 0.3, color = "#4E79A7") +
+    scale_y_continuous(labels = scales::dollar_format(prefix = "$", suffix = " CLP")) +
+    labs(
+      x     = "Años de escolaridad",
+      y     = "Ingreso del trabajo corregido",
+      title = "Dispersión: Escolaridad vs Ingreso del trabajo (escala lineal)"
+    ) +
+    theme_minimal(base_family = "Fira Sans", base_size = 12)
+```
+
+Como se aprecia, el gráfico presenta un problema serio de **sobreposición** (*overplotting*): la enorme concentración de observaciones en la parte inferior hace imposible distinguir patrones claros. Además, los valores extremadamente altos comprimen visualmente la mayor parte de los datos en una franja muy estrecha del eje vertical.Ahora, aplicando la transformación logarítmica al eje de ingresos:
+
+```{r}
+#| label: scatter-ytrabajo-log
+#| collapse: true
+
+casen2022 |>
+  filter(!is.na(esc), !is.na(ytrabajocor)) |>
+  ggplot(aes(x = esc, y = ytrabajocor)) +
+    geom_jitter(width = 0.1, alpha = 0.4, color = "#ADD8E6") +
+    scale_y_log10(labels = scales::dollar_format(prefix = "$", suffix = " CLP")) +
+    labs(
+      x     = "Años de escolaridad",
+      y     = "Ingreso del trabajo corregido (escala log)",
+      title = "Dispersión: Escolaridad vs Ingreso del trabajo"
+    ) +
+    theme_minimal(base_family = "Fira Sans", base_size = 12)
+```
+
+Ahora sí el gráfico nos comunica información mucho más clara. La transformación logarítmica del eje vertical nos permite observar patrones que eran invisibles en la escala lineal. Veamos con detención lo que muestra este gráfico:
+
+1. **Tendencia positiva clara**: Se aprecia una relación creciente entre años de escolaridad e ingreso laboral. Las "columnas" de puntos van ascendiendo de izquierda a derecha, confirmando que a mayor educación, mayor es el ingreso esperado.
+
+2. **Dispersión considerable pero estructurada**: Aunque la variabilidad de los ingresos es sustancial en todos los niveles educativos (las columnas verticales de puntos son largas), existe una estructura clara en los datos. La dispersión no es aleatoria: hay un rango típico de ingresos para cada nivel educativo, con algunos valores atípicos tanto hacia arriba como hacia abajo.
+
+3. **Concentración de datos en niveles intermedios**: La mayor densidad de observaciones (columnas más "pobladas" de puntos) se encuentra en los niveles intermedios de escolaridad, especialmente entre 8 y 12 años, que corresponden a educación media completa. Esto tiene sentido considerando la distribución educacional de la población ocupada en Chile.
+
+4. **Valores extremos en educación**: En los extremos (0-2 años y más de 20 años de escolaridad) hay notoriamente menos observaciones, lo que se refleja en columnas más "delgadas" de puntos. Esto es importante porque implica que cualquier conclusión sobre esos niveles educativos tendrá mayor incertidumbre.
+
+5. **Rango amplio de ingresos**: En escala logarítmica, el eje Y abarca desde aproximadamente $1,000 CLP hasta más de $10,000,000 CLP. Esta enorme amplitud (varios órdenes de magnitud) refleja la alta desigualdad salarial en el mercado laboral chileno.
+
+::: {.callout-warning}
+## La escala logarítmica y la interpretación de los ingresos
+
+Es fundamental entender que cuando usamos `scale_y_log10()`, las etiquetas del eje Y ($100,000 CLP, $1,000,000 CLP, etc.) representan **valores reales en pesos chilenos**, no valores logarítmicos. Lo que cambia es el **espaciamiento visual**: la distancia entre $100,000 y $1,000,000 (multiplicar por 10) es igual a la distancia entre $1,000,000 y $10,000,000 (también multiplicar por 10). Esta representación es útil porque los ingresos tienen una distribución muy asimétrica, con muchas personas ganando cantidades bajas o medias y pocas ganando cantidades muy altas. La escala logarítmica "comprime" los valores altos y "expande" los bajos, permitiendo visualizar toda la distribución de manera más equilibrada.
+:::
+
+## Introduciendo una línea de tendencia: el primer paso hacia la regresión
+
+Esta tendencia que observamos en los datos no solo podemos visualizarla, sino también **modelarla** matemáticamente. El paquete `ggplot2` permite trazar una línea de tendencia con bandas de error mediante un modelo estadístico. Esta línea resume la relación "promedio" entre las dos variables y nos da una primera aproximación a lo que será un **modelo de regresión lineal simple**.
+
+```{r}
+#| label: scatter-ytrabajo-regresion
+#| collapse: true
+#| warning: false
+
+# Scatter plot con línea de regresión
+ggplot(
+  casen2022 |> filter(!is.na(esc), !is.na(ytrabajocor)),
+  aes(x = esc, y = ytrabajocor)
+) +
+  geom_point(alpha = 0.3, color = "#36648B", size = 0.8) +
+  geom_smooth(
+    method = "lm",
+    se     = TRUE,
+    color  = "#8B0000",
+    fill   = "#696969",
+    linewidth = 1.2
+  ) +
+  scale_y_log10(labels = scales::dollar_format(prefix = "$", suffix = " CLP")) +
+  labs(
+    x     = "Años de escolaridad",
+    y     = "Ingreso del trabajo corregido (escala log)",
+    title = "Ingreso del trabajo según años de escolaridad",
+    caption = "Línea roja: modelo de regresión lineal | Banda gris: intervalo de confianza al 95%"
+  ) +
+  theme_minimal(base_family = "Fira Sans", base_size = 12) +
+  theme(
+    plot.title   = element_text(face = "bold", size = 16, hjust = 0.5),
+    plot.caption = element_text(size = 10, hjust = 0.5, color = "gray40"),
+    axis.text    = element_text(size = 12)
+  )
+```
+
+Este gráfico es particularmente revelador porque integra tres elementos fundamentales que nos permiten hacer una lectura mucho más profunda de la relación entre educación e ingresos:
+
+1. **Los datos observados** (puntos azules): cada punto representa una persona con su combinación específica de años de escolaridad e ingreso laboral. La nube de puntos muestra la realidad empírica: hay dispersión, heterogeneidad, y casos que se alejan del patrón general.
+
+2. **La línea de tendencia** (línea roja): esta línea resume la relación "promedio" entre educación e ingreso. Matemáticamente, es la **recta de regresión** que "mejor se ajusta" a la nube de puntos en el sentido de minimizar las distancias verticales entre los puntos observados y la línea predicha. Nótese que la línea es **aproximadamente recta en escala logarítmica**, lo que indica una relación log-lineal entre las variables.
+
+3. **El intervalo de confianza** (banda gris): representa la incertidumbre de nuestra estimación de la línea de tendencia. Observemos cómo es más estrecha en el centro del gráfico (entre 8 y 15 años de escolaridad, donde hay más datos) y se ensancha progresivamente hacia los extremos. En 0 años de escolaridad y más allá de 22 años, la banda es considerablemente más ancha, reflejando mayor incertidumbre debido a la menor cantidad de observaciones en esos rangos.
+
+### Interpretación detallada del gráfico
+
+Del gráfico con la línea de regresión se pueden extraer varias conclusiones importantes:
+
+1. **Relación positiva y aproximadamente lineal en escala log**: La línea roja es ascendente y relativamente recta, lo que indica que en escala logarítmica existe una relación lineal positiva entre escolaridad e ingreso. Esto implica que cada año adicional de educación se asocia con un **aumento porcentual aproximadamente constante** en el ingreso esperado.
+
+2. **Pendiente sostenida**: A diferencia de lo que observamos con el ingreso autónomo del hogar (que mostraba rendimientos marginales decrecientes con una curva que se aplanaba), aquí la pendiente se mantiene relativamente estable a lo largo de todo el rango educativo. Esto sugiere que el retorno marginal de un año adicional de educación, medido en términos porcentuales, no disminuye sustancialmente con el nivel educativo.
+
+3. **Variabilidad sustancial no capturada por el modelo**: Aunque la línea roja resume bien la tendencia central, la dispersión vertical de los puntos alrededor de ella es considerable. Esto nos indica que, si bien la educación es un predictor importante del ingreso (explica parte de la variación), hay muchos otros factores que influyen en cuánto gana una persona: experiencia laboral, sector económico, género, región geográfica, tipo de ocupación, habilidades específicas, redes sociales, entre otros.
+
+4. **Heterogeneidad en todos los niveles educativos**: En cualquier nivel de escolaridad podemos encontrar personas con ingresos muy diversos. Por ejemplo, entre quienes tienen 12 años de educación (media completa), hay personas ganando desde aproximadamente $100,000 CLP hasta más de $2,000,000 CLP. Esta heterogeneidad refleja la complejidad del mercado laboral y la importancia de factores más allá de la educación formal.
+
+5. **Mayor incertidumbre en los extremos**: La banda de confianza se ensancha notoriamente en niveles muy bajos (0-2 años) y muy altos (>22 años) de escolaridad. Esto es una consecuencia directa de tener menos observaciones en esos rangos. Nuestras estimaciones del ingreso esperado son menos precisas allí, y debemos ser más cautelosos al hacer inferencias sobre esos grupos.
+
+6. **Intercepto bajo pero con alta incertidumbre**: La línea de regresión, si la extrapolamos hasta 0 años de escolaridad, sugiere un ingreso esperado alrededor de $100,000 CLP. Sin embargo, la banda de confianza en ese punto es muy ancha, reflejando que hay relativamente pocas personas en la muestra sin ninguna educación formal.
+
+### De la visualización al modelo: la pregunta de la regresión
+
+Este gráfico nos lleva naturalmente a preguntarnos: **¿cuánto aumenta el ingreso, en promedio, por cada año adicional de educación?** O, más precisamente: **¿cuál es el retorno porcentual esperado de un año adicional de escolaridad?** Esta pregunta es precisamente lo que responde un **modelo de regresión lineal simple**.
+
+La línea roja que hemos trazado es, en esencia, una ecuación matemática de la forma:
+
+$$
+\log(\text{Ingreso}) = \beta_0 + \beta_1 \times \text{Escolaridad} + \varepsilon
+$$
+
+donde:
+
+- $\beta_0$ es el **intercepto**: el logaritmo del ingreso esperado cuando la escolaridad es cero (aunque en la práctica este valor tiene poca interpretación sustantiva, ya que casi nadie tiene exactamente cero años de educación)
+  
+- $\beta_1$ es la **pendiente**: el cambio en el log del ingreso asociado a un año adicional de educación. Este parámetro es clave porque, en un modelo log-lineal, puede interpretarse aproximadamente como el **cambio porcentual** en el ingreso por cada año adicional de escolaridad
+  
+- $\epsilon$ representa el **término de error** o la variación no explicada por el modelo, es decir, toda la dispersión vertical que vemos alrededor de la línea roja
+
+En la siguiente sección, formalizaremos este modelo de manera rigurosa. Aprenderemos a estimarlo correctamente usando el método de **mínimos cuadrados ordinarios (MCO)**, a interpretar sus coeficientes de manera precisa (especialmente en el contexto de variables transformadas logarítmicamente), y a evaluar qué tan bien el modelo se ajusta a los datos. También discutiremos los supuestos bajo los cuales este modelo es válido y las limitaciones de interpretar la relación educación-ingreso como causal.
 
