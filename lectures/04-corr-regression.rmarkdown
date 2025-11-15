@@ -45,8 +45,6 @@ Es decir, la distribución conjunta de dos variables aleatorias independientes e
 Dicho esto, la covarianza mide el grado de **dependencia lineal** entre dos variables aleatorias. La representamos con $C(X,Y)$, $\mbox{cov}(X,Y)$ o $\sigma_{XY}$. La medición de la dependencia lineal permite observar cómo doa variables aleatorias evolucionan conjuntamente. Así, diremos que 
 
 :::{.definition}
-#### Covarianza
-
 La covarianza entre $X$ e $Y$ es la esperanza
 $$
 \mbox{E}[(X-\mu_X)(Y-\mu_Y)]
@@ -60,7 +58,7 @@ $$
 $$
 :::
 
-Cuando $X$ es mayor que su media, i.e., $X-\mu_x$ es positivo, entonces, $Y$ tiende a ser mayor que se media, ergo, $Y-\mu_Y$ es positivo. Y al revés, cuando $X-\mu_X<0$, entonces $Y-\mu_Y<0$. En cmabio si $X$ e $Y$ evolucionan en sentido opuesto, entonces la covarianza es negativa ($\sigma_{XY}<0$). Por último, si $\sigma_{XY}=0$, entonces $X$ e $Y$ son independientes entre sí ([Stock y Watson, 2012](https://gc.scalahed.com/recursos/files/r161r/w25589w/Introduccion_a_la_Econometria.pdf);[Cunningham, 2021](https://mixtape.scunning.com/)). Así, tenemos que 
+Cuando $X$ es mayor que su media, i.e., $X-\mu_x$ es positivo, entonces, $Y$ tiende a ser mayor que se media, ergo, $Y-\mu_Y$ es positivo. Y al revés, cuando $X-\mu_X<0$, entonces $Y-\mu_Y<0$. En cmabio si $X$ e $Y$ evolucionan en sentido opuesto, entonces la covarianza es negativa ($\sigma_{XY}<0$). Por último, si $\sigma_{XY}=0$, entonces $X$ e $Y$ son independientes entre sí[@stock-watson; @cunningham]. Así, tenemos que 
 
 1. Se tiene que $\mbox{cov}(X,Y)>0$ indica que dos variables se mueven en la misma dirección;
 
@@ -72,9 +70,7 @@ Cuando $X$ es mayor que su media, i.e., $X-\mu_x$ es positivo, entonces, $Y$ tie
 Ahora bien, la covarianza mide cómo las dos variables se mueven en conjunto, pero lo hace en las unidades de las dos variables de interés. Es decir, si $X$ está medido en tiempo en $Y$ peso, entonces la covarianza expresará tiempo $\times$ peso. Luego, muchas veces sería más útil tener una medida estandarizada. Esa medida estandarizada, es justamente la correlación, que denotaremos como $\mbox{Cor}(X,Y)$ o $\rho_{X,Y}$; y que tiene un rango $[-1,1]$, donde $-1$ es una correlación negativa perfecta y $1$ una correlación positiva perfecta. 
 
 :::{.definition}
-#### Correlación
-
-La "correlación es una medida alternativa de la dependencia entre $X$ e $Y$ que resuelve el problema de las «unidades» de la covarianza" ([Stock y Watson, 2012, p. 23](https://gc.scalahed.com/recursos/files/r161r/w25589w/Introduccion_a_la_Econometria.pdf)). Matemáticamente, la correlación entre $X$ e $Y$ no es más que al covarianza entre $X$ e $Y$ dividida por sus desviaciones estándar, tal que
+La "correlación es una medida alternativa de la dependencia entre $X$ e $Y$ que resuelve el problema de las «unidades» de la covarianza" [@stock-watson, p. 23]. Matemáticamente, la correlación entre $X$ e $Y$ no es más que al covarianza entre $X$ e $Y$ dividida por sus desviaciones estándar, tal que
 $$
 \mbox{Cor}(X,Y)=\rho_{X,Y} = \frac{\mbox{cov}(X,Y)}{\sqrt{\mbox{Var}(X)\cdot \mbox{Var}(Y)}} = \frac{\sigma_{X,Y}}{\sigma_X\sigma_Y}
 $$
@@ -83,9 +79,7 @@ $$
 Por último, una relación muy relevante (y clave más adelante, como para saber si se cumplen los supuestos básicos de MCO) es la de la esperanza condicional y la correlación: 
 
 :::{.definition}
-#### Esperanza condicional y correlación
-
-Si la media condicional de $Y$ no depende de $X$, entonces $Y$ y $X$ están incorrelacionadas ([Stock y Watson, 2012](https://gc.scalahed.com/recursos/files/r161r/w25589w/Introduccion_a_la_Econometria.pdf)). Es decir, 
+Si la media condicional de $Y$ no depende de $X$, entonces $Y$ y $X$ están incorrelacionadas @stock-watson. Es decir, 
 $$
 \text{Si } E(Y|X)=\mu_Y, \Rightarrow \sigma_{Y,X}=0 \text{ y  } \rho_{Y,X}=0
 $$
@@ -96,11 +90,7 @@ correlación entre las dos variables es igual a cero.
 
 Nuevamente, en R es muy simple usar todos estos operadores. 
 
-```{r}
-#| label: eg-cov-corr
-#| collapse: true
-
-
+```{r eg-cov-corr, echo=TRUE, collapse=TRUE}
 pacman::p_load(dplyr)
 
 set.seed(2025)
@@ -134,9 +124,7 @@ df_sim %>%
 Por ejemplo, si nos interesara ver la correlación entre el nivel educacional y los ingresos del trabajo, podríamos hacer esto con la CASEN 2022. Ojo, en general para remover `NA` colocamos `na.rm=TRUE`. Ahora no haremos eso por que `cov()` y `cor()` no reconocen el argumento `na.rm`. Esto simplemente lo solucionamos usando el argumento `use` y `complete.obs`, que ignora cualquier par con `NA`; o `pairwise.complete.obs` que calcula cada covarianza/correlación con los pares no `NA` correspondientes.
 
 
-```{r}
-#| label: eg-cov-corr-casen2
-#| collapse: true 
+```{r eg-cov-corr-casen2, echo=TRUE, collapse=TRUE, eval=FALSE}
 
 # Cálculo de covarianza y correlación empíricas
 cov_xy <- cov(casen2022$ytrabajocor, casen2022$esc,
@@ -158,7 +146,4 @@ donde $X$ es años de escolaridad y $Y$ ingreso de trabajo corregido. Al ser pos
 $$
 \rho_{X,Y} \approx 0{,}3674.
 $$  
-Al estar entre $0$ y $1$, y ser aproximadamente $0,37$, habla de una relación lineal **positiva moderada**: los años de escolaridad y el ingreso suben en conjunto, pero la asociación no es muy fuerte. En resumen, existe evidencia de que la escolaridad y el ingreso laboral se mueven en la misma dirección, con una correlación moderada que sugiere que otros factores además de los años de estudio también influyen en el nivel de ingreso.
-
-
-
+Al estar entre $0$ y $1$, y ser aproximadamente $0,37$, habla de una relación lineal **positiva moderada**: los años de escolaridad y el ingreso suben en conjunto, pero la asociación no es muy fuerte. En resumen, existe evidencia de que la escolaridad y el ingreso laboral se mueven en la misma dirección, con una correlación moderada que sugiere que otros factores además de los años de estudio también influyen en el nivel de ingreso.  
