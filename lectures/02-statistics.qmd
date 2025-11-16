@@ -71,14 +71,6 @@ pacman::p_load(tidyverse, # colección de paquetes, dplyr entre ellos, pero tamb
 options(scipen = 999)
 ```
 
-```{r}
-#| label: cargar-ayudas-datos
-#| include: false
-helper_path <- file.path("R", "data_loaders.R")
-if (file.exists(helper_path)) {
-  source(helper_path)
-}
-```
 
 # 1. Estadística descriptiva
 

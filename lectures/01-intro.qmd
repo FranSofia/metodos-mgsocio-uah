@@ -473,24 +473,18 @@ Pero partamos inmediatamente con bases de datos reales. Tomemos la Encuesta Naci
 ```{r}
 #| label: cargar-ene
 
-ene_path <- file.path("data-sesiones", "ene-2025-07-jja.csv")
-if (!file.exists(ene_path)) {
-  stop("No se encontró el archivo ENE en ", ene_path,
-       ". Agrégalo en la carpeta data/ para seguir con la sesión.")
-}
-
-datos <- read.csv(ene_path, # Ruta
+datos <- read.csv("data-sesiones/ene-2025-07-jja.csv", # Ruta
                   sep=",", # Delimitador
                   encoding = "UTF-8" # UTF-8 o Latin-1
                   )
 
 head(datos) # UPS
 
-datos <- read.csv(ene_path, # Ruta
+datos <- read.csv("data-sesiones/ene-2025-07-jja.csv", # Ruta
                   sep=";", # Delimitador
                   encoding = "Latin-1", # UTF-8 o Latin-1
                   stringsAsFactors = F # character to factor
-                  )
+                  ) 
 
 head(datos) # :D
 ```
@@ -1740,7 +1734,7 @@ library(haven)
 options(scipen = 999)
 
 # 2. CARGAR ENE ----
-datos <- read.csv(ene_path,
+datos <- read.csv("data-sesiones/ene-2025-07-jja.csv",
                   sep = ";",
                   encoding = "Latin-1",
                   stringsAsFactors = FALSE)

@@ -1,7 +1,7 @@
 # Archivos de Quarto
 /.quarto/
 /_site/
-/docs/
+
 
 # Archivos de R
 .Rproj.user/
