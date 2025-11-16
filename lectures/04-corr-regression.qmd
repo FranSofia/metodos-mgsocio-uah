@@ -318,3 +318,361 @@ donde:
 
 En la siguiente sección, formalizaremos este modelo de manera rigurosa. Aprenderemos a estimarlo correctamente usando el método de **mínimos cuadrados ordinarios (MCO)**, a interpretar sus coeficientes de manera precisa (especialmente en el contexto de variables transformadas logarítmicamente), y a evaluar qué tan bien el modelo se ajusta a los datos. También discutiremos los supuestos bajo los cuales este modelo es válido y las limitaciones de interpretar la relación educación-ingreso como causal.
 
+
+
+# Regresión Lineal Simple
+
+## Introducción al modelo de regresión
+
+La **regresión lineal simple** es una técnica estadística que nos permite modelar la relación entre dos variables: una **variable dependiente** (o variable respuesta, $Y$) y una **variable independiente** (o variable explicativa, $X$). El objetivo es encontrar la "mejor" línea recta que describa cómo cambia la variable dependiente cuando cambia la variable independiente.
+
+En nuestro caso, queremos modelar cómo el **ingreso del trabajo** (`ytrabajocor`) depende de los **años de escolaridad** (`esc`). La pregunta fundamental que buscamos responder es: **¿cuánto aumenta el ingreso, en promedio, por cada año adicional de educación?**
+
+## El modelo poblacional de regresión lineal simple
+
+### Especificación del modelo
+
+El modelo de regresión lineal simple se puede escribir como:
+
+$$
+Y_i = \beta_0 + \beta_1 X_i + u_i, \quad i = 1, \ldots, n
+$$
+
+donde:
+
+- $Y_i$ es el valor de la variable dependiente para la observación $i$
+- $X_i$ es el valor de la variable independiente (regresor) para la observación $i$  
+- $\beta_0$ es el **parámetro de intercepto**: representa el valor esperado de $Y$ cuando $X = 0$
+- $\beta_1$ es el **parámetro de pendiente**: mide el cambio en $Y$ asociado con un cambio unitario en $X$
+- $u_i$ es el **término de error**: captura todos los demás factores (además de $X$) que determinan $Y$
+
+Los parámetros $\beta_0$ y $\beta_1$ son **desconocidos** y representan características de la **población**. Nuestro objetivo es **estimarlos** a partir de una muestra de datos.
+
+### Supuestos del modelo clásico de regresión lineal
+
+Para que el estimador de MCO tenga buenas propiedades (insesgadez, consistencia, eficiencia), requerimos ciertos supuestos sobre el término de error $u_i$:
+
+**Supuesto 1 (Esperanza condicional cero):**  
+$$\mathbb{E}[u_i | X_i] = 0$$
+
+Este supuesto establece que el valor esperado del error, dado cualquier valor de $X$, es cero. Implica que $X$ no está correlacionado con ningún factor omitido en el error. Este es el supuesto **crucial** para la interpretación causal: si se viola (por ejemplo, por variables omitidas correlacionadas con $X$), el estimador de $\beta_1$ estará **sesgado**.
+
+**Supuesto 2 (Homocedasticidad):**  
+$$\text{Var}(u_i | X_i) = \sigma^2$$
+
+La varianza del error es constante y no depende de $X$. Cuando este supuesto se viola (heterocedasticidad), los estimadores de MCO siguen siendo insesgados, pero los errores estándar usuales son incorrectos.
+
+**Supuesto 3 (Normalidad, para inferencia):**  
+$$u_i | X_i \sim \mathcal{N}(0, \sigma^2)$$
+
+Los errores se distribuyen normalmente. Este supuesto es necesario para hacer inferencia con muestras pequeñas. En muestras grandes, por el Teorema del Límite Central, este supuesto puede relajarse.
+
+::: {.callout-important}
+## Asociación vs. Causalidad
+
+Un modelo de regresión mide **asociación estadística**, no necesariamente **causalidad**. Para que $\beta_1$ tenga una interpretación causal, el supuesto de esperanza condicional cero debe cumplirse estrictamente: $\mathbb{E}[u_i | X_i] = 0$.
+
+En la práctica, este supuesto rara vez se cumple con datos observacionales. En nuestro caso, factores como habilidades innatas, redes sociales, o capital cultural familiar están correlacionados tanto con la escolaridad como con los ingresos, violando el supuesto de exogeneidad. Por tanto, $\hat{\beta}_1$ captura la **asociación** entre educación e ingresos, pero no puede interpretarse como el "efecto causal puro" de la educación.
+:::
+
+## Estimación por Mínimos Cuadrados Ordinarios (MCO)
+
+### El criterio de MCO
+
+Dada una muestra de $n$ observaciones $\{(X_i, Y_i)\}_{i=1}^n$, el **método de mínimos cuadrados ordinarios** consiste en elegir estimadores $\hat{\beta}_0$ y $\hat{\beta}_1$ que minimicen la **suma de cuadrados de los residuos**:
+
+$$
+\text{SCR}(\beta_0, \beta_1) = \sum_{i=1}^{n} (Y_i - \beta_0 - \beta_1 X_i)^2
+$$
+
+Los valores ajustados (predichos) son $\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_i$, y los residuos son $\hat{u}_i = Y_i - \hat{Y}_i$.
+
+### Solución explícita
+
+Derivando con respecto a $\beta_0$ y $\beta_1$ e igualando a cero (condiciones de primer orden), se obtienen las **ecuaciones normales**:
+
+$$
+\begin{aligned}
+\sum_{i=1}^n (Y_i - \hat{\beta}_0 - \hat{\beta}_1 X_i) &= 0 \\
+\sum_{i=1}^n X_i(Y_i - \hat{\beta}_0 - \hat{\beta}_1 X_i) &= 0
+\end{aligned}
+$$
+
+Resolviendo este sistema, los estimadores de MCO son:
+
+$$
+\hat{\beta}_1 = \frac{\sum_{i=1}^{n}(X_i - \bar{X})(Y_i - \bar{Y})}{\sum_{i=1}^{n}(X_i - \bar{X})^2} = \frac{s_{XY}}{s_X^2}
+$$
+
+$$
+\hat{\beta}_0 = \bar{Y} - \hat{\beta}_1 \bar{X}
+$$
+
+donde $\bar{X}$ y $\bar{Y}$ son las medias muestrales, $s_{XY}$ es la covarianza muestral entre $X$ e $Y$, y $s_X^2$ es la varianza muestral de $X$.
+
+**Interpretación:** La pendiente estimada es la razón entre la covarianza de $X$ e $Y$ y la varianza de $X$. Si $X$ e $Y$ covarían positivamente, $\hat{\beta}_1 > 0$.
+
+## Primera aplicación: Modelo lineal simple
+
+Estimemos primero la relación entre ingreso del trabajo y escolaridad **sin transformaciones**, es decir, en niveles:
+
+$$
+\text{ytrabajocor}_i = \beta_0 + \beta_1 \times \text{esc}_i + u_i
+$$
+
+### Estimación en R
+
+```{r}
+#| label: regresion-lineal-simple
+#| collapse: true
+
+options(scipen = 999)
+
+# Filtrar datos válidos
+datos_reg <- casen2022 |>
+  filter(!is.na(esc), !is.na(ytrabajocor))
+
+# Estimar el modelo sin transformación
+modelo_lineal <- lm(ytrabajocor ~ esc, data = datos_reg)
+
+# Mostrar resultados
+summary(modelo_lineal)
+```
+
+### Interpretación del modelo lineal
+
+Los coeficientes estimados tienen una interpretación directa:
+
+- **$\hat{\beta}_0$ (Intercepto)**: El ingreso esperado cuando la escolaridad es cero. En este caso, representa el ingreso "base" para alguien sin educación formal.
+
+- **$\hat{\beta}_1$ (Pendiente)**: Cada año adicional de escolaridad se asocia con un aumento de $\hat{\beta}_1$ pesos en el ingreso del trabajo. Este es un **cambio absoluto** en pesos chilenos.
+
+Por ejemplo, si $\hat{\beta}_1 = 50,000$, significa que pasar de 10 a 11 años de escolaridad se asocia con un aumento promedio de $50,000 CLP en el ingreso mensual.
+
+**Limitación del modelo lineal:** Este modelo asume que el efecto de un año adicional de educación es **constante** en términos absolutos (pesos), independientemente del nivel educativo inicial. Esto puede no ser realista: $50,000 pesos adicionales representan un aumento muy distinto para alguien que gana $200,000 que para alguien que gana $2,000,000.
+
+## Segunda aplicación: Modelo log-lineal
+
+Para capturar **cambios porcentuales** (que son más comparables entre niveles de ingreso), estimamos el modelo con el logaritmo natural del ingreso:
+
+$$
+\log(\text{ytrabajocor}_i) = \beta_0 + \beta_1 \times \text{esc}_i + u_i
+$$
+
+### Estimación en R
+
+```{r}
+#| label: regresion-log-lineal
+#| collapse: true
+
+# Crear variable logarítmica
+datos_reg <- datos_reg |>
+  mutate(log_ytrabajo = log(ytrabajocor))
+
+# Estimar el modelo log-lineal
+modelo1 <- lm(log_ytrabajo ~ esc, data = datos_reg)
+
+# Mostrar resultados
+summary(modelo1)
+```
+
+### Interpretación del modelo log-lineal
+
+Del output obtenemos:
+
+**Coeficientes estimados:**
+
+$$
+\widehat{\log(\text{ytrabajocor})} = 11.585 + 0.116 \times \text{esc}
+$$
+
+- **$\hat{\beta}_0 = 11.585$**: El logaritmo del ingreso esperado cuando la escolaridad es cero. Exponenciando: $e^{11.585} \approx \$107,180$ CLP. Esta interpretación tiene poco sentido sustantivo (casi nadie tiene exactamente cero años de educación), pero es necesaria matemáticamente para definir la línea.
+
+- **$\hat{\beta}_1 = 0.116$**: Este es el coeficiente de interés. En un modelo log-lineal, $\beta_1$ mide el **cambio proporcional** (o porcentual) en $Y$ asociado con un cambio unitario en $X$.
+
+**Interpretación en términos porcentuales:**
+
+Para un modelo de la forma $\log(Y) = \beta_0 + \beta_1 X$, el coeficiente $\beta_1$ puede interpretarse aproximadamente como:
+
+$$
+\Delta Y \approx 100 \times \beta_1 \%
+$$
+
+cuando $\beta_1$ es pequeño (digamos, $|\beta_1| < 0.15$).
+
+Por tanto: **cada año adicional de escolaridad se asocia con un aumento de aproximadamente 11.6% en el ingreso del trabajo**.
+
+Para mayor precisión, la fórmula exacta es:
+
+$$
+\%\Delta Y = 100 \times (e^{\beta_1} - 1)
+$$
+
+En nuestro caso: $100 \times (e^{0.116} - 1) = 100 \times (1.123 - 1) = 12.3\%$.
+
+::: {.callout-note}
+## Ventajas del modelo log-lineal
+
+El modelo log-lineal tiene varias ventajas para estudiar ingresos:
+
+1. **Interpretación porcentual**: Los cambios se expresan en términos relativos, más comparables entre niveles de ingreso
+2. **Manejo de asimetría**: Los ingresos tienen distribución asimétrica; el logaritmo "normaliza" esta distribución
+3. **Heterocedasticidad reducida**: La transformación logarítmica tiende a estabilizar la varianza de los errores
+4. **Comparabilidad**: Los retornos porcentuales son más fáciles de comparar entre países o periodos
+:::
+
+**Significancia estadística:**
+
+- **Error estándar** de $\hat{\beta}_1$: $\text{SE}(\hat{\beta}_1) = 0.0008$. Mide la precisión de la estimación.
+
+- **Estadístico t**: $t = \hat{\beta}_1 / \text{SE}(\hat{\beta}_1) = 0.116 / 0.0008 = 143.6$. Un valor tan alto indica que el coeficiente es significativamente diferente de cero.
+
+- **p-valor**: Prácticamente cero (< 2e-16), lo que indica que rechazamos fuertemente la hipótesis nula $H_0: \beta_1 = 0$.
+
+**Bondad de ajuste:**
+
+- **$R^2 = 0.189$**: El modelo explica aproximadamente el 19% de la variación en $\log(\text{ytrabajocor})$. Esto significa que la escolaridad, por sí sola, explica casi una quinta parte de la variabilidad en los (log) ingresos, mientras que el 81% restante se debe a otros factores no incluidos en el modelo.
+
+- El $R^2$ ajustado es prácticamente idéntico en este caso, dado el gran tamaño muestral ($n = 88,391$).
+
+### Predicciones del modelo
+
+Podemos usar el modelo estimado para predecir el ingreso esperado en diferentes niveles de escolaridad:
+
+```{r}
+#| label: predicciones-modelo
+#| collapse: true
+
+# Crear datos para predicción
+nuevos_datos <- tibble(esc = seq(0, 25, by = 1))
+
+# Predecir con intervalo de confianza al 95%
+predicciones <- predict(
+  modelo1, 
+  newdata = nuevos_datos, 
+  interval = "confidence",
+  level = 0.95
+)
+
+# Combinar y exponenciar (volver a escala de pesos)
+tabla_pred <- bind_cols(nuevos_datos, as_tibble(predicciones)) |>
+  mutate(
+    ingreso_pred = exp(fit),
+    ingreso_lower = exp(lwr),
+    ingreso_upper = exp(upr)
+  )
+
+# Mostrar algunos valores clave
+tabla_pred |>
+  filter(esc %in% c(8, 12, 16, 20)) |>
+  select(esc, ingreso_pred, ingreso_lower, ingreso_upper) |>
+  mutate(across(where(is.numeric) & !esc, 
+                ~scales::dollar(.x, prefix = "$", suffix = " CLP")))
+```
+
+**Interpretación de las predicciones:**
+
+| Años de escolaridad | Ingreso esperado | Intervalo de confianza 95% |
+|---------------------|------------------|----------------------------|
+| 8 (básica completa) | \$271,702 | [\$269,253, \$274,174] |
+| 12 (media completa) | \$431,939 | [\$429,284, \$434,611] |
+| 16 (universitaria) | \$686,677 | [\$680,789, \$692,616] |
+| 20 (postgrado) | \$1,091,646 | [\$1,076,687, \$1,106,813] |
+
+Estas predicciones muestran que el ingreso esperado aumenta de manera **exponencial** con la escolaridad: pasar de 8 a 12 años (4 años más) aumenta el ingreso en aproximadamente \$160.000 CLP, mientras que pasar de 16 a 20 años (también 4 años más) lo aumenta en aproximadamente \$405.000 CLP.
+
+Los intervalos de confianza son relativamente estrechos, reflejando la gran cantidad de observaciones en estos niveles educativos.
+
+### Diagnóstico del modelo
+
+Es importante verificar los supuestos del modelo mediante el análisis de residuos:
+
+```{r}
+#| label: diagnostico-residuos
+#| collapse: true
+#| warning: false
+#| fig-height: 8
+
+# Gráficos de diagnóstico
+par(mfrow = c(2, 2))
+plot(modelo1)
+par(mfrow = c(1, 1))
+```
+
+**Interpretación de los gráficos de diagnóstico:**
+
+1. **Residuals vs Fitted**: La nube de puntos debería estar dispersa aleatoriamente alrededor de cero. Si se observa un patrón sistemático (curva, embudo), sugiere problemas de especificación o heterocedasticidad.
+
+2. **Q-Q Plot**: Si los residuos son normales, los puntos deberían seguir la línea diagonal. Desviaciones en las colas indican que la distribución tiene más valores extremos que una normal.
+
+3. **Scale-Location**: Evalúa homocedasticidad. Una línea roja horizontal indica varianza constante; una línea con pendiente sugiere heterocedasticidad.
+
+4. **Residuals vs Leverage**: Identifica observaciones influyentes. Puntos fuera de las líneas de distancia de Cook (líneas rojas punteadas) tienen alto impacto en la estimación.
+
+## Limitaciones del análisis
+
+### Variables omitidas y sesgo
+
+El coeficiente estimado $\hat{\beta}_1 = 0.116$ captura la **asociación** entre escolaridad e ingresos, pero no necesariamente el **efecto causal** de la educación. ¿Por qué?
+
+**Problema de variables omitidas:** Hay muchos factores correlacionados tanto con la escolaridad como con los ingresos:
+
+- Habilidades cognitivas innatas
+- Capital cultural familiar
+- Redes sociales y contactos
+- Motivación y perseverancia
+- Contexto socioeconómico de origen
+
+Si estas variables están correlacionadas positivamente con ambas (educación e ingreso), entonces $\hat{\beta}_1$ estará **sesgado al alza**: captura no solo el efecto de la educación, sino también el efecto de estos factores omitidos.
+
+Formalmente, el sesgo por variable omitida es:
+
+$$
+\text{Sesgo} = \beta_2 \times \frac{\text{Cov}(X_1, X_2)}{\text{Var}(X_1)}
+$$
+
+donde $X_1$ es escolaridad, $X_2$ es la variable omitida (e.g., habilidad), y $\beta_2$ es su efecto sobre el ingreso.
+
+### El $R^2$ como medida de ajuste
+
+Con $R^2 = 0.189$, el modelo explica menos del 20% de la variación en los ingresos. Esto no es sorprendente: los ingresos dependen de múltiples factores:
+
+- Experiencia laboral y antigüedad
+- Sector económico y tipo de ocupación
+- Región geográfica
+- Género (brecha salarial)
+- Habilidades específicas no capturadas por años de educación
+- Condiciones del mercado laboral
+
+Un modelo de regresión simple cuantifica una asociación clave, pero no pretende ser una descripción completa de la determinación de los ingresos.
+
+::: {.callout-warning}
+## Heterogeneidad en los retornos a la educación
+
+El coeficiente $\hat{\beta}_1 = 0.116$ es un **promedio** para toda la población. Sin embargo, los retornos a la educación pueden variar sustancialmente:
+
+- Entre hombres y mujeres (brecha de género)
+- Entre niveles educativos (retornos diferentes para educación básica, media, universitaria)
+- Entre regiones (mercados laborales locales)
+- A lo largo del tiempo (cambios en la demanda de habilidades)
+
+En sesiones futuras, mediante **regresión múltiple** e **interacciones**, podremos explorar esta heterogeneidad y estimar retornos diferenciados por grupos.
+:::
+
+## Resumen
+
+En esta sección hemos:
+
+1. Formalizado el **modelo de regresión lineal simple** y sus supuestos
+2. Derivado el **estimador de MCO** y sus propiedades
+3. Estimado dos modelos: uno **lineal** (cambios absolutos) y otro **log-lineal** (cambios porcentuales)
+4. Interpretado el coeficiente en el modelo log-lineal: **cada año adicional de escolaridad se asocia con un aumento del 12% en el ingreso**
+5. Generado predicciones puntuales y por intervalos para diferentes niveles educativos
+6. Discutido las **limitaciones**: asociación vs. causalidad, variables omitidas, y variación no explicada
+
+El análisis sugiere una asociación positiva y significativa entre educación e ingresos. Sin embargo, debemos ser cautos: la escolaridad explica solo una parte de la variación en los ingresos, y la relación observada no puede interpretarse como efecto causal sin considerar el problema de variables omitidas y otros sesgos potenciales.
+
+
+
+
+
