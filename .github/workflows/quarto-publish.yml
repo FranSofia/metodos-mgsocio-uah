@@ -26,6 +26,7 @@ jobs:
         with:
           packages: |
             any::tidyverse
+            any::pacman
             any::psych
             any::sjmisc
             any::sjPlot

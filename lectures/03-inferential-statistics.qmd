@@ -16,7 +16,10 @@ Primero llamamos los paquetes que utilizaremos en la sesión y la base de datos 
 ```{r}
 #| label: setear-base
 #| include: false
-setwd("C:/Users/Fran/OneDrive/Escritorio/UAH/MAGISTER ECONOMIA UCH/Ayudantías/Taller métodos/metodos-mgsocio-uah")
+base_path <- "C:/Users/Fran/OneDrive/Escritorio/UAH/MAGISTER ECONOMIA UCH/Ayudantías/Taller métodos/metodos-mgsocio-uah"
+if (dir.exists(base_path)) {
+  setwd(base_path)
+}
 ```
 
 
@@ -40,6 +43,7 @@ pacman::p_load(tidyverse, # colección de paquetes, dplyr entre ellos, pero tamb
 datos <- readRDS("data-sesiones/enut.RDS")
 
 ```
+
 
 # Estadística inferencial 
 
