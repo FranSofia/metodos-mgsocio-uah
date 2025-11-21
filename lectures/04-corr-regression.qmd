@@ -370,9 +370,9 @@ Los errores se distribuyen normalmente. Este supuesto es necesario para hacer in
 ::: {.callout-important}
 ## Asociación vs. Causalidad
 
-Un modelo de regresión mide **asociación estadística**, no necesariamente **causalidad**. Para que $\beta_1$ tenga una interpretación causal, el supuesto de esperanza condicional cero debe cumplirse estrictamente: $\mathbb{E}[u_i | X_i] = 0$.
+Un modelo de regresión simple, en general, mide **asociación estadística**, o qué factores predicen mejor un fenómeno como mucho, y no necesariamente **causalidad**. Para que $\beta_1$ tenga una interpretación causal, el supuesto de esperanza condicional cero debe cumplirse estrictamente: $\mathbb{E}[u_i | X_i] = 0$.
 
-En la práctica, este supuesto rara vez se cumple con datos observacionales. En nuestro caso, factores como habilidades innatas, redes sociales, o capital cultural familiar están correlacionados tanto con la escolaridad como con los ingresos, violando el supuesto de exogeneidad. Por tanto, $\hat{\beta}_1$ captura la **asociación** entre educación e ingresos, pero no puede interpretarse como el "efecto causal puro" de la educación.
+En la práctica, este supuesto rara vez se cumple con datos observacionales. En nuestro caso, factores como habilidades innatas, redes sociales, o capital cultural familiar están correlacionados tanto con la escolaridad como con los ingresos, violando el supuesto de exogeneidad. Por tanto, $\hat{\beta}_1$ captura la **asociación** entre educación e ingresos, pero no puede interpretarse como el "efecto causal puro" de la educación. O, al menos, no con nuestros datos y sin controles. 
 :::
 
 ## Estimación por Mínimos Cuadrados Ordinarios (MCO)
