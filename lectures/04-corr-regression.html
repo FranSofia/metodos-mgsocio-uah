@@ -465,7 +465,7 @@ Al estar entre <span class="math inline">\(0\)</span> y <span class="math inline
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>casen2022 <span class="sc">|&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(esc), <span class="sc">!</span><span class="fu">is.na</span>(ytrabajocor)) <span class="sc">|&gt;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> esc, <span class="at">y =</span> ytrabajocor)) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"#ADD8E6"</span>) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>, <span class="at">color =</span> <span class="st">"#ADD8E6"</span>) <span class="sc">+</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">dollar_format</span>(<span class="at">prefix =</span> <span class="st">"$"</span>, <span class="at">suffix =</span> <span class="st">" CLP"</span>)) <span class="sc">+</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">x     =</span> <span class="st">"Años de escolaridad"</span>,</span>
@@ -707,8 +707,8 @@ Y_i = \beta_0 + \beta_1 X_i + u_i, \quad i = 1, \ldots, n
 <li><p><strong><span class="math inline">\(\hat{\beta}_0\)</span> (Intercepto)</strong>: El ingreso esperado cuando la escolaridad es cero. En este caso, representa el ingreso “base” para alguien sin educación formal.</p></li>
 <li><p><strong><span class="math inline">\(\hat{\beta}_1\)</span> (Pendiente)</strong>: Cada año adicional de escolaridad se asocia con un aumento de <span class="math inline">\(\hat{\beta}_1\)</span> pesos en el ingreso del trabajo. Este es un <strong>cambio absoluto</strong> en pesos chilenos.</p></li>
 </ul>
-<p>Por ejemplo, si <span class="math inline">\(\hat{\beta}_1 = 50,000\)</span>, significa que pasar de 10 a 11 años de escolaridad se asocia con un aumento promedio de $50,000 CLP en el ingreso mensual.</p>
-<p><strong>Limitación del modelo lineal:</strong> Este modelo asume que el efecto de un año adicional de educación es <strong>constante</strong> en términos absolutos (pesos), independientemente del nivel educativo inicial. Esto puede no ser realista: $50,000 pesos adicionales representan un aumento muy distinto para alguien que gana $200,000 que para alguien que gana $2,000,000.</p>
+<p>Por ejemplo, si <span class="math inline">\(\hat{\beta}_1 = 77,114\)</span>, significa que pasar de 10 a 11 años de escolaridad se asocia con un aumento promedio de $77.114 CLP en el ingreso mensual.</p>
+<p><strong>Limitación del modelo lineal:</strong> Este modelo asume que el efecto de un año adicional de educación es <strong>constante</strong> en términos absolutos (pesos), independientemente del nivel educativo inicial. Esto puede no ser realista: $77.114 pesos adicionales representan un aumento muy distinto para alguien que gana $200,000 que para alguien que gana $2,000,000.</p>
 </section>
 </section>
 <section id="segunda-aplicación-modelo-log-lineal" class="level2">
@@ -1636,7 +1636,7 @@ Y_i = \beta_0 + \beta_1 X_i + u_i, \quad i = 1, \ldots, n
 <span id="cb12-219"><a href="#cb12-219" aria-hidden="true" tabindex="-1"></a>casen2022 <span class="sc">|&gt;</span></span>
 <span id="cb12-220"><a href="#cb12-220" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(esc), <span class="sc">!</span><span class="fu">is.na</span>(ytrabajocor)) <span class="sc">|&gt;</span></span>
 <span id="cb12-221"><a href="#cb12-221" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> esc, <span class="at">y =</span> ytrabajocor)) <span class="sc">+</span></span>
-<span id="cb12-222"><a href="#cb12-222" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"#ADD8E6"</span>) <span class="sc">+</span></span>
+<span id="cb12-222"><a href="#cb12-222" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>, <span class="at">color =</span> <span class="st">"#ADD8E6"</span>) <span class="sc">+</span></span>
 <span id="cb12-223"><a href="#cb12-223" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">dollar_format</span>(<span class="at">prefix =</span> <span class="st">"$"</span>, <span class="at">suffix =</span> <span class="st">" CLP"</span>)) <span class="sc">+</span></span>
 <span id="cb12-224"><a href="#cb12-224" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
 <span id="cb12-225"><a href="#cb12-225" aria-hidden="true" tabindex="-1"></a>      <span class="at">x     =</span> <span class="st">"Años de escolaridad"</span>,</span>
@@ -1709,399 +1709,400 @@ Y_i = \beta_0 + \beta_1 X_i + u_i, \quad i = 1, \ldots, n
 <span id="cb12-294"><a href="#cb12-294" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-295"><a href="#cb12-295" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**El intervalo de confianza** (banda gris): representa la incertidumbre de nuestra estimación de la línea de tendencia. Observemos cómo es más estrecha en el centro del gráfico (entre 8 y 15 años de escolaridad, donde hay más datos) y se ensancha progresivamente hacia los extremos. En 0 años de escolaridad y más allá de 22 años, la banda es considerablemente más ancha, reflejando mayor incertidumbre debido a la menor cantidad de observaciones en esos rangos.</span>
 <span id="cb12-296"><a href="#cb12-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-297"><a href="#cb12-297" aria-hidden="true" tabindex="-1"></a><span class="fu">### Interpretación detallada del gráfico</span></span>
-<span id="cb12-298"><a href="#cb12-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-299"><a href="#cb12-299" aria-hidden="true" tabindex="-1"></a>Del gráfico con la línea de regresión se pueden extraer varias conclusiones importantes:</span>
-<span id="cb12-300"><a href="#cb12-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-301"><a href="#cb12-301" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Relación positiva y aproximadamente lineal en escala log**: La línea roja es ascendente y relativamente recta, lo que indica que en escala logarítmica existe una relación lineal positiva entre escolaridad e ingreso. Esto implica que cada año adicional de educación se asocia con un **aumento porcentual aproximadamente constante** en el ingreso esperado.</span>
-<span id="cb12-302"><a href="#cb12-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-303"><a href="#cb12-303" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Pendiente sostenida**: A diferencia de lo que observamos con el ingreso autónomo del hogar (que mostraba rendimientos marginales decrecientes con una curva que se aplanaba), aquí la pendiente se mantiene relativamente estable a lo largo de todo el rango educativo. Esto sugiere que el retorno marginal de un año adicional de educación, medido en términos porcentuales, no disminuye sustancialmente con el nivel educativo.</span>
-<span id="cb12-304"><a href="#cb12-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-305"><a href="#cb12-305" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Variabilidad sustancial no capturada por el modelo**: Aunque la línea roja resume bien la tendencia central, la dispersión vertical de los puntos alrededor de ella es considerable. Esto nos indica que, si bien la educación es un predictor importante del ingreso (explica parte de la variación), hay muchos otros factores que influyen en cuánto gana una persona: experiencia laboral, sector económico, género, región geográfica, tipo de ocupación, habilidades específicas, redes sociales, entre otros.</span>
-<span id="cb12-306"><a href="#cb12-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-307"><a href="#cb12-307" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Heterogeneidad en todos los niveles educativos**: En cualquier nivel de escolaridad podemos encontrar personas con ingresos muy diversos. Por ejemplo, entre quienes tienen 12 años de educación (media completa), hay personas ganando desde aproximadamente $100,000 CLP hasta más de $2,000,000 CLP. Esta heterogeneidad refleja la complejidad del mercado laboral y la importancia de factores más allá de la educación formal.</span>
-<span id="cb12-308"><a href="#cb12-308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-309"><a href="#cb12-309" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Mayor incertidumbre en los extremos**: La banda de confianza se ensancha notoriamente en niveles muy bajos (0-2 años) y muy altos (&gt;22 años) de escolaridad. Esto es una consecuencia directa de tener menos observaciones en esos rangos. Nuestras estimaciones del ingreso esperado son menos precisas allí, y debemos ser más cautelosos al hacer inferencias sobre esos grupos.</span>
-<span id="cb12-310"><a href="#cb12-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-311"><a href="#cb12-311" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**Intercepto bajo pero con alta incertidumbre**: La línea de regresión, si la extrapolamos hasta 0 años de escolaridad, sugiere un ingreso esperado alrededor de $100,000 CLP. Sin embargo, la banda de confianza en ese punto es muy ancha, reflejando que hay relativamente pocas personas en la muestra sin ninguna educación formal.</span>
-<span id="cb12-312"><a href="#cb12-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-313"><a href="#cb12-313" aria-hidden="true" tabindex="-1"></a><span class="fu">### De la visualización al modelo: la pregunta de la regresión</span></span>
-<span id="cb12-314"><a href="#cb12-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-315"><a href="#cb12-315" aria-hidden="true" tabindex="-1"></a>Este gráfico nos lleva naturalmente a preguntarnos: **¿cuánto aumenta el ingreso, en promedio, por cada año adicional de educación?** O, más precisamente: **¿cuál es el retorno porcentual esperado de un año adicional de escolaridad?** Esta pregunta es precisamente lo que responde un **modelo de regresión lineal simple**.</span>
-<span id="cb12-316"><a href="#cb12-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-317"><a href="#cb12-317" aria-hidden="true" tabindex="-1"></a>La línea roja que hemos trazado es, en esencia, una ecuación matemática de la forma:</span>
-<span id="cb12-318"><a href="#cb12-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-319"><a href="#cb12-319" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-320"><a href="#cb12-320" aria-hidden="true" tabindex="-1"></a>\log(\text{Ingreso}) = \beta_0 + \beta_1 \times \text{Escolaridad} + \varepsilon</span>
-<span id="cb12-321"><a href="#cb12-321" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-322"><a href="#cb12-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-323"><a href="#cb12-323" aria-hidden="true" tabindex="-1"></a>donde:</span>
-<span id="cb12-324"><a href="#cb12-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-325"><a href="#cb12-325" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\beta_0$ es el **intercepto**: el logaritmo del ingreso esperado cuando la escolaridad es cero (aunque en la práctica este valor tiene poca interpretación sustantiva, ya que casi nadie tiene exactamente cero años de educación)</span>
-<span id="cb12-326"><a href="#cb12-326" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb12-327"><a href="#cb12-327" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\beta_1$ es la **pendiente**: el cambio en el log del ingreso asociado a un año adicional de educación. Este parámetro es clave porque, en un modelo log-lineal, puede interpretarse aproximadamente como el **cambio porcentual** en el ingreso por cada año adicional de escolaridad</span>
-<span id="cb12-328"><a href="#cb12-328" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb12-329"><a href="#cb12-329" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\epsilon$ representa el **término de error** o la variación no explicada por el modelo, es decir, toda la dispersión vertical que vemos alrededor de la línea roja</span>
-<span id="cb12-330"><a href="#cb12-330" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-331"><a href="#cb12-331" aria-hidden="true" tabindex="-1"></a>En la siguiente sección, formalizaremos este modelo de manera rigurosa. Aprenderemos a estimarlo correctamente usando el método de **mínimos cuadrados ordinarios (MCO)**, a interpretar sus coeficientes de manera precisa (especialmente en el contexto de variables transformadas logarítmicamente), y a evaluar qué tan bien el modelo se ajusta a los datos. También discutiremos los supuestos bajo los cuales este modelo es válido y las limitaciones de interpretar la relación educación-ingreso como causal.</span>
-<span id="cb12-332"><a href="#cb12-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-297"><a href="#cb12-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-298"><a href="#cb12-298" aria-hidden="true" tabindex="-1"></a><span class="fu">### Interpretación detallada del gráfico</span></span>
+<span id="cb12-299"><a href="#cb12-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-300"><a href="#cb12-300" aria-hidden="true" tabindex="-1"></a>Del gráfico con la línea de regresión se pueden extraer varias conclusiones importantes:</span>
+<span id="cb12-301"><a href="#cb12-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-302"><a href="#cb12-302" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Relación positiva y aproximadamente lineal en escala log**: La línea roja es ascendente y relativamente recta, lo que indica que en escala logarítmica existe una relación lineal positiva entre escolaridad e ingreso. Esto implica que cada año adicional de educación se asocia con un **aumento porcentual aproximadamente constante** en el ingreso esperado.</span>
+<span id="cb12-303"><a href="#cb12-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-304"><a href="#cb12-304" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Pendiente sostenida**: A diferencia de lo que observamos con el ingreso autónomo del hogar (que mostraba rendimientos marginales decrecientes con una curva que se aplanaba), aquí la pendiente se mantiene relativamente estable a lo largo de todo el rango educativo. Esto sugiere que el retorno marginal de un año adicional de educación, medido en términos porcentuales, no disminuye sustancialmente con el nivel educativo.</span>
+<span id="cb12-305"><a href="#cb12-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-306"><a href="#cb12-306" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Variabilidad sustancial no capturada por el modelo**: Aunque la línea roja resume bien la tendencia central, la dispersión vertical de los puntos alrededor de ella es considerable. Esto nos indica que, si bien la educación es un predictor importante del ingreso (explica parte de la variación), hay muchos otros factores que influyen en cuánto gana una persona: experiencia laboral, sector económico, género, región geográfica, tipo de ocupación, habilidades específicas, redes sociales, entre otros.</span>
+<span id="cb12-307"><a href="#cb12-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-308"><a href="#cb12-308" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Heterogeneidad en todos los niveles educativos**: En cualquier nivel de escolaridad podemos encontrar personas con ingresos muy diversos. Por ejemplo, entre quienes tienen 12 años de educación (media completa), hay personas ganando desde aproximadamente $100,000 CLP hasta más de $2,000,000 CLP. Esta heterogeneidad refleja la complejidad del mercado laboral y la importancia de factores más allá de la educación formal.</span>
+<span id="cb12-309"><a href="#cb12-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-310"><a href="#cb12-310" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Mayor incertidumbre en los extremos**: La banda de confianza se ensancha notoriamente en niveles muy bajos (0-2 años) y muy altos (&gt;22 años) de escolaridad. Esto es una consecuencia directa de tener menos observaciones en esos rangos. Nuestras estimaciones del ingreso esperado son menos precisas allí, y debemos ser más cautelosos al hacer inferencias sobre esos grupos.</span>
+<span id="cb12-311"><a href="#cb12-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-312"><a href="#cb12-312" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**Intercepto bajo pero con alta incertidumbre**: La línea de regresión, si la extrapolamos hasta 0 años de escolaridad, sugiere un ingreso esperado alrededor de $100,000 CLP. Sin embargo, la banda de confianza en ese punto es muy ancha, reflejando que hay relativamente pocas personas en la muestra sin ninguna educación formal.</span>
+<span id="cb12-313"><a href="#cb12-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-314"><a href="#cb12-314" aria-hidden="true" tabindex="-1"></a><span class="fu">### De la visualización al modelo: la pregunta de la regresión</span></span>
+<span id="cb12-315"><a href="#cb12-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-316"><a href="#cb12-316" aria-hidden="true" tabindex="-1"></a>Este gráfico nos lleva naturalmente a preguntarnos: **¿cuánto aumenta el ingreso, en promedio, por cada año adicional de educación?** O, más precisamente: **¿cuál es el retorno porcentual esperado de un año adicional de escolaridad?** Esta pregunta es precisamente lo que responde un **modelo de regresión lineal simple**.</span>
+<span id="cb12-317"><a href="#cb12-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-318"><a href="#cb12-318" aria-hidden="true" tabindex="-1"></a>La línea roja que hemos trazado es, en esencia, una ecuación matemática de la forma:</span>
+<span id="cb12-319"><a href="#cb12-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-320"><a href="#cb12-320" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-321"><a href="#cb12-321" aria-hidden="true" tabindex="-1"></a>\log(\text{Ingreso}) = \beta_0 + \beta_1 \times \text{Escolaridad} + \varepsilon</span>
+<span id="cb12-322"><a href="#cb12-322" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-323"><a href="#cb12-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-324"><a href="#cb12-324" aria-hidden="true" tabindex="-1"></a>donde:</span>
+<span id="cb12-325"><a href="#cb12-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-326"><a href="#cb12-326" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\beta_0$ es el **intercepto**: el logaritmo del ingreso esperado cuando la escolaridad es cero (aunque en la práctica este valor tiene poca interpretación sustantiva, ya que casi nadie tiene exactamente cero años de educación)</span>
+<span id="cb12-327"><a href="#cb12-327" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-328"><a href="#cb12-328" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\beta_1$ es la **pendiente**: el cambio en el log del ingreso asociado a un año adicional de educación. Este parámetro es clave porque, en un modelo log-lineal, puede interpretarse aproximadamente como el **cambio porcentual** en el ingreso por cada año adicional de escolaridad</span>
+<span id="cb12-329"><a href="#cb12-329" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-330"><a href="#cb12-330" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\epsilon$ representa el **término de error** o la variación no explicada por el modelo, es decir, toda la dispersión vertical que vemos alrededor de la línea roja</span>
+<span id="cb12-331"><a href="#cb12-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-332"><a href="#cb12-332" aria-hidden="true" tabindex="-1"></a>En la siguiente sección, formalizaremos este modelo de manera rigurosa. Aprenderemos a estimarlo correctamente usando el método de **mínimos cuadrados ordinarios (MCO)**, a interpretar sus coeficientes de manera precisa (especialmente en el contexto de variables transformadas logarítmicamente), y a evaluar qué tan bien el modelo se ajusta a los datos. También discutiremos los supuestos bajo los cuales este modelo es válido y las limitaciones de interpretar la relación educación-ingreso como causal.</span>
 <span id="cb12-333"><a href="#cb12-333" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-334"><a href="#cb12-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-335"><a href="#cb12-335" aria-hidden="true" tabindex="-1"></a><span class="fu"># Regresión Lineal Simple</span></span>
-<span id="cb12-336"><a href="#cb12-336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-337"><a href="#cb12-337" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introducción al modelo de regresión</span></span>
-<span id="cb12-338"><a href="#cb12-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-339"><a href="#cb12-339" aria-hidden="true" tabindex="-1"></a>La **regresión lineal simple** es una técnica estadística que nos permite modelar la relación entre dos variables: una **variable dependiente** (o variable respuesta, $Y$) y una **variable independiente** (o variable explicativa, $X$). El objetivo es encontrar la "mejor" línea recta que describa cómo cambia la variable dependiente cuando cambia la variable independiente.</span>
-<span id="cb12-340"><a href="#cb12-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-341"><a href="#cb12-341" aria-hidden="true" tabindex="-1"></a>En nuestro caso, queremos modelar cómo el **ingreso del trabajo** (`ytrabajocor`) depende de los **años de escolaridad** (`esc`). La pregunta fundamental que buscamos responder es: **¿cuánto aumenta el ingreso, en promedio, por cada año adicional de educación?**</span>
-<span id="cb12-342"><a href="#cb12-342" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-343"><a href="#cb12-343" aria-hidden="true" tabindex="-1"></a><span class="fu">## El modelo poblacional de regresión lineal simple</span></span>
-<span id="cb12-344"><a href="#cb12-344" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-345"><a href="#cb12-345" aria-hidden="true" tabindex="-1"></a><span class="fu">### Especificación del modelo</span></span>
-<span id="cb12-346"><a href="#cb12-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-347"><a href="#cb12-347" aria-hidden="true" tabindex="-1"></a>El modelo de regresión lineal simple se puede escribir como:</span>
-<span id="cb12-348"><a href="#cb12-348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-349"><a href="#cb12-349" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-350"><a href="#cb12-350" aria-hidden="true" tabindex="-1"></a>Y_i = \beta_0 + \beta_1 X_i + u_i, \quad i = 1, \ldots, n</span>
-<span id="cb12-351"><a href="#cb12-351" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-352"><a href="#cb12-352" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-353"><a href="#cb12-353" aria-hidden="true" tabindex="-1"></a>donde:</span>
-<span id="cb12-354"><a href="#cb12-354" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-355"><a href="#cb12-355" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$Y_i$ es el valor de la variable dependiente para la observación $i$</span>
-<span id="cb12-356"><a href="#cb12-356" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$X_i$ es el valor de la variable independiente (regresor) para la observación $i$  </span>
-<span id="cb12-357"><a href="#cb12-357" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\beta_0$ es el **parámetro de intercepto**: representa el valor esperado de $Y$ cuando $X = 0$</span>
-<span id="cb12-358"><a href="#cb12-358" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\beta_1$ es el **parámetro de pendiente**: mide el cambio en $Y$ asociado con un cambio unitario en $X$</span>
-<span id="cb12-359"><a href="#cb12-359" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$u_i$ es el **término de error**: captura todos los demás factores (además de $X$) que determinan $Y$</span>
-<span id="cb12-360"><a href="#cb12-360" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-361"><a href="#cb12-361" aria-hidden="true" tabindex="-1"></a>Los parámetros $\beta_0$ y $\beta_1$ son **desconocidos** y representan características de la **población**. Nuestro objetivo es **estimarlos** a partir de una muestra de datos.</span>
-<span id="cb12-362"><a href="#cb12-362" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-363"><a href="#cb12-363" aria-hidden="true" tabindex="-1"></a><span class="fu">### Supuestos del modelo clásico de regresión lineal</span></span>
-<span id="cb12-364"><a href="#cb12-364" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-365"><a href="#cb12-365" aria-hidden="true" tabindex="-1"></a>Para que el estimador de MCO tenga buenas propiedades (insesgadez, consistencia, eficiencia), requerimos ciertos supuestos sobre el término de error $u_i$:</span>
-<span id="cb12-366"><a href="#cb12-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-367"><a href="#cb12-367" aria-hidden="true" tabindex="-1"></a>**Supuesto 1 (Esperanza condicional cero):**  </span>
-<span id="cb12-368"><a href="#cb12-368" aria-hidden="true" tabindex="-1"></a>$$\mathbb{E}<span class="co">[</span><span class="ot">u_i | X_i</span><span class="co">]</span> = 0$$</span>
-<span id="cb12-369"><a href="#cb12-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-370"><a href="#cb12-370" aria-hidden="true" tabindex="-1"></a>Este supuesto establece que el valor esperado del error, dado cualquier valor de $X$, es cero. Implica que $X$ no está correlacionado con ningún factor omitido en el error. Este es el supuesto **crucial** para la interpretación causal: si se viola (por ejemplo, por variables omitidas correlacionadas con $X$), el estimador de $\beta_1$ estará **sesgado**.</span>
-<span id="cb12-371"><a href="#cb12-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-372"><a href="#cb12-372" aria-hidden="true" tabindex="-1"></a>**Supuesto 2 (Homocedasticidad):**  </span>
-<span id="cb12-373"><a href="#cb12-373" aria-hidden="true" tabindex="-1"></a>$$\text{Var}(u_i | X_i) = \sigma^2$$</span>
-<span id="cb12-374"><a href="#cb12-374" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-375"><a href="#cb12-375" aria-hidden="true" tabindex="-1"></a>La varianza del error es constante y no depende de $X$. Cuando este supuesto se viola (heterocedasticidad), los estimadores de MCO siguen siendo insesgados, pero los errores estándar usuales son incorrectos.</span>
-<span id="cb12-376"><a href="#cb12-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-377"><a href="#cb12-377" aria-hidden="true" tabindex="-1"></a>**Supuesto 3 (Normalidad, para inferencia):**  </span>
-<span id="cb12-378"><a href="#cb12-378" aria-hidden="true" tabindex="-1"></a>$$u_i | X_i \sim \mathcal{N}(0, \sigma^2)$$</span>
-<span id="cb12-379"><a href="#cb12-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-380"><a href="#cb12-380" aria-hidden="true" tabindex="-1"></a>Los errores se distribuyen normalmente. Este supuesto es necesario para hacer inferencia con muestras pequeñas. En muestras grandes, por el Teorema del Límite Central, este supuesto puede relajarse.</span>
-<span id="cb12-381"><a href="#cb12-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-382"><a href="#cb12-382" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
-<span id="cb12-383"><a href="#cb12-383" aria-hidden="true" tabindex="-1"></a><span class="fu">## Asociación vs. Causalidad</span></span>
-<span id="cb12-384"><a href="#cb12-384" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-385"><a href="#cb12-385" aria-hidden="true" tabindex="-1"></a>Un modelo de regresión simple, en general, mide **asociación estadística**, o qué factores predicen mejor un fenómeno como mucho, y no necesariamente **causalidad**. Para que $\beta_1$ tenga una interpretación causal, el supuesto de esperanza condicional cero debe cumplirse estrictamente: $\mathbb{E}<span class="co">[</span><span class="ot">u_i | X_i</span><span class="co">]</span> = 0$.</span>
-<span id="cb12-386"><a href="#cb12-386" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-387"><a href="#cb12-387" aria-hidden="true" tabindex="-1"></a>En la práctica, este supuesto rara vez se cumple con datos observacionales. En nuestro caso, factores como habilidades innatas, redes sociales, o capital cultural familiar están correlacionados tanto con la escolaridad como con los ingresos, violando el supuesto de exogeneidad. Por tanto, $\hat{\beta}_1$ captura la **asociación** entre educación e ingresos, pero no puede interpretarse como el "efecto causal puro" de la educación. O, al menos, no con nuestros datos y sin controles. </span>
-<span id="cb12-388"><a href="#cb12-388" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb12-389"><a href="#cb12-389" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-390"><a href="#cb12-390" aria-hidden="true" tabindex="-1"></a><span class="fu">## Estimación por Mínimos Cuadrados Ordinarios (MCO)</span></span>
-<span id="cb12-391"><a href="#cb12-391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-392"><a href="#cb12-392" aria-hidden="true" tabindex="-1"></a><span class="fu">### El criterio de MCO</span></span>
-<span id="cb12-393"><a href="#cb12-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-394"><a href="#cb12-394" aria-hidden="true" tabindex="-1"></a>Dada una muestra de $n$ observaciones $<span class="sc">\{</span>(X_i, Y_i)<span class="sc">\}</span>_{i=1}^n$, el **método de mínimos cuadrados ordinarios** consiste en elegir estimadores $\hat{\beta}_0$ y $\hat{\beta}_1$ que minimicen la **suma de cuadrados de los residuos**:</span>
-<span id="cb12-395"><a href="#cb12-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-396"><a href="#cb12-396" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-397"><a href="#cb12-397" aria-hidden="true" tabindex="-1"></a>\text{SCR}(\beta_0, \beta_1) = \sum_{i=1}^{n} (Y_i - \beta_0 - \beta_1 X_i)^2</span>
-<span id="cb12-398"><a href="#cb12-398" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-399"><a href="#cb12-399" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-400"><a href="#cb12-400" aria-hidden="true" tabindex="-1"></a>Los valores ajustados (predichos) son $\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_i$, y los residuos son $\hat{u}_i = Y_i - \hat{Y}_i$.</span>
-<span id="cb12-401"><a href="#cb12-401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-402"><a href="#cb12-402" aria-hidden="true" tabindex="-1"></a><span class="fu">### Solución explícita</span></span>
-<span id="cb12-403"><a href="#cb12-403" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-404"><a href="#cb12-404" aria-hidden="true" tabindex="-1"></a>Derivando con respecto a $\beta_0$ y $\beta_1$ e igualando a cero (condiciones de primer orden), se obtienen las **ecuaciones normales**:</span>
-<span id="cb12-405"><a href="#cb12-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-406"><a href="#cb12-406" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-407"><a href="#cb12-407" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
-<span id="cb12-408"><a href="#cb12-408" aria-hidden="true" tabindex="-1"></a>\sum_{i=1}^n (Y_i - \hat{\beta}_0 - \hat{\beta}_1 X_i) &amp;= 0 <span class="sc">\\</span></span>
-<span id="cb12-409"><a href="#cb12-409" aria-hidden="true" tabindex="-1"></a>\sum_{i=1}^n X_i(Y_i - \hat{\beta}_0 - \hat{\beta}_1 X_i) &amp;= 0</span>
-<span id="cb12-410"><a href="#cb12-410" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
-<span id="cb12-411"><a href="#cb12-411" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-412"><a href="#cb12-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-413"><a href="#cb12-413" aria-hidden="true" tabindex="-1"></a>Resolviendo este sistema, los estimadores de MCO son:</span>
-<span id="cb12-414"><a href="#cb12-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-415"><a href="#cb12-415" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-416"><a href="#cb12-416" aria-hidden="true" tabindex="-1"></a>\hat{\beta}_1 = \frac{\sum_{i=1}^{n}(X_i - \bar{X})(Y_i - \bar{Y})}{\sum_{i=1}^{n}(X_i - \bar{X})^2} = \frac{s_{XY}}{s_X^2}</span>
-<span id="cb12-417"><a href="#cb12-417" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-418"><a href="#cb12-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-419"><a href="#cb12-419" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-420"><a href="#cb12-420" aria-hidden="true" tabindex="-1"></a>\hat{\beta}_0 = \bar{Y} - \hat{\beta}_1 \bar{X}</span>
-<span id="cb12-421"><a href="#cb12-421" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-422"><a href="#cb12-422" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-423"><a href="#cb12-423" aria-hidden="true" tabindex="-1"></a>donde $\bar{X}$ y $\bar{Y}$ son las medias muestrales, $s_{XY}$ es la covarianza muestral entre $X$ e $Y$, y $s_X^2$ es la varianza muestral de $X$.</span>
-<span id="cb12-424"><a href="#cb12-424" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-425"><a href="#cb12-425" aria-hidden="true" tabindex="-1"></a>**Interpretación:** La pendiente estimada es la razón entre la covarianza de $X$ e $Y$ y la varianza de $X$. Si $X$ e $Y$ covarían positivamente, $\hat{\beta}_1 &gt; 0$.</span>
-<span id="cb12-426"><a href="#cb12-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-427"><a href="#cb12-427" aria-hidden="true" tabindex="-1"></a><span class="fu">## Primera aplicación: Modelo lineal simple</span></span>
-<span id="cb12-428"><a href="#cb12-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-429"><a href="#cb12-429" aria-hidden="true" tabindex="-1"></a>Estimemos primero la relación entre ingreso del trabajo y escolaridad **sin transformaciones**, es decir, en niveles:</span>
-<span id="cb12-430"><a href="#cb12-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-431"><a href="#cb12-431" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-432"><a href="#cb12-432" aria-hidden="true" tabindex="-1"></a>\text{ytrabajocor}_i = \beta_0 + \beta_1 \times \text{esc}_i + u_i</span>
-<span id="cb12-433"><a href="#cb12-433" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-434"><a href="#cb12-434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-435"><a href="#cb12-435" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimación en R</span></span>
-<span id="cb12-436"><a href="#cb12-436" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-439"><a href="#cb12-439" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb12-440"><a href="#cb12-440" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: regresion-lineal-simple</span></span>
-<span id="cb12-441"><a href="#cb12-441" aria-hidden="true" tabindex="-1"></a><span class="co">#| collapse: true</span></span>
-<span id="cb12-442"><a href="#cb12-442" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-443"><a href="#cb12-443" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
-<span id="cb12-444"><a href="#cb12-444" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-445"><a href="#cb12-445" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar datos válidos</span></span>
-<span id="cb12-446"><a href="#cb12-446" aria-hidden="true" tabindex="-1"></a>datos_reg <span class="ot">&lt;-</span> casen2022 <span class="sc">|&gt;</span></span>
-<span id="cb12-447"><a href="#cb12-447" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(esc), <span class="sc">!</span><span class="fu">is.na</span>(ytrabajocor))</span>
-<span id="cb12-448"><a href="#cb12-448" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-449"><a href="#cb12-449" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimar el modelo sin transformación</span></span>
-<span id="cb12-450"><a href="#cb12-450" aria-hidden="true" tabindex="-1"></a>modelo_lineal <span class="ot">&lt;-</span> <span class="fu">lm</span>(ytrabajocor <span class="sc">~</span> esc, <span class="at">data =</span> datos_reg)</span>
-<span id="cb12-451"><a href="#cb12-451" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-452"><a href="#cb12-452" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar resultados</span></span>
-<span id="cb12-453"><a href="#cb12-453" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo_lineal)</span>
-<span id="cb12-454"><a href="#cb12-454" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-455"><a href="#cb12-455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-456"><a href="#cb12-456" aria-hidden="true" tabindex="-1"></a><span class="fu">### Interpretación del modelo lineal</span></span>
-<span id="cb12-457"><a href="#cb12-457" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-458"><a href="#cb12-458" aria-hidden="true" tabindex="-1"></a>Los coeficientes estimados tienen una interpretación directa:</span>
-<span id="cb12-459"><a href="#cb12-459" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-460"><a href="#cb12-460" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**$\hat{\beta}_0$ (Intercepto)**: El ingreso esperado cuando la escolaridad es cero. En este caso, representa el ingreso "base" para alguien sin educación formal.</span>
-<span id="cb12-461"><a href="#cb12-461" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-462"><a href="#cb12-462" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**$\hat{\beta}_1$ (Pendiente)**: Cada año adicional de escolaridad se asocia con un aumento de $\hat{\beta}_1$ pesos en el ingreso del trabajo. Este es un **cambio absoluto** en pesos chilenos.</span>
-<span id="cb12-463"><a href="#cb12-463" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-464"><a href="#cb12-464" aria-hidden="true" tabindex="-1"></a>Por ejemplo, si $\hat{\beta}_1 = 50,000$, significa que pasar de 10 a 11 años de escolaridad se asocia con un aumento promedio de $50,000 CLP en el ingreso mensual.</span>
-<span id="cb12-465"><a href="#cb12-465" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-466"><a href="#cb12-466" aria-hidden="true" tabindex="-1"></a>**Limitación del modelo lineal:** Este modelo asume que el efecto de un año adicional de educación es **constante** en términos absolutos (pesos), independientemente del nivel educativo inicial. Esto puede no ser realista: $50,000 pesos adicionales representan un aumento muy distinto para alguien que gana $200,000 que para alguien que gana $2,000,000.</span>
-<span id="cb12-467"><a href="#cb12-467" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-468"><a href="#cb12-468" aria-hidden="true" tabindex="-1"></a><span class="fu">## Segunda aplicación: Modelo log-lineal</span></span>
-<span id="cb12-469"><a href="#cb12-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-470"><a href="#cb12-470" aria-hidden="true" tabindex="-1"></a>Para capturar **cambios porcentuales** (que son más comparables entre niveles de ingreso), estimamos el modelo con el logaritmo natural del ingreso:</span>
-<span id="cb12-471"><a href="#cb12-471" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-472"><a href="#cb12-472" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-473"><a href="#cb12-473" aria-hidden="true" tabindex="-1"></a>\log(\text{ytrabajocor}_i) = \beta_0 + \beta_1 \times \text{esc}_i + u_i</span>
-<span id="cb12-474"><a href="#cb12-474" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-475"><a href="#cb12-475" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-476"><a href="#cb12-476" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimación en R</span></span>
-<span id="cb12-477"><a href="#cb12-477" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-480"><a href="#cb12-480" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb12-481"><a href="#cb12-481" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: regresion-log-lineal</span></span>
-<span id="cb12-482"><a href="#cb12-482" aria-hidden="true" tabindex="-1"></a><span class="co">#| collapse: true</span></span>
-<span id="cb12-483"><a href="#cb12-483" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-484"><a href="#cb12-484" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear variable logarítmica</span></span>
-<span id="cb12-485"><a href="#cb12-485" aria-hidden="true" tabindex="-1"></a>datos_reg <span class="ot">&lt;-</span> datos_reg <span class="sc">|&gt;</span></span>
-<span id="cb12-486"><a href="#cb12-486" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_ytrabajo =</span> <span class="fu">log</span>(ytrabajocor))</span>
-<span id="cb12-487"><a href="#cb12-487" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-488"><a href="#cb12-488" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimar el modelo log-lineal</span></span>
-<span id="cb12-489"><a href="#cb12-489" aria-hidden="true" tabindex="-1"></a>modelo1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_ytrabajo <span class="sc">~</span> esc, <span class="at">data =</span> datos_reg)</span>
-<span id="cb12-490"><a href="#cb12-490" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-491"><a href="#cb12-491" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar resultados</span></span>
-<span id="cb12-492"><a href="#cb12-492" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo1)</span>
-<span id="cb12-493"><a href="#cb12-493" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-494"><a href="#cb12-494" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-495"><a href="#cb12-495" aria-hidden="true" tabindex="-1"></a><span class="fu">### Interpretación del modelo log-lineal</span></span>
-<span id="cb12-496"><a href="#cb12-496" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-497"><a href="#cb12-497" aria-hidden="true" tabindex="-1"></a>Del output obtenemos:</span>
-<span id="cb12-498"><a href="#cb12-498" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-499"><a href="#cb12-499" aria-hidden="true" tabindex="-1"></a>**Coeficientes estimados:**</span>
-<span id="cb12-500"><a href="#cb12-500" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-501"><a href="#cb12-501" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-502"><a href="#cb12-502" aria-hidden="true" tabindex="-1"></a>\widehat{\log(\text{ytrabajocor})} = 11.585 + 0.116 \times \text{esc}</span>
-<span id="cb12-503"><a href="#cb12-503" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-504"><a href="#cb12-504" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-505"><a href="#cb12-505" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**$\hat{\beta}_0 = 11.585$**: El logaritmo del ingreso esperado cuando la escolaridad es cero. Exponenciando: $e^{11.585} \approx \$107,180$ CLP. Esta interpretación tiene poco sentido sustantivo (casi nadie tiene exactamente cero años de educación), pero es necesaria matemáticamente para definir la línea.</span>
-<span id="cb12-506"><a href="#cb12-506" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-507"><a href="#cb12-507" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**$\hat{\beta}_1 = 0.116$**: Este es el coeficiente de interés. En un modelo log-lineal, $\beta_1$ mide el **cambio proporcional** (o porcentual) en $Y$ asociado con un cambio unitario en $X$.</span>
-<span id="cb12-508"><a href="#cb12-508" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-509"><a href="#cb12-509" aria-hidden="true" tabindex="-1"></a>**Interpretación en términos porcentuales:**</span>
-<span id="cb12-510"><a href="#cb12-510" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-511"><a href="#cb12-511" aria-hidden="true" tabindex="-1"></a>Para un modelo de la forma $\log(Y) = \beta_0 + \beta_1 X$, el coeficiente $\beta_1$ puede interpretarse aproximadamente como:</span>
-<span id="cb12-512"><a href="#cb12-512" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-513"><a href="#cb12-513" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-514"><a href="#cb12-514" aria-hidden="true" tabindex="-1"></a>\Delta Y \approx 100 \times \beta_1 \%</span>
-<span id="cb12-515"><a href="#cb12-515" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-516"><a href="#cb12-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-517"><a href="#cb12-517" aria-hidden="true" tabindex="-1"></a>cuando $\beta_1$ es pequeño (digamos, $|\beta_1| &lt; 0.15$).</span>
-<span id="cb12-518"><a href="#cb12-518" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-519"><a href="#cb12-519" aria-hidden="true" tabindex="-1"></a>Por tanto: **cada año adicional de escolaridad se asocia con un aumento de aproximadamente 11.6% en el ingreso del trabajo**.</span>
-<span id="cb12-520"><a href="#cb12-520" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-521"><a href="#cb12-521" aria-hidden="true" tabindex="-1"></a>Para mayor precisión, la fórmula exacta es:</span>
-<span id="cb12-522"><a href="#cb12-522" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-523"><a href="#cb12-523" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-524"><a href="#cb12-524" aria-hidden="true" tabindex="-1"></a>\%\Delta Y = 100 \times (e^{\beta_1} - 1)</span>
-<span id="cb12-525"><a href="#cb12-525" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-526"><a href="#cb12-526" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-527"><a href="#cb12-527" aria-hidden="true" tabindex="-1"></a>En nuestro caso: $100 \times (e^{0.116} - 1) = 100 \times (1.123 - 1) = 12.3\%$.</span>
-<span id="cb12-528"><a href="#cb12-528" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-529"><a href="#cb12-529" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb12-530"><a href="#cb12-530" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ventajas del modelo log-lineal</span></span>
-<span id="cb12-531"><a href="#cb12-531" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-532"><a href="#cb12-532" aria-hidden="true" tabindex="-1"></a>El modelo log-lineal tiene varias ventajas para estudiar ingresos:</span>
-<span id="cb12-533"><a href="#cb12-533" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-534"><a href="#cb12-534" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Interpretación porcentual**: Los cambios se expresan en términos relativos, más comparables entre niveles de ingreso</span>
-<span id="cb12-535"><a href="#cb12-535" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Manejo de asimetría**: Los ingresos tienen distribución asimétrica; el logaritmo "normaliza" esta distribución</span>
-<span id="cb12-536"><a href="#cb12-536" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Heterocedasticidad reducida**: La transformación logarítmica tiende a estabilizar la varianza de los errores</span>
-<span id="cb12-537"><a href="#cb12-537" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Comparabilidad**: Los retornos porcentuales son más fáciles de comparar entre países o periodos</span>
-<span id="cb12-538"><a href="#cb12-538" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb12-539"><a href="#cb12-539" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-540"><a href="#cb12-540" aria-hidden="true" tabindex="-1"></a>**Significancia estadística:**</span>
-<span id="cb12-541"><a href="#cb12-541" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-542"><a href="#cb12-542" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Error estándar** de $\hat{\beta}_1$: $\text{SE}(\hat{\beta}_1) = 0.0008$. Mide la precisión de la estimación.</span>
-<span id="cb12-543"><a href="#cb12-543" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-544"><a href="#cb12-544" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Estadístico t**: $t = \hat{\beta}_1 / \text{SE}(\hat{\beta}_1) = 0.116 / 0.0008 = 143.6$. Un valor tan alto indica que el coeficiente es significativamente diferente de cero.</span>
-<span id="cb12-545"><a href="#cb12-545" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-546"><a href="#cb12-546" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**p-valor**: Prácticamente cero (&lt; 2e-16), lo que indica que rechazamos fuertemente la hipótesis nula $H_0: \beta_1 = 0$.</span>
-<span id="cb12-547"><a href="#cb12-547" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-548"><a href="#cb12-548" aria-hidden="true" tabindex="-1"></a>**Bondad de ajuste:**</span>
-<span id="cb12-549"><a href="#cb12-549" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-550"><a href="#cb12-550" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**$R^2 = 0.189$**: El modelo explica aproximadamente el 19% de la variación en $\log(\text{ytrabajocor})$. Esto significa que la escolaridad, por sí sola, explica casi una quinta parte de la variabilidad en los (log) ingresos, mientras que el 81% restante se debe a otros factores no incluidos en el modelo.</span>
-<span id="cb12-551"><a href="#cb12-551" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-552"><a href="#cb12-552" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>El $R^2$ ajustado es prácticamente idéntico en este caso, dado el gran tamaño muestral ($n = 88,391$).</span>
-<span id="cb12-553"><a href="#cb12-553" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-554"><a href="#cb12-554" aria-hidden="true" tabindex="-1"></a><span class="fu">### Predicciones del modelo</span></span>
-<span id="cb12-555"><a href="#cb12-555" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-556"><a href="#cb12-556" aria-hidden="true" tabindex="-1"></a>Podemos usar el modelo estimado para predecir el ingreso esperado en diferentes niveles de escolaridad:</span>
-<span id="cb12-557"><a href="#cb12-557" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-560"><a href="#cb12-560" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb12-561"><a href="#cb12-561" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: predicciones-modelo</span></span>
-<span id="cb12-562"><a href="#cb12-562" aria-hidden="true" tabindex="-1"></a><span class="co">#| collapse: true</span></span>
-<span id="cb12-563"><a href="#cb12-563" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-564"><a href="#cb12-564" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear datos para predicción</span></span>
-<span id="cb12-565"><a href="#cb12-565" aria-hidden="true" tabindex="-1"></a>nuevos_datos <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">esc =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">25</span>, <span class="at">by =</span> <span class="dv">1</span>))</span>
-<span id="cb12-566"><a href="#cb12-566" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-567"><a href="#cb12-567" aria-hidden="true" tabindex="-1"></a><span class="co"># Predecir con intervalo de confianza al 95%</span></span>
-<span id="cb12-568"><a href="#cb12-568" aria-hidden="true" tabindex="-1"></a>predicciones <span class="ot">&lt;-</span> <span class="fu">predict</span>(</span>
-<span id="cb12-569"><a href="#cb12-569" aria-hidden="true" tabindex="-1"></a>  modelo1, </span>
-<span id="cb12-570"><a href="#cb12-570" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> nuevos_datos, </span>
-<span id="cb12-571"><a href="#cb12-571" aria-hidden="true" tabindex="-1"></a>  <span class="at">interval =</span> <span class="st">"confidence"</span>,</span>
-<span id="cb12-572"><a href="#cb12-572" aria-hidden="true" tabindex="-1"></a>  <span class="at">level =</span> <span class="fl">0.95</span></span>
-<span id="cb12-573"><a href="#cb12-573" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-574"><a href="#cb12-574" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-575"><a href="#cb12-575" aria-hidden="true" tabindex="-1"></a><span class="co"># Combinar y exponenciar (volver a escala de pesos)</span></span>
-<span id="cb12-576"><a href="#cb12-576" aria-hidden="true" tabindex="-1"></a>tabla_pred <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(nuevos_datos, <span class="fu">as_tibble</span>(predicciones)) <span class="sc">|&gt;</span></span>
-<span id="cb12-577"><a href="#cb12-577" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb12-578"><a href="#cb12-578" aria-hidden="true" tabindex="-1"></a>    <span class="at">ingreso_pred =</span> <span class="fu">exp</span>(fit),</span>
-<span id="cb12-579"><a href="#cb12-579" aria-hidden="true" tabindex="-1"></a>    <span class="at">ingreso_lower =</span> <span class="fu">exp</span>(lwr),</span>
-<span id="cb12-580"><a href="#cb12-580" aria-hidden="true" tabindex="-1"></a>    <span class="at">ingreso_upper =</span> <span class="fu">exp</span>(upr)</span>
-<span id="cb12-581"><a href="#cb12-581" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-582"><a href="#cb12-582" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-583"><a href="#cb12-583" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar algunos valores clave</span></span>
-<span id="cb12-584"><a href="#cb12-584" aria-hidden="true" tabindex="-1"></a>tabla_pred <span class="sc">|&gt;</span></span>
-<span id="cb12-585"><a href="#cb12-585" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(esc <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">12</span>, <span class="dv">16</span>, <span class="dv">20</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb12-586"><a href="#cb12-586" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(esc, ingreso_pred, ingreso_lower, ingreso_upper) <span class="sc">|&gt;</span></span>
-<span id="cb12-587"><a href="#cb12-587" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric) <span class="sc">&amp;</span> <span class="sc">!</span>esc, </span>
-<span id="cb12-588"><a href="#cb12-588" aria-hidden="true" tabindex="-1"></a>                <span class="sc">~</span>scales<span class="sc">::</span><span class="fu">dollar</span>(.x, <span class="at">prefix =</span> <span class="st">"$"</span>, <span class="at">suffix =</span> <span class="st">" CLP"</span>)))</span>
-<span id="cb12-589"><a href="#cb12-589" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-590"><a href="#cb12-590" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-591"><a href="#cb12-591" aria-hidden="true" tabindex="-1"></a>**Interpretación de las predicciones:**</span>
-<span id="cb12-592"><a href="#cb12-592" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-593"><a href="#cb12-593" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Años de escolaridad <span class="pp">|</span> Ingreso esperado <span class="pp">|</span> Intervalo de confianza 95% <span class="pp">|</span></span>
-<span id="cb12-594"><a href="#cb12-594" aria-hidden="true" tabindex="-1"></a><span class="pp">|---------------------|------------------|----------------------------|</span></span>
-<span id="cb12-595"><a href="#cb12-595" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 8 (básica completa) <span class="pp">|</span> \$271,702 <span class="pp">|</span> <span class="co">[</span><span class="ot">\$269,253, \$274,174</span><span class="co">]</span> <span class="pp">|</span></span>
-<span id="cb12-596"><a href="#cb12-596" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 12 (media completa) <span class="pp">|</span> \$431,939 <span class="pp">|</span> <span class="co">[</span><span class="ot">\$429,284, \$434,611</span><span class="co">]</span> <span class="pp">|</span></span>
-<span id="cb12-597"><a href="#cb12-597" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 16 (universitaria) <span class="pp">|</span> \$686,677 <span class="pp">|</span> <span class="co">[</span><span class="ot">\$680,789, \$692,616</span><span class="co">]</span> <span class="pp">|</span></span>
-<span id="cb12-598"><a href="#cb12-598" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 20 (postgrado) <span class="pp">|</span> \$1,091,646 <span class="pp">|</span> <span class="co">[</span><span class="ot">\$1,076,687, \$1,106,813</span><span class="co">]</span> <span class="pp">|</span></span>
-<span id="cb12-599"><a href="#cb12-599" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-600"><a href="#cb12-600" aria-hidden="true" tabindex="-1"></a>Estas predicciones muestran que el ingreso esperado aumenta de manera **exponencial** con la escolaridad: pasar de 8 a 12 años (4 años más) aumenta el ingreso en aproximadamente \$160.000 CLP, mientras que pasar de 16 a 20 años (también 4 años más) lo aumenta en aproximadamente \$405.000 CLP.</span>
-<span id="cb12-601"><a href="#cb12-601" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-602"><a href="#cb12-602" aria-hidden="true" tabindex="-1"></a>Los intervalos de confianza son relativamente estrechos, reflejando la gran cantidad de observaciones en estos niveles educativos.</span>
-<span id="cb12-603"><a href="#cb12-603" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-604"><a href="#cb12-604" aria-hidden="true" tabindex="-1"></a><span class="fu">### Diagnóstico del modelo</span></span>
-<span id="cb12-605"><a href="#cb12-605" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-606"><a href="#cb12-606" aria-hidden="true" tabindex="-1"></a>Es importante verificar los supuestos del modelo mediante el análisis de residuos:</span>
-<span id="cb12-607"><a href="#cb12-607" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-610"><a href="#cb12-610" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb12-611"><a href="#cb12-611" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: diagnostico-residuos</span></span>
-<span id="cb12-612"><a href="#cb12-612" aria-hidden="true" tabindex="-1"></a><span class="co">#| collapse: true</span></span>
-<span id="cb12-613"><a href="#cb12-613" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb12-614"><a href="#cb12-614" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 8</span></span>
-<span id="cb12-615"><a href="#cb12-615" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-616"><a href="#cb12-616" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráficos de diagnóstico</span></span>
-<span id="cb12-617"><a href="#cb12-617" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb12-618"><a href="#cb12-618" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo1)</span>
-<span id="cb12-619"><a href="#cb12-619" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb12-620"><a href="#cb12-620" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-621"><a href="#cb12-621" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-622"><a href="#cb12-622" aria-hidden="true" tabindex="-1"></a>**Interpretación de los gráficos de diagnóstico:**</span>
-<span id="cb12-623"><a href="#cb12-623" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-624"><a href="#cb12-624" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Residuals vs Fitted**: La nube de puntos debería estar dispersa aleatoriamente alrededor de cero. Si se observa un patrón sistemático (curva, embudo), sugiere problemas de especificación o heterocedasticidad.</span>
-<span id="cb12-625"><a href="#cb12-625" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-626"><a href="#cb12-626" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Q-Q Plot**: Si los residuos son normales, los puntos deberían seguir la línea diagonal. Desviaciones en las colas indican que la distribución tiene más valores extremos que una normal.</span>
-<span id="cb12-627"><a href="#cb12-627" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-628"><a href="#cb12-628" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Scale-Location**: Evalúa homocedasticidad. Una línea roja horizontal indica varianza constante; una línea con pendiente sugiere heterocedasticidad.</span>
-<span id="cb12-629"><a href="#cb12-629" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-630"><a href="#cb12-630" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Residuals vs Leverage**: Identifica observaciones influyentes. Puntos fuera de las líneas de distancia de Cook (líneas rojas punteadas) tienen alto impacto en la estimación.</span>
-<span id="cb12-631"><a href="#cb12-631" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-632"><a href="#cb12-632" aria-hidden="true" tabindex="-1"></a><span class="fu">## Limitaciones del análisis</span></span>
-<span id="cb12-633"><a href="#cb12-633" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-634"><a href="#cb12-634" aria-hidden="true" tabindex="-1"></a><span class="fu">### Variables omitidas y sesgo</span></span>
-<span id="cb12-635"><a href="#cb12-635" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-636"><a href="#cb12-636" aria-hidden="true" tabindex="-1"></a>El coeficiente estimado $\hat{\beta}_1 = 0.116$ captura la **asociación** entre escolaridad e ingresos, pero no necesariamente el **efecto causal** de la educación. ¿Por qué?</span>
-<span id="cb12-637"><a href="#cb12-637" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-638"><a href="#cb12-638" aria-hidden="true" tabindex="-1"></a>**Problema de variables omitidas:** Hay muchos factores correlacionados tanto con la escolaridad como con los ingresos:</span>
-<span id="cb12-639"><a href="#cb12-639" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-640"><a href="#cb12-640" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Habilidades cognitivas innatas</span>
-<span id="cb12-641"><a href="#cb12-641" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Capital cultural familiar</span>
-<span id="cb12-642"><a href="#cb12-642" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Redes sociales y contactos</span>
-<span id="cb12-643"><a href="#cb12-643" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Motivación y perseverancia</span>
-<span id="cb12-644"><a href="#cb12-644" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Contexto socioeconómico de origen</span>
-<span id="cb12-645"><a href="#cb12-645" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-646"><a href="#cb12-646" aria-hidden="true" tabindex="-1"></a>Si estas variables están correlacionadas positivamente con ambas (educación e ingreso), entonces $\hat{\beta}_1$ estará **sesgado al alza**: captura no solo el efecto de la educación, sino también el efecto de estos factores omitidos.</span>
-<span id="cb12-647"><a href="#cb12-647" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-648"><a href="#cb12-648" aria-hidden="true" tabindex="-1"></a>Formalmente, el sesgo por variable omitida es:</span>
-<span id="cb12-649"><a href="#cb12-649" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-650"><a href="#cb12-650" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-651"><a href="#cb12-651" aria-hidden="true" tabindex="-1"></a>\text{Sesgo} = \beta_2 \times \frac{\text{Cov}(X_1, X_2)}{\text{Var}(X_1)}</span>
-<span id="cb12-652"><a href="#cb12-652" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb12-653"><a href="#cb12-653" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-654"><a href="#cb12-654" aria-hidden="true" tabindex="-1"></a>donde $X_1$ es escolaridad, $X_2$ es la variable omitida (e.g., habilidad), y $\beta_2$ es su efecto sobre el ingreso.</span>
-<span id="cb12-655"><a href="#cb12-655" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-656"><a href="#cb12-656" aria-hidden="true" tabindex="-1"></a><span class="fu">### El $R^2$ como medida de ajuste</span></span>
-<span id="cb12-657"><a href="#cb12-657" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-658"><a href="#cb12-658" aria-hidden="true" tabindex="-1"></a>Con $R^2 = 0.189$, el modelo explica menos del 20% de la variación en los ingresos. Esto no es sorprendente: los ingresos dependen de múltiples factores:</span>
-<span id="cb12-659"><a href="#cb12-659" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-660"><a href="#cb12-660" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Experiencia laboral y antigüedad</span>
-<span id="cb12-661"><a href="#cb12-661" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sector económico y tipo de ocupación</span>
-<span id="cb12-662"><a href="#cb12-662" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Región geográfica</span>
-<span id="cb12-663"><a href="#cb12-663" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Género (brecha salarial)</span>
-<span id="cb12-664"><a href="#cb12-664" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Habilidades específicas no capturadas por años de educación</span>
-<span id="cb12-665"><a href="#cb12-665" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Condiciones del mercado laboral</span>
-<span id="cb12-666"><a href="#cb12-666" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-667"><a href="#cb12-667" aria-hidden="true" tabindex="-1"></a>Un modelo de regresión simple cuantifica una asociación clave, pero no pretende ser una descripción completa de la determinación de los ingresos.</span>
-<span id="cb12-668"><a href="#cb12-668" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-669"><a href="#cb12-669" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
-<span id="cb12-670"><a href="#cb12-670" aria-hidden="true" tabindex="-1"></a><span class="fu">## Heterogeneidad en los retornos a la educación</span></span>
-<span id="cb12-671"><a href="#cb12-671" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-672"><a href="#cb12-672" aria-hidden="true" tabindex="-1"></a>El coeficiente $\hat{\beta}_1 = 0.116$ es un **promedio** para toda la población. Sin embargo, los retornos a la educación pueden variar sustancialmente:</span>
-<span id="cb12-673"><a href="#cb12-673" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-674"><a href="#cb12-674" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Entre hombres y mujeres (brecha de género)</span>
-<span id="cb12-675"><a href="#cb12-675" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Entre niveles educativos (retornos diferentes para educación básica, media, universitaria)</span>
-<span id="cb12-676"><a href="#cb12-676" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Entre regiones (mercados laborales locales)</span>
-<span id="cb12-677"><a href="#cb12-677" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A lo largo del tiempo (cambios en la demanda de habilidades)</span>
-<span id="cb12-678"><a href="#cb12-678" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-679"><a href="#cb12-679" aria-hidden="true" tabindex="-1"></a>En sesiones futuras, mediante **regresión múltiple** e **interacciones**, podremos explorar esta heterogeneidad y estimar retornos diferenciados por grupos.</span>
-<span id="cb12-680"><a href="#cb12-680" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb12-681"><a href="#cb12-681" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-682"><a href="#cb12-682" aria-hidden="true" tabindex="-1"></a><span class="fu">## Resumen</span></span>
-<span id="cb12-683"><a href="#cb12-683" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-684"><a href="#cb12-684" aria-hidden="true" tabindex="-1"></a>En esta sección hemos:</span>
-<span id="cb12-685"><a href="#cb12-685" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-686"><a href="#cb12-686" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Formalizado el **modelo de regresión lineal simple** y sus supuestos</span>
-<span id="cb12-687"><a href="#cb12-687" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Derivado el **estimador de MCO** y sus propiedades</span>
-<span id="cb12-688"><a href="#cb12-688" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Estimado dos modelos: uno **lineal** (cambios absolutos) y otro **log-lineal** (cambios porcentuales)</span>
-<span id="cb12-689"><a href="#cb12-689" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Interpretado el coeficiente en el modelo log-lineal: **cada año adicional de escolaridad se asocia con un aumento del 12% en el ingreso**</span>
-<span id="cb12-690"><a href="#cb12-690" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Generado predicciones puntuales y por intervalos para diferentes niveles educativos</span>
-<span id="cb12-691"><a href="#cb12-691" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Discutido las **limitaciones**: asociación vs. causalidad, variables omitidas, y variación no explicada</span>
-<span id="cb12-692"><a href="#cb12-692" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-693"><a href="#cb12-693" aria-hidden="true" tabindex="-1"></a>El análisis sugiere una asociación positiva y significativa entre educación e ingresos. Sin embargo, debemos ser cautos: la escolaridad explica solo una parte de la variación en los ingresos, y la relación observada no puede interpretarse como efecto causal sin considerar el problema de variables omitidas y otros sesgos potenciales.</span>
-<span id="cb12-694"><a href="#cb12-694" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-335"><a href="#cb12-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-336"><a href="#cb12-336" aria-hidden="true" tabindex="-1"></a><span class="fu"># Regresión Lineal Simple</span></span>
+<span id="cb12-337"><a href="#cb12-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-338"><a href="#cb12-338" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introducción al modelo de regresión</span></span>
+<span id="cb12-339"><a href="#cb12-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-340"><a href="#cb12-340" aria-hidden="true" tabindex="-1"></a>La **regresión lineal simple** es una técnica estadística que nos permite modelar la relación entre dos variables: una **variable dependiente** (o variable respuesta, $Y$) y una **variable independiente** (o variable explicativa, $X$). El objetivo es encontrar la "mejor" línea recta que describa cómo cambia la variable dependiente cuando cambia la variable independiente.</span>
+<span id="cb12-341"><a href="#cb12-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-342"><a href="#cb12-342" aria-hidden="true" tabindex="-1"></a>En nuestro caso, queremos modelar cómo el **ingreso del trabajo** (`ytrabajocor`) depende de los **años de escolaridad** (`esc`). La pregunta fundamental que buscamos responder es: **¿cuánto aumenta el ingreso, en promedio, por cada año adicional de educación?**</span>
+<span id="cb12-343"><a href="#cb12-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-344"><a href="#cb12-344" aria-hidden="true" tabindex="-1"></a><span class="fu">## El modelo poblacional de regresión lineal simple</span></span>
+<span id="cb12-345"><a href="#cb12-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-346"><a href="#cb12-346" aria-hidden="true" tabindex="-1"></a><span class="fu">### Especificación del modelo</span></span>
+<span id="cb12-347"><a href="#cb12-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-348"><a href="#cb12-348" aria-hidden="true" tabindex="-1"></a>El modelo de regresión lineal simple se puede escribir como:</span>
+<span id="cb12-349"><a href="#cb12-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-350"><a href="#cb12-350" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-351"><a href="#cb12-351" aria-hidden="true" tabindex="-1"></a>Y_i = \beta_0 + \beta_1 X_i + u_i, \quad i = 1, \ldots, n</span>
+<span id="cb12-352"><a href="#cb12-352" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-353"><a href="#cb12-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-354"><a href="#cb12-354" aria-hidden="true" tabindex="-1"></a>donde:</span>
+<span id="cb12-355"><a href="#cb12-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-356"><a href="#cb12-356" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$Y_i$ es el valor de la variable dependiente para la observación $i$</span>
+<span id="cb12-357"><a href="#cb12-357" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$X_i$ es el valor de la variable independiente (regresor) para la observación $i$  </span>
+<span id="cb12-358"><a href="#cb12-358" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\beta_0$ es el **parámetro de intercepto**: representa el valor esperado de $Y$ cuando $X = 0$</span>
+<span id="cb12-359"><a href="#cb12-359" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\beta_1$ es el **parámetro de pendiente**: mide el cambio en $Y$ asociado con un cambio unitario en $X$</span>
+<span id="cb12-360"><a href="#cb12-360" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$u_i$ es el **término de error**: captura todos los demás factores (además de $X$) que determinan $Y$</span>
+<span id="cb12-361"><a href="#cb12-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-362"><a href="#cb12-362" aria-hidden="true" tabindex="-1"></a>Los parámetros $\beta_0$ y $\beta_1$ son **desconocidos** y representan características de la **población**. Nuestro objetivo es **estimarlos** a partir de una muestra de datos.</span>
+<span id="cb12-363"><a href="#cb12-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-364"><a href="#cb12-364" aria-hidden="true" tabindex="-1"></a><span class="fu">### Supuestos del modelo clásico de regresión lineal</span></span>
+<span id="cb12-365"><a href="#cb12-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-366"><a href="#cb12-366" aria-hidden="true" tabindex="-1"></a>Para que el estimador de MCO tenga buenas propiedades (insesgadez, consistencia, eficiencia), requerimos ciertos supuestos sobre el término de error $u_i$:</span>
+<span id="cb12-367"><a href="#cb12-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-368"><a href="#cb12-368" aria-hidden="true" tabindex="-1"></a>**Supuesto 1 (Esperanza condicional cero):**  </span>
+<span id="cb12-369"><a href="#cb12-369" aria-hidden="true" tabindex="-1"></a>$$\mathbb{E}<span class="co">[</span><span class="ot">u_i | X_i</span><span class="co">]</span> = 0$$</span>
+<span id="cb12-370"><a href="#cb12-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-371"><a href="#cb12-371" aria-hidden="true" tabindex="-1"></a>Este supuesto establece que el valor esperado del error, dado cualquier valor de $X$, es cero. Implica que $X$ no está correlacionado con ningún factor omitido en el error. Este es el supuesto **crucial** para la interpretación causal: si se viola (por ejemplo, por variables omitidas correlacionadas con $X$), el estimador de $\beta_1$ estará **sesgado**.</span>
+<span id="cb12-372"><a href="#cb12-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-373"><a href="#cb12-373" aria-hidden="true" tabindex="-1"></a>**Supuesto 2 (Homocedasticidad):**  </span>
+<span id="cb12-374"><a href="#cb12-374" aria-hidden="true" tabindex="-1"></a>$$\text{Var}(u_i | X_i) = \sigma^2$$</span>
+<span id="cb12-375"><a href="#cb12-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-376"><a href="#cb12-376" aria-hidden="true" tabindex="-1"></a>La varianza del error es constante y no depende de $X$. Cuando este supuesto se viola (heterocedasticidad), los estimadores de MCO siguen siendo insesgados, pero los errores estándar usuales son incorrectos.</span>
+<span id="cb12-377"><a href="#cb12-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-378"><a href="#cb12-378" aria-hidden="true" tabindex="-1"></a>**Supuesto 3 (Normalidad, para inferencia):**  </span>
+<span id="cb12-379"><a href="#cb12-379" aria-hidden="true" tabindex="-1"></a>$$u_i | X_i \sim \mathcal{N}(0, \sigma^2)$$</span>
+<span id="cb12-380"><a href="#cb12-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-381"><a href="#cb12-381" aria-hidden="true" tabindex="-1"></a>Los errores se distribuyen normalmente. Este supuesto es necesario para hacer inferencia con muestras pequeñas. En muestras grandes, por el Teorema del Límite Central, este supuesto puede relajarse.</span>
+<span id="cb12-382"><a href="#cb12-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-383"><a href="#cb12-383" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb12-384"><a href="#cb12-384" aria-hidden="true" tabindex="-1"></a><span class="fu">## Asociación vs. Causalidad</span></span>
+<span id="cb12-385"><a href="#cb12-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-386"><a href="#cb12-386" aria-hidden="true" tabindex="-1"></a>Un modelo de regresión simple, en general, mide **asociación estadística**, o qué factores predicen mejor un fenómeno como mucho, y no necesariamente **causalidad**. Para que $\beta_1$ tenga una interpretación causal, el supuesto de esperanza condicional cero debe cumplirse estrictamente: $\mathbb{E}<span class="co">[</span><span class="ot">u_i | X_i</span><span class="co">]</span> = 0$.</span>
+<span id="cb12-387"><a href="#cb12-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-388"><a href="#cb12-388" aria-hidden="true" tabindex="-1"></a>En la práctica, este supuesto rara vez se cumple con datos observacionales. En nuestro caso, factores como habilidades innatas, redes sociales, o capital cultural familiar están correlacionados tanto con la escolaridad como con los ingresos, violando el supuesto de exogeneidad. Por tanto, $\hat{\beta}_1$ captura la **asociación** entre educación e ingresos, pero no puede interpretarse como el "efecto causal puro" de la educación. O, al menos, no con nuestros datos y sin controles. </span>
+<span id="cb12-389"><a href="#cb12-389" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-390"><a href="#cb12-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-391"><a href="#cb12-391" aria-hidden="true" tabindex="-1"></a><span class="fu">## Estimación por Mínimos Cuadrados Ordinarios (MCO)</span></span>
+<span id="cb12-392"><a href="#cb12-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-393"><a href="#cb12-393" aria-hidden="true" tabindex="-1"></a><span class="fu">### El criterio de MCO</span></span>
+<span id="cb12-394"><a href="#cb12-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-395"><a href="#cb12-395" aria-hidden="true" tabindex="-1"></a>Dada una muestra de $n$ observaciones $<span class="sc">\{</span>(X_i, Y_i)<span class="sc">\}</span>_{i=1}^n$, el **método de mínimos cuadrados ordinarios** consiste en elegir estimadores $\hat{\beta}_0$ y $\hat{\beta}_1$ que minimicen la **suma de cuadrados de los residuos**:</span>
+<span id="cb12-396"><a href="#cb12-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-397"><a href="#cb12-397" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-398"><a href="#cb12-398" aria-hidden="true" tabindex="-1"></a>\text{SCR}(\beta_0, \beta_1) = \sum_{i=1}^{n} (Y_i - \beta_0 - \beta_1 X_i)^2</span>
+<span id="cb12-399"><a href="#cb12-399" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-400"><a href="#cb12-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-401"><a href="#cb12-401" aria-hidden="true" tabindex="-1"></a>Los valores ajustados (predichos) son $\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_i$, y los residuos son $\hat{u}_i = Y_i - \hat{Y}_i$.</span>
+<span id="cb12-402"><a href="#cb12-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-403"><a href="#cb12-403" aria-hidden="true" tabindex="-1"></a><span class="fu">### Solución explícita</span></span>
+<span id="cb12-404"><a href="#cb12-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-405"><a href="#cb12-405" aria-hidden="true" tabindex="-1"></a>Derivando con respecto a $\beta_0$ y $\beta_1$ e igualando a cero (condiciones de primer orden), se obtienen las **ecuaciones normales**:</span>
+<span id="cb12-406"><a href="#cb12-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-407"><a href="#cb12-407" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-408"><a href="#cb12-408" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb12-409"><a href="#cb12-409" aria-hidden="true" tabindex="-1"></a>\sum_{i=1}^n (Y_i - \hat{\beta}_0 - \hat{\beta}_1 X_i) &amp;= 0 <span class="sc">\\</span></span>
+<span id="cb12-410"><a href="#cb12-410" aria-hidden="true" tabindex="-1"></a>\sum_{i=1}^n X_i(Y_i - \hat{\beta}_0 - \hat{\beta}_1 X_i) &amp;= 0</span>
+<span id="cb12-411"><a href="#cb12-411" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb12-412"><a href="#cb12-412" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-413"><a href="#cb12-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-414"><a href="#cb12-414" aria-hidden="true" tabindex="-1"></a>Resolviendo este sistema, los estimadores de MCO son:</span>
+<span id="cb12-415"><a href="#cb12-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-416"><a href="#cb12-416" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-417"><a href="#cb12-417" aria-hidden="true" tabindex="-1"></a>\hat{\beta}_1 = \frac{\sum_{i=1}^{n}(X_i - \bar{X})(Y_i - \bar{Y})}{\sum_{i=1}^{n}(X_i - \bar{X})^2} = \frac{s_{XY}}{s_X^2}</span>
+<span id="cb12-418"><a href="#cb12-418" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-419"><a href="#cb12-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-420"><a href="#cb12-420" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-421"><a href="#cb12-421" aria-hidden="true" tabindex="-1"></a>\hat{\beta}_0 = \bar{Y} - \hat{\beta}_1 \bar{X}</span>
+<span id="cb12-422"><a href="#cb12-422" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-423"><a href="#cb12-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-424"><a href="#cb12-424" aria-hidden="true" tabindex="-1"></a>donde $\bar{X}$ y $\bar{Y}$ son las medias muestrales, $s_{XY}$ es la covarianza muestral entre $X$ e $Y$, y $s_X^2$ es la varianza muestral de $X$.</span>
+<span id="cb12-425"><a href="#cb12-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-426"><a href="#cb12-426" aria-hidden="true" tabindex="-1"></a>**Interpretación:** La pendiente estimada es la razón entre la covarianza de $X$ e $Y$ y la varianza de $X$. Si $X$ e $Y$ covarían positivamente, $\hat{\beta}_1 &gt; 0$.</span>
+<span id="cb12-427"><a href="#cb12-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-428"><a href="#cb12-428" aria-hidden="true" tabindex="-1"></a><span class="fu">## Primera aplicación: Modelo lineal simple</span></span>
+<span id="cb12-429"><a href="#cb12-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-430"><a href="#cb12-430" aria-hidden="true" tabindex="-1"></a>Estimemos primero la relación entre ingreso del trabajo y escolaridad **sin transformaciones**, es decir, en niveles:</span>
+<span id="cb12-431"><a href="#cb12-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-432"><a href="#cb12-432" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-433"><a href="#cb12-433" aria-hidden="true" tabindex="-1"></a>\text{ytrabajocor}_i = \beta_0 + \beta_1 \times \text{esc}_i + u_i</span>
+<span id="cb12-434"><a href="#cb12-434" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-435"><a href="#cb12-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-436"><a href="#cb12-436" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimación en R</span></span>
+<span id="cb12-437"><a href="#cb12-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-440"><a href="#cb12-440" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-441"><a href="#cb12-441" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: regresion-lineal-simple</span></span>
+<span id="cb12-442"><a href="#cb12-442" aria-hidden="true" tabindex="-1"></a><span class="co">#| collapse: true</span></span>
+<span id="cb12-443"><a href="#cb12-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-444"><a href="#cb12-444" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
+<span id="cb12-445"><a href="#cb12-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-446"><a href="#cb12-446" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar datos válidos</span></span>
+<span id="cb12-447"><a href="#cb12-447" aria-hidden="true" tabindex="-1"></a>datos_reg <span class="ot">&lt;-</span> casen2022 <span class="sc">|&gt;</span></span>
+<span id="cb12-448"><a href="#cb12-448" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(esc), <span class="sc">!</span><span class="fu">is.na</span>(ytrabajocor))</span>
+<span id="cb12-449"><a href="#cb12-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-450"><a href="#cb12-450" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimar el modelo sin transformación</span></span>
+<span id="cb12-451"><a href="#cb12-451" aria-hidden="true" tabindex="-1"></a>modelo_lineal <span class="ot">&lt;-</span> <span class="fu">lm</span>(ytrabajocor <span class="sc">~</span> esc, <span class="at">data =</span> datos_reg)</span>
+<span id="cb12-452"><a href="#cb12-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-453"><a href="#cb12-453" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar resultados</span></span>
+<span id="cb12-454"><a href="#cb12-454" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo_lineal)</span>
+<span id="cb12-455"><a href="#cb12-455" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-456"><a href="#cb12-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-457"><a href="#cb12-457" aria-hidden="true" tabindex="-1"></a><span class="fu">### Interpretación del modelo lineal</span></span>
+<span id="cb12-458"><a href="#cb12-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-459"><a href="#cb12-459" aria-hidden="true" tabindex="-1"></a>Los coeficientes estimados tienen una interpretación directa:</span>
+<span id="cb12-460"><a href="#cb12-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-461"><a href="#cb12-461" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**$\hat{\beta}_0$ (Intercepto)**: El ingreso esperado cuando la escolaridad es cero. En este caso, representa el ingreso "base" para alguien sin educación formal.</span>
+<span id="cb12-462"><a href="#cb12-462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-463"><a href="#cb12-463" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**$\hat{\beta}_1$ (Pendiente)**: Cada año adicional de escolaridad se asocia con un aumento de $\hat{\beta}_1$ pesos en el ingreso del trabajo. Este es un **cambio absoluto** en pesos chilenos.</span>
+<span id="cb12-464"><a href="#cb12-464" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-465"><a href="#cb12-465" aria-hidden="true" tabindex="-1"></a>Por ejemplo, si $\hat{\beta}_1 = 77,114$, significa que pasar de 10 a 11 años de escolaridad se asocia con un aumento promedio de $77.114 CLP en el ingreso mensual.</span>
+<span id="cb12-466"><a href="#cb12-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-467"><a href="#cb12-467" aria-hidden="true" tabindex="-1"></a>**Limitación del modelo lineal:** Este modelo asume que el efecto de un año adicional de educación es **constante** en términos absolutos (pesos), independientemente del nivel educativo inicial. Esto puede no ser realista: \$77.114 pesos adicionales representan un aumento muy distinto para alguien que gana \$200,000 que para alguien que gana $2,000,000.</span>
+<span id="cb12-468"><a href="#cb12-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-469"><a href="#cb12-469" aria-hidden="true" tabindex="-1"></a><span class="fu">## Segunda aplicación: Modelo log-lineal</span></span>
+<span id="cb12-470"><a href="#cb12-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-471"><a href="#cb12-471" aria-hidden="true" tabindex="-1"></a>Para capturar **cambios porcentuales** (que son más comparables entre niveles de ingreso), estimamos el modelo con el logaritmo natural del ingreso:</span>
+<span id="cb12-472"><a href="#cb12-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-473"><a href="#cb12-473" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-474"><a href="#cb12-474" aria-hidden="true" tabindex="-1"></a>\log(\text{ytrabajocor}_i) = \beta_0 + \beta_1 \times \text{esc}_i + u_i</span>
+<span id="cb12-475"><a href="#cb12-475" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-476"><a href="#cb12-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-477"><a href="#cb12-477" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimación en R</span></span>
+<span id="cb12-478"><a href="#cb12-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-481"><a href="#cb12-481" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-482"><a href="#cb12-482" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: regresion-log-lineal</span></span>
+<span id="cb12-483"><a href="#cb12-483" aria-hidden="true" tabindex="-1"></a><span class="co">#| collapse: true</span></span>
+<span id="cb12-484"><a href="#cb12-484" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-485"><a href="#cb12-485" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear variable logarítmica</span></span>
+<span id="cb12-486"><a href="#cb12-486" aria-hidden="true" tabindex="-1"></a>datos_reg <span class="ot">&lt;-</span> datos_reg <span class="sc">|&gt;</span></span>
+<span id="cb12-487"><a href="#cb12-487" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_ytrabajo =</span> <span class="fu">log</span>(ytrabajocor))</span>
+<span id="cb12-488"><a href="#cb12-488" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-489"><a href="#cb12-489" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimar el modelo log-lineal</span></span>
+<span id="cb12-490"><a href="#cb12-490" aria-hidden="true" tabindex="-1"></a>modelo1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_ytrabajo <span class="sc">~</span> esc, <span class="at">data =</span> datos_reg)</span>
+<span id="cb12-491"><a href="#cb12-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-492"><a href="#cb12-492" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar resultados</span></span>
+<span id="cb12-493"><a href="#cb12-493" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo1)</span>
+<span id="cb12-494"><a href="#cb12-494" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-495"><a href="#cb12-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-496"><a href="#cb12-496" aria-hidden="true" tabindex="-1"></a><span class="fu">### Interpretación del modelo log-lineal</span></span>
+<span id="cb12-497"><a href="#cb12-497" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-498"><a href="#cb12-498" aria-hidden="true" tabindex="-1"></a>Del output obtenemos:</span>
+<span id="cb12-499"><a href="#cb12-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-500"><a href="#cb12-500" aria-hidden="true" tabindex="-1"></a>**Coeficientes estimados:**</span>
+<span id="cb12-501"><a href="#cb12-501" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-502"><a href="#cb12-502" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-503"><a href="#cb12-503" aria-hidden="true" tabindex="-1"></a>\widehat{\log(\text{ytrabajocor})} = 11.585 + 0.116 \times \text{esc}</span>
+<span id="cb12-504"><a href="#cb12-504" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-505"><a href="#cb12-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-506"><a href="#cb12-506" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**$\hat{\beta}_0 = 11.585$**: El logaritmo del ingreso esperado cuando la escolaridad es cero. Exponenciando: $e^{11.585} \approx \$107,180$ CLP. Esta interpretación tiene poco sentido sustantivo (casi nadie tiene exactamente cero años de educación), pero es necesaria matemáticamente para definir la línea.</span>
+<span id="cb12-507"><a href="#cb12-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-508"><a href="#cb12-508" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**$\hat{\beta}_1 = 0.116$**: Este es el coeficiente de interés. En un modelo log-lineal, $\beta_1$ mide el **cambio proporcional** (o porcentual) en $Y$ asociado con un cambio unitario en $X$.</span>
+<span id="cb12-509"><a href="#cb12-509" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-510"><a href="#cb12-510" aria-hidden="true" tabindex="-1"></a>**Interpretación en términos porcentuales:**</span>
+<span id="cb12-511"><a href="#cb12-511" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-512"><a href="#cb12-512" aria-hidden="true" tabindex="-1"></a>Para un modelo de la forma $\log(Y) = \beta_0 + \beta_1 X$, el coeficiente $\beta_1$ puede interpretarse aproximadamente como:</span>
+<span id="cb12-513"><a href="#cb12-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-514"><a href="#cb12-514" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-515"><a href="#cb12-515" aria-hidden="true" tabindex="-1"></a>\Delta Y \approx 100 \times \beta_1 \%</span>
+<span id="cb12-516"><a href="#cb12-516" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-517"><a href="#cb12-517" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-518"><a href="#cb12-518" aria-hidden="true" tabindex="-1"></a>cuando $\beta_1$ es pequeño (digamos, $|\beta_1| &lt; 0.15$).</span>
+<span id="cb12-519"><a href="#cb12-519" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-520"><a href="#cb12-520" aria-hidden="true" tabindex="-1"></a>Por tanto: **cada año adicional de escolaridad se asocia con un aumento de aproximadamente 11.6% en el ingreso del trabajo**.</span>
+<span id="cb12-521"><a href="#cb12-521" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-522"><a href="#cb12-522" aria-hidden="true" tabindex="-1"></a>Para mayor precisión, la fórmula exacta es:</span>
+<span id="cb12-523"><a href="#cb12-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-524"><a href="#cb12-524" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-525"><a href="#cb12-525" aria-hidden="true" tabindex="-1"></a>\%\Delta Y = 100 \times (e^{\beta_1} - 1)</span>
+<span id="cb12-526"><a href="#cb12-526" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-527"><a href="#cb12-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-528"><a href="#cb12-528" aria-hidden="true" tabindex="-1"></a>En nuestro caso: $100 \times (e^{0.116} - 1) = 100 \times (1.123 - 1) = 12.3\%$.</span>
+<span id="cb12-529"><a href="#cb12-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-530"><a href="#cb12-530" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb12-531"><a href="#cb12-531" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ventajas del modelo log-lineal</span></span>
+<span id="cb12-532"><a href="#cb12-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-533"><a href="#cb12-533" aria-hidden="true" tabindex="-1"></a>El modelo log-lineal tiene varias ventajas para estudiar ingresos:</span>
+<span id="cb12-534"><a href="#cb12-534" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-535"><a href="#cb12-535" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Interpretación porcentual**: Los cambios se expresan en términos relativos, más comparables entre niveles de ingreso</span>
+<span id="cb12-536"><a href="#cb12-536" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Manejo de asimetría**: Los ingresos tienen distribución asimétrica; el logaritmo "normaliza" esta distribución</span>
+<span id="cb12-537"><a href="#cb12-537" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Heterocedasticidad reducida**: La transformación logarítmica tiende a estabilizar la varianza de los errores</span>
+<span id="cb12-538"><a href="#cb12-538" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Comparabilidad**: Los retornos porcentuales son más fáciles de comparar entre países o periodos</span>
+<span id="cb12-539"><a href="#cb12-539" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-540"><a href="#cb12-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-541"><a href="#cb12-541" aria-hidden="true" tabindex="-1"></a>**Significancia estadística:**</span>
+<span id="cb12-542"><a href="#cb12-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-543"><a href="#cb12-543" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Error estándar** de $\hat{\beta}_1$: $\text{SE}(\hat{\beta}_1) = 0.0008$. Mide la precisión de la estimación.</span>
+<span id="cb12-544"><a href="#cb12-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-545"><a href="#cb12-545" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Estadístico t**: $t = \hat{\beta}_1 / \text{SE}(\hat{\beta}_1) = 0.116 / 0.0008 = 143.6$. Un valor tan alto indica que el coeficiente es significativamente diferente de cero.</span>
+<span id="cb12-546"><a href="#cb12-546" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-547"><a href="#cb12-547" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**p-valor**: Prácticamente cero (&lt; 2e-16), lo que indica que rechazamos fuertemente la hipótesis nula $H_0: \beta_1 = 0$.</span>
+<span id="cb12-548"><a href="#cb12-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-549"><a href="#cb12-549" aria-hidden="true" tabindex="-1"></a>**Bondad de ajuste:**</span>
+<span id="cb12-550"><a href="#cb12-550" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-551"><a href="#cb12-551" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**$R^2 = 0.189$**: El modelo explica aproximadamente el 19% de la variación en $\log(\text{ytrabajocor})$. Esto significa que la escolaridad, por sí sola, explica casi una quinta parte de la variabilidad en los (log) ingresos, mientras que el 81% restante se debe a otros factores no incluidos en el modelo.</span>
+<span id="cb12-552"><a href="#cb12-552" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-553"><a href="#cb12-553" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>El $R^2$ ajustado es prácticamente idéntico en este caso, dado el gran tamaño muestral ($n = 88,391$).</span>
+<span id="cb12-554"><a href="#cb12-554" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-555"><a href="#cb12-555" aria-hidden="true" tabindex="-1"></a><span class="fu">### Predicciones del modelo</span></span>
+<span id="cb12-556"><a href="#cb12-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-557"><a href="#cb12-557" aria-hidden="true" tabindex="-1"></a>Podemos usar el modelo estimado para predecir el ingreso esperado en diferentes niveles de escolaridad:</span>
+<span id="cb12-558"><a href="#cb12-558" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-561"><a href="#cb12-561" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-562"><a href="#cb12-562" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: predicciones-modelo</span></span>
+<span id="cb12-563"><a href="#cb12-563" aria-hidden="true" tabindex="-1"></a><span class="co">#| collapse: true</span></span>
+<span id="cb12-564"><a href="#cb12-564" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-565"><a href="#cb12-565" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear datos para predicción</span></span>
+<span id="cb12-566"><a href="#cb12-566" aria-hidden="true" tabindex="-1"></a>nuevos_datos <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">esc =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">25</span>, <span class="at">by =</span> <span class="dv">1</span>))</span>
+<span id="cb12-567"><a href="#cb12-567" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-568"><a href="#cb12-568" aria-hidden="true" tabindex="-1"></a><span class="co"># Predecir con intervalo de confianza al 95%</span></span>
+<span id="cb12-569"><a href="#cb12-569" aria-hidden="true" tabindex="-1"></a>predicciones <span class="ot">&lt;-</span> <span class="fu">predict</span>(</span>
+<span id="cb12-570"><a href="#cb12-570" aria-hidden="true" tabindex="-1"></a>  modelo1, </span>
+<span id="cb12-571"><a href="#cb12-571" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> nuevos_datos, </span>
+<span id="cb12-572"><a href="#cb12-572" aria-hidden="true" tabindex="-1"></a>  <span class="at">interval =</span> <span class="st">"confidence"</span>,</span>
+<span id="cb12-573"><a href="#cb12-573" aria-hidden="true" tabindex="-1"></a>  <span class="at">level =</span> <span class="fl">0.95</span></span>
+<span id="cb12-574"><a href="#cb12-574" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-575"><a href="#cb12-575" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-576"><a href="#cb12-576" aria-hidden="true" tabindex="-1"></a><span class="co"># Combinar y exponenciar (volver a escala de pesos)</span></span>
+<span id="cb12-577"><a href="#cb12-577" aria-hidden="true" tabindex="-1"></a>tabla_pred <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(nuevos_datos, <span class="fu">as_tibble</span>(predicciones)) <span class="sc">|&gt;</span></span>
+<span id="cb12-578"><a href="#cb12-578" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-579"><a href="#cb12-579" aria-hidden="true" tabindex="-1"></a>    <span class="at">ingreso_pred =</span> <span class="fu">exp</span>(fit),</span>
+<span id="cb12-580"><a href="#cb12-580" aria-hidden="true" tabindex="-1"></a>    <span class="at">ingreso_lower =</span> <span class="fu">exp</span>(lwr),</span>
+<span id="cb12-581"><a href="#cb12-581" aria-hidden="true" tabindex="-1"></a>    <span class="at">ingreso_upper =</span> <span class="fu">exp</span>(upr)</span>
+<span id="cb12-582"><a href="#cb12-582" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-583"><a href="#cb12-583" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-584"><a href="#cb12-584" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar algunos valores clave</span></span>
+<span id="cb12-585"><a href="#cb12-585" aria-hidden="true" tabindex="-1"></a>tabla_pred <span class="sc">|&gt;</span></span>
+<span id="cb12-586"><a href="#cb12-586" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(esc <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">12</span>, <span class="dv">16</span>, <span class="dv">20</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-587"><a href="#cb12-587" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(esc, ingreso_pred, ingreso_lower, ingreso_upper) <span class="sc">|&gt;</span></span>
+<span id="cb12-588"><a href="#cb12-588" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric) <span class="sc">&amp;</span> <span class="sc">!</span>esc, </span>
+<span id="cb12-589"><a href="#cb12-589" aria-hidden="true" tabindex="-1"></a>                <span class="sc">~</span>scales<span class="sc">::</span><span class="fu">dollar</span>(.x, <span class="at">prefix =</span> <span class="st">"$"</span>, <span class="at">suffix =</span> <span class="st">" CLP"</span>)))</span>
+<span id="cb12-590"><a href="#cb12-590" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-591"><a href="#cb12-591" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-592"><a href="#cb12-592" aria-hidden="true" tabindex="-1"></a>**Interpretación de las predicciones:**</span>
+<span id="cb12-593"><a href="#cb12-593" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-594"><a href="#cb12-594" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Años de escolaridad <span class="pp">|</span> Ingreso esperado <span class="pp">|</span> Intervalo de confianza 95% <span class="pp">|</span></span>
+<span id="cb12-595"><a href="#cb12-595" aria-hidden="true" tabindex="-1"></a><span class="pp">|---------------------|------------------|----------------------------|</span></span>
+<span id="cb12-596"><a href="#cb12-596" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 8 (básica completa) <span class="pp">|</span> \$271,702 <span class="pp">|</span> <span class="co">[</span><span class="ot">\$269,253, \$274,174</span><span class="co">]</span> <span class="pp">|</span></span>
+<span id="cb12-597"><a href="#cb12-597" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 12 (media completa) <span class="pp">|</span> \$431,939 <span class="pp">|</span> <span class="co">[</span><span class="ot">\$429,284, \$434,611</span><span class="co">]</span> <span class="pp">|</span></span>
+<span id="cb12-598"><a href="#cb12-598" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 16 (universitaria) <span class="pp">|</span> \$686,677 <span class="pp">|</span> <span class="co">[</span><span class="ot">\$680,789, \$692,616</span><span class="co">]</span> <span class="pp">|</span></span>
+<span id="cb12-599"><a href="#cb12-599" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 20 (postgrado) <span class="pp">|</span> \$1,091,646 <span class="pp">|</span> <span class="co">[</span><span class="ot">\$1,076,687, \$1,106,813</span><span class="co">]</span> <span class="pp">|</span></span>
+<span id="cb12-600"><a href="#cb12-600" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-601"><a href="#cb12-601" aria-hidden="true" tabindex="-1"></a>Estas predicciones muestran que el ingreso esperado aumenta de manera **exponencial** con la escolaridad: pasar de 8 a 12 años (4 años más) aumenta el ingreso en aproximadamente \$160.000 CLP, mientras que pasar de 16 a 20 años (también 4 años más) lo aumenta en aproximadamente \$405.000 CLP.</span>
+<span id="cb12-602"><a href="#cb12-602" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-603"><a href="#cb12-603" aria-hidden="true" tabindex="-1"></a>Los intervalos de confianza son relativamente estrechos, reflejando la gran cantidad de observaciones en estos niveles educativos.</span>
+<span id="cb12-604"><a href="#cb12-604" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-605"><a href="#cb12-605" aria-hidden="true" tabindex="-1"></a><span class="fu">### Diagnóstico del modelo</span></span>
+<span id="cb12-606"><a href="#cb12-606" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-607"><a href="#cb12-607" aria-hidden="true" tabindex="-1"></a>Es importante verificar los supuestos del modelo mediante el análisis de residuos:</span>
+<span id="cb12-608"><a href="#cb12-608" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-611"><a href="#cb12-611" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-612"><a href="#cb12-612" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: diagnostico-residuos</span></span>
+<span id="cb12-613"><a href="#cb12-613" aria-hidden="true" tabindex="-1"></a><span class="co">#| collapse: true</span></span>
+<span id="cb12-614"><a href="#cb12-614" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb12-615"><a href="#cb12-615" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 8</span></span>
+<span id="cb12-616"><a href="#cb12-616" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-617"><a href="#cb12-617" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráficos de diagnóstico</span></span>
+<span id="cb12-618"><a href="#cb12-618" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb12-619"><a href="#cb12-619" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo1)</span>
+<span id="cb12-620"><a href="#cb12-620" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb12-621"><a href="#cb12-621" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-622"><a href="#cb12-622" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-623"><a href="#cb12-623" aria-hidden="true" tabindex="-1"></a>**Interpretación de los gráficos de diagnóstico:**</span>
+<span id="cb12-624"><a href="#cb12-624" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-625"><a href="#cb12-625" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Residuals vs Fitted**: La nube de puntos debería estar dispersa aleatoriamente alrededor de cero. Si se observa un patrón sistemático (curva, embudo), sugiere problemas de especificación o heterocedasticidad.</span>
+<span id="cb12-626"><a href="#cb12-626" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-627"><a href="#cb12-627" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Q-Q Plot**: Si los residuos son normales, los puntos deberían seguir la línea diagonal. Desviaciones en las colas indican que la distribución tiene más valores extremos que una normal.</span>
+<span id="cb12-628"><a href="#cb12-628" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-629"><a href="#cb12-629" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Scale-Location**: Evalúa homocedasticidad. Una línea roja horizontal indica varianza constante; una línea con pendiente sugiere heterocedasticidad.</span>
+<span id="cb12-630"><a href="#cb12-630" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-631"><a href="#cb12-631" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Residuals vs Leverage**: Identifica observaciones influyentes. Puntos fuera de las líneas de distancia de Cook (líneas rojas punteadas) tienen alto impacto en la estimación.</span>
+<span id="cb12-632"><a href="#cb12-632" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-633"><a href="#cb12-633" aria-hidden="true" tabindex="-1"></a><span class="fu">## Limitaciones del análisis</span></span>
+<span id="cb12-634"><a href="#cb12-634" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-635"><a href="#cb12-635" aria-hidden="true" tabindex="-1"></a><span class="fu">### Variables omitidas y sesgo</span></span>
+<span id="cb12-636"><a href="#cb12-636" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-637"><a href="#cb12-637" aria-hidden="true" tabindex="-1"></a>El coeficiente estimado $\hat{\beta}_1 = 0.116$ captura la **asociación** entre escolaridad e ingresos, pero no necesariamente el **efecto causal** de la educación. ¿Por qué?</span>
+<span id="cb12-638"><a href="#cb12-638" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-639"><a href="#cb12-639" aria-hidden="true" tabindex="-1"></a>**Problema de variables omitidas:** Hay muchos factores correlacionados tanto con la escolaridad como con los ingresos:</span>
+<span id="cb12-640"><a href="#cb12-640" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-641"><a href="#cb12-641" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Habilidades cognitivas innatas</span>
+<span id="cb12-642"><a href="#cb12-642" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Capital cultural familiar</span>
+<span id="cb12-643"><a href="#cb12-643" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Redes sociales y contactos</span>
+<span id="cb12-644"><a href="#cb12-644" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Motivación y perseverancia</span>
+<span id="cb12-645"><a href="#cb12-645" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Contexto socioeconómico de origen</span>
+<span id="cb12-646"><a href="#cb12-646" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-647"><a href="#cb12-647" aria-hidden="true" tabindex="-1"></a>Si estas variables están correlacionadas positivamente con ambas (educación e ingreso), entonces $\hat{\beta}_1$ estará **sesgado al alza**: captura no solo el efecto de la educación, sino también el efecto de estos factores omitidos.</span>
+<span id="cb12-648"><a href="#cb12-648" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-649"><a href="#cb12-649" aria-hidden="true" tabindex="-1"></a>Formalmente, el sesgo por variable omitida es:</span>
+<span id="cb12-650"><a href="#cb12-650" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-651"><a href="#cb12-651" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-652"><a href="#cb12-652" aria-hidden="true" tabindex="-1"></a>\text{Sesgo} = \beta_2 \times \frac{\text{Cov}(X_1, X_2)}{\text{Var}(X_1)}</span>
+<span id="cb12-653"><a href="#cb12-653" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb12-654"><a href="#cb12-654" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-655"><a href="#cb12-655" aria-hidden="true" tabindex="-1"></a>donde $X_1$ es escolaridad, $X_2$ es la variable omitida (e.g., habilidad), y $\beta_2$ es su efecto sobre el ingreso.</span>
+<span id="cb12-656"><a href="#cb12-656" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-657"><a href="#cb12-657" aria-hidden="true" tabindex="-1"></a><span class="fu">### El $R^2$ como medida de ajuste</span></span>
+<span id="cb12-658"><a href="#cb12-658" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-659"><a href="#cb12-659" aria-hidden="true" tabindex="-1"></a>Con $R^2 = 0.189$, el modelo explica menos del 20% de la variación en los ingresos. Esto no es sorprendente: los ingresos dependen de múltiples factores:</span>
+<span id="cb12-660"><a href="#cb12-660" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-661"><a href="#cb12-661" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Experiencia laboral y antigüedad</span>
+<span id="cb12-662"><a href="#cb12-662" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sector económico y tipo de ocupación</span>
+<span id="cb12-663"><a href="#cb12-663" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Región geográfica</span>
+<span id="cb12-664"><a href="#cb12-664" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Género (brecha salarial)</span>
+<span id="cb12-665"><a href="#cb12-665" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Habilidades específicas no capturadas por años de educación</span>
+<span id="cb12-666"><a href="#cb12-666" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Condiciones del mercado laboral</span>
+<span id="cb12-667"><a href="#cb12-667" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-668"><a href="#cb12-668" aria-hidden="true" tabindex="-1"></a>Un modelo de regresión simple cuantifica una asociación clave, pero no pretende ser una descripción completa de la determinación de los ingresos.</span>
+<span id="cb12-669"><a href="#cb12-669" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-670"><a href="#cb12-670" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb12-671"><a href="#cb12-671" aria-hidden="true" tabindex="-1"></a><span class="fu">## Heterogeneidad en los retornos a la educación</span></span>
+<span id="cb12-672"><a href="#cb12-672" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-673"><a href="#cb12-673" aria-hidden="true" tabindex="-1"></a>El coeficiente $\hat{\beta}_1 = 0.116$ es un **promedio** para toda la población. Sin embargo, los retornos a la educación pueden variar sustancialmente:</span>
+<span id="cb12-674"><a href="#cb12-674" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-675"><a href="#cb12-675" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Entre hombres y mujeres (brecha de género)</span>
+<span id="cb12-676"><a href="#cb12-676" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Entre niveles educativos (retornos diferentes para educación básica, media, universitaria)</span>
+<span id="cb12-677"><a href="#cb12-677" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Entre regiones (mercados laborales locales)</span>
+<span id="cb12-678"><a href="#cb12-678" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A lo largo del tiempo (cambios en la demanda de habilidades)</span>
+<span id="cb12-679"><a href="#cb12-679" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-680"><a href="#cb12-680" aria-hidden="true" tabindex="-1"></a>En sesiones futuras, mediante **regresión múltiple** e **interacciones**, podremos explorar esta heterogeneidad y estimar retornos diferenciados por grupos.</span>
+<span id="cb12-681"><a href="#cb12-681" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-682"><a href="#cb12-682" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-683"><a href="#cb12-683" aria-hidden="true" tabindex="-1"></a><span class="fu">## Resumen</span></span>
+<span id="cb12-684"><a href="#cb12-684" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-685"><a href="#cb12-685" aria-hidden="true" tabindex="-1"></a>En esta sección hemos:</span>
+<span id="cb12-686"><a href="#cb12-686" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-687"><a href="#cb12-687" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Formalizado el **modelo de regresión lineal simple** y sus supuestos</span>
+<span id="cb12-688"><a href="#cb12-688" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Derivado el **estimador de MCO** y sus propiedades</span>
+<span id="cb12-689"><a href="#cb12-689" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Estimado dos modelos: uno **lineal** (cambios absolutos) y otro **log-lineal** (cambios porcentuales)</span>
+<span id="cb12-690"><a href="#cb12-690" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Interpretado el coeficiente en el modelo log-lineal: **cada año adicional de escolaridad se asocia con un aumento del 12% en el ingreso**</span>
+<span id="cb12-691"><a href="#cb12-691" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Generado predicciones puntuales y por intervalos para diferentes niveles educativos</span>
+<span id="cb12-692"><a href="#cb12-692" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Discutido las **limitaciones**: asociación vs. causalidad, variables omitidas, y variación no explicada</span>
+<span id="cb12-693"><a href="#cb12-693" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-694"><a href="#cb12-694" aria-hidden="true" tabindex="-1"></a>El análisis sugiere una asociación positiva y significativa entre educación e ingresos. Sin embargo, debemos ser cautos: la escolaridad explica solo una parte de la variación en los ingresos, y la relación observada no puede interpretarse como efecto causal sin considerar el problema de variables omitidas y otros sesgos potenciales.</span>
 <span id="cb12-695"><a href="#cb12-695" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-696"><a href="#cb12-696" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-697"><a href="#cb12-697" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-698"><a href="#cb12-698" aria-hidden="true" tabindex="-1"></a></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
