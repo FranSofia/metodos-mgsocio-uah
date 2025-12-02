@@ -209,7 +209,7 @@ Como se aprecia, el gráfico presenta un problema serio de **sobreposición** (*
 casen2022 |>
   filter(!is.na(esc), !is.na(ytrabajocor)) |>
   ggplot(aes(x = esc, y = ytrabajocor)) +
-    geom_jitter(width = 0.1, alpha = 0.4, color = "#ADD8E6") +
+    geom_jitter(width = 0.1, alpha = 0.9, color = "#ADD8E6") +
     scale_y_log10(labels = scales::dollar_format(prefix = "$", suffix = " CLP")) +
     labs(
       x     = "Años de escolaridad",
@@ -281,6 +281,7 @@ Este gráfico es particularmente revelador porque integra tres elementos fundame
 2. **La línea de tendencia** (línea roja): esta línea resume la relación "promedio" entre educación e ingreso. Matemáticamente, es la **recta de regresión** que "mejor se ajusta" a la nube de puntos en el sentido de minimizar las distancias verticales entre los puntos observados y la línea predicha. Nótese que la línea es **aproximadamente recta en escala logarítmica**, lo que indica una relación log-lineal entre las variables.
 
 3. **El intervalo de confianza** (banda gris): representa la incertidumbre de nuestra estimación de la línea de tendencia. Observemos cómo es más estrecha en el centro del gráfico (entre 8 y 15 años de escolaridad, donde hay más datos) y se ensancha progresivamente hacia los extremos. En 0 años de escolaridad y más allá de 22 años, la banda es considerablemente más ancha, reflejando mayor incertidumbre debido a la menor cantidad de observaciones en esos rangos.
+
 
 ### Interpretación detallada del gráfico
 
@@ -447,9 +448,9 @@ Los coeficientes estimados tienen una interpretación directa:
 
 - **$\hat{\beta}_1$ (Pendiente)**: Cada año adicional de escolaridad se asocia con un aumento de $\hat{\beta}_1$ pesos en el ingreso del trabajo. Este es un **cambio absoluto** en pesos chilenos.
 
-Por ejemplo, si $\hat{\beta}_1 = 50,000$, significa que pasar de 10 a 11 años de escolaridad se asocia con un aumento promedio de $50,000 CLP en el ingreso mensual.
+Por ejemplo, si $\hat{\beta}_1 = 77,114$, significa que pasar de 10 a 11 años de escolaridad se asocia con un aumento promedio de $77.114 CLP en el ingreso mensual.
 
-**Limitación del modelo lineal:** Este modelo asume que el efecto de un año adicional de educación es **constante** en términos absolutos (pesos), independientemente del nivel educativo inicial. Esto puede no ser realista: $50,000 pesos adicionales representan un aumento muy distinto para alguien que gana $200,000 que para alguien que gana $2,000,000.
+**Limitación del modelo lineal:** Este modelo asume que el efecto de un año adicional de educación es **constante** en términos absolutos (pesos), independientemente del nivel educativo inicial. Esto puede no ser realista: \$77.114 pesos adicionales representan un aumento muy distinto para alguien que gana \$200,000 que para alguien que gana $2,000,000.
 
 ## Segunda aplicación: Modelo log-lineal
 
